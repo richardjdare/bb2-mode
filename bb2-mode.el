@@ -1072,7 +1072,7 @@
     (modify-syntax-entry ?\$ "w" table)
     table))
 
-(defvar bb2-keywords-regexp nil)
+(defvar bb2-keywords-regexp nil "regular expression for bb2 keywords")
 (setq bb2-keywords-regexp (regexp-opt bb2-keywords 'words))
 
 ;; constants- ie. #something_like_this
@@ -1081,7 +1081,7 @@
 
 ;; types, ie .w .l .q string$ .newtype
 (defvar bb2-types-regexp nil "regular expression for bb2 types")
-(setq bb2-types-regexp "\\$\\|\\.[a-zA-Z_]+")
+(setq bb2-types-regexp "\\$\\|\\b\\.[a-zA-Z_]+")
 
 (defvar bb2-highlights nil)
 (setq bb2-highlights
