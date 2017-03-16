@@ -7,7 +7,7 @@ My first ever Emacs Lisp code, so bear with me.
 
 ## Todo
 * Add more 3rd party commands
-* add AmigaDos library functions that Blitz knows about
+* separate keywords and functions? (unlike bb2 editor)
 * sort out tabs to match bb2 editor
 * capitalize/title-case keywords like the bb2 editor does
 * load and save tokenized bb2 files (somehow)
