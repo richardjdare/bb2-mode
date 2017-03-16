@@ -3,6 +3,7 @@
 ;;;; Richard Dare
 ;;;; www.richardjdare.com
 
+(defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
       '("ABCD"
 	"ACos"
@@ -1071,14 +1072,18 @@
     (modify-syntax-entry ?\$ "w" table)
     table))
 
+(defvar bb2-keywords-regexp nil)
 (setq bb2-keywords-regexp (regexp-opt bb2-keywords 'words))
 
 ;; constants- ie. #something_like_this
+(defvar bb2-const-regexp nil "regular expression for bb2 constants")
 (setq bb2-const-regexp "#\\w+")
 
 ;; types, ie .w .l .q string$ .newtype
+(defvar bb2-types-regexp nil "regular expression for bb2 types")
 (setq bb2-types-regexp "\\$\\|\\.[a-zA-Z_]+")
 
+(defvar bb2-highlights nil)
 (setq bb2-highlights
       `((,bb2-const-regexp . font-lock-constant-face)
 	(,bb2-types-regexp . font-lock-type-face)
@@ -1091,3 +1096,4 @@
   (setq font-lock-defaults '((bb2-highlights) nil t))
   (font-lock-fontify-buffer))
  
+(provide 'bb2-mode)
