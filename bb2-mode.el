@@ -118,7 +118,7 @@
 	"LoadIFF" "LoadMedModule" "LoadModule" "LoadPCF" "LoadPalette"
 	"LoadScreen" "LoadShape" "LoadShapes" "LoadSound" "LoadSprites"
 	"LoadTape" "Loc" "Locate" "Lof" "Log"
-	"Log10" "LoopSound" "MButtons" "MOVE" "MOVEA"
+	"Log10" "LoopSound" "MButtons" "MOD" "MOVE" "MOVEA"
 	"MOVEM" "MOVEQ" "MOVEP" "MULS" "MULU"
 	"Macro" "MacroKey" "MakeCommodity" "MakeCookie" "MakeDir"
 	"MatchToolValue" "Max" "MaxLen" "Maximum" "MemFree"
