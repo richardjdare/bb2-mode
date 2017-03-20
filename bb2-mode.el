@@ -1,7 +1,7 @@
-;;;; bb2-mode.el
-;;;; Emacs major mode for ascii Blitz Basic II source code
-;;;; Richard Dare
-;;;; www.richardjdare.com
+;;; bb2-mode.el
+;;; Emacs major mode for ascii Blitz Basic II source code
+;;; Richard Dare
+;;; www.richardjdare.com
 
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
@@ -45,7 +45,7 @@
 	"CustomString" "Cvi" "Cvl" "Cvq" "CxAppear"
 	"CxChangeList" "CxDisAppear" "CxDisable" "CxEnable" "CxKill"
 	"CxUnique" "Cycle" "CyclePalette" "DBcc" "DCB"
-	"DEFTYPE" "DIVS" "DIVU" "Data" "Date$"
+	"DEFTYPE" "DIVS" "DIVU" "Data" "Data$" "Date$"
 	"DateFormat" "Days" "Dcb" "DeIce" "DecodeILBM"
 	"DecodeMedModule" "DecodePalette" "DecodeShapes" "DecodeSound" "Decrypt"
 	"Default" "DefaultInput" "DefaultOutput" "Defaultinput" "DefaultlDCMP"
@@ -449,13 +449,13 @@
 
 ;; types, ie .w .l .q string$ .newtype
 (defvar bb2-types-regexp nil "regular expression for bb2 types")
-(setq bb2-types-regexp "\\$\\|\\b\\.[a-zA-Z_]+")
+(setq bb2-types-regexp "\\$\\|\\.\\w+")
 
 (defvar bb2-highlights nil)
 (setq bb2-highlights
-      `((,bb2-const-regexp . font-lock-constant-face)
-	(,bb2-types-regexp . font-lock-type-face)
-	(,bb2-keywords-regexp . font-lock-keyword-face)))
+      `((,bb2-keywords-regexp . font-lock-keyword-face)
+	(,bb2-const-regexp . font-lock-constant-face)
+	(,bb2-types-regexp . font-lock-type-face)))
 
 ;; font-lock-defaults last param sets case-insensitivity
 (define-derived-mode bb2-mode prog-mode "bb2"
@@ -463,5 +463,8 @@
   :syntax-table bb2-mode-syntax-table
   (setq font-lock-defaults '((bb2-highlights) nil t))
   (font-lock-fontify-buffer))
- 
+
+;; associate  bb2-mode to ascii files only at the moment
+(add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))
+
 (provide 'bb2-mode)
