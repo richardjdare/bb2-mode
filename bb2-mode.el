@@ -449,7 +449,7 @@
 
 ;; types, ie .w .l .q string$ .newtype
 (defvar bb2-types-regexp nil "regular expression for bb2 types")
-(setq bb2-types-regexp "\\$\\|\\.\\w+")
+(setq bb2-types-regexp "\\$\\|\\b\\.[a-zA-Z_]+")
 
 (defvar bb2-highlights nil)
 (setq bb2-highlights
