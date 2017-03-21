@@ -438,6 +438,9 @@
     (modify-syntax-entry ?_ "w" table)
     ;; $ is part of a word
     (modify-syntax-entry ?\$ "w" table)
+    ;; \ is punctuation, not an escape character
+    ;; but \\ is escape in AmiBlitz? how to do it?
+    (modify-syntax-entry ?\\ "." table)
     table))
 
 (defvar bb2-keywords-regexp nil "regular expression for bb2 keywords")
@@ -449,7 +452,7 @@
 
 ;; types, ie .w .l .q string$ .newtype
 (defvar bb2-types-regexp nil "regular expression for bb2 types")
-(setq bb2-types-regexp "\\$\\|\\b\\.[a-zA-Z_]+")
+(setq bb2-types-regexp "\\B\\$\\|\\(\\b\\|[[:blank:]]+\\)\\.[a-z]+")
 
 (defvar bb2-highlights nil)
 (setq bb2-highlights
@@ -465,6 +468,6 @@
   (font-lock-fontify-buffer))
 
 ;; associate  bb2-mode to ascii files only at the moment
-(add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))
+(add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))	     
 
 (provide 'bb2-mode)
