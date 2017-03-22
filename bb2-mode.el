@@ -44,7 +44,7 @@
 	"Cursor" "CustomChunkySize" "CustomColors" "CustomCop" "CustomSprites"
 	"CustomString" "Cvi" "Cvl" "Cvq" "CxAppear"
 	"CxChangeList" "CxDisAppear" "CxDisable" "CxEnable" "CxKill"
-	"CxUnique" "Cycle" "CyclePalette" "DBcc" "DCB"
+	"CxUnique" "Cycle" "CyclePalette" "DBcc" "Dc" "DCB"
 	"DEFTYPE" "DIVS" "DIVU" "Data" "Data$" "Date$"
 	"DateFormat" "Days" "Dcb" "DeIce" "DecodeILBM"
 	"DecodeMedModule" "DecodePalette" "DecodeShapes" "DecodeSound" "Decrypt"
@@ -424,6 +424,9 @@
 	"XFA_PutSeqFrame_" "XFA_SaveScreen_" "XFA_OpenRead_" "XFA_ReadFrame_" "XFA_CloseRead_"
 	"XFA_FreeFrame_"))
 
+(defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
+(setq bb2-ted-indent-p t)
+
 (defconst bb2-mode-syntax-table
   (let ((table (make-syntax-table)))
     ;; ' is a string delimiter
@@ -443,16 +446,20 @@
     (modify-syntax-entry ?\\ "." table)
     table))
 
+
 (defvar bb2-keywords-regexp nil "regular expression for bb2 keywords")
 (setq bb2-keywords-regexp (regexp-opt bb2-keywords 'words))
+
 
 ;; constants- ie. #something_like_this
 (defvar bb2-const-regexp nil "regular expression for bb2 constants")
 (setq bb2-const-regexp "#\\w+")
 
+
 ;; types, ie .w .l .q string$ .newtype
 (defvar bb2-types-regexp nil "regular expression for bb2 types")
 (setq bb2-types-regexp "\\B\\$\\|\\(\\b\\|[[:blank:]]+\\)\\.[a-zA-Z_]+")
+
 
 (defvar bb2-highlights nil)
 (setq bb2-highlights
@@ -460,10 +467,27 @@
 	(,bb2-const-regexp . font-lock-constant-face)
 	(,bb2-types-regexp . font-lock-type-face)))
 
-;; font-lock-defaults last param sets case-insensitivity
+
+;; set bb2-mode to use simple 2 space indents like TED on Amiga
+(defun bb2-use-ted-indent () 
+  (setq indent-tabs-mode nil)
+  (setq tab-width 2)
+  (set (make-local-variable 'tab-stop-list) '(0 2 4 6))
+  (setq standard-indent 2)  
+  ; replace indent-relative
+  (setq indent-line-function 'insert-tab)  
+  ; turn off electric-indent for this mode
+  (electric-indent-local-mode -1))
+
+
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
+
+  (if bb2-ted-indent-p
+      (bb2-use-ted-indent))
+  
+  ;; font-lock-defaults last param sets case-insensitivity
   (setq font-lock-defaults '((bb2-highlights) nil t))
   (font-lock-fontify-buffer))
 
