@@ -526,12 +526,12 @@
 
 ;; constants- ie. #something_like_this
 (defvar bb2-const-regexp nil "regular expression for bb2 constants")
-(setq bb2-const-regexp "#\\w+")
+(setq bb2-const-regexp "#[a-zA-Z0-9_@]+")
 
 
 ;; types, ie .w .l .q string$ .newtype
 (defvar bb2-types-regexp nil "regular expression for bb2 types")
-(setq bb2-types-regexp "\\B\\$\\|\\(\\b\\|[[:blank:]]+\\)\\.[a-zA-Z_]+")
+(setq bb2-types-regexp "\\B\\$\\|\\(\\b\\|[[:blank:]]+\\)\\.[a-zA-Z_0-9]+")
 
 (defvar bb2-amigados-keywords-regexp nil "regular expression for AmigaDOS keywords")
 (setq bb2-amigados-keywords-regexp (regexp-opt bb2-amigados-keywords 'words))
