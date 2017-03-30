@@ -496,9 +496,12 @@
 	"XFA_UseHead_" "XProtocolHostMon_" "XProtocolUserMon_" "XorRectRegion_" "XorRegionRegion_" 
 	"ZipWindow_"))
 
-
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
 (setq bb2-ted-indent-p t)
+
+(defconst bb2-trigger-characters
+  (mapcar 'string-to-char '(";" " " "(" "," "'" "{" "}"))
+  "When the user types one of these characters, we trigger the keyword replacement logic.")
 
 (defconst bb2-mode-syntax-table
   (let ((table (make-syntax-table)))
@@ -519,15 +522,12 @@
     (modify-syntax-entry ?\\ "." table)
     table))
 
-
 (defvar bb2-keywords-regexp nil "regular expression for bb2 keywords")
 (setq bb2-keywords-regexp (regexp-opt bb2-keywords 'words))
-
 
 ;; constants- ie. #something_like_this
 (defvar bb2-const-regexp nil "regular expression for bb2 constants")
 (setq bb2-const-regexp "#[a-zA-Z0-9_@]+")
-
 
 ;; types, ie .w .l .q string$ .newtype
 (defvar bb2-types-regexp nil "regular expression for bb2 types")
@@ -543,6 +543,7 @@
 	  (,bb2-const-regexp . font-lock-constant-face)
 	  (,bb2-types-regexp . font-lock-type-face)))
 
+
 ;; set bb2-mode to use simple 2 space indents like TED on Amiga
 (defun bb2-use-ted-indent () 
   (setq indent-tabs-mode nil)
@@ -554,7 +555,57 @@
   ; turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
+(defun test-keyhook ()
+  (if (bb2-should-replace-keywordp)
+      (save-excursion (bb2-keywordize-symbol -1))))
 
+(defun bb2-should-replace-keywordp ()
+  "check if user pressed a key that triggers keyword replacement"
+  (and (bb2-not-just-initializedp)
+       (or (bb2-user-pressed-specialp)
+	   (and (bb2-user-is-typingp)
+		(bb2-user-pressed-trigger-keyp)))))
+
+(defun bb2-not-just-initializedp ()
+  (not (eq this-command 'bb2-mode)))
+
+;; The bb2 editor changed keywords on up or down. so do we
+(defun bb2-user-pressed-specialp ()
+  "Did the user press enter, up or down?"  
+  (and (< 0 (length (this-command-keys-vector)))
+       (or (equal 13 last-command-event)
+	   (equal 10 last-command-event)
+	   (equal 'up last-command-event)
+	   (equal 'down last-command-event))))
+
+(defun bb2-user-is-typingp ()
+  (eq this-command #'self-insert-command))
+
+(defun bb2-user-pressed-trigger-keyp ()
+  "Did the user enter a character from our list?"
+  (let ((bb2-current-char last-command-event))
+    (member bb2-current-char bb2-trigger-characters)))
+
+(defun bb2-keywordize-symbol (direction)
+  "direction is 1 for forward or -1 for backward"
+  (forward-symbol direction)
+  (bb2-process-symbol (thing-at-point 'symbol)
+		      (bounds-of-thing-at-point 'symbol)))
+
+(defun bb2-process-symbol (symbol symbol-boundaries)
+  (let ((found-keyword (bb2-find-symbol symbol)))
+    (if found-keyword
+	(progn
+	  (delete-region (car symbol-boundaries) (cdr symbol-boundaries))
+	  (insert found-keyword)))))
+
+(defun bb2-find-symbol (symbol)
+  "Return the blitz keyword for a given symbol (or nil)"
+  (cl-some
+   (lambda (x)
+     (if (string-match-p (concat "^" x "$") symbol) x))
+   bb2-keywords))
+	   
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
@@ -564,7 +615,9 @@
   
   ;; font-lock-defaults last param sets case-insensitivity
   (setq font-lock-defaults '((bb2-highlights) nil t))
-  (font-lock-fontify-buffer))
+  (font-lock-fontify-buffer)
+
+  (add-hook 'post-command-hook 'test-keyhook nil t))
 
 ;; associate  bb2-mode to ascii files only at the moment
 (add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))	     
