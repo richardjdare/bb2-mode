@@ -3,6 +3,8 @@
 ;;; Richard Dare
 ;;; www.richardjdare.com
 
+(require 'cl-lib)
+
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
       '("ACos" "ADDValue" "AGABlue" "AGAFillPalette" "AGAGreen" 
