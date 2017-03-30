@@ -5,6 +5,7 @@ bb2-mode provides syntax highlighting for ascii Blitz Basic II source code. It s
 It will also correctly capitalize keywords as you type them like in the original Blitz II editor.
 
 Keywords were extracted from Blitz using Stripper (1997) by D!ck/Carnage (from http://www.blitz-2000.co.uk/)
+
 keyword transformation code based on [sql-up-mode](https://github.com/Trevoke/sqlup-mode.el) by Aldric Giacomoni.
 
 My first ever Emacs Lisp code, so bear with me.
