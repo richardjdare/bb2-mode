@@ -545,7 +545,6 @@
 	  (,bb2-const-regexp . font-lock-constant-face)
 	  (,bb2-types-regexp . font-lock-type-face)))
 
-
 ;; set bb2-mode to use simple 2 space indents like TED on Amiga
 (defun bb2-use-ted-indent () 
   (setq indent-tabs-mode nil)
@@ -571,14 +570,16 @@
 (defun bb2-not-just-initializedp ()
   (not (eq this-command 'bb2-mode)))
 
-;; The bb2 editor changed keywords on up or down. so do we
+;; The bb2 editor changed keywords on up or down.
+;; it doesnt play nice with the mechanism taken from sql-up.
+;; we need another way of doing things.
 (defun bb2-user-pressed-specialp ()
   "Did the user press enter, up or down?"  
   (and (< 0 (length (this-command-keys-vector)))
        (or (equal 13 last-command-event)
-	   (equal 10 last-command-event)
-	   (equal 'up last-command-event)
-	   (equal 'down last-command-event))))
+	   (equal 10 last-command-event))))
+;	   (equal 'up last-command-event)
+;	   (equal 'down last-command-event))))
 
 (defun bb2-user-is-typingp ()
   (eq this-command #'self-insert-command))
@@ -595,18 +596,21 @@
 		      (bounds-of-thing-at-point 'symbol)))
 
 (defun bb2-process-symbol (symbol symbol-boundaries)
-  (let ((found-keyword (bb2-find-symbol symbol)))
+  (let ((found-keyword (bb2-find-keyword symbol)))
     (if found-keyword
 	(progn
 	  (delete-region (car symbol-boundaries) (cdr symbol-boundaries))
 	  (insert found-keyword)))))
 
-(defun bb2-find-symbol (symbol)
-  "Return the blitz keyword for a given symbol (or nil)"
-  (cl-some
-   (lambda (x)
-     (if (string-match-p (concat "^" x "$") symbol) x))
-   bb2-keywords))
+(defun bb2-find-keyword (symbol)
+  "Return the Blitz Keyword for a given symbol"
+  (let ((keyword-list
+	 (if (string-suffix-p "_" symbol)
+	     bb2-amigados-keywords
+	   bb2-keywords)))
+    (cl-some (lambda (x)
+	       (if (string-match-p (concat "^" x "$") symbol) x))
+	     keyword-list)))
 	   
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
