@@ -556,7 +556,7 @@
   ; turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
-(defun test-keyhook ()
+(defun keywordize-keyhook ()
   (if (bb2-should-replace-keywordp)
       (save-excursion (bb2-keywordize-symbol -1))))
 
@@ -604,14 +604,16 @@
 
 (defun bb2-find-keyword (symbol)
   "Return the Blitz Keyword for a given symbol"
-  (let ((keyword-list
-	 (if (string-suffix-p "_" symbol)
-	     bb2-amigados-keywords
-	   bb2-keywords)))
+  (let ((keyword-list (bb2-choose-keyword-list symbol)))
     (cl-some (lambda (x)
 	       (if (string-match-p (concat "^" x "$") symbol) x))
 	     keyword-list)))
-	   
+
+(defun bb2-choose-keyword-list (symbol)
+  (if (string-suffix-p "_" symbol)
+      bb2-amigados-keywords
+    bb2-keywords))
+
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
@@ -623,7 +625,7 @@
   (setq font-lock-defaults '((bb2-highlights) nil t))
   (font-lock-fontify-buffer)
 
-  (add-hook 'post-command-hook 'test-keyhook nil t))
+  (add-hook 'post-command-hook 'keywordize-keyhook nil t))
 
 ;; associate  bb2-mode to ascii files only at the moment
 (add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))	     
