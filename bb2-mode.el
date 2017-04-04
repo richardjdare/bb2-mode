@@ -565,7 +565,7 @@
   (and (bb2-not-just-initialized-p)
        (or (bb2-user-pressed-special-p)
 	   (and (bb2-user-is-typing-p)
-		(bb2-user-pressed-trigger-keyp)))))
+		(bb2-user-pressed-trigger-key-p)))))
 
 (defun bb2-not-just-initialized-p ()
   (not (eq this-command 'bb2-mode)))
@@ -625,6 +625,7 @@
   (font-lock-fontify-buffer)
 
   (add-hook 'post-command-hook 'keywordize-keyhook nil t))
+
 
 ;; associate  bb2-mode to ascii files only at the moment
 (add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))	     
