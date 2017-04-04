@@ -557,23 +557,23 @@
   (electric-indent-local-mode -1))
 
 (defun keywordize-keyhook ()
-  (if (bb2-should-replace-keywordp)
+  (if (bb2-should-replace-keyword-p)
       (save-excursion (bb2-keywordize-symbol -1))))
 
-(defun bb2-should-replace-keywordp ()
+(defun bb2-should-replace-keyword-p ()
   "check if user pressed a key that triggers keyword replacement"
-  (and (bb2-not-just-initializedp)
-       (or (bb2-user-pressed-specialp)
-	   (and (bb2-user-is-typingp)
+  (and (bb2-not-just-initialized-p)
+       (or (bb2-user-pressed-special-p)
+	   (and (bb2-user-is-typing-p)
 		(bb2-user-pressed-trigger-keyp)))))
 
-(defun bb2-not-just-initializedp ()
+(defun bb2-not-just-initialized-p ()
   (not (eq this-command 'bb2-mode)))
 
 ;; The bb2 editor changed keywords on up or down.
 ;; it doesnt play nice with the mechanism taken from sql-up.
 ;; we need another way of doing things.
-(defun bb2-user-pressed-specialp ()
+(defun bb2-user-pressed-special-p ()
   "Did the user press enter, up or down?"  
   (and (< 0 (length (this-command-keys-vector)))
        (or (equal 13 last-command-event)
@@ -581,10 +581,10 @@
 ;	   (equal 'up last-command-event)
 ;	   (equal 'down last-command-event))))
 
-(defun bb2-user-is-typingp ()
+(defun bb2-user-is-typing-p ()
   (eq this-command #'self-insert-command))
 
-(defun bb2-user-pressed-trigger-keyp ()
+(defun bb2-user-pressed-trigger-key-p ()
   "Did the user enter a character from our list?"
   (let ((bb2-current-char last-command-event))
     (member bb2-current-char bb2-trigger-characters)))
@@ -597,10 +597,9 @@
 
 (defun bb2-process-symbol (symbol symbol-boundaries)
   (let ((found-keyword (bb2-find-keyword symbol)))
-    (if found-keyword
-	(progn
+    (when found-keyword
 	  (delete-region (car symbol-boundaries) (cdr symbol-boundaries))
-	  (insert found-keyword)))))
+	  (insert found-keyword))))
 
 (defun bb2-find-keyword (symbol)
   "Return the Blitz Keyword for a given symbol"
