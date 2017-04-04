@@ -613,6 +613,9 @@
       bb2-amigados-keywords
     bb2-keywords))
 
+(defun bb2-eldoc-function ()
+  "Testing")
+
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
@@ -624,6 +627,9 @@
   (setq font-lock-defaults '((bb2-highlights) nil t))
   (font-lock-fontify-buffer)
 
+  (set (make-local-variable 'eldoc-documentation-function)
+       'bb2-eldoc-function)
+   
   (add-hook 'post-command-hook 'keywordize-keyhook nil t))
 
 
