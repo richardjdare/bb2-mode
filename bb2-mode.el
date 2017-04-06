@@ -1886,9 +1886,9 @@
   (setq tab-width 2)
   (set (make-local-variable 'tab-stop-list) '(0 2 4 6))
   (setq standard-indent 2)  
-					; replace indent-relative
+  ; replace indent-relative
   (setq indent-line-function 'insert-tab)  
-					; turn off electric-indent for this mode
+  ; turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
 (defun keywordize-keyhook ()
@@ -1913,8 +1913,8 @@
   (and (< 0 (length (this-command-keys-vector)))
        (or (equal 13 last-command-event)
 	   (equal 10 last-command-event))))
-					;	   (equal 'up last-command-event)
-					;	   (equal 'down last-command-event))))
+     ;	   (equal 'up last-command-event)
+   ;	   (equal 'down last-command-event))))
 
 (defun bb2-user-is-typing-p ()
   (eq this-command #'self-insert-command))
@@ -1960,8 +1960,7 @@
   
   ;; font-lock-defaults last param sets case-insensitivity
   (setq font-lock-defaults '((bb2-highlights) nil t))
- ; (font-lock-fontify-buffer)
-  (font-lock-ensure)
+  (font-lock-fontify-buffer)
   
   (set (make-local-variable 'eldoc-documentation-function)
        'bb2-eldoc-function)
