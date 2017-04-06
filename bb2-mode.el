@@ -1949,7 +1949,10 @@
     bb2-keywords))
 
 (defun bb2-eldoc-function ()
-  (gethash (downcase (thing-at-point 'symbol)) bb2-eldoc-table))
+  (let ((symbol (thing-at-point 'symbol)))
+    (if (char-or-string-p symbol)
+	(setq symbol (downcase symbol)))
+    (gethash symbol bb2-eldoc-table)))
 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
