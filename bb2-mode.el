@@ -1944,7 +1944,8 @@
 	     keyword-list)))
 
 (defun bb2-choose-keyword-list (symbol)
-  (if (string-suffix-p "_" symbol)
+  (if (and (char-or-string-p symbol)
+	   (string-suffix-p "_" symbol))
       bb2-amigados-keywords
     bb2-keywords))
 
