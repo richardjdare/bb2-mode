@@ -881,7 +881,7 @@
 		     "freezonetable" "table#"
 		     "freq" "Channelmask,period"
 		     "fromcli" "result=FromCLI"
-		     "fullpath$" "(PathPart$,FilePart$) ;"DH0:S" + "User-Startup" -> "DH0:S/User-Startup""
+		     "fullpath$" "(PathPart$,FilePart$) ;\"DH0:S\" + \"User-Startup\" -> \"DH0:S/User-Startup\""
 		     "funclibversion" "V1.36 29/1/95 Written By S Matty (C) LES"
 		     "gplot" "Chunky#,x,y,color.b"
 		     "gpoint" "(Chunky#,x,y)"
