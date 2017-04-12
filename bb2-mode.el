@@ -1909,7 +1909,7 @@
 ;; it doesnt play nice with the mechanism taken from sql-up.
 ;; we need another way of doing things.
 (defun bb2-user-pressed-special-p ()
-  "Did the user press enter, up or down?"  
+  "Did the user press enter?"  
   (and (< 0 (length (this-command-keys-vector)))
        (or (equal 13 last-command-event)
 	   (equal 10 last-command-event))))
@@ -1948,6 +1948,14 @@
 	   (string-suffix-p "_" symbol))
       bb2-amigados-keywords
     bb2-keywords))
+
+(defun bb2-keywordize-region (start-pos end-pos)
+  "Capitalize Blitz II keywords within a region"
+  (interactive "r")
+  (save-excursion
+    (goto-char start-pos)
+    (while (< (point) end-pos)
+      (bb2-keywordize-symbol 1))))
 
 (defun bb2-eldoc-function ()
   (let ((symbol (thing-at-point 'symbol)))
