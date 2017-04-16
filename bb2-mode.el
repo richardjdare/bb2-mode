@@ -7,1831 +7,2417 @@
 
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
-      '("ACos" "ADDValue" "AGABlue" "AGAFillPalette" "AGAGreen" 
-	"AGAPalBlue" "AGAPalGreen" "AGAPalRGB" "AGAPalRed" "AGARGB" 
-	"AGARed" "ALibJsr" "AMIGA" "ASLFileRequest" "ASLFileRequest$" 
-	"ASLFontRequest" "ASLPathRequest$" "ASLScreenRequest" "ASLScreenRequest$" "ASin" 
-	"ASyncFade" "ATan" "AbleICR_a" "AbleICR_b" "Abs" 
-	"AbsMouse" "Activate" "ActivateSelectedBox" "ActivateString" "ActiveScreen" 
-	"ActiveWindow" "AddAppIcon" "AddAppMenu" "AddAppWindow" "AddBox" 
-	"AddFirst" "AddICRVector_a" "AddICRVector_b" "AddIDCMP" "AddItem" 
-	"AddLast" "Addr" "AdjustChunky" "AllFire" "AllocFill" 
-	"AllocMem" "AnalyzeDisk" "AnimLoop" "AppEvent" "AppEventID" 
-	"AppEventType" "AppFile" "AppIconEvent" "AppIconFile" "AppIconHit" 
-	"AppLock" "AppMenuEvent" "AppMenuFile" "AppMenuHit" "AppMessage" 
-	"AppNumFiles" "AppWindowEvent" "AppWindowFile" "Asc" "AsmExit" 
-	"Assign" "Assign$" "AttachGTList" "AutoCookie" "Avg" 
-	"Avg.l" "Avg.q" "BBlit" "BBlitMode" "BLITZ" 
-	"BLibJsr" "BLoad" "BSave" "Bank" "BankLoc" 
-	"BankSize" "BeepScreen" "Bin#" "Bin$" "BitMap" 
-	"BitMapInput" "BitMapOrigin" "BitMapOutput" "BitMapPoly" "BitMapToWindow" 
-	"BitMapWindow" "BitMaptoWindow" "BitPlanesBitMap" "Blit" "BlitColl" 
-	"BlitMode" "BlitterDone" "BlitterNasty" "BlitzEvent" "BlitzFont" 
-	"BlitzKey" "BlitzKeys" "BlitzQualifier" "BlitzRepeat" "Block" 
-	"BlockScroll" "Blue" "BootProg" "BorderPens" "Borders" 
-	"Box" "BoxPrint" "BoxPropX" "BoxPropY" "BoxSelected" 
-	"BoxShow" "BoxString" "BoxValue" "Boxf" "Buffer" 
-	"ButtonGroup" "ButtonId" "CDDoor" "CDFastForward" "CDFirstTrack" 
-	"CDFlush" "CDLastTrack" "CDNormalSpeed" "CDNumTracks" "CDPause" 
-	"CDPlayTrack" "CDReadTOC" "CDRewind" "CDSpeed" "CDStatus" 
-	"CDStop" "CDTrackLength" "CDTrackMins" "CDTrackPlaying" "CDTrackSecs" 
-	"CDUpdateInfo" "CDVolume" "CELSE" "CEND" "CERR" 
-	"CHDir" "CMPMEM" "CNIF" "CPUCls" "CPlot" 
-	"CPoint" "CSIF" "CacheOff" "CachePCF" "CachesOff" 
-	"CachesOn" "Call" "Case" "CaseSense" "CatchDosErrs" 
-	"Centre$" "ChDir" "ChangeBox" "ChangeDir" "ChangeTrackerMask" 
-	"ChangeTrackerVBlank" "CharCount" "CheckAGA" "CheckPrt" "CheckTrackerEvent" 
-	"CheckTrackerID" "Checksum" "ChipFree" "Chr$" "ChunkHeader" 
-	"ChunkyCLS" "ChunkyConvert" "ChunkyLoc" "ChunkyPlot" "ChunkyPoly" 
-	"ChunkyToBitMap" "ChunkyToPlanar" "ChunkyVlin" "Cipher$" "Circle" 
-	"Circlef" "ClearBitmap" "ClearList" "ClearRexxMsg" "ClearString" 
-	"ClearToolTypes" "ClickButton" "ClickMouse" "ClipBlit" "ClipBlitMode" 
-	"CloseCD" "CloseConsole" "CloseDisk" "CloseEd" "CloseFile" 
-	"CloseScreen" "CloseSerial" "CloseWindow" "ClrErr" "ClrInt" 
-	"Cls" "CludgeBitMap" "CludgeShapes" "CludgeSound" "Col8" 
-	"ColSplit" "ColorChunky" "Colour" "ColourRequest" "CommoditiesBase" 
-	"CommodityEvent" "ComparePaths" "Con_Base" "CookieMode" "CopLen" 
-	"CopLoc" "CopperAGACol" "CopperCommand" "CopperEnd" "CopperInfoBlock" 
-	"CopperMove" "CopperReset" "CopperSkip" "CopperWait" "CopyBitMap" 
-	"CopyByte" "CopyChunky" "CopyColour" "CopyFile" "CopyLong" 
-	"CopyShape" "CopyWord" "Cos" "CrMDecrunch" "CreateArgString" 
-	"CreateDisplay" "CreateMsgPort" "CreateRexxMsg" "CurrentDir$" "CursX" 
-	"CursY" "Cursor" "CustomChunky" "CustomChunkySize" "CustomColors" 
-	"CustomCop" "CustomSprites" "CustomString" "Cvi" "Cvl" 
-	"Cvq" "CxAppear" "CxChangeList" "CxDisAppear" "CxDisable" 
-	"CxEnable" "CxKill" "CxListChange" "CxUnique" "Cycle" 
-	"CyclePalette" "DBCasesense" "DBInit" "DBLoad" "DBSave" 
-	"DBactive" "DBadd" "DBaddFirst" "DBaddLast" "DBcurrent" 
-	"DBdelete" "DBfind" "DBfindnext" "DBfirst" "DBget" 
-	"DBisnext" "DBisprev" "DBkill" "DBlast" "DBlistaddr" 
-	"DBmemtype" "DBmodified" "DBnext" "DBpop" "DBprev" 
-	"DBpush" "DBrecs" "DBsetkey" "DBsetpos" "DBupdate" 
-	"DCB" "DEFTYPE" "D_CheckNMove" "D_CheckNMoveA" "D_CheckNMoveWord" 
-	"D_FindStringPtr" "D_FindVolume" "D_GetSR" "D_HexWord" "Data" 
-	"Data$" "Date$" "DateFormat" "Days" "Dc" 
-	"Dcb" "DeIce" "DeSelectBox" "DecodeILBM" "DecodeMedModule" 
-	"DecodeModule" "DecodePalette" "DecodeShapes" "DecodeSound" "Decrypt" 
-	"Default" "DefaultIDCMP" "DefaultInput" "DefaultOutput" "DelAppIcon" 
-	"DelAppMenu" "DelAppWindow" "DeleteArgString" "DeleteMsgPort" "DeleteRexxMsg" 
-	"Deplode" "Depth" "Derez" "DetachGTList" "DeviceName$" 
-	"Dim" "Disable" "DisableBox" "DiskBlocks" "DiskBuffer" 
-	"DiskCapacity" "DiskErrors" "DiskErrs" "DiskFontBase" "DiskFree" 
-	"DiskIO" "DiskMotor" "DiskPlay" "DiskState" "DiskStatus" 
-	"DiskType$" "DiskUnit" "DiskUsed" "DiskfontBase" "DispHeight" 
-	"Display" "DisplayAdjust" "DisplayBitMap" "DisplayControls" "DisplayDblScan" 
-	"DisplayGenlock" "DisplayOff" "DisplayOn" "DisplayPalette" "DisplayRGB" 
-	"DisplayRainbow" "DisplayScroll" "DisplaySprite" "DisplayUser" "DoColSplit" 
-	"DoColl" "DoFade" "DosBase" "DosBuffLen" "DosError$" 
-	"Dos_Base" "DuplicatePalette" "EMouseX" "EMouseY" "EVEN" 
-	"EasyRequest" "Edit" "Edit$" "EditExit" "EditFrom" 
-	"Editat" "Else" "Enable" "EnableBox" "Encrypt" 
-	"End" "EndIf" "EntryBits$" "EntryComment$" "EntryDate" 
-	"EntryDir" "EntryHour" "EntryMins" "EntryName$" "EntrySecs" 
-	"EntrySize" "Eof" "Erase" "EraseAll" "EraseMode" 
-	"ErrFail" "Even" "Event" "EventCode" "EventQualifier" 
-	"EventWindow" "Examine" "Exchange" "ExchangeAppear" "ExchangeChangeList" 
-	"ExchangeDisAble" "ExchangeDisAppear" "ExchangeDisable" "ExchangeEnable" "ExchangeKill" 
-	"ExchangeListChange" "ExchangeMessage" "ExchangeUnique" "Exec" "ExecVersion" 
-	"Exists" "Exp" "ExtractLabel" "FFPBase" "FInverse" 
-	"FLocate" "FNPrint" "FNSClip" "FNSClipOutput" "FNSHeight" 
-	"FNSInk" "FNSLength" "FNSLoad" "FNSOrigin" "FNSOutput" 
-	"FNSPrefs" "FNSPrint" "FNSSetTab" "FNSSlot" "FNSUnLoad" 
-	"FNSUnderline" "FNSUnload" "FNSVersion" "FNSWidth" "FPrint" 
-	"FPrintDetoke" "FXLibReserved1" "FXLibReserved2" "FYOffset" "FadeIn" 
-	"FadeInBitmap" "FadeOut" "FadePalette" "FadeStatus" "False" 
-	"FastFree" "Fields" "FileFilter" "FileInput" "FileOutput" 
-	"FilePart$" "FileReqSize" "FileRequest$" "FileSeek" "FileSize" 
-	"FileStructure" "FillMem" "FillPalette" "FillRexxMsg" "Filter" 
-	"FindScreen" "FindToolNumber" "FindToolType" "FindToolValue" "FindVolume" 
-	"FirstItem" "FloatMode" "FloodFill" "FlsToStr$" "FlushBuffer" 
-	"FlushEvents" "FlushQueue" "For" "ForceNTSC" "ForcePAL" 
-	"Forever" "Format" "FormatTrack" "Frac" "Frames" 
-	"Free" "FreeBank" "FreeCatalog" "FreeChunky" "FreeFill" 
-	"FreeIconObject" "FreeIncData" "FreeMacroKey" "FreeMem" "FreePCFCache" 
-	"FreePage" "FreeSlices" "FreeTrackerModule" "FreeZoneTable" "Freq" 
-	"FromCLI" "FullPath$" "FuncLibVersion" "Function" "GPlot" 
-	"GPoint" "GTArrowSize" "GTBevelBox" "GTButton" "GTChangeList" 
-	"GTCheckBox" "GTCycle" "GTDisable" "GTEnable" "GTFreeGadget" 
-	"GTGadPtr" "GTGetAttrs" "GTGetInteger" "GTGetString" "GTGimmeCludge" 
-	"GTInteger" "GTListView" "GTMX" "GTNumber" "GTPalette" 
-	"GTScroller" "GTSetAttrs" "GTSetHighlight" "GTSetInteger" "GTSetString" 
-	"GTShape" "GTSlider" "GTStatus" "GTString" "GTTagValue" 
-	"GTTags" "GTText" "GTToggle" "GadgetBorder" "GadgetHit" 
-	"GadgetJam" "GadgetPens" "GadgetStatus" "Gameb" "Get" 
-	"GetAssigns" "GetCCOffset" "GetCopIns$" "GetCustomReg" "GetCustomRegAdr" 
-	"GetEnv$" "GetHex$" "GetHexAdr$" "GetIconInfo" "GetIconObject" 
-	"GetLocal$" "GetLocaleStr" "GetMedInstr" "GetMedNote" "GetMedVolume" 
-	"GetModuleName$" "GetModulePosition" "GetProgMode" "GetReg" "GetResultString" 
-	"GetRexxCommand" "GetRexxResult" "GetString$" "GetSuperBitMap" "GetTrackerEvent" 
-	"GetTrackerLocation" "GetTrackerSize" "GetWheel" "GetZoneX1" "GetZoneX2" 
-	"GetZoneY1" "GetZoneY2" "GetaShape" "GetaSprite" "Gfx_Base" 
-	"Gosub" "Goto" "GraphicsBase" "Green" "GreyChunky" 
-	"HCos" "HPropBody" "HPropPot" "HSin" "HTan" 
-	"Handle" "HandleRawKey" "HardCopy" "Hardcopy" "Hex#" 
-	"Hex$" "HideScreen" "HotKeyHit" "Hours" "ILBMDepth" 
-	"ILBMGrab" "ILBMHeight" "ILBMInfo" "ILBMPalette" "ILBMViewMode" 
-	"ILBMWidth" "ILLEGAL" "INCDIR" "INCLUDE" "IconBase" 
-	"IconDefTool" "IconDefTool$" "IconDefaultTool" "IconRender" "IconStack" 
-	"IconSubTool$" "IconTool$" "IconType" "If" "Implode" 
-	"InFront" "InFrontB" "InFrontF" "IncBin" "IncBitmap" 
-	"IncData" "IncDataAbs" "IncMed" "IncMod" "IncNextShape" 
-	"IncShape" "IncSize" "IncSound" "IncText$" "Index" 
-	"InitAnim" "InitBank" "InitChunky" "InitCopList" "InitPage" 
-	"InitPalette" "InitShape" "InitSound" "InitZoomXY" "Inkey$" 
-	"InnerCls" "InnerHeight" "InnerWidth" "InstallFNS" "Instr" 
-	"Int" "Int_Base" "IntuitionBase" "InvMode" "IsEven" 
-	"IsLocale" "IsReqToolsActive" "IsReqtoolsActive" "IsRexxMsg" "ItemHit" 
-	"ItemStackSize" "JAdaptorStatus" "JFire" "JHoriz" "JVert" 
-	"JoYY" "JoyC" "Joyb" "Joyr" "Joyx" 
-	"Joyy" "JumpMed" "KeyCode" "KillFile" "KillGreyChunky" 
-	"KillItem" "LCase$" "LECludgeShapes" "LECompressShapes" "LEInitShape" 
-	"LELoadShapes" "LEMaxShapeDepth" "LEMaxShapeHeight" "LEMaxShapeWidth" "LESaveShapes" 
-	"LEScanShapes" "LSet$" "Largest" "Largest.l" "Largest.q" 
-	"LargestFree" "LastItem" "Left$" "Len" "Length" 
-	"Let" "Line" "Lisa" "List" "ListBase" 
-	"LoadAnim" "LoadBank" "LoadBitMap" "LoadBlitzFont" "LoadChunky" 
-	"LoadFont" "LoadIFF" "LoadMedModule" "LoadModule" "LoadPCF" 
-	"LoadPalette" "LoadScreen" "LoadShape" "LoadShapes" "LoadSound" 
-	"LoadSprites" "LoadTape" "LoadTrackerModule" "Loc" "Locate" 
-	"Lof" "Log" "Log10" "LoopSound" "MButtons" 
-	"MOD" "Macro" "MacroKey" "MakeCommodity" "MakeCookie" 
-	"MakeDir" "MatchToolValue" "MatchWild" "Max" "MaxLen" 
-	"MaxSelect$" "Maximum" "MemFree" "MenuChecked" "MenuColour" 
-	"MenuGap" "MenuHit" "MenuItem" "MenuState" "MenuTitle" 
-	"Menus" "MenusOff" "MenusOn" "Mid$" "MidHandle" 
-	"Min" "Mins" "MixPalette" "Mki$" "Mkl$" 
-	"Mkq$" "Module" "ModulePatterns" "ModulePositionJump" "ModuleSampleName" 
-	"ModuleToChip" "Months" "MoreEntries" "MotorOff" "MotorOn" 
-	"Mouse" "MouseArea" "MouseButton" "MouseEnabled" "MouseWait" 
-	"MouseX" "MouseXSpeed" "MouseY" "MouseYSpeed" "MoveFile" 
-	"MoveScreen" "NEWTYPE" "NPrint" "NPrintCon" "NTSC" 
-	"NameFile" "NewPaletteMode" "NewToolType" "NewZoneTable" "Next" 
-	"NextAppFile" "NextBank" "NextFile$" "NextFrame" "NextItem" 
-	"NoCli" "NoMoreEntries" "Null" "NumDays" "NumPars" 
-	"On" "OpenCD" "OpenConsole" "OpenDisk" "OpenFile" 
-	"OpenSerial" "OutText" "OutTextPen" "PCFDepth" "PCFHeight" 
-	"PCFInfo" "PCFVersion" "PCFWidth" "PColl" "PICreateRequest" 
-	"PIEndRequest" "PIUpdateRequest" "PLoad" "PPDecrunch" "PackPBM" 
-	"PalAdjust" "PalBlue" "PalGreen" "PalRGB" "PalRed" 
-	"Palette" "PaletteInfo" "PaletteRange" "Par$" "ParPath$" 
-	"PathLock" "PathPart$" "PauseModule" "Peek" "PeekMax$" 
-	"PeekSound" "PeekTo$" "Peeks$" "Peekto$" "PhoneticSpeak" 
-	"Pi" "PlanarToChunky" "PlayBack" "PlayMed" "PlayModule" 
-	"PlayTracker" "PlayWait" "Plot" "Point" "Pointer" 
-	"Poke" "Poly" "Polyf" "Pop" "PopInput" 
-	"PopItem" "PopOutput" "PositionMouse" "PositionSuperBitMap" "PositionSuperBitmap" 
-	"PrevItem" "Print" "PrintCon" "ProcessChunky" "Processor" 
-	"PropGadget" "PrtCommand" "PrtText" "PushItem" "Put" 
-	"PutIconObject" "PutReg" "PutSuperBitMap" "QAMIGA" "QAbs" 
-	"QAngle" "QBlit" "QBlitMode" "QFrac" "QLimit" 
-	"QWrap" "Qualifier" "Queue" "QuickPlay" "Quiet" 
-	"QuietTrap" "RGB" "RIAnimFrameCount" "RIAnimInit" "RINextAnimFrame" 
-	"RRandomize" "RRnd" "RSet$" "RTASyncPaletteRequest" "RTASyncRequest" 
-	"RTCheckASyncPaletteRequest" "RTCheckASyncRequest" "RTEZFlagsRequest" "RTEZFontRequest" "RTEZFreePattern" 
-	"RTEZGetLong" "RTEZGetLongRange" "RTEZGetString" "RTEZLoadFile" "RTEZMultiLoadFile" 
-	"RTEZPaletteRequest" "RTEZPathRequest" "RTEZRNextPathEntry" "RTEZRequest" "RTEZSaveFile" 
-	"RTEZScreenModeRequest" "RTEZSetDefaultDirectory" "RTEZSetPattern" "RTEndASyncPaletteRequest" "RTEndASyncRequest" 
-	"RTFileRequest" "RTLockWindow" "RTNextPathEntry" "RTRequest" "RTRevision" 
-	"RTUnlockWindow" "RTVersion" "RastPort" "RawKey" "RawStatus" 
-	"ReMap" "Read" "ReadChunky" "ReadFile" "ReadMem" 
-	"ReadSector" "ReadSerial" "ReadSerialMem" "ReadSerialString" "Reboot" 
-	"Record" "RectsHit" "Red" "RedoColSplit" "Redraw" 
-	"RedrawBox" "RedrawPage" "ReduceX2" "RelMouse" "RemICRVector_a" 
-	"RemICRVector_b" "RemoveFNS" "Rename" "RenderPoly" "RenderToBitmap" 
-	"RenderToChunky" "Repeat" "Repeats" "Replace$" "ReplyRexxMsg" 
-	"ReqColours" "ReqFileLoc" "ReqFileRequest" "ReqFileRequest$" "ReqFontSize" 
-	"ReqOutput" "Req_Base" "Request" "Reserve" "ResetList" 
-	"ResetString" "ResetTimer" "Restore" "Return" "Rex_Base" 
-	"RexxError" "RexxEvent" "RexxSysBase" "RexxsysBase" "Right$" 
-	"Rnd" "Rotate" "Rrandomize" "Rrnd" "Run" 
-	"Runerrsoff" "Runerrson" "SBlit" "SBlitMode" "SColl" 
-	"SHARED" "SMouseX" "SMouseY" "SPACE$" "SafeToBlit" 
-	"SaveBank" "SaveBitmap" "SaveCMAP" "SaveChunky" "SaveIncData" 
-	"SavePalette" "SaveScreen" "SaveShape" "SaveShapes" "SaveSprites" 
-	"SaveTape" "Scale" "ScaleChunkyX" "ScaleChunkyY" "Screen" 
-	"ScreenHeight" "ScreenPens" "ScreenTags" "ScreenWidth" "ScreensBitMap" 
-	"Scroll" "SearchBegin" "SearchEnd" "SearchMem" "SearchMemFound" 
-	"SearchString" "Secs" "Select" "SelectBox" "SelectMode" 
-	"SendRexxCommand" "SerialEvent" "SetBLWait" "SetBPLCON0" "SetBits" 
-	"SetBox" "SetBoxColor" "SetBoxString" "SetBoxTitle" "SetColl" 
-	"SetCollHi" "SetCollOdd" "SetCopyBuffer" "SetCxStatus" "SetCycle" 
-	"SetEnv" "SetErr" "SetEventFilter" "SetFileComment" "SetGadgetStatus" 
-	"SetHProp" "SetHotKey" "SetICR_a" "SetICR_b" "SetIconHit" 
-	"SetIconType" "SetInt" "SetLocal" "SetMedMask" "SetMedVolume" 
-	"SetMenu" "SetPagePens" "SetPeriod" "SetSerialBuffer" "SetSerialLens" 
-	"SetSerialParams" "SetStatus" "SetString" "SetTextGadget" "SetToolValue" 
-	"SetVProp" "SetVoice" "SetWildString" "SetZone" "SetZoneMode" 
-	"SetupLESDebug" "Sgn" "Shape" "ShapeGadget" "ShapeHeight" 
-	"ShapeItem" "ShapeSpriteHit" "ShapeSub" "ShapeToIcon" "ShapeWidth" 
-	"ShapesBitMap" "ShapesHit" "Shared" "Show" "ShowB" 
-	"ShowBitMap" "ShowBitmap" "ShowBlitz" "ShowF" "ShowPalette" 
-	"ShowRequesters" "ShowScreen" "ShowSprite" "ShowStencil" "Sin" 
-	"SizeLimits" "SizeOf" "Slice" "Smallest" "Smallest.l" 
-	"Smallest.q" "SolidMode" "Sort" "SortDown" "SortList" 
-	"SortUp" "Sound" "SoundData" "Space$" "Speak" 
-	"SpotBox" "SpriteMode" "SpritesHit" "Sqr" "Start" 
-	"StartMedModule" "StartTracker" "Statement" "Stencil" "StopCycle" 
-	"StopMed" "StopModule" "StopTracker" "Str$" "StrToFls" 
-	"String$" "StringGadget" "StringSort" "StringSortDir" "StringSortItem" 
-	"StringText$" "StripLead$" "StripTrail$" "SubHit" "SubIDCMP" 
-	"SubItem" "SubItemOff" "SwapBank" "SysJsr" "SystemDate" 
-	"Tan" "TapeTrap" "TaskName$" "TextGadget" "TextRequest" 
-	"TextTimeout" "Then" "Ticks" "Timer" "To" 
-	"Toggle" "ToggleBox" "TokeJsr" "TrackerVolume" "Translate$" 
-	"True" "Type" "UCase$" "USED" "USEPATH" 
-	"UStr$" "UnBuffer" "UnLeft$" "UnPackPBM" "UnQueue" 
-	"UnRight$" "UnSetEnv" "UnSetLocal" "UnpackIFF" "UnpackPCF" 
-	"Until" "Use" "UseCatalog" "UseZoneTable" "Used" 
-	"VPos" "VPropBody" "VPropPot" "VWait" "VWaitPos" 
-	"Val" "ViewPort" "VoiceLoc" "Volume" "Vpos" 
-	"VwaitPos" "WBDepth" "WBExtViewMode" "WBHeight" "WBStartup" 
-	"WBViewMode" "WBWidth" "WBlit" "WBox" "WCircle" 
-	"WCls" "WColour" "WCursX" "WCursY" "WEllipse" 
-	"WJam" "WLeftOff" "WLine" "WLocate" "WMouseX" 
-	"WMouseY" "WMove" "WPlot" "WPointer" "WPrintScroll" 
-	"WScroll" "WSize" "WTitle" "WTopOff" "Wait" 
-	"WaitBlitter" "WaitCommodity" "WaitEvent" "WaitFor" "WaitTrackerEvent" 
-	"WbToScreen" "WeekDay" "Wend" "While" "Window" 
-	"WindowFont" "WindowHeight" "WindowInput" "WindowOutput" "WindowTags" 
-	"WindowWidth" "WindowX" "WindowY" "Wline" "WriteBoot" 
-	"WriteChunky" "WriteFile" "WriteMem" "WriteSector" "WriteSerial" 
-	"WriteSerialMem" "WriteSerialString" "XBDecodeSound" "XBDiskBuffer" "XBDiskPlay" 
-	"XBFilter" "XBInitSound" "XBLoadSound" "XBLoopSound" "XBPeekSound" 
-	"XBSetPeriod" "XBSound" "XBSoundData" "XBVolume" "XFlip" 
-	"XINCLUDE" "XOR" "XStatus" "Xor" "YFlip" 
-	"Years" "Zone" "ZoneInit" "ZoneMode" "ZoneTable" 
-	"ZoneTableNumber" "ZoneTableSize" "ZoneTest" "ZoomX2" "ZoomX4" 
-	"ZoomX8" "ZoomXY" "cr_vbr"
-	
-					; 68000 keywords
-	
-	"ABCD" "ADD" "ADDA" "ADDI" "ADDQ" 
-	"ADDX" "AND" "ANDI" "ASL" "ASR" 
-	"BCC" "BCS" "BEQ" "BGE" "BGT" 
-	"BHI" "BLE" "BLS" "BLT" "BMI" 
-	"BNE" "BPL" "BVC" "BVS" "BRA" 
-	"BSR" "BCHG" "BCLR" "BSET" "BTST" 
-	"CHK" "CLR" "CMP" "CMPA" "CMPI" 
-	"CMPM" "DBCC" "DBCS" "DBEQ" "DBF" 
-	"DBRA" "DBGE" "DBGT" "DBHI" "DBLE" 
-	"DBLS" "DBLT" "DBMI" "DBNE" "DBPL" 
-	"DBT" "DBVC" "DBVS" "DIVS" "DIVU" 
-	"EOR" "EORI" "EXG" "EXT" "JMP" 
-	"JSR" "LEA" "LINK" "LSL" "LSR" 
-	"MOVE" "MOVEA" "MOVEM" "MOVEP" "MOVEQ" 
-	"MULS" "MULU" "NBCD" "NEG" "NEGX" 
-	"NOP" "NOT" "OR" "ORI" "PEA" 
-	"RESET" "ROL" "ROR" "ROXL" "ROXR" 
-	"RTE" "RTR" "RTS" "SBCD" "SCC" 
-	"SCS" "SEQ" "SF" "SGE" "SGT" 
-	"SHI" "SLE" "SLS" "SLT" "SMI" 
-	"SNE" "SPL" "ST" "SVC" "SVS" 
-	"STOP" "SUB" "SUBA" "SUBI" "SUBQ" 
-	"SUBX" "SWAP" "TAS" "TRAP" "TRAPV" 
-	"TST" "UNLK"))
-
-(defvar bb2-amigados-keywords nil "AmigaDOS keywords")
-(setq bb2-amigados-keywords
-      '("AGARexxHost_" "AbortIO_" "AbortPkt_" "ActivateCxObj_" "ActivateGadget_" 
-	"ActivateWindow_" "AddAmigaGuideHostA_" "AddAnimOb_" "AddAppIconA_" "AddAppMenuItemA_" 
-	"AddAppWindowA_" "AddBob_" "AddBootNode_" "AddBuffers_" "AddClass_" 
-	"AddConfigDev_" "AddDTObject_" "AddDevice_" "AddDosEntry_" "AddDosNode_" 
-	"AddFont_" "AddFreeList_" "AddGList_" "AddGadget_" "AddHead_" 
-	"AddIEvents_" "AddIntServer_" "AddLibrary_" "AddMemHandler_" "AddMemList_" 
-	"AddNamedObject_" "AddPart_" "AddPort_" "AddResource_" "AddSegment_" 
-	"AddSemaphore_" "AddTail_" "AddTask_" "AddVSprite_" "Alert_" 
-	"AllocAbs_" "AllocAslRequest_" "AllocBitMap_" "AllocBoardInfo_" "AllocBoardMem_" 
-	"AllocConfigDev_" "AllocDBufInfo_" "AllocDosObject_" "AllocEntry_" "AllocExpansionMem_" 
-	"AllocFileRequest_" "AllocIFF_" "AllocLocalItem_" "AllocMem_" "AllocMiscResource_" 
-	"AllocNamedObjectA_" "AllocPooled_" "AllocPotBits_" "AllocRaster_" "AllocRemember_" 
-	"AllocScreenBuffer_" "AllocSignal_" "AllocSpriteDataA_" "AllocTrap_" "AllocUnit_" 
-	"AllocVec_" "AllocateTagItems_" "Allocate_" "AlohaWorkbench_" "Amiga2Date_" 
-	"AmigaGuideSignal_" "AndRectRegion_" "AndRegionRegion_" "Animate_" "ApplyTagChanges_" 
-	"AreaDraw_" "AreaEllipse_" "AreaEnd_" "AreaMove_" "AskFont_" 
-	"AskKeyMapDefault_" "AskSoftStyle_" "AslRequest_" "AssignAdd_" "AssignLate_" 
-	"AssignLock_" "AssignPath_" "AttachCxObj_" "AttachPalExtra_" "AttemptLockDosList_" 
-	"AttemptLockLayerRom_" "AttemptRemNamedObject_" "AttemptSemaphoreShared_" "AttemptSemaphore_" "AutoRequest_" 
-	"AvailFonts_" "AvailMem_" "BeginCardAccess_" "BeginRefresh_" "BeginUpdate_" 
-	"BehindLayer_" "BestModeIDA_" "BitMapScale_" "BltBitMapRastPort_" "BltBitMap_" 
-	"BltClear_" "BltMaskBitMapRastPort_" "BltPattern_" "BltTemplate_" "BoardsPrivate1_" 
-	"BuildEasyRequestArgs_" "BuildSysRequest_" "BumpRevision_" "CBump_" "CMove_" 
-	"CWait_" "CacheClearE_" "CacheClearU_" "CacheControl_" "CachePostDMA_" 
-	"CachePreDMA_" "CalcIVG_" "CallHookPkt_" "CardAccessSpeed_" "CardChangeCount_" 
-	"CardForceChange_" "CardInterface_" "CardMiscControl_" "CardProgramVoltage_" "CardResetCard_" 
-	"CardResetRemove_" "Cause_" "ChangeExtSpriteA_" "ChangeMode_" "ChangeScreenBuffer_" 
-	"ChangeSprite_" "ChangeVPBitMap_" "ChangeWindowBox_" "CheckDate_" "CheckIO_" 
-	"CheckSignal_" "ChildFree_" "ChildOrphan_" "ChildStatus_" "ChildWait_" 
-	"ClearCxObjError_" "ClearDMRequest_" "ClearEOL_" "ClearMenuStrip_" "ClearPointer_" 
-	"ClearRectRegion_" "ClearRegion_" "ClearRexxMsg_" "ClearScreen_" "CliInitNewcli_" 
-	"CliInitRun_" "Cli_" "ClipBlit_" "CloneTagItems_" "CloseAmigaGuide_" 
-	"CloseCatalog_" "CloseClipboard_" "CloseDevice_" "CloseEngine_" "CloseFont_" 
-	"CloseIFF_" "CloseLibrary_" "CloseLocale_" "CloseMonitor_" "CloseScreen_" 
-	"CloseWindow_" "CloseWorkBench_" "Close_" "CoerceMode_" "ColdReboot_" 
-	"CollectionChunk_" "CollectionChunks_" "CompareDates_" "ConfigBoard_" "ConfigChain_" 
-	"ConvToLower_" "ConvToUpper_" "ConvertHSBToRGB_" "ConvertRGBToHSB_" "CopyMemQuick_" 
-	"CopyMem_" "CopySBitMap_" "CopyTuple_" "CreateArgstring_" "CreateBehindHookLayer_" 
-	"CreateBehindLayer_" "CreateContext_" "CreateCxObj_" "CreateDir_" "CreateGadgetA_" 
-	"CreateIORequest_" "CreateMenusA_" "CreateMsgPort_" "CreateNewProc_" "CreatePool_" 
-	"CreateProc_" "CreateRexxMsg_" "CreateUpfrontHookLayer_" "CreateUpfrontLayer_" "CurrentChunk_" 
-	"CurrentDir_" "CurrentTime_" "CxBroker_" "CxMsgData_" "CxMsgID_" 
-	"CxMsgType_" "CxObjError_" "CxObjType_" "Date2Amiga_" "DateStamp_" 
-	"DateToStr_" "Deallocate_" "Debug_" "Delay_" "DeleteArgstring_" 
-	"DeleteCxObjAll_" "DeleteCxObj_" "DeleteDiskObject_" "DeleteFile_" "DeleteIORequest_" 
-	"DeleteLayer_" "DeleteMsgPort_" "DeletePool_" "DeleteRexxMsg_" "DeleteVar_" 
-	"DeviceProc_" "DeviceTuple_" "Disable_" "DisownBlitter_" "DisplayAlert_" 
-	"DisplayBeep_" "DisposeCxMsg_" "DisposeDTObject_" "DisposeFontContents_" "DisposeLayerInfo_" 
-	"DisposeObject_" "DisposeRegion_" "DivertCxMsg_" "DoAsyncLayout_" "DoCollision_" 
-	"DoDTMethodA_" "DoGadgetMethodA_" "DoHookClipRects_" "DoIO_" "DoPkt_" 
-	"DoubleClick_" "DrawBevelBoxA_" "DrawBorder_" "DrawEllipse_" "DrawGList_" 
-	"DrawImageState_" "DrawImage_" "Draw_" "DupLockFromFH_" "DupLock_" 
-	"EasyRequestArgs_" "Enable_" "EndCardAccess_" "EndNotify_" "EndRefresh_" 
-	"EndRequest_" "EndUpdate_" "EnqueueCxObj_" "Enqueue_" "EntryHandler_" 
-	"EraseImage_" "EraseRect_" "ErrorReport_" "ExAllEnd_" "ExAll_" 
-	"ExNext_" "ExamineFH_" "Examine_" "Execute_" "ExitHandler_" 
-	"Exit_" "ExtendFont_" "FGetC_" "FGets_" "FPutC_" 
-	"FPuts_" "FRead_" "FWrite_" "FattenLayerInfo_" "Fault_" 
-	"FilePart_" "FillRexxMsg_" "FilterTagChanges_" "FilterTagItems_" "FindArg_" 
-	"FindCliProc_" "FindCollection_" "FindColor_" "FindConfigDev_" "FindDisplayInfo_" 
-	"FindDosEntry_" "FindLocalItem_" "FindName_" "FindNamedObject_" "FindPort_" 
-	"FindPropContext_" "FindProp_" "FindResident_" "FindSegment_" "FindSemaphore_" 
-	"FindTagItem_" "FindTask_" "FindToolType_" "FindVar_" "Flood_" 
-	"Flush_" "FontExtent_" "Forbid_" "FormatDate_" "FormatString_" 
-	"Format_" "FreeArgs_" "FreeAslRequest_" "FreeBitMap_" "FreeBoardInfo_" 
-	"FreeBoardMem_" "FreeClass_" "FreeColorMap_" "FreeConfigDev_" "FreeCopList_" 
-	"FreeCprList_" "FreeDBufInfo_" "FreeDeviceProc_" "FreeDiskObject_" "FreeDosEntry_" 
-	"FreeDosObject_" "FreeEntry_" "FreeExpansionMem_" "FreeFileRequest_" "FreeFreeList_" 
-	"FreeGBuffers_" "FreeGadgets_" "FreeIFF_" "FreeLocalItem_" "FreeMem_" 
-	"FreeMenus_" "FreeMiscResource_" "FreeNamedObject_" "FreePooled_" "FreePotBits_" 
-	"FreeRaster_" "FreeRemember_" "FreeScreenBuffer_" "FreeScreenDrawInfo_" "FreeSignal_" 
-	"FreeSpriteData_" "FreeSprite_" "FreeSysRequest_" "FreeTagItems_" "FreeTrap_" 
-	"FreeUnit_" "FreeVPortCopLists_" "FreeVec_" "FreeVisualInfo_" "GT_BeginRefresh_" 
-	"GT_EndRefresh_" "GT_FilterIMsg_" "GT_GetGadgetAttrsA_" "GT_GetIMsg_" "GT_PostFilterIMsg_" 
-	"GT_RefreshWindow_" "GT_ReplyIMsg_" "GT_SetGadgetAttrsA_" "GadgetMouse_" "GetAPen_" 
-	"GetAmigaGuideAttr_" "GetAmigaGuideMsg_" "GetAmigaGuideString_" "GetArgStr_" "GetAttr_" 
-	"GetBPen_" "GetBitMapAttr_" "GetBoardName_" "GetCC_" "GetCardMap_" 
-	"GetCatalogStr_" "GetColorMap_" "GetConsoleTask_" "GetCurrentBinding_" "GetCurrentDirName_" 
-	"GetDTAttrsA_" "GetDTMethods_" "GetDTString_" "GetDTTriggerMethods_" "GetDefDiskObject_" 
-	"GetDefPrefs_" "GetDefaultPubScreen_" "GetDeviceProc_" "GetDiskObjectNew_" "GetDiskObject_" 
-	"GetDisplayInfoData_" "GetDrMd_" "GetExtSpriteA_" "GetFileSysTask_" "GetGBuffers_" 
-	"GetIcon_" "GetLocaleStr_" "GetMsg_" "GetOutlinePen_" "GetPrefs_" 
-	"GetProgramDir_" "GetProgramName_" "GetPrompt_" "GetRGB32_" "GetRGB4_" 
-	"GetRPAttrsA_" "GetScreenData_" "GetScreenDrawInfo_" "GetSprite_" "GetTagData_" 
-	"GetUniqueID_" "GetUnitID_" "GetUnit_" "GetVPModeID_" "GetVar_" 
-	"GetVisualInfoA_" "GfxAssociate_" "GfxFree_" "GfxInternal1_" "GfxInternal2_" 
-	"GfxInternal3_" "GfxLookUp_" "GfxNew_" "GfxSpare1_" "GfxSpare2_" 
-	"GiveUnit_" "GoodID_" "GoodType_" "HelpControl_" "IDtoStr_" 
-	"IEEEDPAbs_" "IEEEDPAcos_" "IEEEDPAdd_" "IEEEDPAsin_" "IEEEDPAtan_" 
-	"IEEEDPCeil_" "IEEEDPCmp_" "IEEEDPCos_" "IEEEDPCosh_" "IEEEDPDiv_" 
-	"IEEEDPExp_" "IEEEDPFieee_" "IEEEDPFix_" "IEEEDPFloor_" "IEEEDPFlt_" 
-	"IEEEDPLog10_" "IEEEDPLog_" "IEEEDPMul_" "IEEEDPNeg_" "IEEEDPPow_" 
-	"IEEEDPSin_" "IEEEDPSincos_" "IEEEDPSinh_" "IEEEDPSqrt_" "IEEEDPSub_" 
-	"IEEEDPTan_" "IEEEDPTanh_" "IEEEDPTieee_" "IEEEDPTst_" "IEEESPAbs_" 
-	"IEEESPAcos_" "IEEESPAdd_" "IEEESPAsin_" "IEEESPAtan_" "IEEESPCeil_" 
-	"IEEESPCmp_" "IEEESPCos_" "IEEESPCosh_" "IEEESPDiv_" "IEEESPExp_" 
-	"IEEESPFieee_" "IEEESPFix_" "IEEESPFloor_" "IEEESPFlt_" "IEEESPLog10_" 
-	"IEEESPLog_" "IEEESPMul_" "IEEESPNeg_" "IEEESPPow_" "IEEESPSin_" 
-	"IEEESPSincos_" "IEEESPSinh_" "IEEESPSqrt_" "IEEESPSub_" "IEEESPTan_" 
-	"IEEESPTanh_" "IEEESPTieee_" "IEEESPTst_" "IfAmigaXIP_" "Info_" 
-	"Inhibit_" "InitArea_" "InitBitMap_" "InitCode_" "InitGMasks_" 
-	"InitGels_" "InitIFF_" "InitIFFasClip_" "InitIFFasDOS_" "InitLayers_" 
-	"InitMasks_" "InitRastPort_" "InitRequester_" "InitResident_" "InitSemaphore_" 
-	"InitStruct_" "InitTmpRas_" "InitVPort_" "InitView_" "Input_" 
-	"InsertCxObj_" "Insert_" "InstallClipRegion_" "InstallLayerHook_" "InstallLayerInfoHook_" 
-	"InternalLoadSeg_" "InternalUnLoadSeg_" "IntuiTextLength_" "Intuition_" "InvertKeyMap_" 
-	"IoErr_" "IsAlNum_" "IsAlpha_" "IsCntrl_" "IsDigit_" 
-	"IsFileSystem_" "IsGraph_" "IsInteractive_" "IsLower_" "IsPrint_" 
-	"IsPunct_" "IsRexxMsg_" "IsSpace_" "IsUpper_" "IsXDigit_" 
-	"ItemAddress_" "LayoutMenuItemsA_" "LayoutMenusA_" "LendMenus_" "LengthArgstring_" 
-	"LoadRGB32_" "LoadRGB4_" "LoadSeg_" "LoadView_" "LocalItemData_" 
-	"LockAmigaGuideBase_" "LockDosList_" "LockIBase_" "LockLayerInfo_" "LockLayerRom_" 
-	"LockLayer_" "LockLayers_" "LockPubScreenList_" "LockPubScreen_" "LockRecord_" 
-	"LockRecords_" "LockRexxBase_" "Lock_" "MakeClass_" "MakeDosEntry_" 
-	"MakeDosNode_" "MakeFunctions_" "MakeLibrary_" "MakeLink_" "MakeScreen_" 
-	"MakeVPort_" "MapANSI_" "MapRawKey_" "MapTags_" "MatchEnd_" 
-	"MatchFirst_" "MatchIX_" "MatchNext_" "MatchPatternNoCase_" "MatchPattern_" 
-	"MatchToolValue_" "MaxCli_" "ModeNotAvailable_" "ModifyIDCMP_" "ModifyProp_" 
-	"MoveLayerInFrontOf_" "MoveLayer_" "MoveScreen_" "MoveSizeLayer_" "MoveSprite_" 
-	"MoveWindowInFrontOf_" "MoveWindow_" "Move_" "MrgCop_" "NameFromFH_" 
-	"NameFromLock_" "NamedObjectName_" "NewDTObjectA_" "NewFontContents_" "NewLayerInfo_" 
-	"NewLoadSeg_" "NewModifyProp_" "NewObjectA_" "NewRegion_" "NewScaledDiskFont_" 
-	"NextBoardInfo_" "NextDisplayInfo_" "NextDosEntry_" "NextObject_" "NextPubScreen_" 
-	"NextTagItem_" "ObtainBattSemaphore_" "ObtainBestPenA_" "ObtainConfigBinding_" "ObtainDataTypeA_" 
-	"ObtainGIRPort_" "ObtainInfoA_" "ObtainPen_" "ObtainSemaphoreList_" "ObtainSemaphoreShared_" 
-	"ObtainSemaphore_" "OffGadget_" "OffMenu_" "OldOpenLibrary_" "OnGadget_" 
-	"OnMenu_" "OpenAmigaGuideA_" "OpenAmigaGuideAsyncA_" "OpenCatalogA_" "OpenClipboard_" 
-	"OpenDevice_" "OpenDiskFont_" "OpenEngine_" "OpenFont_" "OpenFromLock_" 
-	"OpenIFF_" "OpenIntuition_" "OpenLibrary_" "OpenLocale_" "OpenMonitor_" 
-	"OpenResource_" "OpenScreenTagList_" "OpenScreen_" "OpenWindowTagList_" "OpenWindow_" 
-	"OpenWorkBench_" "Open_" "OrRectRegion_" "OrRegionRegion_" "Output_" 
-	"OwnBlitter_" "OwnCard_" "PackBoolTags_" "PackStructureTags_" "ParentChunk_" 
-	"ParentDir_" "ParentOfFH_" "ParseDate_" "ParseIFF_" "ParseIX_" 
-	"ParsePatternNoCase_" "ParsePattern_" "PathPart_" "Permit_" "PointInImage_" 
-	"PolyDraw_" "PopChunk_" "PrintDTObjectA_" "PrintFault_" "PrintIText_" 
-	"Procure_" "PropChunk_" "PropChunks_" "PubScreenStatus_" "PushChunk_" 
-	"PutDefDiskObject_" "PutDiskObject_" "PutIcon_" "PutMsg_" "PutStr_" 
-	"QBSBlit_" "QBlit_" "QueryOverscan_" "RLDispatch_" "RawDoFmt_" 
-	"ReadArgs_" "ReadBattClock_" "ReadBattMem_" "ReadCardStatus_" "ReadChunkBytes_" 
-	"ReadChunkRecords_" "ReadExpansionByte_" "ReadExpansionRom_" "ReadItem_" "ReadLink_" 
-	"ReadPixelArray8_" "ReadPixelLine8_" "ReadPixel_" "ReadUnitID_" "Read_" 
-	"RectFill_" "RefreshDTObjectA_" "RefreshGList_" "RefreshGadgets_" "RefreshTagItemClones_" 
-	"RefreshWindowFrame_" "Relabel_" "ReleaseBattSemaphore_" "ReleaseCard_" "ReleaseConfigBinding_" 
-	"ReleaseDataType_" "ReleaseGIRPort_" "ReleaseInfoA_" "ReleaseNamedObject_" "ReleasePen_" 
-	"ReleaseSemaphoreList_" "ReleaseSemaphore_" "RemAssignList_" "RemConfigDev_" "RemDevice_" 
-	"RemDosEntry_" "RemFont_" "RemHead_" "RemIBob_" "RemIntServer_" 
-	"RemLibrary_" "RemMemHandler_" "RemNamedObject_" "RemPort_" "RemResource_" 
-	"RemSegment_" "RemSemaphore_" "RemTail_" "RemTask_" "RemVSprite_" 
-	"RemakeDisplay_" "RemoveAmigaGuideHostA_" "RemoveAppIcon_" "RemoveAppMenuItem_" "RemoveAppWindow_" 
-	"RemoveClass_" "RemoveCxObj_" "RemoveDTObject_" "RemoveGList_" "RemoveGadget_" 
-	"Remove_" "Rename_" "ReplyAmigaGuideMsg_" "ReplyMsg_" "ReplyPkt_" 
-	"ReportMouse_" "RequestFile_" "Request_" "ResetBattClock_" "ResetMenuStrip_" 
-	"RethinkDisplay_" "RouteCxMsg_" "RunCommand_" "SDivMod32_" "SMult32_" 
-	"SMult64_" "SPAbs_" "SPAcos_" "SPAdd_" "SPAsin_" 
-	"SPAtan_" "SPCeil_" "SPCmp_" "SPCos_" "SPCosh_" 
-	"SPDiv_" "SPExp_" "SPFieee_" "SPFix_" "SPFloor_" 
-	"SPFlt_" "SPLog10_" "SPLog_" "SPMul_" "SPNeg_" 
-	"SPPow_" "SPSin_" "SPSincos_" "SPSinh_" "SPSqrt_" 
-	"SPSub_" "SPTan_" "SPTanh_" "SPTieee_" "SPTst_" 
-	"SameDevice_" "SameLock_" "ScalerDiv_" "ScreenDepth_" "ScreenPosition_" 
-	"ScreenToBack_" "ScreenToFront_" "ScrollLayer_" "ScrollRasterBF_" "ScrollRaster_" 
-	"ScrollVPort_" "ScrollWindowRaster_" "Seek_" "SelectInput_" "SelectOutput_" 
-	"SendAmigaGuideCmdA_" "SendAmigaGuideContextA_" "SendIO_" "SendPkt_" "SetABPenDrMd_" 
-	"SetAPen_" "SetAmigaGuideAttrsA_" "SetAmigaGuideContextA_" "SetArgStr_" "SetAttrsA_" 
-	"SetBPen_" "SetChipRev_" "SetCollision_" "SetComment_" "SetConsoleTask_" 
-	"SetCurrentBinding_" "SetCurrentDirName_" "SetCxObjPri_" "SetDMRequest_" "SetDTAttrsA_" 
-	"SetDefaultPubScreen_" "SetDrMd_" "SetEditHook_" "SetExcept_" "SetFileDate_" 
-	"SetFileSize_" "SetFileSysTask_" "SetFilterIX_" "SetFilter_" "SetFont_" 
-	"SetFunction_" "SetGadgetAttrsA_" "SetInfoA_" "SetIntVector_" "SetIoErr_" 
-	"SetKeyMapDefault_" "SetLocalItemPurge_" "SetMaxPen_" "SetMenuStrip_" "SetMode_" 
-	"SetMouseQueue_" "SetOutlinePen_" "SetOwner_" "SetPointer_" "SetPrefs_" 
-	"SetProgramDir_" "SetProgramName_" "SetPrompt_" "SetProtection_" "SetPubScreenModes_" 
-	"SetRGB32CM_" "SetRGB32_" "SetRGB4CM_" "SetRGB4_" "SetRPAttrsA_" 
-	"SetRast_" "SetSR_" "SetSignal_" "SetSoftStyle_" "SetTaskPri_" 
-	"SetTranslate_" "SetVBuf_" "SetVar_" "SetWindowPointerA_" "SetWindowTitles_" 
-	"SetWriteMask_" "ShowTitle_" "Signal_" "SizeLayer_" "SizeWindow_" 
-	"SortGList_" "SortLayerCR_" "SplitName_" "StackSwap_" "StartNotify_" 
-	"StopChunk_" "StopChunks_" "StopOnExit_" "StoreItemInContext_" "StoreLocalItem_" 
-	"StrConvert_" "StrToDate_" "StrToLong_" "Stricmp_" "StripFont_" 
-	"StrnCmp_" "Strnicmp_" "SumKickData_" "SumLibrary_" "SuperState_" 
-	"Supervisor_" "SwapBitsRastPortClipRect_" "SyncSBitMap_" "SysReqHandler_" "SystemTagList_" 
-	"TEDGetCurrentLine_" "TEDGetFilename_" "TEDGetFirstLine_" "TEDGetJumpTable_" "TEDGetLabelCount_" 
-	"TEDGetLabelList_" "TEDSetJumpTable_" "TagInArray_" "TextExtent_" "TextFit_" 
-	"TextLength_" "Text_" "ThinLayerInfo_" "TimedDisplayAlert_" "ToLower_" 
-	"ToUpper_" "TypeOfMem_" "UCopperListInit_" "UDivMod32_" "UMult32_" 
-	"UMult64_" "UnGetC_" "UnLoadSeg_" "UnLockDosList_" "UnLockRecord_" 
-	"UnLockRecords_" "UnLock_" "UnlockAmigaGuideBase_" "UnlockIBase_" "UnlockLayerInfo_" 
-	"UnlockLayerRom_" "UnlockLayer_" "UnlockLayers_" "UnlockPubScreenList_" "UnlockPubScreen_" 
-	"UnlockRexxBase_" "UnpackStructureTags_" "UpfrontLayer_" "UserState_" "VBeamPos_" 
-	"VFPrintf_" "VFWritef_" "VPrintf_" "Vacate_" "VideoControl_" 
-	"ViewAddress_" "ViewPortAddress_" "WBInfo_" "WBenchToBack_" "WBenchToFront_" 
-	"WaitBOVP_" "WaitBlit_" "WaitForChar_" "WaitIO_" "WaitPkt_" 
-	"WaitPort_" "WaitTOF_" "Wait_" "WeighTAMatch_" "WhichLayer_" 
-	"WindowLimits_" "WindowToBack_" "WindowToFront_" "WriteBattClock_" "WriteBattMem_" 
-	"WriteChars_" "WriteChunkBytes_" "WriteChunkRecords_" "WriteExpansionByte_" "WritePixelArray8_" 
-	"WritePixelLine8_" "WritePixel_" "WritePotgo_" "Write_" "XFA_AllocFrames_" 
-	"XFA_AnimFrames_" "XFA_AnimMem_" "XFA_CMapPtr_" "XFA_ChangePackBitMap_" "XFA_ClosePackStuff_" 
-	"XFA_ClosePlayStuff_" "XFA_CloseRead_" "XFA_FreeAnim_" "XFA_FreeFrame_" "XFA_FreeFrames_" 
-	"XFA_GetPackMode_" "XFA_HeadPtr_" "XFA_IsSkip_" "XFA_LibErr_" "XFA_LoadAnim_" 
-	"XFA_OpenPackStuff_" "XFA_OpenPlayStuff_" "XFA_OpenRead_" "XFA_PackBitMap_" "XFA_PackMem_L_" 
-	"XFA_PackMem_W_" "XFA_Play_" "XFA_PosOnFrame_" "XFA_PutFrame_" "XFA_PutSeqFrame_" 
-	"XFA_PutSkip_" "XFA_ReadFrame_" "XFA_SaveAnim_" "XFA_SaveScreen_" "XFA_SetFramesArray_" 
-	"XFA_SetPack_" "XFA_UnPackBitMap_" "XFA_UnPackBitMap_L_" "XFA_UnPackBitMap_W_" "XFA_UseCMap_" 
-	"XFA_UseHead_" "XProtocolHostMon_" "XProtocolUserMon_" "XorRectRegion_" "XorRegionRegion_" 
-	"ZipWindow_"))
-
-(defvar bb2-eldoc-table nil "Table of Blitz II help strings for eldoc")
-(setq bb2-eldoc-table
-      #s(hash-table test equal data
-		    ("acos" "(Float)"
-		     "addvalue" "(bitmap#,x,y)"
-		     "agablue" "(Colour Register)"
-		     "agafillpalette" "palette#,r,g,b[,start_col,end_col] - fill palette with AGA r,g,b values"
-		     "agagreen" "(Colour Register)"
-		     "agapalblue" "(colour#)"
-		     "agapalgreen" "(colour#)"
-		     "agapalrgb" "Palette#,Colour Register,Red,Green,Blue"
-		     "agapalred" "(colour#)"
-		     "agargb" "Colour Register,Red,Green,Blue"
-		     "agared" "(Colour Register)"
-		     "aslfilerequest$" "Title$,Pathname$,Filename$ [,Pattern$] [,x,y,w,h]"
-		     "aslfontrequest" "enable flags (1=pen 2=bckgrnd 4=style 8=drawmode 16=fixedsize)"
-		     "aslpathrequest$" "Title$,Pathname$ [,x,y,w,h]"
-		     "aslscreenrequest" "enable flags (1=width 2=height 4=depth 8=overscan 16=scroll)"
-		     "asin" "(Float)"
-		     "asyncfade" "On|Off"
-		     "atan" "(Float)"
-		     "ableicr_a" "(resource,mask)"
-		     "ableicr_b" "(resource,mask)"
-		     "abs" "(Expression)"
-		     "absmouse" "X,Y"
-		     "activate" "Window#"
-		     "activatestring" "Window#,Id"
-		     "activescreen" ";Returns ADDRESS of current Intuition screen"
-		     "activewindow" ";Returns ADDRESS of current Intuition window"
-		     "addappicon" "(id,text$,filename$/shape#[,x,y])"
-		     "addappmenu" "(id,text$)"
-		     "addappwindow" "(windownumber)"
-		     "addbox" "Page#,Box#,x,y,w,h,type[,text$]|[,shape,shape]"
-		     "addfirst" "(Arrayname())"
-		     "addidcmp" "IDCMP_Flags"
-		     "additem" "(Arrayname())"
-		     "addlast" "(Arrayname())"
-		     "adjustchunky" "chunky#,DeltaRed,DeltaGreen,DeltaBlue,"
-		     "allfire" "([joybits])"
-		     "allocfill" "for internal use only (polylib.obj)"
-		     "allocmem" "(size,memtype) memtype: 0=fast 2=chip 65536=clrmem"
-		     "analyzedisk" "(DriveName$) ;TRUE if device name is valid"
-		     "animloop" "On|Off"
-		     "appfile" "(num)"
-		     "asc" "(String$)"
-		     "assign" "[success=] Assign(Name$,ToPath$) ;e.g. Assign \"Blitz2:\",\"DH1:Blitz2\""
-		     "assign$" ";Null-string indicates end of list"
-		     "attachgtlist" "GTList#,Window#"
-		     "autocookie" "On|Off"
-		     "avg" "(Integer1,Integer2)"
-		     "avg.l" "(Long Integer 1,Long Integer 2)"
-		     "avg.q" "(Quick1,Quick2)"
-		     "bblit" "Buffer#,Shape#,X,Y[,Excessonoff]"
-		     "bblitmode" "BLTCON0"
-		     "bload" "(filename$,[address,[,length,[offset,[memtype]]]])"
-		     "bsave" "(filename$,address/bank[,length])"
-		     "bank" "(bank#)"
-		     "bankloc" "(bank#)"
-		     "banksize" "(bank#)"
-		     "beepscreen" "Screen#"
-		     "bin#" "(BinString$) ;Converts binary value (in string) to decimal"
-		     "bin$" "(Expression)"
-		     "bitmap" "BitMap#,Width,Height,Depth"
-		     "bitmaporigin" "BitMap#,x,y"
-		     "bitmapoutput" "Bitmap#"
-		     "bitmappoly" "numpts,*coords.w,color[,ditherbitmap]"
-		     "bitmaptowindow" "Bitmap#,Window#[,srcx,srcy,destx,desty,wid,height]"
-		     "bitmapwindow" "srcbitmap,destbitmap,x,y,w,h"
-		     "bitmaptowindow" "Bitmap#,Window#[,srcx,srcy,destx,desty,wid,height]"
-		     "bitplanesbitmap" "srcbitmap,destbitmap,planepick"
-		     "blit" "Shape#,X,Y[,Excessonoff]"
-		     "blitcoll" "(Shape#,x,y)"
-		     "blitmode" "BLTCON0"
-		     "blitternasty" "On|Off"
-		     "blitzevent" ";handles user input and returns event"
-		     "blitzkey" ";same as inkey$ after a bitmapinput"
-		     "blitzkeys" "On|Off"
-		     "blitzrepeat" "Delay,Speed"
-		     "block" "Shape#,X,Y"
-		     "blockscroll" "X1,Y1,Width,Height,X2,Y2[,BitMap#]"
-		     "blue" "(Colour Register)"
-		     "bootprog" "unit#,memoryaddress"
-		     "borderpens" "Highlight Colour,Shadow Colour"
-		     "borders" "[On|Off]|[Width,Height]"
-		     "box" "x1,y1,x2,y2,color"
-		     "boxprint" "Box#[,String$]|[Bank#,Line]"
-		     "boxpropx" "Box#"
-		     "boxpropy" "Box#"
-		     "boxshow" "Box#[,Bitmap#,x,y]|[dx,dy]"
-		     "boxstring" "(Box#)|(Page#,Box#)"
-		     "boxvalue" "(Box#)|(Page#,Box#)"
-		     "boxf" "x1,y1,x2,y2,color"
-		     "buffer" "Buffer#,Memorylen"
-		     "buttongroup" "Group"
-		     "buttonid" "(GadgetList#,ButtonGroup)"
-		     "cddoor" "on/off"
-		     "cdpause" "on/off"
-		     "cdplaytrack" "track#,numtracks"
-		     "cdspeed" "speed"
-		     "cdtracklength" "track#"
-		     "cdtrackmins" "[offset] - mins for current track"
-		     "cdtrackplaying" "- current track being played"
-		     "cdtracksecs" "[offset] - secs for current track"
-		     "cdupdateinfo" "- update track playing/time information"
-		     "cdvolume" "volume,lengthoffade"
-		     "chdir" "[success=] CHDir(Path$) ;CHange current DIRectory"
-		     "cmpmem" "(source,dest,length) 0=same,-1 source<dest, +1 source>dest"
-		     "cpucls" "bitmap#"
-		     "cplot" "Chunky#,x,y[,color.l],[red.b,green.b,blue.b]"
-		     "cpoint" "(Chunky#,x,y)"
-		     "cachesoff" "bitmask"
-		     "cacheson" "bitmask"
-		     "call" "Address"
-		     "casesense" "On|Off"
-		     "centre$" "(String$,Characters)"
-		     "chdir" "[success=] CHDir(Path$) ;CHange current DIRectory"
-		     "changebox" "Page#,Box#,Value"
-		     "changedir" "dir$"
-		     "changetrackermask" "Channel_Mask"
-		     "charcount" "(String$,byte) ;Returns no. occurances of 'byte' in 'string$'"
-		     "checkaga" ";Returns 'TRUE' for AGA machines, otherwise returns 'FALSE'"
-		     "checkprt" "-1=Printer Off|-3=Printer Offline|-4=Printer On"
-		     "checktrackerid" "(TrackerModule#)"
-		     "checksum" "(String$) ;Returns a unique checksum for a given string"
-		     "chipfree" ";Returns largest block of free CHIP memory"
-		     "chr$" "(Expression)"
-		     "chunkheader" "(a$)"
-		     "chunkycls" "color"
-		     "chunkyconvert" "chunky#[,palette]|[,array.l(),numcols]"
-		     "chunkyloc" "chunky#"
-		     "chunkyplot" "x,y,color,[,CLIP]"
-		     "chunkypoly" "numpts,*coords.w,color[,noblitter]"
-		     "chunkytobitmap" "Chunky#,Bitmap#"
-		     "chunkyvlin" "x,y1,y2,color,[,CLIP]"
-		     "cipher$" "(String$) ;Create/Unencrypt a Cipher$() string"
-		     "circle" "x,y,rx[,ry],color"
-		     "circlef" "x,y,rx[,ry],color"
-		     "clearbitmap" "bitmap#,delay[,height,offset]"
-		     "clearlist" "Arrayname()"
-		     "clearrexxmsg" "rexxmsg"
-		     "clearstring" "GadgetList#,Id"
-		     "clickbutton" "Button : 0=Left"
-		     "clickmouse" ";Waits for left mouse button to be CLICKED"
-		     "clipblit" "Shape#,X,Y,[Excess]"
-		     "clipblitmode" "BPLCON0"
-		     "closeconsole" "Console#"
-		     "closedisk" "unit#"
-		     "closefile" "File#"
-		     "closescreen" "Screen#"
-		     "closeserial" "unit#"
-		     "closewindow" "Window#"
-		     "cls" "[Colour]"
-		     "cludgebitmap" "BitMap#,Width,Height,Depth,Memory"
-		     "cludgeshapes" "shape#,numshapes,address"
-		     "cludgesound" "sound#,address"
-		     "col8" "(array.l(),numcols,rgb.l)"
-		     "colsplit" "Colour Register,Red,Green,Blue,Y"
-		     "colorchunky" "chunky#"
-		     "colour" "Foreground Colour[,Background Colour]"
-		     "colourrequest" "Colour#"
-		     "commoditiesbase" ";Returns Commodities Library base"
-		     "comparepaths" "(Path1$,Path2$) ;0=Unrelated, 1=Same Dir or File, 2=On Same Volume"
-		     "con_base" "Returns pointer to console.device"
-		     "copperagacol" "col#,r,g,b"
-		     "coppercommand" "copins1,copins2"
-		     "coppermove" "register,value"
-		     "copperreset" "coplist#,startline[,ccoffset]"
-		     "copperskip" "x,y"
-		     "copperwait" "x,y"
-		     "copybitmap" "Src BitMap#,Dest BitMap#"
-		     "copybyte" "sourceaddr,destaddr,bytes"
-		     "copychunky" "srcchunky#,destchunky#,[sx,sy,w,h,dx,dy]"
-		     "copycolour" "sourcepal#,destpal#,colsource#,coldest#"
-		     "copyfile" "[success=] CopyFile(Source$,Dest$)"
-		     "copylong" "sourceaddr,destaddr,longs"
-		     "copyshape" "Shape#,Shape#"
-		     "copyword" "sourceaddr,destaddr,words"
-		     "cos" "(Float)"
-		     "crmdecrunch" "Bufferadr"
-		     "createargstring" "ArgString=CreateArgString(String)"
-		     "createdisplay" "CopList#[,CopList#..]"
-		     "createmsgport" "*UserPort.port=CreateMsgPort(PortName$)"
-		     "createrexxmsg" "MsgPtr=CreateRexxMsg(ReplyPort,Exten,Host)"
-		     "currentdir$" ";Current directory name"
-		     "cursor" "Thickness : <0 - block, >=0 - underline thickness"
-		     "customchunky" "CopList#,CCOffset,YPos,width,height,res[,splitpos] ;4n+2"
-		     "customchunkysize" "width,height"
-		     "customcolors" "CopList#,CCOffset,YPos,Palette,startcol,numcols[,thru256flag]"
-		     "customcop" "Copins$,Y"
-		     "customsprites" "CopList#,CCOffset,YPos,NumSprites ;4n+2"
-		     "customstring" "CopList#,CCOffset,YPos,Copper$"
-		     "cvi" "(String$)"
-		     "cvl" "(String$)"
-		     "cvq" "(String$)"
-		     "cycle" "Palette#"
-		     "cyclepalette" "Palette#"
-		     "dbcasesense" "On|Off"
-		     "dbinit" "(object#,init recs, exp recs,rec struct[,keylength[,offset]])"
-		     "dbload" "Database#,filename$"
-		     "dbsave" "Database#,filename$"
-		     "dbactive" "(Database#) Is a database active or not ?"
-		     "dbadd" "(database #,record var) add record to database"
-		     "dbaddfirst" "(database #,record var) add record to database"
-		     "dbaddlast" "(database #,record var) add record to database"
-		     "dbcurrent" "(Database#)"
-		     "dbdelete" "database # delete current entry in database"
-		     "dbfind" "(database #,searchstring$[,length,offset[,startrec]])"
-		     "dbfindnext" "(database #)"
-		     "dbfirst" "(database #) set pointer to the first database entry"
-		     "dbget" "(database #,record var) get current record from database"
-		     "dbisnext" "(Database#)"
-		     "dbisprev" "(Database#)"
-		     "dbkill" "(database #) kill current database"
-		     "dblast" "(database #) set pointer to the last database entry"
-		     "dblistaddr" "(database #) gives address of nodelist header"
-		     "dbmemtype" "memtype"
-		     "dbmodified" "(Database#)"
-		     "dbnext" "(database #) set pointer to the next database entry"
-		     "dbpop" "(Database#) retrieve a pushed record"
-		     "dbprev" "(database #) set pointer to the previous database entry"
-		     "dbpush" "(Database#) hold onto this record"
-		     "dbrecs" "(database #) gives number of records in database"
-		     "dbsetkey" "database #,On|Off"
-		     "dbsetpos" "database #,recs"
-		     "dbupdate" "database #,record variable"
-		     "d_checknmove" "source_address,dest_address[,count]"
-		     "d_checknmovea" "source_address,dest_address[,count]"
-		     "d_checknmoveword" "source_address,dest_address[,count]"
-		     "d_findstringptr" "areg5,lookfor"
-		     "d_findvolume" "(volumename)"
-		     "d_getsr" "buffer,SR"
-		     "d_hexword" "source,address,num"
-		     "date$" "days.l ;converts days since 1/1/1978 to date string"
-		     "dateformat" "0=dd/mm/yyyy 1=mm/dd/yyyy"
-		     "days" ";returns day calculated in last call to date$"
-		     "deice" "(sourceaddr,destaddr)"
-		     "decodeilbm" "Bitmap#,MemoryLocation"
-		     "decodemedmodule" "MedModule#,MemoryLocation"
-		     "decodemodule" "TrackerModule#,ModuleAddress"
-		     "decodepalette" "Palette#,MemoryLocation[,Palette Offset]"
-		     "decodeshapes" "Shape#[,Shape#],MemoryLocation"
-		     "decodesound" "Sound#,MemoryLocation"
-		     "decrypt" "memadr,length,wheel1,wheel2,wheel3[,mode]"
-		     "defaultidcmp" "IDCMP_Flags"
-		     "delappicon" "(id)"
-		     "delappmenu" "(id)"
-		     "delappwindow" "(windownumber)"
-		     "deleteargstring" "argstring"
-		     "deletemsgport" "*UserPort"
-		     "deleterexxmsg" "rexxmsg.l"
-		     "deplode" "Success=Startadr"
-		     "depth" "(Bitmap#) ;Returns DEPTH of specified bitmap"
-		     "derez" "source#,dest#,sourceadd,destadd,derez_value,height"
-		     "detachgtlist" "GTList#"
-		     "devicename$" "volumename$"
-		     "disable" "(GadgetList#,Id)"
-		     "disablebox" "Box#"
-		     "diskblocks" ";Bytes per block of last drive analyzed"
-		     "diskbuffer" "Bufferlen"
-		     "diskcapacity" ";Capacity in bytes of last drive analyzed"
-		     "diskerrors" ";No. of soft errors on last drive analyzed"
-		     "diskfontbase" ";Returns DiskFont Library base"
-		     "diskfree" ";No. free bytes on last analyzed disk"
-		     "diskio" "unit#"
-		     "diskmotor" "; Returns -1 if motor is on"
-		     "diskplay" "Filename$,Channelmask[,Vol1[,Vol2...]]"
-		     "diskstate" ";0=Write-Protected, 1=Validating, 2=Validated"
-		     "diskstatus" "unit#"
-		     "disktype$" ";4-char string ID"
-		     "diskunit" ";Unit# of last drive analyzed"
-		     "diskused" ";No. bytes used of last analyzed drive"
-		     "diskfontbase" ";Returns DiskFont Library base"
-		     "displayadjust" "CopList#,fetchwid,ddfstrt,ddfstop,diwstrt,diwstop"
-		     "displaybitmap" "CopList#,bmap[,x,y] [,bmap[,x,y]]"
-		     "displaycontrols" "CopList#,BPLCON2,BPLCON3,BPLCON4"
-		     "displaydblscan" "CopList#,Mode[,copoffset]"
-		     "displaygenlock" "BPLCON0"
-		     "displaypalette" "CopList#,Palette# [,coloroffset] [,coloroffset,bankoffset]"
-		     "displayrgb" "CopList#,Register,line,r,g,b[,copoffset] ;ecs=1 aga=4"
-		     "displayrainbow" "CopList#,Register,Palette[,copoffset] ;ecs=1 aga=4"
-		     "displayscroll" "CopList#,&xpos.q(n),&xpos.q(n)[,Offset]"
-		     "displaysprite" "CopList#,Sprite#,X,Y,Sprite Channel"
-		     "displayuser" "CopList#,Line,String[,Offset]"
-		     "docolsplit" "cols_adr,numlines,colour_register"
-		     "dosbase" ";Returns DOS Library base"
-		     "dosbufflen" "Bytes"
-		     "doserror$" ";Reason for last failed DOS action"
-		     "dos_base" "Returns pointer to dos.library"
-		     "duplicatepalette" "SrcPalette#,DestPalette#"
-		     "easyrequest" "Result=EasyRequest([#Window,]title$,body$,gtext$)"
-		     "edit" "([DefaultValue,]Characters)"
-		     "edit$" "([DefaultString$,]Characters)"
-		     "editfrom" "[Characterpos]"
-		     "enable" "(GadgetList#,Id)"
-		     "enablebox" "Box#"
-		     "encrypt" "memadr,length[,wheel1,wheel2,wheel3]"
-		     "entrybits$" ";Possible bits: H, S, A, P, R, W, E, D"
-		     "entrycomment$" ";Comment String of last Examined object or entry"
-		     "entrydate" ";Date$(EntryDate) returns date of last Examined object or entry"
-		     "entrydir" ";True if last Examined object or entry is a directory"
-		     "entryhour" ";Hour of last Examined object or entry"
-		     "entrymins" ";Minutes of last Examined object or entry"
-		     "entryname$" ";Filename of last Examined object or entry"
-		     "entrysecs" ";Seconds of last Examined object or entry"
-		     "entrysize" ";Bytesize of last Examined object or entry"
-		     "eof" "(File#)"
-		     "erase" "bank"
-		     "examine" "[success=] Examine(Pathname$)"
-		     "exec" "DosCommands$ ;String is executed"
-		     "exists" "(Filename$)"
-		     "exp" "(Float)"
-		     "extractlabel" "label_string"
-		     "ffpbase" ";Returns FFP Math Library base"
-		     "finverse" "inversemode"
-		     "flocate" "x,y"
-		     "fnprint" "a$"
-		     "fnsclip" "xmin,ymin,xmax,ymax"
-		     "fnsclipoutput" "- set clipping zone to output bitmap size"
-		     "fnsheight" "(fontnum)"
-		     "fnsink" "colour"
-		     "fnslength" "(fontnum,a$[,prefs])"
-		     "fnsload" "(fontname$,fontslot)"
-		     "fnsorigin" "[x,y]"
-		     "fnsoutput" "bitmap[,clip_update (On|Off)]"
-		     "fnsprefs" "prefs[,colour]"
-		     "fnsprint" "fontnum,x,y,a$/string_address[,prefs,colour]"
-		     "fnssettab" "tab_size - set tab size in pixels"
-		     "fnsunload" "fontslot"
-		     "fnsunderline" "(fontnum)"
-		     "fnsunload" "fontslot"
-		     "fnsversion" "- returns quick, lastest version=0.992"
-		     "fnswidth" "(fontnum)"
-		     "fprint" "a$"
-		     "fprintdetoke" "tokenised_string,cio,typ,lineoffset"
-		     "fyoffset" "pixel_offset - offset from vertical y cursor to print at"
-		     "fadein" "Palette#[,Rate[,Low Colour,High Colour]]"
-		     "fadeinbitmap" "bitmapsource#,bitmapdest#,delay[,height,offset1,offset2]"
-		     "fadeout" "Palette#[,Rate[,Low Colour,High Colour]]"
-		     "fadepalette" "SrcPalette#,DestPalette#,Brightness.q"
-		     "fastfree" ";Returns largest block of free FAST memory"
-		     "fields" "File#,Var1[,Var2...]"
-		     "filefilter" "Show$,Hide$"
-		     "fileinput" "File#"
-		     "fileoutput" "File#"
-		     "filepart$" "(FullPath$) ;\"DH0:S/User-Startup\" -> \"User-Startup\""
-		     "filereqsize" "Lines High,File Length,Device Length,"
-		     "filerequest$" "Title$,Pathname$,Filename$"
-		     "fileseek" "File#,Position"
-		     "filesize" "(filename$)"
-		     "filestructure" "Pointer to file requester structor"
-		     "fillmem" "address,length[,value]"
-		     "fillpalette" "palette#,r,g,b[,start_col,end_col] - fill palette with r,g,b values"
-		     "fillrexxmsg" "rexxmsg,&FillStruct"
-		     "filter" "On|Off"
-		     "findscreen" "Screen#[,Title$]"
-		     "findtoolnumber" "(tooltype#)"
-		     "findtooltype" "(tooltype$)"
-		     "findtoolvalue" "(tooltype$)"
-		     "findvolume" "(volumename)"
-		     "firstitem" "(Arrayname())"
-		     "floatmode" "Mode : -1=standard, 0=guess, 1=exp"
-		     "floodfill" "x,y,colour [,border colour]"
-		     "flstostr$" "(startaddr of FLS, maxlength)"
-		     "flushbuffer" "Buffer#"
-		     "flushevents" "[IDCMP_Flag]"
-		     "flushqueue" "Queue#"
-		     "forcentsc" ";Forces screen mode to NTSC (60hz)"
-		     "forcepal" ";Forces screen mode to PAL (50hz)"
-		     "format" "FormatString"
-		     "formattrack" "unit#,track#,buffer[,numtracks]"
-		     "frac" "(Expression)"
-		     "frames" "(Anim#)"
-		     "freebank" "bank#"
-		     "freechunky" "Chunky#"
-		     "freefill" "frees memory allocated for 2d fill routines"
-		     "freeiconobject" "- free the disk object of a icon"
-		     "freemacrokey" "Rawkey,Qualifier"
-		     "freemem" "address,size"
-		     "freepage" "Page#"
-		     "freetrackermodule" "TrackerModule#"
-		     "freezonetable" "table#"
-		     "freq" "Channelmask,period"
-		     "fromcli" "result=FromCLI"
-		     "fullpath$" "(PathPart$,FilePart$) ;\"DH0:S\" + \"User-Startup\" -> \"DH0:S/User-Startup\""
-		     "funclibversion" "V1.36 29/1/95 Written By S Matty (C) LES"
-		     "gplot" "Chunky#,x,y,color.b"
-		     "gpoint" "(Chunky#,x,y)"
-		     "gtarrowsize" "size"
-		     "gtbevelbox" "GTList#,x,y,w,h,flags"
-		     "gtbutton" "GTList#,id,x,y,w,h,Text$,flags"
-		     "gtchangelist" "GTList#,id [ ,List() ]"
-		     "gtcheckbox" "GTList#,id,x,y,w,h,Text$,flags"
-		     "gtcycle" "GTList#,id,x,y,w,h,Text$,flags,Options$[,active]"
-		     "gtdisable" "GTList#,Id"
-		     "gtenable" "GTList#,Id"
-		     "gtfreegadget" "GTList#,id"
-		     "gtgadptr" "(GTList#,id)"
-		     "gtgetattrs" "(GTList#,id,Tag)"
-		     "gtgetinteger" "GTList#,id"
-		     "gtgetstring" "GTList#,id"
-		     "gtgimmecludge" "On/Off"
-		     "gtinteger" "GTList#,id,x,y,w,h,Text$,flags,default"
-		     "gtlistview" "GTList#,id,x,y,w,h,Text$,flags,list()[,selected[,top]]"
-		     "gtmx" "GTList#,id,x,y,w,h,Text$,flags,Options$[,active]"
-		     "gtnumber" "GTList#,id,x,y,w,h,Text$,flags,value"
-		     "gtpalette" "GTList#,id,x,y,w,h,Text$,flags,depth[,Color]"
-		     "gtscroller" "GTList#,id,x,y,w,h,Text$,flags,Visible,Total[,Top]"
-		     "gtsetattrs" "GTList#,id [,Tag,Value...]"
-		     "gtsethighlight" "GTList#,id,value"
-		     "gtsetinteger" "GTList#,id,value"
-		     "gtsetstring" "GTList#,id,string$"
-		     "gtshape" "GTList#,id,x,y,flags,Shape#[,Shape#]"
-		     "gtslider" "GTList#,id,x,y,w,h,Text$,flags,Min,Max[,Level]"
-		     "gtstatus" "GTList#,Id"
-		     "gtstring" "GTList#,id,x,y,w,h,Text$,flags,MaxChars [,default$]"
-		     "gttagvalue" "([tagvalue])"
-		     "gttags" "Tag,Value [,Tag,Value...]"
-		     "gttext" "GTList#,id,x,y,w,h,Text$,flags,Display$"
-		     "gttoggle" "GTList#,Id [,On|Off]"
-		     "gadgetborder" "X,Y,Width,Height"
-		     "gadgetjam" "Jammode"
-		     "gadgetpens" "Foreground Colour[,Background Colour]"
-		     "gadgetstatus" "(GadgetList#,Id)"
-		     "gameb" "(Port)"
-		     "get" "File#,Record"
-		     "getassigns" "(Type) ;Types are: 0=Devices, 1=Directories 2=Volumes"
-		     "getccoffset" "- get current custom copper offset"
-		     "getcopins$" "copdata"
-		     "getcustomreg" "address"
-		     "getcustomregadr" "name$"
-		     "getenv$" "(Name$) ;Returns DOS environmental variable"
-		     "gethex$" "value,mode"
-		     "gethexadr$" "*value,mode"
-		     "geticoninfo" "success.w=GetIconInfo(Info#,filename$)"
-		     "geticonobject" "(filename$)"
-		     "getlocal$" "(Name$) ;Returns DOS local variable"
-		     "getlocalestr" "(#StringNumber,DefaultString$)"
-		     "getmedinstr" "Channel"
-		     "getmednote" "Channel"
-		     "getmedvolume" "Channel"
-		     "getmodulename$" "(TrackerModule#)"
-		     "getprogmode" "mode,buffer"
-		     "getresultstring" "String=GetResultString(rexxmsg)"
-		     "getrexxcommand" "String=GetRexxCommand(rexxmsg,ARGNum)"
-		     "getrexxresult" "Result=GetRexxResult(rexxmsg,ResultNum)"
-		     "getstring$" "(Title$,Default$,Visable size,Max length)"
-		     "gettrackerlocation" "(TrackerModule#)"
-		     "gettrackersize" "(TrackerModule#)"
-		     "getwheel" "wheel#"
-		     "getzonex1" "(zone) - returns the start x pos of a zone"
-		     "getzonex2" "(zone) - returns the end x pos of a zone"
-		     "getzoney1" "(zone) - returns the start y pos of a zone"
-		     "getzoney2" "(zone) - returns the end pos of a zone"
-		     "getashape" "Shape#,X,Y,Width,Height"
-		     "getasprite" "Sprite#,Shape#"
-		     "gfx_base" "Returns pointer to graphics.library"
-		     "graphicsbase" ";Returns Graphics Library base"
-		     "green" "(Colour Register)"
-		     "greychunky" "chunky#"
-		     "hcos" "(Float)"
-		     "hpropbody" "(GadgetList#,Id)"
-		     "hproppot" "(GadgetList#,Id)"
-		     "hsin" "(Float)"
-		     "htan" "(Float)"
-		     "handle" "Shape#,X,Y"
-		     "hardcopy" "Screen#,X,Y,Width,Height,PtrWidth,PrtHeight,Flags"
-		     "hardcopy" "Screen#,X,Y,Width,Height,PtrWidth,PrtHeight,Flags"
-		     "hex#" "(HexString$) ;Converts hexadecimal (in string) value to decimal"
-		     "hex$" "(Expression)"
-		     "hidescreen" "Screen#"
-		     "hours" ";gets system time and returns hour of day"
-		     "ilbmgrab" "sourceaddr,bitmap#,palette#"
-		     "ilbminfo" "Filename$"
-		     "ilbmpalette" "(sourceaddr,palette#[,#offset)"
-		     "iconbase" ";Returns Icon Library base"
-		     "icondeftool" "tool$"
-		     "icondeftool$" "deftool$=IconDefTool$(Info#)"
-		     "iconrender" "render_flags"
-		     "iconstack" "stackSize.l=IconType(Info#)"
-		     "iconsubtool$" "boolean.w=IconSubTool$(type$,sub$) -1=Found"
-		     "icontool$" "tool$=IconTool$(Info#,type$)"
-		     "icontype" "type.w=IconType(Info#)"
-		     "implode" "Error/CrunchedLen=Bufferadr,DataLen"
-		     "infront" "Sprite Channel"
-		     "infrontb" "Sprite Channel"
-		     "infrontf" "Sprite Channel"
-		     "index" "List() ;Returns index from top of LIST"
-		     "initanim" "Anim#[,BitMap#]"
-		     "initbank" "bank#,size,memtype ;0=fast 2=chip 65536=clrmem"
-		     "initchunky" "Chunky#,width,height,flags (1=24bit 2=8bit)"
-		     "initcoplist" "CopList#[,type]|[,ypos,height,type,sprites,colors,numcustoms]"
-		     "initpage" "Page#,BitMap#,NumBoxes"
-		     "initpalette" "Palette#,NumColors"
-		     "initshape" "Shape#,Width,Height,Depth"
-		     "initsound" "Sound#,Length[,Period[,Repeat]]"
-		     "initzoomxy" "source#,dest#,sourceadd,destadd"
-		     "inkey$" "[(Characters)]"
-		     "innercls" "[Colour]"
-		     "installfns" "(fontnum,address)"
-		     "instr" "(String$,Findstring$[,Startpos])"
-		     "int" "(Expression)"
-		     "int_base" "Returns pointer to intuition.library"
-		     "intuitionbase" ";Returns Intuition Library base"
-		     "islocale" "<>0 if locale exists"
-		     "isrexxmsg" "Boolean=IsRexxMsg(rexxmsg)"
-		     "itemstacksize" "Max Items"
-		     "jadaptorstatus" "On/Off - status of four player adaptor reading"
-		     "jfire" "(port)"
-		     "jhoriz" "(port)"
-		     "jvert" "(port)"
-		     "joyy" "(Port)"
-		     "joyc" "(Port)"
-		     "joyb" "(Port)"
-		     "joyr" "(Port)"
-		     "joyx" "(Port)"
-		     "joyy" "(Port)"
-		     "jumpmed" "Pattern#"
-		     "killfile" "Filename$"
-		     "killgreychunky" "chunky#"
-		     "killitem" "Arrayname()"
-		     "lcase$" "(String$)"
-		     "lecludgeshapes" "shape#,shape#,address,palette#[,copymemflag]"
-		     "lecompressshapes" "True|False"
-		     "leinitshape" "shape#,width,height,depth"
-		     "leloadshapes" "shape#[,shape#],filename$[,palette#]"
-		     "lesaveshapes" "shape#,shape#,filename$[,palette#]"
-		     "lescanshapes" "startshape#,endshape#"
-		     "lset$" "(String$,Characters)"
-		     "largest" "(Integer1,Integer2)"
-		     "largest.l" "(Long Integer1,Long Integer2)"
-		     "largest.q" "(Quick1,Quick2)"
-		     "largestfree" ";Returns largest block of memory available"
-		     "lastitem" "Arrayname()"
-		     "left$" "(String$,Length)"
-		     "len" "(String$)"
-		     "length" "(bank)"
-		     "line" "[x1,y1,]x2,y2,color[,width]"
-		     "lisa" "-- returns Lisa chip version"
-		     "listbase" "(list)"
-		     "loadanim" "Anim#,Filename$[,Palette#]"
-		     "loadbank" "bank#,filename$[,memtype]"
-		     "loadbitmap" "BitMap#,Filename$[,Palette#]"
-		     "loadblitzfont" "BlitzFont#,Fontname.font$"
-		     "loadchunky" "Chunky#,IFFfilename$"
-		     "loadfont" "IntuiFont#,Fontname.font$,Y size [,style]"
-		     "loadiff" "(filename$,bitmap[,palette])"
-		     "loadmedmodule" "MedModule#,Name"
-		     "loadmodule" "Module#,Filename$"
-		     "loadpalette" "Palette#,Filename$[,Palette Offset]"
-		     "loadscreen" "Screen#,Filename$[,Palette#]"
-		     "loadshape" "Shape#,Filename$[,Palette#]"
-		     "loadshapes" "Shape#[,Shape#],Filename$"
-		     "loadsound" "Sound#,Filename$"
-		     "loadsprites" "Sprite#[,Sprite#],Filename$"
-		     "loadtape" "Tape#,filename$"
-		     "loadtrackermodule" "(TrackerModule#,Name)"
-		     "loc" "(File#)"
-		     "locate" "X,Y"
-		     "lof" "(File#)"
-		     "log" "(Float)"
-		     "log10" "(Float)"
-		     "loopsound" "Sound#,Channelmask[,Vol1[,Vol2...]]"
-		     "macrokey" "Tape#,Rawkey,Qualifier"
-		     "makecommodity" "(name$,title$,description$"
-		     "makecookie" "Shape#"
-		     "makedir" "(dirname$)"
-		     "matchtoolvalue" "(tooltype$,value$)"
-		     "matchwild" "(String$) ;TRUE=Match, FALSE=No Match"
-		     "max" "(a,b)"
-		     "maxselect$" "Path$=(Title$,File$,Path$,Flags,number of files)"
-		     "menuchecked" "(MenuList#,Menu,Item[,Subitem])"
-		     "menucolour" "Colour"
-		     "menugap" "X Gap,Y Gap"
-		     "menuitem" "MenuList#,Flags,Menu,Item,Itemtext$[,Shortcut$]"
-		     "menustate" "MenuList#[,Menu[,Item[,Subitem]]],On|Off"
-		     "menutitle" "MenuList#,Menu,Title$"
-		     "menus" "On|Off"
-		     "mid$" "(String$,Startchar[,Length])"
-		     "midhandle" "Shape#"
-		     "min" "(a,b)"
-		     "mins" ";returns minutes calculated at last call to hour"
-		     "mixpalette" "Palette#,Palette#,DestPalette#,fraction"
-		     "mki$" "(Integer)"
-		     "mkl$" "(Long)"
-		     "mkq$" "(Quick)"
-		     "modulepatterns" "(Module #)"
-		     "modulepositionjump" "(Position#)"
-		     "modulesamplename" "(Module#,Sample#[0-30])"
-		     "moduletochip" "(TrackerModule#)"
-		     "months" ";returns month calculated in last call to date$"
-		     "moreentries" ";True if more entries in Examined directory"
-		     "motoroff" "unit#"
-		     "motoron" "unit#"
-		     "mouse" "On|Off"
-		     "mousearea" "Minx,Miny,Maxx,Maxy"
-		     "mousebutton" "Button,On|Off : 0=Left"
-		     "movefile" "[success=] MoveFile(Source$,Dest$)"
-		     "movescreen" "Screen#,deltax,deltay"
-		     "nprint" "Expression[,Expression...]"
-		     "nprintcon" "Console#,Expression"
-		     "namefile" "[success=] Rename(Oldfilename$,Newfilename$)"
-		     "newpalettemode" "On|Off"
-		     "newtooltype" "(tooltype$,value$[,status])"
-		     "newzonetable" "table#,num_zones"
-		     "nextbank" "[startbank]"
-		     "nextfile$" "Returns next file form MaxSelect$"
-		     "nextframe" "Anim#"
-		     "nextitem" "(Arrayname())"
-		     "nomoreentries" ";Release lock on currently Examined object"
-		     "null" "(String$) ;Returns address of null-termed string"
-		     "numdays" "date$ ;converts dd/mm/yyyy to days since 1/1/1978"
-		     "numpars" "pars.w=NumPars"
-		     "opencd" "[devicename,unit] - open a CD compatible device"
-		     "openconsole" "#Window,#Console"
-		     "opendisk" "unit#"
-		     "openfile" "(File#,Filename$)"
-		     "openserial" "device$,unit#,baud,io_serflags"
-		     "outtext" "x,y,rastport,address/string"
-		     "outtextpen" "rastport,pen"
-		     "pcoll" "(Sprite Channel)"
-		     "picreaterequest" "(Title$,Min,Max [,NoGagdet])"
-		     "piupdaterequest" "(Value)"
-		     "pload" "(filename$,address)"
-		     "ppdecrunch" "Bufferadr,Bufferend,Destinationadr"
-		     "packpbm" "sourceaddr,destaddr,length"
-		     "paladjust" "palette#,ratio.q[,start_col,end_col]"
-		     "palblue" "(colour#)"
-		     "palgreen" "(colour#)"
-		     "palrgb" "Palette#,Colour Register,Red,Green,Blue"
-		     "palred" "(colour#)"
-		     "paletteinfo" "palette#"
-		     "paletterange" "Palette#,StartCol,EndCol,r0,g0,b0,r1,g1,b1"
-		     "par$" "parameter$=Par$(Paramter#)"
-		     "parpath$" "path$=ParPath$(Par#,#type)"
-		     "pathpart$" "(FullPath$) ;\"DH0:S/User-Startup\" -> \"DH0:S\""
-		     "peek" "[.Type](Address)"
-		     "peekmax$" "(address,max_chars)"
-		     "peeksound" "(Sound#,Offset)"
-		     "peekto$" "(Address,byte)"
-		     "peeks$" "(Address,Length)"
-		     "peekto$" "(Address,byte)"
-		     "phoneticspeak" "phonetic string"
-		     "playback" "[Tape#]"
-		     "playmodule" "Module#"
-		     "plot" "X,Y,Colour"
-		     "point" "X,Y,Colour"
-		     "pointer" "Sprite#,Sprite Channel"
-		     "poke" "[.Type] Address,Data"
-		     "poly" "numpts,*coords.w,color"
-		     "polyf" "numpts,*coords.w,color[,color2]"
-		     "popitem" "Arrayname()"
-		     "positionmouse" "x,y"
-		     "positionsuperbitmap" "x,y"
-		     "positionsuperbitmap" "x,y"
-		     "previtem" "Arrayname()"
-		     "print" "Expression[,Expression...]"
-		     "printcon" "Console#,Expression"
-		     "processchunky" "chunky#,contrast"
-		     "propgadget" "GadgetList#,X,Y,Flags,Id,Width,Height"
-		     "prtcommand" "Command,Para1,Para2,Para3,Para4"
-		     "prttext" "String"
-		     "pushitem" "Arrayname()"
-		     "put" "File#,Record"
-		     "puticonobject" "(filename$[,icontype]|[x,y])"
-		     "qabs" "(Quick)"
-		     "qangle" "(Src X,Src Y,Dest X,Dest Y)"
-		     "qblit" "Queue#,Shape#,X,Y[,Excessonoff]"
-		     "qblitmode" "BLTCON0"
-		     "qfrac" "(Quick)"
-		     "qlimit" "(Quick,Low,High)"
-		     "qwrap" "(Quick,Low,High)"
-		     "queue" "Queue#,Max Items"
-		     "quickplay" "On|Off"
-		     "quiet" "ChannelMask ;Stops specified currently playing sounds"
-		     "quiettrap" "On|Off"
-		     "rgb" "Colour Register,Red,Green,Blue"
-		     "rianiminit" "(address,bitmap#,palette# [,xy_offset]|[,x,y])"
-		     "rinextanimframe" "(bitmap#)"
-		     "rrandomize" "Seed"
-		     "rrnd" "(Low,High)"
-		     "rset$" "(String$,Characters)"
-		     "rtasyncpaletterequest" "(Title$,FirstColour)"
-		     "rtasyncrequest" "(Title$,BodyText$,GadgetText$)"
-		     "rtezflagsrequest" "(Title$,BodyText$,GadgetText$,IDCMPFlags [,ReqPosition])"
-		     "rtezfontrequest" "(Title$)"
-		     "rtezfreepattern" "Requester#"
-		     "rtezgetlong" "(Title$,BodyText$ [,DefaultValue])"
-		     "rtezgetlongrange" "(Title$,BodyText$,Min,Max [,DefaultValue])"
-		     "rtezgetstring" "(Title$,BodyText$,MaxChars [,DefaultString])"
-		     "rtezloadfile" "(Title$,Filename$)"
-		     "rtezmultiloadfile" "(Title$)"
-		     "rtezpaletterequest" "(Title$,FirstColour)"
-		     "rtezpathrequest" "(Title$)"
-		     "rtezrequest" "(Title$,BodyText$,GadgetText$ [,ReqPosition [,DefaultResponse,Flags]])"
-		     "rtezsavefile" "(Title$,Filename$)"
-		     "rtezscreenmoderequest" "(Title$ [,DisplayFlags])"
-		     "rtezsetdefaultdirectory" "Requester#,Directory$"
-		     "rtezsetpattern" "Requester#,Pattern$"
-		     "rtfilerequest" "(Title$,FileName$,TagList)"
-		     "rtlockwindow" "(Window#)"
-		     "rtrequest" "(BodyText$,GadgetText$,TagList)"
-		     "rtunlockwindow" "Window#,Lock"
-		     "rastport" "(Window#)"
-		     "rawstatus" "(Rawkey)"
-		     "remap" "colour# to replace,destination colour# [,BitMap destintion"
-		     "readchunky" "Chunky#,rawfilename$"
-		     "readfile" "(File#,Filename$)"
-		     "readmem" "File#,Address,Length"
-		     "readsector" "unit#,sector#,buffer[,numsectors]"
-		     "readserial" "(unit#[,flags 1=wait on])"
-		     "readserialmem" "unit#,Address,Length"
-		     "readserialstring" "(unit#)"
-		     "reboot" "-- performs a cold reboot"
-		     "record" "[Tape#]"
-		     "rectshit" "(X1,Y1,Width1,Height1,X2,Y2,Width2,Height2)"
-		     "red" "(Colour Register)"
-		     "redocolsplit" "cols_adr,numlines,ccoffset"
-		     "redraw" "Window#,Id"
-		     "redrawbox" "Box#"
-		     "reducex2" "source#,dest#,sourceadd,destadd,width,height"
-		     "relmouse" "X Offset,Y Offset"
-		     "removefns" "fontnum"
-		     "rename" "(oldfilename$,newfilename$)"
-		     "renderpoly" "numpts,*coords.w,color"
-		     "rendertobitmap" "BitMap#[,DitherBitMap#]"
-		     "rendertochunky" "CopList#[,split]"
-		     "repeats" "(String$) ;Returns # repetitive characters at front of string"
-		     "replace$" "(String$,Findstring$,Replacestring$)"
-		     "replyrexxmsg" "rexxmsg,Result1,Result2,ResultString"
-		     "reqcolours" "Text,Detail,Block[,File,Dir,Device[,GadText,GadBox,StringName,StringBox,Frame]]"
-		     "reqfilerequest$" "(Title$,File$,Path$,Flags)"
-		     "reqfontsize" "Returns font size"
-		     "req_base" "Returns pointer to req.library"
-		     "request" "(Title$,text$,button$) ;OS 2.0 & above System Requester"
-		     "reserve" "(length)|(bank,length[,requirements])"
-		     "resetlist" "Arrayname()"
-		     "resetstring" "GadgetList#,Id"
-		     "resettimer" ";Resets timer to zero 'Ticks.'"
-		     "rex_base" "Returns pointer to RexxSys.library ?"
-		     "rexxerror" "ErrorString=RexxError(ErrorCode)"
-		     "rexxevent" "rexxmsg=RexxEvent(PortAddress)"
-		     "rexxsysbase" ";Returns RexxSys Library base"
-		     "rexxsysbase" ";Returns RexxSys Library base"
-		     "right$" "(String$,Length)"
-		     "rnd" "[(Range)]"
-		     "rotate" "Shape#,Angle Ratio"
-		     "rrandomize" "Seed"
-		     "rrnd" "(Low,High)"
-		     "run" "[*Process=] Run(Filename$,Args$[,StackSize])"
-		     "sblit" "Stencil#,Shape#,X,Y[,Excessonoff]"
-		     "sblitmode" "BLTCON0"
-		     "scoll" "(Sprite Channel,Sprite Channel)"
-		     "space$" "(number of spaces)"
-		     "safetoblit" "shape,x,y"
-		     "savebank" "bank#,filename$"
-		     "savebitmap" "BitMap#,Filename$[,Palette#]"
-		     "savecmap" "palette#,filename$"
-		     "savechunky" "Chunky#,IFFfilename$"
-		     "savepalette" "Palette#,Filename$"
-		     "savescreen" "Screen#,Filename$"
-		     "saveshape" "Shape#,Filename$[,Palette#]"
-		     "saveshapes" "Shape#,Shape#,Filename$"
-		     "savesprites" "Sprite#,Sprite#,Filename$"
-		     "savetape" "Tape#,Filename$"
-		     "scale" "Shape#,X Ratio,Y Ratio[,Palette#]"
-		     "scalechunkyx" "srcchunky#,destchunky#,newwidth"
-		     "scalechunkyy" "srcchunky#,destchunky#,newheight"
-		     "screen" "[Screen#,Mode[,Title$]]|[Screen#,X,Y,W,H,D,Viewmode,Title$,Dpen,Bpen[,BitMap#]"
-		     "screenheight" ";Returns height in pixels of active screen"
-		     "screenpens" "Text,Shine,Shadow,Fill,FillText,Background,HighLight"
-		     "screentags" "Screen#,Title$ [&TagList] or [[,Tag,Data]...]"
-		     "screenwidth" ";Returns width in pixels of active screen"
-		     "screensbitmap" "Screen#,BitMap#"
-		     "scroll" "X1,Y1,Width,Height,X2,Y2[,BitMap#]"
-		     "searchbegin" "(String$,byte,# from Begin) ;Searches string for Nth byte"
-		     "searchend" "(String$,byte,# from End) ;Searches string backwards for Nth byte"
-		     "searchmem" "type,value,start_ad,end_ad"
-		     "secs" ";returns seconds calculated at last call to hour"
-		     "selectbox" "[Box#]|[x+,y+][0,x,y] ;deselects previously selected"
-		     "selectmode" "1=Box, 0=Inverse"
-		     "sendrexxcommand" "rexxmsg,CommandString,ActionCodes"
-		     "serialevent" "(unit#)"
-		     "setblwait" "Wait move for line 256 (eg:$ffe1fffe"
-		     "setbplcon0" "BPLCON0 Default"
-		     "setbits" "[success=] SetBits(Bits$,Filename$) ;<HSPARWED>"
-		     "setbox" "Box#[,Value]|[xprop,yprop]"
-		     "setboxcolor" "Box#,color"
-		     "setboxstring" "Box#,String$"
-		     "setboxtitle" "Box#,String$"
-		     "setcoll" "Colour,Bitplanes[,Playfield 1=front, 2=back]"
-		     "setcollhi" "Bitplanes"
-		     "setcopybuffer" "BufferSize ;Default is 4096 bytes, min. 1024 bytes"
-		     "setcxstatus" "on|off"
-		     "setcycle" "Palette#,Cycle,Low Colour,High Colour[,Speed]"
-		     "setenv" "[success=] SetEnv(Name$,Value$) ;Sets DOS environmental variable"
-		     "seteventfilter" "preprocess,postprocess"
-		     "setfilecomment" "[success=] SetFileComment(Filename$,Comment$)"
-		     "setgadgetstatus" "(GadgetList#,Id,Value)"
-		     "sethprop" "GadgetList#,Id,Pot,Body"
-		     "sethotkey" "(hotkeynum,hotkey$)"
-		     "seticr_a" "(resource,mask)"
-		     "seticr_b" "(resource,mask)"
-		     "seticonhit" "width,height"
-		     "seticontype" "object_type"
-		     "setlocal" "[success=] SetLocal(Name$,Value$) ;Sets DOS local variable"
-		     "setmedmask" "Channel Mask"
-		     "setmedvolume" "Volume"
-		     "setmenu" "Menulist#"
-		     "setpagepens" "Page#,c0,c1,c2,c3 (defaults: 3,1,2,3)"
-		     "setperiod" "Sound#,Period"
-		     "setserialbuffer" "unit#,bufferlength"
-		     "setseriallens" "unit#,readlen,writelen,stopbits"
-		     "setserialparams" "unit#"
-		     "setstring" "GadgetList#,Id,String$"
-		     "settextgadget" "GadgetList#,Id,Text$"
-		     "settoolvalue" "(tooltype$,value$[,status])"
-		     "setvprop" "GadgetList#,Id,Pot,Body"
-		     "setvoice" "rate(150),pitch(110),expression(1),sex,volume(64),freq(22200)"
-		     "setwildstring" "[result=] SetWildString(Pattern$) ;0=Failed, 1=Found WildCards, 2=No WildCards"
-		     "setzone" "num,x1,y1[,x2,y2]|[,radius]"
-		     "setzonemode" "mode"
-		     "setuplesdebug" "token_addr,tokenise"
-		     "sgn" "(Expression)"
-		     "shapegadget" "GadgetList#,X,Y,Flags,Id,Shape#[,Shape#]"
-		     "shapeheight" "(Shape#)"
-		     "shapeitem" "MenuList#,Flags,Menu,Item,Shape#"
-		     "shapespritehit" "(Shape#,X,Y,Sprite#,X,Y)"
-		     "shapesub" "MenuList#,Flags,Menu,Item,Subitem,Shape#"
-		     "shapetoicon" "shape"
-		     "shapewidth" "(Shape#)"
-		     "shapesbitmap" "Shape#,BitMap#"
-		     "shapeshit" "(Shape#,X,Y,Shape#,X,Y)"
-		     "show" "Bitmap#[,X,Y]"
-		     "showb" "Bitmap#[,X,Y[,ShowF X]]"
-		     "showbitmap" "[BitMap#]"
-		     "showbitmap" "[BitMap#]"
-		     "showf" "Bitmap#[,X,Y[,ShowB X]]"
-		     "showpalette" "Palette#"
-		     "showrequesters" "[0=Cancel] [1=On Workbench Screen] [2=In Current Window]"
-		     "showscreen" "Screen#"
-		     "showsprite" "Sprite#,X,Y,Sprite Channel"
-		     "showstencil" "Buffer#,Stencil#"
-		     "sin" "(Float)"
-		     "sizelimits" "Min Width,Min Height,Max Width,Max Height"
-		     "slice" "[Slice#,Y,Flags]|[Slice#,Y,Width,Hite,Flgs,Bitplns,Sprts,Colrs,Fscrnw,Bscrnw]"
-		     "smallest" "(Integer1,Integer2)"
-		     "smallest.l" "(Long Integer1,Long Integer2)"
-		     "smallest.q" "(Quick1,Quick2)"
-		     "sort" "Arrayname()"
-		     "sortlist" "Arrayname(),sizeof .type\offset"
-		     "sound" "Sound#,Channelmask[,Vol1[,Vol2...]]"
-		     "sounddata" "Sound#,Offset,Data"
-		     "space$" "(number of spaces)"
-		     "speak" "string"
-		     "spotbox" "; returns box that mouse is over"
-		     "spritemode" "0=16 1=32 2=64"
-		     "spriteshit" "(Sprite#,X,Y,Sprite#,X,Y)"
-		     "sqr" "(Float)"
-		     "start" "(bank)"
-		     "startmedmodule" "MedModule#"
-		     "starttracker" "(TrackerModule#)"
-		     "stencil" "Stencil#,BitMap#"
-		     "str$" "(Expression)"
-		     "strtofls" "string$,destvar,maxlength[,fillchar]"
-		     "string$" "(String$,Repeats)"
-		     "stringgadget" "GadgetList#,X,Y,Flags,Id,Maxlen,Width"
-		     "stringsort" "list,sizeof.type[,offset] - sort from start of list"
-		     "stringsortdir" "direction"
-		     "stringsortitem" "list,sizeof.type[,offset] - sort from current list item"
-		     "stringtext$" "(GadgetList#,Id)"
-		     "striplead$" "(String$,Ascii)"
-		     "striptrail$" "(String$,Ascii)"
-		     "subidcmp" "IDCMP_Flags"
-		     "subitem" "MenuList#,Flags,Menu,Item,Subitem,Subitemtext$[,Shortcut$]"
-		     "subitemoff" "X Offset,Y Offset"
-		     "swapbank" "(sourcebank,destbank)"
-		     "systemdate" "Returns system date as number of days since 1/1/1978"
-		     "tan" "(Float)"
-		     "tapetrap" "[Tape#]"
-		     "taskname$" "task"
-		     "textgadget" "GadgetList#,X,Y,Flags,Id,Text$"
-		     "textrequest" "(Text,Title,Left Text[,[Middle Text,]Right Text])"
-		     "texttimeout" "Timeout Seconds"
-		     "ticks" ";'ticks' since last ResetTimer (1/50 secs. PAL, 1/60 NTSC)"
-		     "timer" "-- returns number of 50ths since machine startup"
-		     "toggle" "GadgetList#,Id [,On|Off]"
-		     "togglebox" "Box#"
-		     "trackervolume" "(Volume Range: 0-64)"
-		     "translate$" "returns phoneme translation of a string"
-		     "type" "String$"
-		     "ucase$" "(String$)"
-		     "ustr$" "(Expression)"
-		     "unbuffer" "Buffer#"
-		     "unleft$" "(String$,Length)"
-		     "unpackpbm" "sourceaddr,destaddr,length,destlength"
-		     "unqueue" "Queue#[,BitMap#]"
-		     "unright$" "(String$,Length)"
-		     "unsetenv" "[success=] UnSetEnv(Name$) ;Removes DOS environmental variable"
-		     "unsetlocal" "[success=] UnSetLocal(Name$) ;Removes DOS local variable"
-		     "unpackiff" "(sourceaddr,bitmap#[,numlines,xy_offset])"
-		     "usecatalog" "Catalogname"
-		     "usezonetable" "- select a zone table for use"
-		     "vpropbody" "(GadgetList#,Id)"
-		     "vproppot" "(GadgetList#,Id)"
-		     "vwaitpos" "RasterLine"
-		     "val" "(String$)"
-		     "viewport" "(Screen#)"
-		     "voiceloc" "returns location of newvoice struct"
-		     "volume" "Channelmask,Vol1[,Vol2...]"
-		     "vwaitpos" "RasterLine"
-		     "wblit" "Shape#,x,y"
-		     "wbox" "X1,Y1,X2,Y2,Colour"
-		     "wcircle" "X,Y,Radius,Colour"
-		     "wcls" "[Colour]"
-		     "wcolour" "Foreground Colour[,Background Colour]"
-		     "wellipse" "X,Y,X Radius,Y Radius,Colour"
-		     "wjam" "Jammode"
-		     "wline" "X1,Y1,X2,Y3[,Xn,Yn...],Colour"
-		     "wlocate" "Cursor x,Cursor y"
-		     "wmove" "X,Y"
-		     "wplot" "X,Y,Colour"
-		     "wpointer" "Shape#"
-		     "wscroll" "X1,Y1,X2,Y2,Delta X,Delta Y"
-		     "wsize" "Width,Height"
-		     "wtitle" "windowtitle$,screentitle$"
-		     "waitfor" "(IDCMP Code)"
-		     "wbtoscreen" "Screen#"
-		     "weekday" ";returns day of week calculated in last call to date$"
-		     "window" "Window#,X,Y,Width,Height,Flags,Title$,Dpen,Bpen[,GadgetList#[,BitMap#]]"
-		     "windowfont" "IntuiFont# [,SoftStyle]"
-		     "windowinput" "Window#"
-		     "windowoutput" "Window#"
-		     "windowtags" "Window#,Flags,Title$ [,&TagList] or [[,Tag,Data]...]"
-		     "wline" "X1,Y1,X2,Y3[,Xn,Yn...],Colour"
-		     "writeboot" "unit#[,bootdata]"
-		     "writechunky" "Chunky#,rawfilename$"
-		     "writefile" "(File#,Filename$)"
-		     "writemem" "File#,Address,Length"
-		     "writesector" "unit#,sector#,buffer[,numsectors]"
-		     "writeserial" "unit#,byte"
-		     "writeserialmem" "unit#,Address,Length"
-		     "writeserialstring" "unit#,string[,Flags 1=DoIO 2=TrueString] "
-		     "xbdecodesound" "Sound#,MemoryLocation"
-		     "xbdiskbuffer" "Bufferlen"
-		     "xbdiskplay" "Filename$,Channelmask[,Vol1[,Vol2...]]"
-		     "xbfilter" "On|Off"
-		     "xbinitsound" "Sound#,Length[,Period[,Repeat]]"
-		     "xbloadsound" "Sound#,Filename$"
-		     "xbloopsound" "Sound#,Channelmask[,Vol1[,Vol2...]]"
-		     "xbpeeksound" "(Sound#,Offset)"
-		     "xbsetperiod" "Sound#,Period"
-		     "xbsound" "Sound#,Channelmask[,Vol1[,Vol2...]]"
-		     "xbsounddata" "Sound#,Offset,Data"
-		     "xbvolume" "Channelmask,Vol1[,Vol2...]"
-		     "xflip" "Shape#"
-		     "xor" "(expression,expression) ;Returns Exclusive OR of two expressions"
-		     "xor" "(expression,expression) ;Returns Exclusive OR of two expressions"
-		     "yflip" "Shape#"
-		     "years" ";returns year calculated in last call to date$"
-		     "zone" "(x,y)"
-		     "zoneinit" "[zone_num#]|[#start_num,#end_num] - intialize zones"
-		     "zonemode" "- returns -1 for 68020 mode or 0 for 68000 mode"
-		     "zonetable" "- returns address of the current zone table"
-		     "zonetablenumber" "- returns the number of the current zone table"
-		     "zonetablesize" "- returns size of the current zone table"
-		     "zonetest" "(start_num[,end_num],x,y)"
-		     "zoomx2" "source#,dest#,sourceadd,destadd,width,height"
-		     "zoomx4" "source#,dest#,sourceadd,destadd,width,height[,xy_select]"
-		     "zoomx8" "source#,dest#,sourceadd,destadd,width,height"
-		     "zoomxy" "xzoom,yzoom,height"
-		     "agarexxhost_" "(rmsg,result)"
-		     "abortpkt_" "(port,pkt)"
-		     "activatecxobj_" "(co,true)"
-		     "addbob_" "(bob,rp)"
-		     "addbootnode_" "(bootPri,flags,deviceNode,configDev)"
-		     "addbuffers_" "(name,number)"
-		     "adddtobject_" "(win,req,o,pos)"
-		     "addhead_" "(list,node)"
-		     "addintserver_" "(intNumber,interrupt)"
-		     "addnamedobject_" "(namespace,object)"
-		     "addtail_" "(list,node)"
-		     "addvsprite_" "(vSprite,rp)"
-		     "allocabs_" "(byteSize,location)"
-		     "allocaslrequest_" "(reqType,tagList)"
-		     "allocdosobject_" "(type,tags)"
-		     "allocexpansionmem_" "(numSlots,slotAlign)"
-		     "alloclocalitem_" "(type,id,ident,dataSize)"
-		     "allocmem_" "(byteSize,requirements)"
-		     "allocmiscresource_" "(unitNum,name)"
-		     "allocnamedobjecta_" "(name,tags)"
-		     "allocpooled_" "(poolHeader,memSize)"
-		     "allocraster_" "(width,height)"
-		     "allocspritedataa_" "(bm,tags)"
-		     "allocvec_" "(byteSize,requirements)"
-		     "allocate_" "(freeList,byteSize)"
-		     "amiga2date_" "(seconds,result)"
-		     "andrectregion_" "(region,rectangle)"
-		     "andregionregion_" "(srcRegion,destRegion)"
-		     "animate_" "(anKey,rp)"
-		     "applytagchanges_" "(list,changeList)"
-		     "askfont_" "(rp,textAttr)"
-		     "aslrequest_" "(requester,tagList)"
-		     "assignadd_" "(name,lock)"
-		     "assignlate_" "(name,path)"
-		     "assignlock_" "(name,lock)"
-		     "assignpath_" "(name,path)"
-		     "attachcxobj_" "(headObj,co)"
-		     "attachpalextra_" "(cm,vp)"
-		     "autorequest_" "(window,body,posText,negText,pFlag,nFlag,width,height)"
-		     "behindlayer_" "(dummy,layer)"
-		     "bltmaskbitmaprastport_" "(srcBitMap,xSrc,ySrc,destRP,xDest,yDest,xSize,ySize,minterm,bltMask)"
-		     "blttemplate_" "(source,xSrc,srcMod,destRP,xDest,yDest,xSize,ySize)"
-		     "buildeasyrequestargs_" "(window,easyStruct,idcmp,args)"
-		     "bumprevision_" "(newname,oldname)"
-		     "cachecontrol_" "(cacheBits,cacheMask)"
-		     "calcivg_" "(v,vp)"
-		     "cardaccessspeed_" "(handle,nanoseconds)"
-		     "cardmisccontrol_" "(handle,control_bits)"
-		     "cardprogramvoltage_" "(handle,voltage)"
-		     "cardresetremove_" "(handle,flag)"
-		     "changeextspritea_" "(vp,oldsprite,newsprite,tags)"
-		     "changescreenbuffer_" "(sc,sb)"
-		     "clearrectregion_" "(region,rectangle)"
-		     "clearrexxmsg_" "(msgptr,count)"
-		     "comparedates_" "(date1,date2)"
-		     "configboard_" "(board,configDev)"
-		     "convtolower_" "(locale,character)"
-		     "convtoupper_" "(locale,character)"
-		     "copytuple_" "(handle,buffer,tuplecode,size)"
-		     "createargstring_" "(string,length)"
-		     "createbehindlayer_" "(li,bm,x0,y0,x1,y1,flags,bm2)"
-		     "creategadgeta_" "(kind,gad,ng,taglist)"
-		     "createiorequest_" "(port,size)"
-		     "createmenusa_" "(newmenu,taglist)"
-		     "createproc_" "(name,pri,segList,stackSize)"
-		     "createupfrontlayer_" "(li,bm,x0,y0,x1,y1,flags,bm2)"
-		     "currenttime_" "(seconds,micros)"
-		     "cxbroker_" "(nb,error)"
-		     "deletelayer_" "(dummy,layer)"
-		     "deletevar_" "(name,flags)"
-		     "devicetuple_" "(tuple_data,storage)"
-		     "doasynclayout_" "(o,gpl)"
-		     "dodtmethoda_" "(o,win,req,msg)"
-		     "dogadgetmethoda_" "(gad,win,req,message)"
-		     "doubleclick_" "(sSeconds,sMicros,cSeconds,cMicros)"
-		     "drawbevelboxa_" "(rport,left,top,width,height,taglist)"
-		     "drawborder_" "(rp,border,leftOffset,topOffset)"
-		     "drawglist_" "(rp,vp)"
-		     "drawimagestate_" "(rp,image,leftOffset,topOffset,state,drawInfo)"
-		     "drawimage_" "(rp,image,leftOffset,topOffset)"
-		     "easyrequestargs_" "(window,easyStruct,idcmpPtr,args)"
-		     "endrefresh_" "(window,complete)"
-		     "endrequest_" "(requester,window)"
-		     "endupdate_" "(layer,flag)"
-		     "enqueuecxobj_" "(headObj,co)"
-		     "enqueue_" "(list,node)"
-		     "entryhandler_" "(iff,type,id,position,handler,object)"
-		     "eraseimage_" "(rp,image,leftOffset,topOffset)"
-		     "errorreport_" "(code,type,arg1,device)"
-		     "exnext_" "(lock,fileInfoBlock)"
-		     "examinefh_" "(fh,fib)"
-		     "examine_" "(lock,fileInfoBlock)"
-		     "exithandler_" "(iff,type,id,position,handler,object)"
-		     "extendfont_" "(font,fontTags)"
-		     "fputc_" "(fh,ch)"
-		     "fputs_" "(fh,str)"
-		     "fread_" "(fh,block,blocklen,number)"
-		     "fwrite_" "(fh,block,blocklen,number)"
-		     "fault_" "(code,header,buffer,len)"
-		     "findarg_" "(keyword,template)"
-		     "findlocalitem_" "(iff,type,id,ident)"
-		     "findname_" "(list,name)"
-		     "findtagitem_" "(tagVal,tagList)"
-		     "findtooltype_" "(toolTypeArray,typeName)"
-		     "findvar_" "(name,type)"
-		     "flood_" "(rp,mode,x,y)"
-		     "fontextent_" "(font,fontExtent)"
-		     "formatdate_" "(locale,template,date,putCharFunc)"
-		     "formatstring_" "(locale,string,dataStream,putCharFunc)"
-		     "freeboardmem_" "(startSlot,slotSpec)"
-		     "freedosobject_" "(type,ptr)"
-		     "freeexpansionmem_" "(startSlot,numSlots)"
-		     "freemem_" "(memoryBlock,byteSize)"
-		     "freeremember_" "(rememberKey,reallyForget)"
-		     "freescreenbuffer_" "(sc,sb)"
-		     "freescreendrawinfo_" "(screen,drawInfo)"
-		     "gt_endrefresh_" "(win,complete)"
-		     "gt_getgadgetattrsa_" "(gad,win,req,taglist)"
-		     "gt_refreshwindow_" "(win,req)"
-		     "gt_setgadgetattrsa_" "(gad,win,req,taglist)"
-		     "getbitmapattr_" "(bm,attrnum)"
-		     "getcurrentbinding_" "(currentBinding,bindingSize)"
-		     "getcurrentdirname_" "(buf,len)"
-		     "getdtattrsa_" "(o,attrs)"
-		     "getdefprefs_" "(preferences,size)"
-		     "getdeviceproc_" "(name,dp)"
-		     "getextspritea_" "(ss,tags)"
-		     "getlocalestr_" "(locale,stringNum)"
-		     "getprefs_" "(preferences,size)"
-		     "getprogramname_" "(buf,len)"
-		     "getprompt_" "(buf,len)"
-		     "getrgb32_" "(cm,firstcolor,ncolors,table)"
-		     "getrgb4_" "(colorMap,entry)"
-		     "getrpattrsa_" "(rp,tags)"
-		     "getscreendata_" "(buffer,size,type,screen)"
-		     "getsprite_" "(sprite,num)"
-		     "getvar_" "(name,buffer,size,flags)"
-		     "getvisualinfoa_" "(screen,taglist)"
-		     "gfxassociate_" "(associateNode,gfxNodePtr)"
-		     "helpcontrol_" "(win,flags)"
-		     "idtostr_" "(id,buf)"
-		     "ieeedpabs_" "(parm)"
-		     "ieeedpacos_" "(parm)"
-		     "ieeedpadd_" "(leftParm,rightParm)"
-		     "ieeedpasin_" "(parm)"
-		     "ieeedpatan_" "(parm)"
-		     "ieeedpceil_" "(parm)"
-		     "ieeedpcmp_" "(leftParm,rightParm)"
-		     "ieeedpcos_" "(parm)"
-		     "ieeedpcosh_" "(parm)"
-		     "ieeedpdiv_" "(dividend,divisor)"
-		     "ieeedpexp_" "(parm)"
-		     "ieeedpfix_" "(parm)"
-		     "ieeedpfloor_" "(parm)"
-		     "ieeedplog10_" "(parm)"
-		     "ieeedplog_" "(parm)"
-		     "ieeedpmul_" "(factor1,factor2)"
-		     "ieeedpneg_" "(parm)"
-		     "ieeedppow_" "(exp,arg)"
-		     "ieeedpsin_" "(parm)"
-		     "ieeedpsinh_" "(parm)"
-		     "ieeedpsqrt_" "(parm)"
-		     "ieeedpsub_" "(leftParm,rightParm)"
-		     "ieeedptan_" "(parm)"
-		     "ieeedptanh_" "(parm)"
-		     "ieeedptieee_" "(parm)"
-		     "ieeedptst_" "(parm)"
-		     "ieeespadd_" "(leftParm,rightParm)"
-		     "ieeespcmp_" "(leftParm,rightParm)"
-		     "ieeespdiv_" "(dividend,divisor)"
-		     "ieeespmul_" "(leftParm,rightParm)"
-		     "ieeesppow_" "(exp,arg)"
-		     "ieeespsincos_" "(cosptr,parm)"
-		     "ieeespsub_" "(leftParm,rightParm)"
-		     "info_" "(lock,parameterBlock)"
-		     "inhibit_" "(name,onoff)"
-		     "initbitmap_" "(bitMap,depth,width,height)"
-		     "initcode_" "(startClass,version)"
-		     "initresident_" "(resident,segList)"
-		     "installclipregion_" "(layer,region)"
-		     "installlayerhook_" "(layer,hook)"
-		     "installlayerinfohook_" "(li,hook)"
-		     "internalloadseg_" "(fh,table,funcarray,stack)"
-		     "internalunloadseg_" "(seglist,freefunc)"
-		     "isalnum_" "(locale,character)"
-		     "isalpha_" "(locale,character)"
-		     "iscntrl_" "(locale,character)"
-		     "isdigit_" "(locale,character)"
-		     "isgraph_" "(locale,character)"
-		     "islower_" "(locale,character)"
-		     "isprint_" "(locale,character)"
-		     "ispunct_" "(locale,character)"
-		     "isspace_" "(locale,character)"
-		     "isupper_" "(locale,character)"
-		     "isxdigit_" "(locale,character)"
-		     "itemaddress_" "(menuStrip,menuNumber)"
-		     "lendmenus_" "(fromwindow,towindow)"
-		     "loadrgb32_" "(vp,table)"
-		     "locklayer_" "(dummy,layer)"
-		     "lockrecords_" "(recArray,timeout)"
-		     "lock_" "(name,type)"
-		     "makedosentry_" "(name,type)"
-		     "makevport_" "(view,vp)"
-		     "maprawkey_" "(event,buffer,length,keyMap)"
-		     "matchfirst_" "(pat,anchor)"
-		     "matchix_" "(event,ix)"
-		     "matchpatternnocase_" "(pat,str)"
-		     "matchpattern_" "(pat,str)"
-		     "matchtoolvalue_" "(typeString,value)"
-		     "modifyidcmp_" "(window,flags)"
-		     "modifyprop_" "(gadget,window,requester,flags,horizPot,vertPot,horizBody,vertBody)"
-		     "movelayerinfrontof_" "(layer_to_move,other_layer)"
-		     "movelayer_" "(dummy,layer,dx,dy)"
-		     "movesprite_" "(vp,sprite,x,y)"
-		     "movewindowinfrontof_" "(window,behindWindow)"
-		     "newdtobjecta_" "(name,attrs)"
-		     "newfontcontents_" "(fontsLock,fontName)"
-		     "newloadseg_" "(file,tags)"
-		     "newscaleddiskfont_" "(sourceFont,destTextAttr)"
-		     "nextdosentry_" "(dlist,flags)"
-		     "nextpubscreen_" "(screen,namebuf)"
-		     "obtaininfoa_" "(glyphEngine,tagList)"
-		     "obtainpen_" "(cm,n,r,g,b,f)"
-		     "offmenu_" "(window,menuNumber)"
-		     "onmenu_" "(window,menuNumber)"
-		     "openamigaguidea_" "(nag,*)"
-		     "openamigaguideasynca_" "(nag,attrs)"
-		     "opendevice_" "(devName,unit,ioRequest,flags)"
-		     "openiff_" "(iff,rwMode)"
-		     "openlibrary_" "(libName,version)"
-		     "openmonitor_" "(monitorName,displayID)"
-		     "openscreentaglist_" "(newScreen,tagList)"
-		     "openwindowtaglist_" "(newWindow,tagList)"
-		     "open_" "(name,accessMode)"
-		     "orrectregion_" "(region,rectangle)"
-		     "orregionregion_" "(srcRegion,destRegion)"
-		     "parsedate_" "(locale,date,template,getCharFunc)"
-		     "parseiff_" "(iff,control)"
-		     "parseix_" "(description,ix)"
-		     "pointinimage_" "(point,image)"
-		     "printdtobjecta_" "(o,w,r,msg)"
-		     "printfault_" "(code,header)"
-		     "printitext_" "(rp,iText,left,top)"
-		     "procure_" "(sigSem,bidMsg)"
-		     "pubscreenstatus_" "(screen,statusFlags)"
-		     "pushchunk_" "(iff,type,id,size)"
-		     "putdiskobject_" "(name,diskobj)"
-		     "puticon_" "(name,icon)"
-		     "putmsg_" "(port,message)"
-		     "rldispatch_" "(rmsg,result)"
-		     "rawdofmt_" "(formatString,dataStream,putChProc,putChData)"
-		     "readchunkrecords_" "(iff,buf,bytesPerRecord,numRecords)"
-		     "readexpansionbyte_" "(board,offset)"
-		     "readexpansionrom_" "(board,configDev)"
-		     "readpixelline8_" "(rp,xstart,ystart,width,array,tempRP)"
-		     "refreshdtobjecta_" "(o,win,req,attrs)"
-		     "refreshglist_" "(gadgets,window,requester,numGad)"
-		     "refreshtagitemclones_" "(clone,original)"
-		     "relabel_" "(drive,newname)"
-		     "releasecard_" "(handle,flags)"
-		     "releaseinfoa_" "(glyphEngine,tagList)"
-		     "releasepen_" "(cm,n)"
-		     "remassignlist_" "(name,lock)"
-		     "remintserver_" "(intNumber,interrupt)"
-		     "remnamedobject_" "(object,message)"
-		     "removeamigaguidehosta_" "(hh,attrs)"
-		     "removedtobject_" "(win,o)"
-		     "removegadget_" "(window,gadget)"
-		     "rename_" "(oldName,newName)"
-		     "reportmouse_" "(flag,window)"
-		     "request_" "(requester,window)"
-		     "resetmenustrip_" "(window,menu)"
-		     "routecxmsg_" "(cxm,co)"
-		     "runcommand_" "(seg,stack,paramptr,paramlen)"
-		     "sdivmod32_" "(dividend,divisor)"
-		     "smult32_" "(arg1,arg2)"
-		     "smult64_" "(arg1,arg2)"
-		     "spadd_" "(leftParm,rightParm)"
-		     "spcmp_" "(leftParm,rightParm)"
-		     "spdiv_" "(leftParm,rightParm)"
-		     "spmul_" "(leftParm,rightParm)"
-		     "sppow_" "(power,arg)"
-		     "spsincos_" "(cosResult,parm)"
-		     "spsub_" "(leftParm,rightParm)"
-		     "samedevice_" "(lock1,lock2)"
-		     "samelock_" "(lock1,lock2)"
-		     "screenposition_" "(screen,flags,x1,y1,x2,y2)"
-		     "scrolllayer_" "(dummy,layer,dx,dy)"
-		     "sendamigaguidecontexta_" "(cl,attrs)"
-		     "setabpendrmd_" "(rp,apen,bpen,drawmode)"
-		     "setapen_" "(rp,pen)"
-		     "setamigaguideattrsa_" "(cl,attrs)"
-		     "setattrsa_" "(object,tagList)"
-		     "setbpen_" "(rp,pen)"
-		     "setcomment_" "(name,comment)"
-		     "setcurrentbinding_" "(currentBinding,bindingSize)"
-		     "setcxobjpri_" "(co,pri)"
-		     "setdmrequest_" "(window,requester)"
-		     "setdtattrsa_" "(o,win,req,attrs)"
-		     "setdrmd_" "(rp,drawMode)"
-		     "setexcept_" "(newSignals,signalSet)"
-		     "setfiledate_" "(name,date)"
-		     "setfilterix_" "(filter,ix)"
-		     "setfilter_" "(filter,text)"
-		     "setfont_" "(rp,textFont)"
-		     "setgadgetattrsa_" "(gadget,window,requester,tagList)"
-		     "setinfoa_" "(glyphEngine,tagList)"
-		     "setintvector_" "(intNumber,interrupt)"
-		     "setlocalitempurge_" "(localItem,purgeHook)"
-		     "setmaxpen_" "(rp,maxpen)"
-		     "setmenustrip_" "(window,menu)"
-		     "setmode_" "(fh,mode)"
-		     "setmousequeue_" "(window,queueLength)"
-		     "setoutlinepen_" "(rp,pen)"
-		     "setowner_" "(name,owner_info)"
-		     "setpointer_" "(window,pointer,height,width,xOffset,yOffset)"
-		     "setprotection_" "(name,protect)"
-		     "setrpattrsa_" "(rp,tags)"
-		     "setrast_" "(rp,pen)"
-		     "setsr_" "(newSR,mask)"
-		     "setsignal_" "(newSignals,signalSet)"
-		     "settaskpri_" "(task,priority)"
-		     "settranslate_" "(translator,events)"
-		     "setvbuf_" "(fh,buff,type,size)"
-		     "setvar_" "(name,buffer,size,flags)"
-		     "setwindowpointera_" "(win,taglist)"
-		     "setwritemask_" "(rp,msk)"
-		     "showtitle_" "(screen,showIt)"
-		     "signal_" "(task,signalSet)"
-		     "sizelayer_" "(dummy,layer,dx,dy)"
-		     "strtolong_" "(string,value)"
-		     "stricmp_" "(string1,string2)"
-		     "swapbitsrastportcliprect_" "(rp,cr)"
-		     "systemtaglist_" "(command,tags)"
-		     "tedgetcurrentline_" "()-90"
-		     "tedgetfilename_" "()-102"
-		     "tedgetfirstline_" "()-84"
-		     "tedgetjumptable_" "()-60"
-		     "tedgetlabelcount_" "()-48"
-		     "tedgetlabellist_" "()-42"
-		     "tedsetjumptable_" "()-54"
-		     "taginarray_" "(tagValue,tagArray)"
-		     "textextent_" "(rp,string,count,textExtent)"
-		     "textfit_" "(rp,string,strLen,textExtent,constrainingExtent,strDirection,constrainingBitWidth,constrainingBitHeight)"
-		     "timeddisplayalert_" "(alertNumber,string,height,time)"
-		     "ucopperlistinit_" "(uCopList,n)"
-		     "udivmod32_" "(dividend,divisor)"
-		     "umult32_" "(arg1,arg2)"
-		     "umult64_" "(arg1,arg2)"
-		     "ungetc_" "(fh,character)"
-		     "unlockpubscreen_" "(name,screen)"
-		     "upfrontlayer_" "(dummy,layer)"
-		     "vprintf_" "(format,argarray)"
-		     "vacate_" "(sigSem,bidMsg)"
-		     "videocontrol_" "(colorMap,tagarray)"
-		     "waitforchar_" "(file,timeout)"
-		     "writechars_" "(buf,buflen)"
-		     "writechunkrecords_" "(iff,buf,bytesPerRecord,numRecords)"
-		     "writepixelline8_" "(rp,xstart,ystart,width,array,tempRP)"
-		     "writepotgo_" "(word,mask)"
-		     "xprotocolhostmon_" "(io,serbuff,actual,maxsize)"
-		     "xprotocolusermon_" "(io,serbuff,actual,maxsize)"
-		     "xorrectregion_" "(region,rectangle)"
-		     "xorregionregion_" "(srcRegion,destRegion)")))
+      #s(hash-table data ("acos" ("ACos" "(Float)" "E002")
+			  "addvalue" ("ADDValue" "(bitmap#,x,y)" "A10B")
+			  "agablue" ("AGABlue" "(Colour Register)" "CE12")
+			  "agafillpalette" ("AGAFillPalette" "palette#,r,g,b[,start_col,end_col] - fill palette with AGA r,g,b values" "A08A")
+			  "agagreen" ("AGAGreen" "(Colour Register)" "CE11")
+			  "agapalblue" ("AGAPalBlue" "(colour#)" "A087")
+			  "agapalgreen" ("AGAPalGreen" "(colour#)" "A086")
+			  "agapalrgb" ("AGAPalRGB" "Palette#,Colour Register,Red,Green,Blue" "CE0E")
+			  "agapalred" ("AGAPalRed" "(colour#)" "A085")
+			  "agargb" ("AGARGB" "Colour Register,Red,Green,Blue" "CE0D")
+			  "agared" ("AGARed" "(Colour Register)" "CE10")
+			  "alibjsr" ("ALibJsr" "" "8038")
+			  "amiga" ("AMIGA" "" "8035")
+			  "aslfilerequest" ("ASLFileRequest" "" "")
+			  "aslfilerequest$" ("ASLFileRequest$" "Title$,Pathname$,Filename$ [,Pattern$] [,x,y,w,h]" "A801")
+			  "aslfontrequest" ("ASLFontRequest" "enable flags (1=pen 2=bckgrnd 4=style 8=drawmode 16=fixedsize)" "A802")
+			  "aslpathrequest$" ("ASLPathRequest$" "Title$,Pathname$ [,x,y,w,h]" "A804")
+			  "aslscreenrequest" ("ASLScreenRequest" "enable flags (1=width 2=height 4=depth 8=overscan 16=scroll)" "A803")
+			  "aslscreenrequest$" ("ASLScreenRequest$" "" "")
+			  "asin" ("ASin" "(Float)" "E003")
+			  "asyncfade" ("ASyncFade" "On|Off" "CE83")
+			  "atan" ("ATan" "(Float)" "E004")
+			  "ableicr_a" ("AbleICR_a" "(resource,mask)" "F903")
+			  "ableicr_b" ("AbleICR_b" "(resource,mask)" "F883")
+			  "abs" ("Abs" "(Expression)" "BC09")
+			  "absmouse" ("AbsMouse" "X,Y" "C205")
+			  "activate" ("Activate" "Window#" "C51F")
+			  "activateselectedbox" ("ActivateSelectedBox" "" "BA89")
+			  "activatestring" ("ActivateString" "Window#,Id" "C612")
+			  "activescreen" ("ActiveScreen" ";Returns ADDRESS of current Intuition screen" "B58E")
+			  "activewindow" ("ActiveWindow" ";Returns ADDRESS of current Intuition window" "B591")
+			  "addappicon" ("AddAppIcon" "(id,text$,filename$/shape#[,x,y])" "9E85")
+			  "addappmenu" ("AddAppMenu" "(id,text$)" "9E83")
+			  "addappwindow" ("AddAppWindow" "(windownumber)" "9E81")
+			  "addbox" ("AddBox" "Page#,Box#,x,y,w,h,type[,text$]|[,shape,shape]" "BA84")
+			  "addfirst" ("AddFirst" "(Arrayname())" "C006")
+			  "addicrvector_a" ("AddICRVector_a" "" "F901")
+			  "addicrvector_b" ("AddICRVector_b" "" "F881")
+			  "addidcmp" ("AddIDCMP" "IDCMP_Flags" "C535")
+			  "additem" ("AddItem" "(Arrayname())" "C002")
+			  "addlast" ("AddLast" "(Arrayname())" "C008")
+			  "addr" ("Addr" "" "80B8")
+			  "adjustchunky" ("AdjustChunky" "chunky#,DeltaRed,DeltaGreen,DeltaBlue," "A409")
+			  "allfire" ("AllFire" "([joybits])" "A009")
+			  "allocfill" ("AllocFill" "for internal use only (polylib.obj)" "BB87")
+			  "allocmem" ("AllocMem" "(size,memtype) memtype: 0=fast 2=chip 65536=clrmem" "A608")
+			  "analyzedisk" ("AnalyzeDisk" "(DriveName$) ;TRUE if device name is valid" "B691")
+			  "animloop" ("AnimLoop" "On|Off" "9C83")
+			  "appevent" ("AppEvent" "" "9E87")
+			  "appeventid" ("AppEventID" "" "9E89")
+			  "appeventtype" ("AppEventType" "" "9E88")
+			  "appfile" ("AppFile" "(num)" "9E8B")
+			  "appiconevent" ("AppIconEvent" "" "")
+			  "appiconfile" ("AppIconFile" "" "")
+			  "appiconhit" ("AppIconHit" "" "")
+			  "applock" ("AppLock" "" "9E8D")
+			  "appmenuevent" ("AppMenuEvent" "" "")
+			  "appmenufile" ("AppMenuFile" "" "")
+			  "appmenuhit" ("AppMenuHit" "" "")
+			  "appmessage" ("AppMessage" "" "9E8E")
+			  "appnumfiles" ("AppNumFiles" "" "9E8C")
+			  "appwindowevent" ("AppWindowEvent" "" "")
+			  "appwindowfile" ("AppWindowFile" "" "")
+			  "asc" ("Asc" "(String$)" "DC87")
+			  "asmexit" ("AsmExit" "" "8011")
+			  "assign" ("Assign" "[success=] Assign(Name$,ToPath$) ;e.g. Assign "Blitz2:","DH1:Blitz2"" "")
+			  "assign$" ("Assign$" ";Null-string indicates end of list" "")
+			  "attachgtlist" ("AttachGTList" "GTList#,Window#" "C68E")
+			  "autocookie" ("AutoCookie" "On|Off" "CD06")
+			  "avg" ("Avg" "(Integer1,Integer2)" "B48A")
+			  "avg.l" ("Avg.l" "(Long Integer 1,Long Integer 2)" "B488")
+			  "avg.q" ("Avg.q" "(Quick1,Quick2)" "B489")
+			  "bblit" ("BBlit" "Buffer#,Shape#,X,Y[,Excessonoff]" "C902")
+			  "bblitmode" ("BBlitMode" "BLTCON0" "C904")
+			  "blitz" ("BLITZ" "" "8034")
+			  "blibjsr" ("BLibJsr" "" "803A")
+			  "bload" ("BLoad" "(filename$,[address,[,length,[offset,[memtype]]]])" "A58F")
+			  "bsave" ("BSave" "(filename$,address/bank[,length])" "A590")
+			  "bank" ("Bank" "(bank#)" "A601")
+			  "bankloc" ("BankLoc" "(bank#)" "A606")
+			  "banksize" ("BankSize" "(bank#)" "A607")
+			  "beepscreen" ("BeepScreen" "Screen#" "CF0D")
+			  "bin#" ("Bin#" "(BinString$) ;Converts binary value (in string) to decimal" "B48E")
+			  "bin$" ("Bin$" "(Expression)" "DC85")
+			  "bitmap" ("BitMap" "BitMap#,Width,Height,Depth" "D001")
+			  "bitmapinput" ("BitMapInput" "" "C707")
+			  "bitmaporigin" ("BitMapOrigin" "BitMap#,x,y" "BB90")
+			  "bitmapoutput" ("BitMapOutput" "Bitmap#" "C702")
+			  "bitmappoly" ("BitMapPoly" "numpts,*coords.w,color[,ditherbitmap]" "AB85")
+			  "bitmaptowindow" ("BitMapToWindow" "Bitmap#,Window#[,srcx,srcy,destx,desty,wid,height]" "C53F")
+			  "bitmapwindow" ("BitMapWindow" "srcbitmap,destbitmap,x,y,w,h" "BB8F")
+			  "bitmaptowindow" ("BitMaptoWindow" "Bitmap#,Window#[,srcx,srcy,destx,desty,wid,height]" "C53F")
+			  "bitplanesbitmap" ("BitPlanesBitMap" "srcbitmap,destbitmap,planepick" "BB8C")
+			  "blit" ("Blit" "Shape#,X,Y[,Excessonoff]" "CB01")
+			  "blitcoll" ("BlitColl" "(Shape#,x,y)" "CB09")
+			  "blitmode" ("BlitMode" "BLTCON0" "CB02")
+			  "blitterdone" ("BlitterDone" "" "A59D")
+			  "blitternasty" ("BlitterNasty" "On|Off" "")
+			  "blitzevent" ("BlitzEvent" ";handles user input and returns event" "BA92")
+			  "blitzfont" ("BlitzFont" "" "C70D")
+			  "blitzkey" ("BlitzKey" ";same as inkey$ after a bitmapinput" "B106")
+			  "blitzkeys" ("BlitzKeys" "On|Off" "B101")
+			  "blitzqualifier" ("BlitzQualifier" "" "B104")
+			  "blitzrepeat" ("BlitzRepeat" "Delay,Speed" "B103")
+			  "block" ("Block" "Shape#,X,Y" "CB08")
+			  "blockscroll" ("BlockScroll" "X1,Y1,Width,Height,X2,Y2[,BitMap#]" "B206")
+			  "blue" ("Blue" "(Colour Register)" "CE08")
+			  "bootprog" ("BootProg" "unit#,memoryaddress" "AD8B")
+			  "borderpens" ("BorderPens" "Highlight Colour,Shadow Colour" "C618")
+			  "borders" ("Borders" "[On|Off]|[Width,Height]" "C611")
+			  "box" ("Box" "x1,y1,x2,y2,color" "BB83")
+			  "boxprint" ("BoxPrint" "Box#[,String$]|[Bank#,Line]" "BA90")
+			  "boxpropx" ("BoxPropX" "Box#" "BA98")
+			  "boxpropy" ("BoxPropY" "Box#" "BA99")
+			  "boxselected" ("BoxSelected" "" "BA8F")
+			  "boxshow" ("BoxShow" "Box#[,Bitmap#,x,y]|[dx,dy]" "BA8E")
+			  "boxstring" ("BoxString" "(Box#)|(Page#,Box#)" "BA8D")
+			  "boxvalue" ("BoxValue" "(Box#)|(Page#,Box#)" "BA8B")
+			  "boxf" ("Boxf" "x1,y1,x2,y2,color" "BB84")
+			  "buffer" ("Buffer" "Buffer#,Memorylen" "C901")
+			  "buttongroup" ("ButtonGroup" "Group" "C61C")
+			  "buttonid" ("ButtonId" "(GadgetList#,ButtonGroup)" "C61E")
+			  "cddoor" ("CDDoor" "on/off" "8703")
+			  "cdfastforward" ("CDFastForward" "" "8711")
+			  "cdfirsttrack" ("CDFirstTrack" "" "870A")
+			  "cdflush" ("CDFlush" "" "870E")
+			  "cdlasttrack" ("CDLastTrack" "" "870B")
+			  "cdnormalspeed" ("CDNormalSpeed" "" "8712")
+			  "cdnumtracks" ("CDNumTracks" "" "8709")
+			  "cdpause" ("CDPause" "on/off" "870F")
+			  "cdplaytrack" ("CDPlayTrack" "track#,numtracks" "8704")
+			  "cdreadtoc" ("CDReadTOC" "" "8705")
+			  "cdrewind" ("CDRewind" "" "8710")
+			  "cdspeed" ("CDSpeed" "speed" "8713")
+			  "cdstatus" ("CDStatus" "" "8706")
+			  "cdstop" ("CDStop" "" "8707")
+			  "cdtracklength" ("CDTrackLength" "track#" "870C")
+			  "cdtrackmins" ("CDTrackMins" "[offset] - mins for current track" "8714")
+			  "cdtrackplaying" ("CDTrackPlaying" "- current track being played" "8716")
+			  "cdtracksecs" ("CDTrackSecs" "[offset] - secs for current track" "8715")
+			  "cdupdateinfo" ("CDUpdateInfo" "- update track playing/time information" "870D")
+			  "cdvolume" ("CDVolume" "volume,lengthoffade" "8708")
+			  "celse" ("CELSE" "" "801E")
+			  "cend" ("CEND" "" "801F")
+			  "cerr" ("CERR" "" "8020")
+			  "chdir" ("CHDir" "[success=] CHDir(Path$) ;CHange current DIRectory" "B681")
+			  "cmpmem" ("CMPMEM" "(source,dest,length) 0=same,-1 source<dest, +1 source>dest" "")
+			  "cnif" ("CNIF" "" "801C")
+			  "cpucls" ("CPUCls" "bitmap#" "A08C")
+			  "cplot" ("CPlot" "Chunky#,x,y[,color.l],[red.b,green.b,blue.b]" "A413")
+			  "cpoint" ("CPoint" "(Chunky#,x,y)" "A415")
+			  "csif" ("CSIF" "" "801D")
+			  "cacheoff" ("CacheOff" "" "")
+			  "cachepcf" ("CachePCF" "" "")
+			  "cachesoff" ("CachesOff" "bitmask" "A597")
+			  "cacheson" ("CachesOn" "bitmask" "A581")
+			  "call" ("Call" "Address" "DA04")
+			  "case" ("Case" "" "800F")
+			  "casesense" ("CaseSense" "On|Off" "DC99")
+			  "catchdoserrs" ("CatchDosErrs" "" "C538")
+			  "centre$" ("Centre$" "(String$,Characters)" "DC96")
+			  "chdir" ("ChDir" "[success=] CHDir(Path$) ;CHange current DIRectory" "B681")
+			  "changebox" ("ChangeBox" "Page#,Box#,Value" "BA9A")
+			  "changedir" ("ChangeDir" "dir$" "A5A3")
+			  "changetrackermask" ("ChangeTrackerMask" "Channel_Mask" "9C11")
+			  "changetrackervblank" ("ChangeTrackerVBlank" "" "9C0E")
+			  "charcount" ("CharCount" "(String$,byte) ;Returns no. occurances of 'byte' in 'string$'" "B284")
+			  "checkaga" ("CheckAGA" ";Returns 'TRUE' for AGA machines, otherwise returns 'FALSE'" "B387")
+			  "checkprt" ("CheckPrt" "-1=Printer Off|-3=Printer Offline|-4=Printer On" "A304")
+			  "checktrackerevent" ("CheckTrackerEvent" "" "9C09")
+			  "checktrackerid" ("CheckTrackerID" "(TrackerModule#)" "9C0B")
+			  "checksum" ("Checksum" "(String$) ;Returns a unique checksum for a given string" "B283")
+			  "chipfree" ("ChipFree" ";Returns largest block of free CHIP memory" "B582")
+			  "chr$" ("Chr$" "(Expression)" "DC86")
+			  "chunkheader" ("ChunkHeader" "(a$)" "A487")
+			  "chunkycls" ("ChunkyCLS" "color" "AB81")
+			  "chunkyconvert" ("ChunkyConvert" "chunky#[,palette]|[,array.l(),numcols]" "A411")
+			  "chunkyloc" ("ChunkyLoc" "chunky#" "A410")
+			  "chunkyplot" ("ChunkyPlot" "x,y,color,[,CLIP]" "AB82")
+			  "chunkypoly" ("ChunkyPoly" "numpts,*coords.w,color[,noblitter]" "AB84")
+			  "chunkytobitmap" ("ChunkyToBitMap" "Chunky#,Bitmap#" "A412")
+			  "chunkytoplanar" ("ChunkyToPlanar" "" "")
+			  "chunkyvlin" ("ChunkyVlin" "x,y1,y2,color,[,CLIP]" "AB83")
+			  "cipher$" ("Cipher$" "(String$) ;Create/Unencrypt a Cipher$() string" "B287")
+			  "circle" ("Circle" "x,y,rx[,ry],color" "BB81")
+			  "circlef" ("Circlef" "x,y,rx[,ry],color" "BB82")
+			  "clearbitmap" ("ClearBitmap" "bitmap#,delay[,height,offset]" "A101")
+			  "clearlist" ("ClearList" "Arrayname()" "C007")
+			  "clearrexxmsg" ("ClearRexxMsg" "rexxmsg" "AE04")
+			  "clearstring" ("ClearString" "GadgetList#,Id" "C615")
+			  "cleartooltypes" ("ClearToolTypes" "" "9D89")
+			  "clickbutton" ("ClickButton" "Button : 0=Left" "C208")
+			  "clickmouse" ("ClickMouse" ";Waits for left mouse button to be CLICKED" "B38C")
+			  "clipblit" ("ClipBlit" "Shape#,X,Y,[Excess]" "BB8D")
+			  "clipblitmode" ("ClipBlitMode" "BPLCON0" "BB8E")
+			  "closecd" ("CloseCD" "" "8702")
+			  "closeconsole" ("CloseConsole" "Console#" "A185")
+			  "closedisk" ("CloseDisk" "unit#" "AD83")
+			  "closeed" ("CloseEd" "" "80CB")
+			  "closefile" ("CloseFile" "File#" "BE02")
+			  "closescreen" ("CloseScreen" "Screen#" "CF0B")
+			  "closeserial" ("CloseSerial" "unit#" "AD06")
+			  "closewindow" ("CloseWindow" "Window#" "C53C")
+			  "clrerr" ("ClrErr" "" "80B5")
+			  "clrint" ("ClrInt" "" "8031")
+			  "cls" ("Cls" "[Colour]" "B205")
+			  "cludgebitmap" ("CludgeBitMap" "BitMap#,Width,Height,Depth,Memory" "D007")
+			  "cludgeshapes" ("CludgeShapes" "shape#,numshapes,address" "9701")
+			  "cludgesound" ("CludgeSound" "sound#,address" "9681")
+			  "col8" ("Col8" "(array.l(),numcols,rgb.l)" "A417")
+			  "colsplit" ("ColSplit" "Colour Register,Red,Green,Blue,Y" "C808")
+			  "colorchunky" ("ColorChunky" "chunky#" "A40F")
+			  "colour" ("Colour" "Foreground Colour[,Background Colour]" "C703")
+			  "colourrequest" ("ColourRequest" "Colour#" "9A82")
+			  "commoditiesbase" ("CommoditiesBase" ";Returns Commodities Library base" "B58A")
+			  "commodityevent" ("CommodityEvent" "" "AC85")
+			  "comparepaths" ("ComparePaths" "(Path1$,Path2$) ;0=Unrelated, 1=Same Dir or File, 2=On Same Volume" "")
+			  "con_base" ("Con_Base" "Returns pointer to console.device" "9A93")
+			  "cookiemode" ("CookieMode" "" "CB03")
+			  "coplen" ("CopLen" "" "C807")
+			  "coploc" ("CopLoc" "" "C802")
+			  "copperagacol" ("CopperAGACol" "col#,r,g,b" "858B")
+			  "coppercommand" ("CopperCommand" "copins1,copins2" "8586")
+			  "copperend" ("CopperEnd" "" "8584")
+			  "copperinfoblock" ("CopperInfoBlock" "" "8585")
+			  "coppermove" ("CopperMove" "register,value" "8587")
+			  "copperreset" ("CopperReset" "coplist#,startline[,ccoffset]" "8583")
+			  "copperskip" ("CopperSkip" "x,y" "8589")
+			  "copperwait" ("CopperWait" "x,y" "8588")
+			  "copybitmap" ("CopyBitMap" "Src BitMap#,Dest BitMap#" "D005")
+			  "copybyte" ("CopyByte" "sourceaddr,destaddr,bytes" "A58A")
+			  "copychunky" ("CopyChunky" "srcchunky#,destchunky#,[sx,sy,w,h,dx,dy]" "A40C")
+			  "copycolour" ("CopyColour" "sourcepal#,destpal#,colsource#,coldest#" "A08B")
+			  "copyfile" ("CopyFile" "[success=] CopyFile(Source$,Dest$)" "B68D")
+			  "copylong" ("CopyLong" "sourceaddr,destaddr,longs" "A58C")
+			  "copyshape" ("CopyShape" "Shape#,Shape#" "CD07")
+			  "copyword" ("CopyWord" "sourceaddr,destaddr,words" "A58B")
+			  "cos" ("Cos" "(Float)" "E005")
+			  "crmdecrunch" ("CrMDecrunch" "Bufferadr" "A503")
+			  "createargstring" ("CreateArgString" "ArgString=CreateArgString(String)" "AE05")
+			  "createdisplay" ("CreateDisplay" "CopList#[,CopList#..]" "C783")
+			  "createmsgport" ("CreateMsgPort" "*UserPort.port=CreateMsgPort(PortName$)" "E101")
+			  "createrexxmsg" ("CreateRexxMsg" "MsgPtr=CreateRexxMsg(ReplyPort,Exten,Host)" "AE01")
+			  "currentdir$" ("CurrentDir$" ";Current directory name" "")
+			  "cursx" ("CursX" "" "C705")
+			  "cursy" ("CursY" "" "C706")
+			  "cursor" ("Cursor" "Thickness : <0 - block, >=0 - underline thickness" "C515")
+			  "customchunky" ("CustomChunky" "CopList#,CCOffset,YPos,width,height,res[,splitpos] ;4n+2" "C791")
+			  "customchunkysize" ("CustomChunkySize" "width,height" "C792")
+			  "customcolors" ("CustomColors" "CopList#,CCOffset,YPos,Palette,startcol,numcols[,thru256flag]" "C789")
+			  "customcop" ("CustomCop" "Copins$,Y" "C803")
+			  "customsprites" ("CustomSprites" "CopList#,CCOffset,YPos,NumSprites ;4n+2" "C790")
+			  "customstring" ("CustomString" "CopList#,CCOffset,YPos,Copper$" "C78A")
+			  "cvi" ("Cvi" "(String$)" "DC8D")
+			  "cvl" ("Cvl" "(String$)" "DC8E")
+			  "cvq" ("Cvq" "(String$)" "DC9B")
+			  "cxappear" ("CxAppear" "" "AC90")
+			  "cxchangelist" ("CxChangeList" "" "")
+			  "cxdisappear" ("CxDisAppear" "" "AC91")
+			  "cxdisable" ("CxDisable" "" "AC8E")
+			  "cxenable" ("CxEnable" "" "AC8F")
+			  "cxkill" ("CxKill" "" "AC92")
+			  "cxlistchange" ("CxListChange" "" "AC93")
+			  "cxunique" ("CxUnique" "" "AC94")
+			  "cycle" ("Cycle" "Palette#" "CE02")
+			  "cyclepalette" ("CyclePalette" "Palette#" "CE15")
+			  "dbcasesense" ("DBCasesense" "On|Off" "")
+			  "dbinit" ("DBInit" "(object#,init recs, exp recs,rec struct[,keylength[,offset]])" "")
+			  "dbload" ("DBLoad" "Database#,filename$" "")
+			  "dbsave" ("DBSave" "Database#,filename$" "")
+			  "dbactive" ("DBactive" "(Database#) Is a database active or not ?" "")
+			  "dbadd" ("DBadd" "(database #,record var) add record to database" "")
+			  "dbaddfirst" ("DBaddFirst" "(database #,record var) add record to database" "")
+			  "dbaddlast" ("DBaddLast" "(database #,record var) add record to database" "")
+			  "dbcurrent" ("DBcurrent" "(Database#)" "")
+			  "dbdelete" ("DBdelete" "database # delete current entry in database" "")
+			  "dbfind" ("DBfind" "(database #,searchstring$[,length,offset[,startrec]])" "")
+			  "dbfindnext" ("DBfindnext" "(database #)" "")
+			  "dbfirst" ("DBfirst" "(database #) set pointer to the first database entry" "")
+			  "dbget" ("DBget" "(database #,record var) get current record from database" "")
+			  "dbisnext" ("DBisnext" "(Database#)" "")
+			  "dbisprev" ("DBisprev" "(Database#)" "")
+			  "dbkill" ("DBkill" "(database #) kill current database" "")
+			  "dblast" ("DBlast" "(database #) set pointer to the last database entry" "")
+			  "dblistaddr" ("DBlistaddr" "(database #) gives address of nodelist header" "")
+			  "dbmemtype" ("DBmemtype" "memtype" "")
+			  "dbmodified" ("DBmodified" "(Database#)" "")
+			  "dbnext" ("DBnext" "(database #) set pointer to the next database entry" "")
+			  "dbpop" ("DBpop" "(Database#) retrieve a pushed record" "")
+			  "dbprev" ("DBprev" "(database #) set pointer to the previous database entry" "")
+			  "dbpush" ("DBpush" "(Database#) hold onto this record" "")
+			  "dbrecs" ("DBrecs" "(database #) gives number of records in database" "")
+			  "dbsetkey" ("DBsetkey" "database #,On|Off" "")
+			  "dbsetpos" ("DBsetpos" "database #,recs" "")
+			  "dbupdate" ("DBupdate" "database #,record variable" "")
+			  "dcb" ("DCB" "" "8028")
+			  "deftype" ("DEFTYPE" "" "8033")
+			  "d_checknmove" ("D_CheckNMove" "source_address,dest_address[,count]" "9884")
+			  "d_checknmovea" ("D_CheckNMoveA" "source_address,dest_address[,count]" "9899")
+			  "d_checknmoveword" ("D_CheckNMoveWord" "source_address,dest_address[,count]" "9890")
+			  "d_findstringptr" ("D_FindStringPtr" "areg5,lookfor" "9885")
+			  "d_findvolume" ("D_FindVolume" "(volumename)" "9881")
+			  "d_getsr" ("D_GetSR" "buffer,SR" "9882")
+			  "d_hexword" ("D_HexWord" "source,address,num" "9883")
+			  "data" ("Data" "" "801A")
+			  "data$" ("Data$" "" "")
+			  "date$" ("Date$" "days.l ;converts days since 1/1/1978 to date string" "A702")
+			  "dateformat" ("DateFormat" "0=dd/mm/yyyy 1=mm/dd/yyyy" "A704")
+			  "days" ("Days" ";returns day calculated in last call to date$" "A705")
+			  "dc" ("Dc" "" "8025")
+			  "dcb" ("Dcb" "" "8028")
+			  "deice" ("DeIce" "(sourceaddr,destaddr)" "")
+			  "deselectbox" ("DeSelectBox" "" "BA88")
+			  "decodeilbm" ("DecodeILBM" "Bitmap#,MemoryLocation" "D089")
+			  "decodemedmodule" ("DecodeMedModule" "MedModule#,MemoryLocation" "A90B")
+			  "decodemodule" ("DecodeModule" "TrackerModule#,ModuleAddress" "9C04")
+			  "decodepalette" ("DecodePalette" "Palette#,MemoryLocation[,Palette Offset]" "CE1A")
+			  "decodeshapes" ("DecodeShapes" "Shape#[,Shape#],MemoryLocation" "CD0F")
+			  "decodesound" ("DecodeSound" "Sound#,MemoryLocation" "BA0B")
+			  "decrypt" ("Decrypt" "memadr,length,wheel1,wheel2,wheel3[,mode]" "9A02")
+			  "default" ("Default" "" "8010")
+			  "defaultidcmp" ("DefaultIDCMP" "IDCMP_Flags" "C506")
+			  "defaultinput" ("DefaultInput" "" "D201")
+			  "defaultoutput" ("DefaultOutput" "" "D202")
+			  "delappicon" ("DelAppIcon" "(id)" "9E86")
+			  "delappmenu" ("DelAppMenu" "(id)" "9E84")
+			  "delappwindow" ("DelAppWindow" "(windownumber)" "9E82")
+			  "deleteargstring" ("DeleteArgString" "argstring" "AE06")
+			  "deletemsgport" ("DeleteMsgPort" "*UserPort" "E102")
+			  "deleterexxmsg" ("DeleteRexxMsg" "rexxmsg.l" "AE02")
+			  "deplode" ("Deplode" "Success=Startadr" "A502")
+			  "depth" ("Depth" "(Bitmap#) ;Returns DEPTH of specified bitmap" "B38B")
+			  "derez" ("Derez" "source#,dest#,sourceadd,destadd,derez_value,height" "A104")
+			  "detachgtlist" ("DetachGTList" "GTList#" "C69F")
+			  "devicename$" ("DeviceName$" "volumename$" "A5A2")
+			  "dim" ("Dim" "" "8004")
+			  "disable" ("Disable" "(GadgetList#,Id)" "C620")
+			  "disablebox" ("DisableBox" "Box#" "BA94")
+			  "diskblocks" ("DiskBlocks" ";Bytes per block of last drive analyzed" "B696")
+			  "diskbuffer" ("DiskBuffer" "Bufferlen" "BA02")
+			  "diskcapacity" ("DiskCapacity" ";Capacity in bytes of last drive analyzed" "B694")
+			  "diskerrors" ("DiskErrors" ";No. of soft errors on last drive analyzed" "B693")
+			  "diskerrs" ("DiskErrs" "" "")
+			  "diskfontbase" ("DiskFontBase" ";Returns DiskFont Library base" "B589")
+			  "diskfree" ("DiskFree" ";No. free bytes on last analyzed disk" "B697")
+			  "diskio" ("DiskIO" "unit#" "AD8A")
+			  "diskmotor" ("DiskMotor" "; Returns -1 if motor is on" "AD8C")
+			  "diskplay" ("DiskPlay" "Filename$,Channelmask[,Vol1[,Vol2...]]" "BA01")
+			  "diskstate" ("DiskState" ";0=Write-Protected, 1=Validating, 2=Validated" "")
+			  "diskstatus" ("DiskStatus" "unit#" "AD89")
+			  "disktype$" ("DiskType$" ";4-char string ID" "")
+			  "diskunit" ("DiskUnit" ";Unit# of last drive analyzed" "B692")
+			  "diskused" ("DiskUsed" ";No. bytes used of last analyzed drive" "B695")
+			  "diskfontbase" ("DiskfontBase" ";Returns DiskFont Library base" "B589")
+			  "dispheight" ("DispHeight" "" "BC0C")
+			  "display" ("Display" "" "")
+			  "displayadjust" ("DisplayAdjust" "CopList#,fetchwid,ddfstrt,ddfstop,diwstrt,diwstop" "C788")
+			  "displaybitmap" ("DisplayBitMap" "CopList#,bmap[,x,y] [,bmap[,x,y]]" "C784")
+			  "displaycontrols" ("DisplayControls" "CopList#,BPLCON2,BPLCON3,BPLCON4" "C787")
+			  "displaydblscan" ("DisplayDblScan" "CopList#,Mode[,copoffset]" "C78B")
+			  "displaygenlock" ("DisplayGenlock" "BPLCON0" "C793")
+			  "displayoff" ("DisplayOff" "" "C80B")
+			  "displayon" ("DisplayOn" "" "C80C")
+			  "displaypalette" ("DisplayPalette" "CopList#,Palette# [,coloroffset] [,coloroffset,bankoffset]" "C786")
+			  "displayrgb" ("DisplayRGB" "CopList#,Register,line,r,g,b[,copoffset] ;ecs=1 aga=4" "C78D")
+			  "displayrainbow" ("DisplayRainbow" "CopList#,Register,Palette[,copoffset] ;ecs=1 aga=4" "C78C")
+			  "displayscroll" ("DisplayScroll" "CopList#,&xpos.q(n),&xpos.q(n)[,Offset]" "C78F")
+			  "displaysprite" ("DisplaySprite" "CopList#,Sprite#,X,Y,Sprite Channel" "C785")
+			  "displayuser" ("DisplayUser" "CopList#,Line,String[,Offset]" "C78E")
+			  "docolsplit" ("DoColSplit" "cols_adr,numlines,colour_register" "8581")
+			  "docoll" ("DoColl" "" "B40C")
+			  "dofade" ("DoFade" "" "CE84")
+			  "dosbase" ("DosBase" ";Returns DOS Library base" "B586")
+			  "dosbufflen" ("DosBuffLen" "Bytes" "BE0E")
+			  "doserror$" ("DosError$" ";Reason for last failed DOS action" "")
+			  "dos_base" ("Dos_Base" "Returns pointer to dos.library" "9A8F")
+			  "duplicatepalette" ("DuplicatePalette" "SrcPalette#,DestPalette#" "CE19")
+			  "emousex" ("EMouseX" "" "C533")
+			  "emousey" ("EMouseY" "" "C534")
+			  "even" ("EVEN" "" "8027")
+			  "easyrequest" ("EasyRequest" "Result=EasyRequest([#Window,]title$,body$,gtext$)" "A281")
+			  "edit" ("Edit" "([DefaultValue,]Characters)" "DD03")
+			  "edit$" ("Edit$" "([DefaultString$,]Characters)" "DD01")
+			  "editexit" ("EditExit" "" "C518")
+			  "editfrom" ("EditFrom" "[Characterpos]" "C517")
+			  "editat" ("Editat" "" "C516")
+			  "else" ("Else" "" "8022")
+			  "enable" ("Enable" "(GadgetList#,Id)" "C61F")
+			  "enablebox" ("EnableBox" "Box#" "BA95")
+			  "encrypt" ("Encrypt" "memadr,length[,wheel1,wheel2,wheel3]" "9A01")
+			  "end" ("End" "" "8002")
+			  "endif" ("EndIf" "" "80C0")
+			  "entrybits$" ("EntryBits$" ";Possible bits: H, S, A, P, R, W, E, D" "B686")
+			  "entrycomment$" ("EntryComment$" ";Comment String of last Examined object or entry" "B68C")
+			  "entrydate" ("EntryDate" ";Date$(EntryDate) returns date of last Examined object or entry" "B688")
+			  "entrydir" ("EntryDir" ";True if last Examined object or entry is a directory" "B685")
+			  "entryhour" ("EntryHour" ";Hour of last Examined object or entry" "B689")
+			  "entrymins" ("EntryMins" ";Minutes of last Examined object or entry" "B68A")
+			  "entryname$" ("EntryName$" ";Filename of last Examined object or entry" "B684")
+			  "entrysecs" ("EntrySecs" ";Seconds of last Examined object or entry" "B68B")
+			  "entrysize" ("EntrySize" ";Bytesize of last Examined object or entry" "B687")
+			  "eof" ("Eof" "(File#)" "BE0D")
+			  "erase" ("Erase" "bank" "A593")
+			  "eraseall" ("EraseAll" "" "A594")
+			  "erasemode" ("EraseMode" "" "CB04")
+			  "errfail" ("ErrFail" "" "80B7")
+			  "even" ("Even" "" "8027")
+			  "event" ("Event" "" "C503")
+			  "eventcode" ("EventCode" "" "C540")
+			  "eventqualifier" ("EventQualifier" "" "C541")
+			  "eventwindow" ("EventWindow" "" "C505")
+			  "examine" ("Examine" "[success=] Examine(Pathname$)" "")
+			  "exchange" ("Exchange" "" "80C9")
+			  "exchangeappear" ("ExchangeAppear" "" "AC89")
+			  "exchangechangelist" ("ExchangeChangeList" "" "")
+			  "exchangedisable" ("ExchangeDisAble" "" "AC87")
+			  "exchangedisappear" ("ExchangeDisAppear" "" "AC8A")
+			  "exchangedisable" ("ExchangeDisable" "" "AC87")
+			  "exchangeenable" ("ExchangeEnable" "" "AC88")
+			  "exchangekill" ("ExchangeKill" "" "AC8B")
+			  "exchangelistchange" ("ExchangeListChange" "" "AC8C")
+			  "exchangemessage" ("ExchangeMessage" "" "AC86")
+			  "exchangeunique" ("ExchangeUnique" "" "AC8D")
+			  "exec" ("Exec" "DosCommands$ ;String is executed" "")
+			  "execversion" ("ExecVersion" "" "E087")
+			  "exists" ("Exists" "(Filename$)" "BE15")
+			  "exp" ("Exp" "(Float)" "E007")
+			  "extractlabel" ("ExtractLabel" "label_string" "9897")
+			  "ffpbase" ("FFPBase" ";Returns FFP Math Library base" "B588")
+			  "finverse" ("FInverse" "inversemode" "988A")
+			  "flocate" ("FLocate" "x,y" "9887")
+			  "fnprint" ("FNPrint" "a$" "9889")
+			  "fnsclip" ("FNSClip" "xmin,ymin,xmax,ymax" "AE87")
+			  "fnsclipoutput" ("FNSClipOutput" "- set clipping zone to output bitmap size" "AE88")
+			  "fnsheight" ("FNSHeight" "(fontnum)" "AE86")
+			  "fnsink" ("FNSInk" "colour" "AE84")
+			  "fnslength" ("FNSLength" "(fontnum,a$[,prefs])" "AE8B")
+			  "fnsload" ("FNSLoad" "(fontname$,fontslot)" "AE8F")
+			  "fnsorigin" ("FNSOrigin" "[x,y]" "AE8D")
+			  "fnsoutput" ("FNSOutput" "bitmap[,clip_update (On|Off)]" "AE83")
+			  "fnsprefs" ("FNSPrefs" "prefs[,colour]" "AE85")
+			  "fnsprint" ("FNSPrint" "fontnum,x,y,a$/string_address[,prefs,colour]" "AE81")
+			  "fnssettab" ("FNSSetTab" "tab_size - set tab size in pixels" "AE92")
+			  "fnsslot" ("FNSSlot" "" "AE90")
+			  "fnsunload" ("FNSUnLoad" "fontslot" "AE91")
+			  "fnsunderline" ("FNSUnderline" "(fontnum)" "AE8A")
+			  "fnsunload" ("FNSUnload" "fontslot" "AE91")
+			  "fnsversion" ("FNSVersion" "- returns quick, lastest version=0.992" "AE8C")
+			  "fnswidth" ("FNSWidth" "(fontnum)" "AE8E")
+			  "fprint" ("FPrint" "a$" "9888")
+			  "fprintdetoke" ("FPrintDetoke" "tokenised_string,cio,typ,lineoffset" "9895")
+			  "fxlibreserved1" ("FXLibReserved1" "" "")
+			  "fxlibreserved2" ("FXLibReserved2" "" "")
+			  "fyoffset" ("FYOffset" "pixel_offset - offset from vertical y cursor to print at" "988C")
+			  "fadein" ("FadeIn" "Palette#[,Rate[,Low Colour,High Colour]]" "CE81")
+			  "fadeinbitmap" ("FadeInBitmap" "bitmapsource#,bitmapdest#,delay[,height,offset1,offset2]" "A102")
+			  "fadeout" ("FadeOut" "Palette#[,Rate[,Low Colour,High Colour]]" "CE82")
+			  "fadepalette" ("FadePalette" "SrcPalette#,DestPalette#,Brightness.q" "CE16")
+			  "fadestatus" ("FadeStatus" "" "CE85")
+			  "false" ("False" "" "BC0F")
+			  "fastfree" ("FastFree" ";Returns largest block of free FAST memory" "B583")
+			  "fields" ("Fields" "File#,Var1[,Var2...]" "BE04")
+			  "filefilter" ("FileFilter" "Show$,Hide$" "9A86")
+			  "fileinput" ("FileInput" "File#" "BE08")
+			  "fileoutput" ("FileOutput" "File#" "BE07")
+			  "filepart$" ("FilePart$" "(FullPath$) ;\"DH0:S/User-Startup\" -> \"User-Startup\"" "")
+			  "filereqsize" ("FileReqSize" "Lines High,File Length,Device Length," "9A84")
+			  "filerequest$" ("FileRequest$" "Title$,Pathname$,Filename$" "CC01")
+			  "fileseek" ("FileSeek" "File#,Position" "BE0B")
+			  "filesize" ("FileSize" "(filename$)" "A58E")
+			  "filestructure" ("FileStructure" "Pointer to file requester structor" "9A8A")
+			  "fillmem" ("FillMem" "address,length[,value]" "A599")
+			  "fillpalette" ("FillPalette" "palette#,r,g,b[,start_col,end_col] - fill palette with r,g,b values" "A089")
+			  "fillrexxmsg" ("FillRexxMsg" "rexxmsg,&FillStruct" "AE03")
+			  "filter" ("Filter" "On|Off" "BA06")
+			  "findscreen" ("FindScreen" "Screen#[,Title$]" "CF04")
+			  "findtoolnumber" ("FindToolNumber" "(tooltype#)" "9D88")
+			  "findtooltype" ("FindToolType" "(tooltype$)" "9D8F")
+			  "findtoolvalue" ("FindToolValue" "(tooltype$)" "9D82")
+			  "findvolume" ("FindVolume" "(volumename)" "A59F")
+			  "firstitem" ("FirstItem" "(Arrayname())" "C001")
+			  "floatmode" ("FloatMode" "Mode : -1=standard, 0=guess, 1=exp" "DD85")
+			  "floodfill" ("FloodFill" "x,y,colour [,border colour]" "BB89")
+			  "flstostr$" ("FlsToStr$" "(startaddr of FLS, maxlength)" "")
+			  "flushbuffer" ("FlushBuffer" "Buffer#" "C906")
+			  "flushevents" ("FlushEvents" "[IDCMP_Flag]" "C537")
+			  "flushqueue" ("FlushQueue" "Queue#" "CA05")
+			  "for" ("For" "" "8016")
+			  "forcentsc" ("ForceNTSC" ";Forces screen mode to NTSC (60hz)" "B38A")
+			  "forcepal" ("ForcePAL" ";Forces screen mode to PAL (50hz)" "B389")
+			  "forever" ("Forever" "" "80C7")
+			  "format" ("Format" "FormatString" "DD84")
+			  "formattrack" ("FormatTrack" "unit#,track#,buffer[,numtracks]" "AD87")
+			  "frac" ("Frac" "(Expression)" "BC04")
+			  "frames" ("Frames" "(Anim#)" "AF05")
+			  "free" ("Free" "" "802B")
+			  "freebank" ("FreeBank" "bank#" "A603")
+			  "freecatalog" ("FreeCatalog" "" "A203")
+			  "freechunky" ("FreeChunky" "Chunky#" "A403")
+			  "freefill" ("FreeFill" "frees memory allocated for 2d fill routines" "BB86")
+			  "freeiconobject" ("FreeIconObject" "- free the disk object of a icon" "9D85")
+			  "freeincdata" ("FreeIncData" "" "B789")
+			  "freemacrokey" ("FreeMacroKey" "Rawkey,Qualifier" "C213")
+			  "freemem" ("FreeMem" "address,size" "A609")
+			  "freepcfcache" ("FreePCFCache" "" "")
+			  "freepage" ("FreePage" "Page#" "BA83")
+			  "freeslices" ("FreeSlices" "" "C80A")
+			  "freetrackermodule" ("FreeTrackerModule" "TrackerModule#" "9C07")
+			  "freezonetable" ("FreeZoneTable" "table#" "A00D")
+			  "freq" ("Freq" "Channelmask,period" "B381")
+			  "fromcli" ("FromCLI" "result=FromCLI" "B503")
+			  "fullpath$" ("FullPath$" "(PathPart$,FilePart$) ;\"DH0:S\" + \"User-Startup\" -> \"DH0:S/User-Startup\"" "")
+			  "funclibversion" ("FuncLibVersion" "V1.36 29/1/95 Written By S Matty (C) LES" "")
+			  "function" ("Function" "" "8009")
+			  "gplot" ("GPlot" "Chunky#,x,y,color.b" "A414")
+			  "gpoint" ("GPoint" "(Chunky#,x,y)" "A416")
+			  "gtarrowsize" ("GTArrowSize" "size" "C69E")
+			  "gtbevelbox" ("GTBevelBox" "GTList#,x,y,w,h,flags" "C691")
+			  "gtbutton" ("GTButton" "GTList#,id,x,y,w,h,Text$,flags" "C682")
+			  "gtchangelist" ("GTChangeList" "GTList#,id [ ,List() ]" "C692")
+			  "gtcheckbox" ("GTCheckBox" "GTList#,id,x,y,w,h,Text$,flags" "C683")
+			  "gtcycle" ("GTCycle" "GTList#,id,x,y,w,h,Text$,flags,Options$[,active]" "C684")
+			  "gtdisable" ("GTDisable" "GTList#,Id" "C69B")
+			  "gtenable" ("GTEnable" "GTList#,Id" "C69A")
+			  "gtfreegadget" ("GTFreeGadget" "GTList#,id" "C6A2")
+			  "gtgadptr" ("GTGadPtr" "(GTList#,id)" "C690")
+			  "gtgetattrs" ("GTGetAttrs" "(GTList#,id,Tag)" "C699")
+			  "gtgetinteger" ("GTGetInteger" "GTList#,id" "C697")
+			  "gtgetstring" ("GTGetString" "GTList#,id" "C696")
+			  "gtgimmecludge" ("GTGimmeCludge" "On/Off" "")
+			  "gtinteger" ("GTInteger" "GTList#,id,x,y,w,h,Text$,flags,default" "C685")
+			  "gtlistview" ("GTListView" "GTList#,id,x,y,w,h,Text$,flags,list()[,selected[,top]]" "C686")
+			  "gtmx" ("GTMX" "GTList#,id,x,y,w,h,Text$,flags,Options$[,active]" "C687")
+			  "gtnumber" ("GTNumber" "GTList#,id,x,y,w,h,Text$,flags,value" "C688")
+			  "gtpalette" ("GTPalette" "GTList#,id,x,y,w,h,Text$,flags,depth[,Color]" "C689")
+			  "gtscroller" ("GTScroller" "GTList#,id,x,y,w,h,Text$,flags,Visible,Total[,Top]" "C68A")
+			  "gtsetattrs" ("GTSetAttrs" "GTList#,id [,Tag,Value...]" "C693")
+			  "gtsethighlight" ("GTSetHighlight" "GTList#,id,value" "C6A1")
+			  "gtsetinteger" ("GTSetInteger" "GTList#,id,value" "C695")
+			  "gtsetstring" ("GTSetString" "GTList#,id,string$" "C694")
+			  "gtshape" ("GTShape" "GTList#,id,x,y,flags,Shape#[,Shape#]" "C698")
+			  "gtslider" ("GTSlider" "GTList#,id,x,y,w,h,Text$,flags,Min,Max[,Level]" "C68B")
+			  "gtstatus" ("GTStatus" "GTList#,Id" "C69D")
+			  "gtstring" ("GTString" "GTList#,id,x,y,w,h,Text$,flags,MaxChars [,default$]" "C68C")
+			  "gttagvalue" ("GTTagValue" "([tagvalue])" "A587")
+			  "gttags" ("GTTags" "Tag,Value [,Tag,Value...]" "C68F")
+			  "gttext" ("GTText" "GTList#,id,x,y,w,h,Text$,flags,Display$" "C68D")
+			  "gttoggle" ("GTToggle" "GTList#,Id [,On|Off]" "C69C")
+			  "gadgetborder" ("GadgetBorder" "X,Y,Width,Height" "C610")
+			  "gadgethit" ("GadgetHit" "" "C504")
+			  "gadgetjam" ("GadgetJam" "Jammode" "C619")
+			  "gadgetpens" ("GadgetPens" "Foreground Colour[,Background Colour]" "C617")
+			  "gadgetstatus" ("GadgetStatus" "(GadgetList#,Id)" "C61D")
+			  "gameb" ("Gameb" "(Port)" "DF05")
+			  "get" ("Get" "File#,Record" "BE06")
+			  "getassigns" ("GetAssigns" "(Type) ;Types are: 0=Devices, 1=Directories 2=Volumes" "")
+			  "getccoffset" ("GetCCOffset" "- get current custom copper offset" "858A")
+			  "getcopins$" ("GetCopIns$" "copdata" "9886")
+			  "getcustomreg" ("GetCustomReg" "address" "9893")
+			  "getcustomregadr" ("GetCustomRegAdr" "name$" "9894")
+			  "getenv$" ("GetEnv$" "(Name$) ;Returns DOS environmental variable" "")
+			  "gethex$" ("GetHex$" "value,mode" "9891")
+			  "gethexadr$" ("GetHexAdr$" "*value,mode" "9892")
+			  "geticoninfo" ("GetIconInfo" "success.w=GetIconInfo(Info#,filename$)" "9F02")
+			  "geticonobject" ("GetIconObject" "(filename$)" "9D81")
+			  "getlocal$" ("GetLocal$" "(Name$) ;Returns DOS local variable" "")
+			  "getlocalestr" ("GetLocaleStr" "(#StringNumber,DefaultString$)" "A204")
+			  "getmedinstr" ("GetMedInstr" "Channel" "A909")
+			  "getmednote" ("GetMedNote" "Channel" "A908")
+			  "getmedvolume" ("GetMedVolume" "Channel" "A907")
+			  "getmodulename$" ("GetModuleName$" "(TrackerModule#)" "9C0C")
+			  "getmoduleposition" ("GetModulePosition" "" "")
+			  "getprogmode" ("GetProgMode" "mode,buffer" "988B")
+			  "getreg" ("GetReg" "" "8029")
+			  "getresultstring" ("GetResultString" "String=GetResultString(rexxmsg)" "AE0B")
+			  "getrexxcommand" ("GetRexxCommand" "String=GetRexxCommand(rexxmsg,ARGNum)" "AE0A")
+			  "getrexxresult" ("GetRexxResult" "Result=GetRexxResult(rexxmsg,ResultNum)" "AE09")
+			  "getstring$" ("GetString$" "(Title$,Default$,Visable size,Max length)" "9A89")
+			  "getsuperbitmap" ("GetSuperBitMap" "" "C543")
+			  "gettrackerevent" ("GetTrackerEvent" "" "9C08")
+			  "gettrackerlocation" ("GetTrackerLocation" "(TrackerModule#)" "9C06")
+			  "gettrackersize" ("GetTrackerSize" "(TrackerModule#)" "9C05")
+			  "getwheel" ("GetWheel" "wheel#" "9A03")
+			  "getzonex1" ("GetZoneX1" "(zone) - returns the start x pos of a zone" "A012")
+			  "getzonex2" ("GetZoneX2" "(zone) - returns the end x pos of a zone" "A014")
+			  "getzoney1" ("GetZoneY1" "(zone) - returns the start y pos of a zone" "A013")
+			  "getzoney2" ("GetZoneY2" "(zone) - returns the end pos of a zone" "A015")
+			  "getashape" ("GetaShape" "Shape#,X,Y,Width,Height" "CD08")
+			  "getasprite" ("GetaSprite" "Sprite#,Shape#" "B801")
+			  "gfx_base" ("Gfx_Base" "Returns pointer to graphics.library" "9A91")
+			  "gosub" ("Gosub" "" "8006")
+			  "goto" ("Goto" "" "8005")
+			  "graphicsbase" ("GraphicsBase" ";Returns Graphics Library base" "B587")
+			  "green" ("Green" "(Colour Register)" "CE07")
+			  "greychunky" ("GreyChunky" "chunky#" "A40D")
+			  "hcos" ("HCos" "(Float)" "E006")
+			  "hpropbody" ("HPropBody" "(GadgetList#,Id)" "C608")
+			  "hproppot" ("HPropPot" "(GadgetList#,Id)" "C607")
+			  "hsin" ("HSin" "(Float)" "E00B")
+			  "htan" ("HTan" "(Float)" "E00E")
+			  "handle" ("Handle" "Shape#,X,Y" "CD05")
+			  "handlerawkey" ("HandleRawKey" "" "B105")
+			  "hardcopy" ("HardCopy" "Screen#,X,Y,Width,Height,PtrWidth,PrtHeight,Flags" "A302")
+			  "hardcopy" ("Hardcopy" "Screen#,X,Y,Width,Height,PtrWidth,PrtHeight,Flags" "A302")
+			  "hex#" ("Hex#" "(HexString$) ;Converts hexadecimal (in string) value to decimal" "B48D")
+			  "hex$" ("Hex$" "(Expression)" "DC84")
+			  "hidescreen" ("HideScreen" "Screen#" "CF0C")
+			  "hotkeyhit" ("HotKeyHit" "" "AC83")
+			  "hours" ("Hours" ";gets system time and returns hour of day" "A709")
+			  "ilbmdepth" ("ILBMDepth" "" "D087")
+			  "ilbmgrab" ("ILBMGrab" "sourceaddr,bitmap#,palette#" "A485")
+			  "ilbmheight" ("ILBMHeight" "" "D086")
+			  "ilbminfo" ("ILBMInfo" "Filename$" "D084")
+			  "ilbmpalette" ("ILBMPalette" "(sourceaddr,palette#[,#offset)" "A484")
+			  "ilbmviewmode" ("ILBMViewMode" "" "D088")
+			  "ilbmwidth" ("ILBMWidth" "" "D085")
+			  "illegal" ("ILLEGAL" "" "8077")
+			  "incdir" ("INCDIR" "" "80BF")
+			  "include" ("INCLUDE" "" "8013")
+			  "iconbase" ("IconBase" ";Returns Icon Library base" "B58B")
+			  "icondeftool" ("IconDefTool" "tool$" "9D8E")
+			  "icondeftool$" ("IconDefTool$" "deftool$=IconDefTool$(Info#)" "9F05")
+			  "icondefaulttool" ("IconDefaultTool" "" "")
+			  "iconrender" ("IconRender" "render_flags" "9D8D")
+			  "iconstack" ("IconStack" "stackSize.l=IconType(Info#)" "9F06")
+			  "iconsubtool$" ("IconSubTool$" "boolean.w=IconSubTool$(type$,sub$) -1=Found" "9F07")
+			  "icontool$" ("IconTool$" "tool$=IconTool$(Info#,type$)" "9F03")
+			  "icontype" ("IconType" "type.w=IconType(Info#)" "9F04")
+			  "if" ("If" "" "800B")
+			  "implode" ("Implode" "Error/CrunchedLen=Bufferadr,DataLen" "A501")
+			  "infront" ("InFront" "Sprite Channel" "B803")
+			  "infrontb" ("InFrontB" "Sprite Channel" "B805")
+			  "infrontf" ("InFrontF" "Sprite Channel" "B804")
+			  "incbin" ("IncBin" "" "802A")
+			  "incbitmap" ("IncBitmap" "" "B782")
+			  "incdata" ("IncData" "" "B788")
+			  "incdataabs" ("IncDataAbs" "" "B787")
+			  "incmed" ("IncMed" "" "B784")
+			  "incmod" ("IncMod" "" "B783")
+			  "incnextshape" ("IncNextShape" "" "B786")
+			  "incshape" ("IncShape" "" "B785")
+			  "incsize" ("IncSize" "" "B78C")
+			  "incsound" ("IncSound" "" "B781")
+			  "inctext$" ("IncText$" "" "B78B")
+			  "index" ("Index" "List() ;Returns index from top of LIST" "B281")
+			  "initanim" ("InitAnim" "Anim#[,BitMap#]" "AF03")
+			  "initbank" ("InitBank" "bank#,size,memtype ;0=fast 2=chip 65536=clrmem" "A602")
+			  "initchunky" ("InitChunky" "Chunky#,width,height,flags (1=24bit 2=8bit)" "A402")
+			  "initcoplist" ("InitCopList" "CopList#[,type]|[,ypos,height,type,sprites,colors,numcustoms]" "C782")
+			  "initpage" ("InitPage" "Page#,BitMap#,NumBoxes" "BA82")
+			  "initpalette" ("InitPalette" "Palette#,NumColors" "CE17")
+			  "initshape" ("InitShape" "Shape#,Width,Height,Depth" "CD10")
+			  "initsound" ("InitSound" "Sound#,Length[,Period[,Repeat]]" "BA08")
+			  "initzoomxy" ("InitZoomXY" "source#,dest#,sourceadd,destadd" "A106")
+			  "inkey$" ("Inkey$" "[(Characters)]" "DD02")
+			  "innercls" ("InnerCls" "[Colour]" "C52F")
+			  "innerheight" ("InnerHeight" "" "C52E")
+			  "innerwidth" ("InnerWidth" "" "C52D")
+			  "installfns" ("InstallFNS" "(fontnum,address)" "AE82")
+			  "instr" ("Instr" "(String$,Findstring$[,Startpos])" "DC89")
+			  "int" ("Int" "(Expression)" "BC02")
+			  "int_base" ("Int_Base" "Returns pointer to intuition.library" "9A90")
+			  "intuitionbase" ("IntuitionBase" ";Returns Intuition Library base" "B585")
+			  "invmode" ("InvMode" "" "CB05")
+			  "iseven" ("IsEven" "" "")
+			  "islocale" ("IsLocale" "<>0 if locale exists" "A201")
+			  "isreqtoolsactive" ("IsReqToolsActive" "" "9B1A")
+			  "isreqtoolsactive" ("IsReqtoolsActive" "" "9B1A")
+			  "isrexxmsg" ("IsRexxMsg" "Boolean=IsRexxMsg(rexxmsg)" "AE0D")
+			  "itemhit" ("ItemHit" "" "C508")
+			  "itemstacksize" ("ItemStackSize" "Max Items" "C00D")
+			  "jadaptorstatus" ("JAdaptorStatus" "On/Off - status of four player adaptor reading" "A011")
+			  "jfire" ("JFire" "(port)" "A006")
+			  "jhoriz" ("JHoriz" "(port)" "A008")
+			  "jvert" ("JVert" "(port)" "A007")
+			  "joyy" ("JoYY" "(Port)" "DF02")
+			  "joyc" ("JoyC" "(Port)" "B386")
+			  "joyb" ("Joyb" "(Port)" "DF04")
+			  "joyr" ("Joyr" "(Port)" "DF03")
+			  "joyx" ("Joyx" "(Port)" "DF01")
+			  "joyy" ("Joyy" "(Port)" "DF02")
+			  "jumpmed" ("JumpMed" "Pattern#" "A905")
+			  "keycode" ("KeyCode" "" "A59A")
+			  "killfile" ("KillFile" "Filename$" "BE03")
+			  "killgreychunky" ("KillGreyChunky" "chunky#" "A40E")
+			  "killitem" ("KillItem" "Arrayname()" "C005")
+			  "lcase$" ("LCase$" "(String$)" "DC97")
+			  "lecludgeshapes" ("LECludgeShapes" "shape#,shape#,address,palette#[,copymemflag]" "9706")
+			  "lecompressshapes" ("LECompressShapes" "True|False" "9705")
+			  "leinitshape" ("LEInitShape" "shape#,width,height,depth" "9707")
+			  "leloadshapes" ("LELoadShapes" "shape#[,shape#],filename$[,palette#]" "9703")
+			  "lemaxshapedepth" ("LEMaxShapeDepth" "" "970B")
+			  "lemaxshapeheight" ("LEMaxShapeHeight" "" "970A")
+			  "lemaxshapewidth" ("LEMaxShapeWidth" "" "9709")
+			  "lesaveshapes" ("LESaveShapes" "shape#,shape#,filename$[,palette#]" "9704")
+			  "lescanshapes" ("LEScanShapes" "startshape#,endshape#" "9708")
+			  "lset$" ("LSet$" "(String$,Characters)" "DC94")
+			  "largest" ("Largest" "(Integer1,Integer2)" "B486")
+			  "largest.l" ("Largest.l" "(Long Integer1,Long Integer2)" "B482")
+			  "largest.q" ("Largest.q" "(Quick1,Quick2)" "B484")
+			  "largestfree" ("LargestFree" ";Returns largest block of memory available" "B584")
+			  "lastitem" ("LastItem" "Arrayname()" "C00C")
+			  "left$" ("Left$" "(String$,Length)" "DC81")
+			  "len" ("Len" "(String$)" "DC8F")
+			  "length" ("Length" "(bank)" "A592")
+			  "let" ("Let" "" "8003")
+			  "line" ("Line" "[x1,y1,]x2,y2,color[,width]" "BB85")
+			  "lisa" ("Lisa" "-- returns Lisa chip version" "A583")
+			  "list" ("List" "" "80B3")
+			  "listbase" ("ListBase" "(list)" "8682")
+			  "loadanim" ("LoadAnim" "Anim#,Filename$[,Palette#]" "AF02")
+			  "loadbank" ("LoadBank" "bank#,filename$[,memtype]" "A604")
+			  "loadbitmap" ("LoadBitMap" "BitMap#,Filename$[,Palette#]" "D002")
+			  "loadblitzfont" ("LoadBlitzFont" "BlitzFont#,Fontname.font$" "C701")
+			  "loadchunky" ("LoadChunky" "Chunky#,IFFfilename$" "A404")
+			  "loadfont" ("LoadFont" "IntuiFont#,Fontname.font$,Y size [,style]" "C301")
+			  "loadiff" ("LoadIFF" "(filename$,bitmap[,palette])" "A486")
+			  "loadmedmodule" ("LoadMedModule" "MedModule#,Name" "A901")
+			  "loadmodule" ("LoadModule" "Module#,Filename$" "B002")
+			  "loadpcf" ("LoadPCF" "" "")
+			  "loadpalette" ("LoadPalette" "Palette#,Filename$[,Palette Offset]" "CE01")
+			  "loadscreen" ("LoadScreen" "Screen#,Filename$[,Palette#]" "CF03")
+			  "loadshape" ("LoadShape" "Shape#,Filename$[,Palette#]" "CD01")
+			  "loadshapes" ("LoadShapes" "Shape#[,Shape#],Filename$" "CD0A")
+			  "loadsound" ("LoadSound" "Sound#,Filename$" "BA03")
+			  "loadsprites" ("LoadSprites" "Sprite#[,Sprite#],Filename$" "B807")
+			  "loadtape" ("LoadTape" "Tape#,filename$" "C204")
+			  "loadtrackermodule" ("LoadTrackerModule" "(TrackerModule#,Name)" "9C01")
+			  "loc" ("Loc" "(File#)" "BE0C")
+			  "locate" ("Locate" "X,Y" "C704")
+			  "lof" ("Lof" "(File#)" "BE0A")
+			  "log" ("Log" "(Float)" "E009")
+			  "log10" ("Log10" "(Float)" "E008")
+			  "loopsound" ("LoopSound" "Sound#,Channelmask[,Vol1[,Vol2...]]" "BA07")
+			  "mbuttons" ("MButtons" "" "C522")
+			  "mod" ("MOD" "" "80B9")
+			  "macro" ("Macro" "" "800D")
+			  "macrokey" ("MacroKey" "Tape#,Rawkey,Qualifier" "C209")
+			  "makecommodity" ("MakeCommodity" "(name$,title$,description$" "AC81")
+			  "makecookie" ("MakeCookie" "Shape#" "CD02")
+			  "makedir" ("MakeDir" "(dirname$)" "A584")
+			  "matchtoolvalue" ("MatchToolValue" "(tooltype$,value$)" "9D86")
+			  "matchwild" ("MatchWild" "(String$) ;TRUE=Match, FALSE=No Match" "")
+			  "max" ("Max" "(a,b)" "A58D")
+			  "maxlen" ("MaxLen" "" "8032")
+			  "maxselect$" ("MaxSelect$" "Path$=(Title$,File$,Path$,Flags,number of files)" "9A8C")
+			  "maximum" ("Maximum" "" "80C4")
+			  "memfree" ("MemFree" "" "A586")
+			  "menuchecked" ("MenuChecked" "(MenuList#,Menu,Item[,Subitem])" "C40C")
+			  "menucolour" ("MenuColour" "Colour" "C40B")
+			  "menugap" ("MenuGap" "X Gap,Y Gap" "C407")
+			  "menuhit" ("MenuHit" "" "C507")
+			  "menuitem" ("MenuItem" "MenuList#,Flags,Menu,Item,Itemtext$[,Shortcut$]" "C403")
+			  "menustate" ("MenuState" "MenuList#[,Menu[,Item[,Subitem]]],On|Off" "C40A")
+			  "menutitle" ("MenuTitle" "MenuList#,Menu,Title$" "C401")
+			  "menus" ("Menus" "On|Off" "C523")
+			  "menusoff" ("MenusOff" "" "C528")
+			  "menuson" ("MenusOn" "" "C527")
+			  "mid$" ("Mid$" "(String$,Startchar[,Length])" "DC83")
+			  "midhandle" ("MidHandle" "Shape#" "CD0D")
+			  "min" ("Min" "(a,b)" "A589")
+			  "mins" ("Mins" ";returns minutes calculated at last call to hour" "A70A")
+			  "mixpalette" ("MixPalette" "Palette#,Palette#,DestPalette#,fraction" "CE1B")
+			  "mki$" ("Mki$" "(Integer)" "DC8B")
+			  "mkl$" ("Mkl$" "(Long)" "DC8C")
+			  "mkq$" ("Mkq$" "(Quick)" "DC9A")
+			  "module" ("Module" "" "B001")
+			  "modulepatterns" ("ModulePatterns" "(Module #)" "9C12")
+			  "modulepositionjump" ("ModulePositionJump" "(Position#)" "")
+			  "modulesamplename" ("ModuleSampleName" "(Module#,Sample#[0-30])" "")
+			  "moduletochip" ("ModuleToChip" "(TrackerModule#)" "")
+			  "months" ("Months" ";returns month calculated in last call to date$" "A706")
+			  "moreentries" ("MoreEntries" ";True if more entries in Examined directory" "B683")
+			  "motoroff" ("MotorOff" "unit#" "AD85")
+			  "motoron" ("MotorOn" "unit#" "AD82")
+			  "mouse" ("Mouse" "On|Off" "B601")
+			  "mousearea" ("MouseArea" "Minx,Miny,Maxx,Maxy" "B603")
+			  "mousebutton" ("MouseButton" "Button,On|Off : 0=Left" "C207")
+			  "mouseenabled" ("MouseEnabled" "" "BA96")
+			  "mousewait" ("MouseWait" "" "800A")
+			  "mousex" ("MouseX" "" "B604")
+			  "mousexspeed" ("MouseXSpeed" "" "B606")
+			  "mousey" ("MouseY" "" "B605")
+			  "mouseyspeed" ("MouseYSpeed" "" "B607")
+			  "movefile" ("MoveFile" "[success=] MoveFile(Source$,Dest$)" "")
+			  "movescreen" ("MoveScreen" "Screen#,deltax,deltay" "CF0E")
+			  "newtype" ("NEWTYPE" "" "8001")
+			  "nprint" ("NPrint" "Expression[,Expression...]" "DD82")
+			  "nprintcon" ("NPrintCon" "Console#,Expression" "A184")
+			  "ntsc" ("NTSC" "" "BC0B")
+			  "namefile" ("NameFile" "[success=] Rename(Oldfilename$,Newfilename$)" "B68F")
+			  "newpalettemode" ("NewPaletteMode" "On|Off" "CE14")
+			  "newtooltype" ("NewToolType" "(tooltype$,value$[,status])" "9D87")
+			  "newzonetable" ("NewZoneTable" "table#,num_zones" "A00B")
+			  "next" ("Next" "" "8017")
+			  "nextappfile" ("NextAppFile" "" "9E8A")
+			  "nextbank" ("NextBank" "[startbank]" "A596")
+			  "nextfile$" ("NextFile$" "Returns next file form MaxSelect$" "9A8B")
+			  "nextframe" ("NextFrame" "Anim#" "AF04")
+			  "nextitem" ("NextItem" "(Arrayname())" "C003")
+			  "nocli" ("NoCli" "" "80CC")
+			  "nomoreentries" ("NoMoreEntries" ";Release lock on currently Examined object" "")
+			  "null" ("Null" "(String$) ;Returns address of null-termed string" "B581")
+			  "numdays" ("NumDays" "date$ ;converts dd/mm/yyyy to days since 1/1/1978" "A703")
+			  "numpars" ("NumPars" "pars.w=NumPars" "B501")
+			  "on" ("On" "" "80C5")
+			  "opencd" ("OpenCD" "[devicename,unit] - open a CD compatible device" "8701")
+			  "openconsole" ("OpenConsole" "#Window,#Console" "A182")
+			  "opendisk" ("OpenDisk" "unit#" "AD81")
+			  "openfile" ("OpenFile" "(File#,Filename$)" "BE01")
+			  "openserial" ("OpenSerial" "device$,unit#,baud,io_serflags" "AD01")
+			  "outtext" ("OutText" "x,y,rastport,address/string" "9898")
+			  "outtextpen" ("OutTextPen" "rastport,pen" "989A")
+			  "pcfdepth" ("PCFDepth" "" "")
+			  "pcfheight" ("PCFHeight" "" "")
+			  "pcfinfo" ("PCFInfo" "" "")
+			  "pcfversion" ("PCFVersion" "" "")
+			  "pcfwidth" ("PCFWidth" "" "")
+			  "pcoll" ("PColl" "(Sprite Channel)" "B40B")
+			  "picreaterequest" ("PICreateRequest" "(Title$,Min,Max [,NoGagdet])" "9B81")
+			  "piendrequest" ("PIEndRequest" "" "9B82")
+			  "piupdaterequest" ("PIUpdateRequest" "(Value)" "9B83")
+			  "pload" ("PLoad" "(filename$,address)" "")
+			  "ppdecrunch" ("PPDecrunch" "Bufferadr,Bufferend,Destinationadr" "A504")
+			  "packpbm" ("PackPBM" "sourceaddr,destaddr,length" "A481")
+			  "paladjust" ("PalAdjust" "palette#,ratio.q[,start_col,end_col]" "A088")
+			  "palblue" ("PalBlue" "(colour#)" "A083")
+			  "palgreen" ("PalGreen" "(colour#)" "A082")
+			  "palrgb" ("PalRGB" "Palette#,Colour Register,Red,Green,Blue" "CE0A")
+			  "palred" ("PalRed" "(colour#)" "A081")
+			  "palette" ("Palette" "" "CE09")
+			  "paletteinfo" ("PaletteInfo" "palette#" "A084")
+			  "paletterange" ("PaletteRange" "Palette#,StartCol,EndCol,r0,g0,b0,r1,g1,b1" "CE18")
+			  "par$" ("Par$" "parameter$=Par$(Paramter#)" "B502")
+			  "parpath$" ("ParPath$" "path$=ParPath$(Par#,#type)" "B504")
+			  "pathlock" ("PathLock" "" "B682")
+			  "pathpart$" ("PathPart$" "(FullPath$) ;\"DH0:S/User-Startup\" -> \"DH0:S"\" "")
+			  "pausemodule" ("PauseModule" "" "9C0D")
+			  "peek" ("Peek" "[.Type](Address)" "DA02")
+			  "peekmax$" ("PeekMax$" "(address,max_chars)" "988F")
+			  "peeksound" ("PeekSound" "(Sound#,Offset)" "BA0A")
+			  "peekto$" ("PeekTo$" "(Address,byte)" "B388")
+			  "peeks$" ("Peeks$" "(Address,Length)" "")
+			  "peekto$" ("Peekto$" "(Address,byte)" "B388")
+			  "phoneticspeak" ("PhoneticSpeak" "phonetic string" "AC04")
+			  "pi" ("Pi" "" "80BA")
+			  "planartochunky" ("PlanarToChunky" "" "")
+			  "playback" ("PlayBack" "[Tape#]" "C202")
+			  "playmed" ("PlayMed" "" "A903")
+			  "playmodule" ("PlayModule" "Module#" "B003")
+			  "playtracker" ("PlayTracker" "" "9C0F")
+			  "playwait" ("PlayWait" "" "C20F")
+			  "plot" ("Plot" "X,Y,Colour" "B203")
+			  "point" ("Point" "X,Y,Colour" "B204")
+			  "pointer" ("Pointer" "Sprite#,Sprite Channel" "B602")
+			  "poke" ("Poke" "[.Type] Address,Data" "DA01")
+			  "poly" ("Poly" "numpts,*coords.w,color" "BB8A")
+			  "polyf" ("Polyf" "numpts,*coords.w,color[,color2]" "BB8B")
+			  "pop" ("Pop" "" "80BE")
+			  "popinput" ("PopInput" "" "D20A")
+			  "popitem" ("PopItem" "Arrayname()" "C00A")
+			  "popoutput" ("PopOutput" "" "D20B")
+			  "positionmouse" ("PositionMouse" "x,y" "B608")
+			  "positionsuperbitmap" ("PositionSuperBitMap" "x,y" "C542")
+			  "positionsuperbitmap" ("PositionSuperBitmap" "x,y" "C542")
+			  "previtem" ("PrevItem" "Arrayname()" "C00B")
+			  "print" ("Print" "Expression[,Expression...]" "DD81")
+			  "printcon" ("PrintCon" "Console#,Expression" "A183")
+			  "processchunky" ("ProcessChunky" "chunky#,contrast" "A408")
+			  "processor" ("Processor" "" "E085")
+			  "propgadget" ("PropGadget" "GadgetList#,X,Y,Flags,Id,Width,Height" "C603")
+			  "prtcommand" ("PrtCommand" "Command,Para1,Para2,Para3,Para4" "A303")
+			  "prttext" ("PrtText" "String" "A301")
+			  "pushitem" ("PushItem" "Arrayname()" "C009")
+			  "put" ("Put" "File#,Record" "BE05")
+			  "puticonobject" ("PutIconObject" "(filename$[,icontype]|[x,y])" "9D84")
+			  "putreg" ("PutReg" "" "80BD")
+			  "putsuperbitmap" ("PutSuperBitMap" "" "C544")
+			  "qamiga" ("QAMIGA" "" "8036")
+			  "qabs" ("QAbs" "(Quick)" "BC08")
+			  "qangle" ("QAngle" "(Src X,Src Y,Dest X,Dest Y)" "BC10")
+			  "qblit" ("QBlit" "Queue#,Shape#,X,Y[,Excessonoff]" "CA02")
+			  "qblitmode" ("QBlitMode" "BLTCON0" "CA04")
+			  "qfrac" ("QFrac" "(Quick)" "BC05")
+			  "qlimit" ("QLimit" "(Quick,Low,High)" "BC0A")
+			  "qwrap" ("QWrap" "(Quick,Low,High)" "BC06")
+			  "qualifier" ("Qualifier" "" "C513")
+			  "queue" ("Queue" "Queue#,Max Items" "CA01")
+			  "quickplay" ("QuickPlay" "On|Off" "C20D")
+			  "quiet" ("Quiet" "ChannelMask ;Stops specified currently playing sounds" "B382")
+			  "quiettrap" ("QuietTrap" "On|Off" "C20B")
+			  "rgb" ("RGB" "Colour Register,Red,Green,Blue" "CE05")
+			  "rianimframecount" ("RIAnimFrameCount" "" "9C84")
+			  "rianiminit" ("RIAnimInit" "(address,bitmap#,palette# [,xy_offset]|[,x,y])" "9C81")
+			  "rinextanimframe" ("RINextAnimFrame" "(bitmap#)" "9C82")
+			  "rrandomize" ("RRandomize" "Seed" "B48B")
+			  "rrnd" ("RRnd" "(Low,High)" "B48C")
+			  "rset$" ("RSet$" "(String$,Characters)" "DC95")
+			  "rtasyncpaletterequest" ("RTASyncPaletteRequest" "(Title$,FirstColour)" "9B1B")
+			  "rtasyncrequest" ("RTASyncRequest" "(Title$,BodyText$,GadgetText$)" "9B15")
+			  "rtcheckasyncpaletterequest" ("RTCheckASyncPaletteRequest" "" "9B1C")
+			  "rtcheckasyncrequest" ("RTCheckASyncRequest" "" "9B16")
+			  "rtezflagsrequest" ("RTEZFlagsRequest" "(Title$,BodyText$,GadgetText$,IDCMPFlags [,ReqPosition])" "9B10")
+			  "rtezfontrequest" ("RTEZFontRequest" "(Title$)" "9B03")
+			  "rtezfreepattern" ("RTEZFreePattern" "Requester#" "9B0F")
+			  "rtezgetlong" ("RTEZGetLong" "(Title$,BodyText$ [,DefaultValue])" "9B06")
+			  "rtezgetlongrange" ("RTEZGetLongRange" "(Title$,BodyText$,Min,Max [,DefaultValue])" "9B07")
+			  "rtezgetstring" ("RTEZGetString" "(Title$,BodyText$,MaxChars [,DefaultString])" "9B08")
+			  "rtezloadfile" ("RTEZLoadFile" "(Title$,Filename$)" "9B02")
+			  "rtezmultiloadfile" ("RTEZMultiLoadFile" "(Title$)" "9B13")
+			  "rtezpaletterequest" ("RTEZPaletteRequest" "(Title$,FirstColour)" "9B05")
+			  "rtezpathrequest" ("RTEZPathRequest" "(Title$)" "9B0B")
+			  "rtezrnextpathentry" ("RTEZRNextPathEntry" "" "")
+			  "rtezrequest" ("RTEZRequest" "(Title$,BodyText$,GadgetText$ [,ReqPosition [,DefaultResponse,Flags]])" "9B01")
+			  "rtezsavefile" ("RTEZSaveFile" "(Title$,Filename$)" "9B09")
+			  "rtezscreenmoderequest" ("RTEZScreenModeRequest" "(Title$ [,DisplayFlags])" "9B04")
+			  "rtezsetdefaultdirectory" ("RTEZSetDefaultDirectory" "Requester#,Directory$" "9B0A")
+			  "rtezsetpattern" ("RTEZSetPattern" "Requester#,Pattern$" "9B0E")
+			  "rtendasyncpaletterequest" ("RTEndASyncPaletteRequest" "" "9B1D")
+			  "rtendasyncrequest" ("RTEndASyncRequest" "" "9B17")
+			  "rtfilerequest" ("RTFileRequest" "(Title$,FileName$,TagList)" "9B12")
+			  "rtlockwindow" ("RTLockWindow" "(Window#)" "9B0C")
+			  "rtnextpathentry" ("RTNextPathEntry" "" "9B14")
+			  "rtrequest" ("RTRequest" "(BodyText$,GadgetText$,TagList)" "9B11")
+			  "rtrevision" ("RTRevision" "" "9B19")
+			  "rtunlockwindow" ("RTUnlockWindow" "Window#,Lock" "9B0D")
+			  "rtversion" ("RTVersion" "" "9B18")
+			  "rastport" ("RastPort" "(Window#)" "C539")
+			  "rawkey" ("RawKey" "" "C514")
+			  "rawstatus" ("RawStatus" "(Rawkey)" "B102")
+			  "remap" ("ReMap" "colour# to replace,destination colour# [,BitMap destintion" "BB88")
+			  "read" ("Read" "" "801B")
+			  "readchunky" ("ReadChunky" "Chunky#,rawfilename$" "A406")
+			  "readfile" ("ReadFile" "(File#,Filename$)" "BE11")
+			  "readmem" ("ReadMem" "File#,Address,Length" "BE14")
+			  "readsector" ("ReadSector" "unit#,sector#,buffer[,numsectors]" "AD84")
+			  "readserial" ("ReadSerial" "(unit#[,flags 1=wait on])" "AD04")
+			  "readserialmem" ("ReadSerialMem" "unit#,Address,Length" "AD0B")
+			  "readserialstring" ("ReadSerialString" "(unit#)" "AD05")
+			  "reboot" ("Reboot" "-- performs a cold reboot" "A582")
+			  "record" ("Record" "[Tape#]" "C201")
+			  "rectshit" ("RectsHit" "(X1,Y1,Width1,Height1,X2,Y2,Width2,Height2)" "B409")
+			  "red" ("Red" "(Colour Register)" "CE06")
+			  "redocolsplit" ("RedoColSplit" "cols_adr,numlines,ccoffset" "8582")
+			  "redraw" ("Redraw" "Window#,Id" "C60B")
+			  "redrawbox" ("RedrawBox" "Box#" "BA86")
+			  "redrawpage" ("RedrawPage" "" "BA85")
+			  "reducex2" ("ReduceX2" "source#,dest#,sourceadd,destadd,width,height" "A10C")
+			  "relmouse" ("RelMouse" "X Offset,Y Offset" "C206")
+			  "remicrvector_a" ("RemICRVector_a" "" "F902")
+			  "remicrvector_b" ("RemICRVector_b" "" "F882")
+			  "removefns" ("RemoveFNS" "fontnum" "AE89")
+			  "rename" ("Rename" "(oldfilename$,newfilename$)" "A585")
+			  "renderpoly" ("RenderPoly" "numpts,*coords.w,color" "AB88")
+			  "rendertobitmap" ("RenderToBitmap" "BitMap#[,DitherBitMap#]" "AB86")
+			  "rendertochunky" ("RenderToChunky" "CopList#[,split]" "AB87")
+			  "repeat" ("Repeat" "" "80BB")
+			  "repeats" ("Repeats" "(String$) ;Returns # repetitive characters at front of string" "B288")
+			  "replace$" ("Replace$" "(String$,Findstring$,Replacestring$)" "DC8A")
+			  "replyrexxmsg" ("ReplyRexxMsg" "rexxmsg,Result1,Result2,ResultString" "AE08")
+			  "reqcolours" ("ReqColours" "Text,Detail,Block[,File,Dir,Device[,GadText,GadBox,StringName,StringBox,Frame]]" "9A88")
+			  "reqfileloc" ("ReqFileLoc" "" "A782")
+			  "reqfilerequest" ("ReqFileRequest" "" "A781")
+			  "reqfilerequest$" ("ReqFileRequest$" "(Title$,File$,Path$,Flags)" "9A85")
+			  "reqfontsize" ("ReqFontSize" "Returns font size" "9A8D")
+			  "reqoutput" ("ReqOutput" "" "A783")
+			  "req_base" ("Req_Base" "Returns pointer to req.library" "9A8E")
+			  "request" ("Request" "(Title$,text$,button$) ;OS 2.0 & above System Requester" "B58D")
+			  "reserve" ("Reserve" "(length)|(bank,length[,requirements])" "A595")
+			  "resetlist" ("ResetList" "Arrayname()" "C004")
+			  "resetstring" ("ResetString" "GadgetList#,Id" "C613")
+			  "resettimer" ("ResetTimer" ";Resets timer to zero 'Ticks.'" "B385")
+			  "restore" ("Restore" "" "80C8")
+			  "return" ("Return" "" "8007")
+			  "rex_base" ("Rex_Base" "Returns pointer to RexxSys.library ?" "9A92")
+			  "rexxerror" ("RexxError" "ErrorString=RexxError(ErrorCode)" "AE0E")
+			  "rexxevent" ("RexxEvent" "rexxmsg=RexxEvent(PortAddress)" "AE0C")
+			  "rexxsysbase" ("RexxSysBase" ";Returns RexxSys Library base" "B58C")
+			  "rexxsysbase" ("RexxsysBase" ";Returns RexxSys Library base" "B58C")
+			  "right$" ("Right$" "(String$,Length)" "DC82")
+			  "rnd" ("Rnd" "[(Range)]" "BC07")
+			  "rotate" ("Rotate" "Shape#,Angle Ratio" "BB04")
+			  "rrandomize" ("Rrandomize" "Seed" "B48B")
+			  "rrnd" ("Rrnd" "(Low,High)" "B48C")
+			  "run" ("Run" "[*Process=] Run(Filename$,Args$[,StackSize])" "")
+			  "runerrsoff" ("Runerrsoff" "" "80D3")
+			  "runerrson" ("Runerrson" "" "80D2")
+			  "sblit" ("SBlit" "Stencil#,Shape#,X,Y[,Excessonoff]" "BD02")
+			  "sblitmode" ("SBlitMode" "BLTCON0" "BD03")
+			  "scoll" ("SColl" "(Sprite Channel,Sprite Channel)" "B40A")
+			  "shared" ("SHARED" "" "8015")
+			  "smousex" ("SMouseX" "" "CF05")
+			  "smousey" ("SMouseY" "" "CF06")
+			  "space$" ("SPACE$" "(number of spaces)" "B282")
+			  "safetoblit" ("SafeToBlit" "shape,x,y" "9702")
+			  "savebank" ("SaveBank" "bank#,filename$" "A605")
+			  "savebitmap" ("SaveBitmap" "BitMap#,Filename$[,Palette#]" "B901")
+			  "savecmap" ("SaveCMAP" "palette#,filename$" "A08D")
+			  "savechunky" ("SaveChunky" "Chunky#,IFFfilename$" "A405")
+			  "saveincdata" ("SaveIncData" "" "B78A")
+			  "savepalette" ("SavePalette" "Palette#,Filename$" "B905")
+			  "savescreen" ("SaveScreen" "Screen#,Filename$" "B902")
+			  "saveshape" ("SaveShape" "Shape#,Filename$[,Palette#]" "B904")
+			  "saveshapes" ("SaveShapes" "Shape#,Shape#,Filename$" "CD09")
+			  "savesprites" ("SaveSprites" "Sprite#,Sprite#,Filename$" "B806")
+			  "savetape" ("SaveTape" "Tape#,Filename$" "C203")
+			  "scale" ("Scale" "Shape#,X Ratio,Y Ratio[,Palette#]" "BB01")
+			  "scalechunkyx" ("ScaleChunkyX" "srcchunky#,destchunky#,newwidth" "A40A")
+			  "scalechunkyy" ("ScaleChunkyY" "srcchunky#,destchunky#,newheight" "A40B")
+			  "screen" ("Screen" "[Screen#,Mode[,Title$]]|[Screen#,X,Y,W,H,D,Viewmode,Title$,Dpen,Bpen[,BitMap#]" "CF01")
+			  "screenheight" ("ScreenHeight" ";Returns height in pixels of active screen" "B590")
+			  "screenpens" ("ScreenPens" "Text,Shine,Shadow,Fill,FillText,Background,HighLight" "CF08")
+			  "screentags" ("ScreenTags" "Screen#,Title$ [&TagList] or [[,Tag,Data]...]" "CF0F")
+			  "screenwidth" ("ScreenWidth" ";Returns width in pixels of active screen" "B58F")
+			  "screensbitmap" ("ScreensBitMap" "Screen#,BitMap#" "D003")
+			  "scroll" ("Scroll" "X1,Y1,Width,Height,X2,Y2[,BitMap#]" "B201")
+			  "searchbegin" ("SearchBegin" "(String$,byte,# from Begin) ;Searches string for Nth byte" "B286")
+			  "searchend" ("SearchEnd" "(String$,byte,# from End) ;Searches string backwards for Nth byte" "B285")
+			  "searchmem" ("SearchMem" "type,value,start_ad,end_ad" "988D")
+			  "searchmemfound" ("SearchMemFound" "" "988E")
+			  "searchstring" ("SearchString" "" "")
+			  "secs" ("Secs" ";returns seconds calculated at last call to hour" "A70B")
+			  "select" ("Select" "" "800E")
+			  "selectbox" ("SelectBox" "[Box#]|[x+,y+][0,x,y] ;deselects previously selected" "BA87")
+			  "selectmode" ("SelectMode" "1=Box, 0=Inverse" "C61A")
+			  "sendrexxcommand" ("SendRexxCommand" "rexxmsg,CommandString,ActionCodes" "AE07")
+			  "serialevent" ("SerialEvent" "(unit#)" "AD0A")
+			  "setblwait" ("SetBLWait" "Wait move for line 256 (eg:$ffe1fffe" "C80E")
+			  "setbplcon0" ("SetBPLCON0" "BPLCON0 Default" "C80D")
+			  "setbits" ("SetBits" "[success=] SetBits(Bits$,Filename$) ;<HSPARWED>" "")
+			  "setbox" ("SetBox" "Box#[,Value]|[xprop,yprop]" "BA8A")
+			  "setboxcolor" ("SetBoxColor" "Box#,color" "BA91")
+			  "setboxstring" ("SetBoxString" "Box#,String$" "BA8C")
+			  "setboxtitle" ("SetBoxTitle" "Box#,String$" "BA93")
+			  "setcoll" ("SetColl" "Colour,Bitplanes[,Playfield 1=front, 2=back]" "B404")
+			  "setcollhi" ("SetCollHi" "Bitplanes" "B405")
+			  "setcollodd" ("SetCollOdd" "" "B403")
+			  "setcopybuffer" ("SetCopyBuffer" "BufferSize ;Default is 4096 bytes, min. 1024 bytes" "B68E")
+			  "setcxstatus" ("SetCxStatus" "on|off" "AC95")
+			  "setcycle" ("SetCycle" "Palette#,Cycle,Low Colour,High Colour[,Speed]" "CE0B")
+			  "setenv" ("SetEnv" "[success=] SetEnv(Name$,Value$) ;Sets DOS environmental variable" "")
+			  "seterr" ("SetErr" "" "80B4")
+			  "seteventfilter" ("SetEventFilter" "preprocess,postprocess" "C53A")
+			  "setfilecomment" ("SetFileComment" "[success=] SetFileComment(Filename$,Comment$)" "")
+			  "setgadgetstatus" ("SetGadgetStatus" "(GadgetList#,Id,Value)" "C621")
+			  "sethprop" ("SetHProp" "GadgetList#,Id,Pot,Body" "C605")
+			  "sethotkey" ("SetHotKey" "(hotkeynum,hotkey$)" "AC82")
+			  "seticr_a" ("SetICR_a" "(resource,mask)" "F904")
+			  "seticr_b" ("SetICR_b" "(resource,mask)" "F884")
+			  "seticonhit" ("SetIconHit" "width,height" "9D8A")
+			  "seticontype" ("SetIconType" "object_type" "9D8C")
+			  "setint" ("SetInt" "" "8030")
+			  "setlocal" ("SetLocal" "[success=] SetLocal(Name$,Value$) ;Sets DOS local variable" "")
+			  "setmedmask" ("SetMedMask" "Channel Mask" "A90A")
+			  "setmedvolume" ("SetMedVolume" "Volume" "A906")
+			  "setmenu" ("SetMenu" "Menulist#" "C402")
+			  "setpagepens" ("SetPagePens" "Page#,c0,c1,c2,c3 (defaults: 3,1,2,3)" "BA97")
+			  "setperiod" ("SetPeriod" "Sound#,Period" "BA0C")
+			  "setserialbuffer" ("SetSerialBuffer" "unit#,bufferlength" "AD07")
+			  "setseriallens" ("SetSerialLens" "unit#,readlen,writelen,stopbits" "AD08")
+			  "setserialparams" ("SetSerialParams" "unit#" "AD09")
+			  "setstatus" ("SetStatus" "" "")
+			  "setstring" ("SetString" "GadgetList#,Id,String$" "C61B")
+			  "settextgadget" ("SetTextGadget" "GadgetList#,Id,Text$" "")
+			  "settoolvalue" ("SetToolValue" "(tooltype$,value$[,status])" "9D83")
+			  "setvprop" ("SetVProp" "GadgetList#,Id,Pot,Body" "C606")
+			  "setvoice" ("SetVoice" "rate(150),pitch(110),expression(1),sex,volume(64),freq(22200)" "AC02")
+			  "setwildstring" ("SetWildString" "[result=] SetWildString(Pattern$) ;0=Failed, 1=Found WildCards, 2=No WildCards" "")
+			  "setzone" ("SetZone" "num,x1,y1[,x2,y2]|[,radius]" "A002")
+			  "setzonemode" ("SetZoneMode" "mode" "A010")
+			  "setuplesdebug" ("SetupLESDebug" "token_addr,tokenise" "9896")
+			  "sgn" ("Sgn" "(Expression)" "BC03")
+			  "shape" ("Shape" "" "CD0C")
+			  "shapegadget" ("ShapeGadget" "GadgetList#,X,Y,Flags,Id,Shape#[,Shape#]" "C604")
+			  "shapeheight" ("ShapeHeight" "(Shape#)" "CD04")
+			  "shapeitem" ("ShapeItem" "MenuList#,Flags,Menu,Item,Shape#" "C405")
+			  "shapespritehit" ("ShapeSpriteHit" "(Shape#,X,Y,Sprite#,X,Y)" "B407")
+			  "shapesub" ("ShapeSub" "MenuList#,Flags,Menu,Item,Subitem,Shape#" "C406")
+			  "shapetoicon" ("ShapeToIcon" "shape" "9D8B")
+			  "shapewidth" ("ShapeWidth" "(Shape#)" "CD03")
+			  "shapesbitmap" ("ShapesBitMap" "Shape#,BitMap#" "D006")
+			  "shapeshit" ("ShapesHit" "(Shape#,X,Y,Shape#,X,Y)" "B406")
+			  "shared" ("Shared" "" "8015")
+			  "show" ("Show" "Bitmap#[,X,Y]" "C804")
+			  "showb" ("ShowB" "Bitmap#[,X,Y[,ShowF X]]" "C806")
+			  "showbitmap" ("ShowBitMap" "[BitMap#]" "CF0A")
+			  "showbitmap" ("ShowBitmap" "[BitMap#]" "CF0A")
+			  "showblitz" ("ShowBlitz" "" "C809")
+			  "showf" ("ShowF" "Bitmap#[,X,Y[,ShowB X]]" "C805")
+			  "showpalette" ("ShowPalette" "Palette#" "CE13")
+			  "showrequesters" ("ShowRequesters" "[0=Cancel] [1=On Workbench Screen] [2=In Current Window]" "B593")
+			  "showscreen" ("ShowScreen" "Screen#" "CF07")
+			  "showsprite" ("ShowSprite" "Sprite#,X,Y,Sprite Channel" "B802")
+			  "showstencil" ("ShowStencil" "Buffer#,Stencil#" "C905")
+			  "sin" ("Sin" "(Float)" "E00A")
+			  "sizelimits" ("SizeLimits" "Min Width,Min Height,Max Width,Max Height" "C532")
+			  "sizeof" ("SizeOf" "" "802F")
+			  "slice" ("Slice" "[Slice#,Y,Flags]|[Slice#,Y,Width,Hite,Flgs,Bitplns,Sprts,Colrs,Fscrnw,Bscrnw]" "C801")
+			  "smallest" ("Smallest" "(Integer1,Integer2)" "B487")
+			  "smallest.l" ("Smallest.l" "(Long Integer1,Long Integer2)" "B483")
+			  "smallest.q" ("Smallest.q" "(Quick1,Quick2)" "B485")
+			  "solidmode" ("SolidMode" "" "CB06")
+			  "sort" ("Sort" "Arrayname()" "B701")
+			  "sortdown" ("SortDown" "" "B703")
+			  "sortlist" ("SortList" "Arrayname(),sizeof .type\offset" "C00E")
+			  "sortup" ("SortUp" "" "B702")
+			  "sound" ("Sound" "Sound#,Channelmask[,Vol1[,Vol2...]]" "BA04")
+			  "sounddata" ("SoundData" "Sound#,Offset,Data" "BA09")
+			  "space$" ("Space$" "(number of spaces)" "B282")
+			  "speak" ("Speak" "string" "AC01")
+			  "spotbox" ("SpotBox" "; returns box that mouse is over" "BA9C")
+			  "spritemode" ("SpriteMode" "0=16 1=32 2=64" "B808")
+			  "spriteshit" ("SpritesHit" "(Sprite#,X,Y,Sprite#,X,Y)" "B408")
+			  "sqr" ("Sqr" "(Float)" "E00C")
+			  "start" ("Start" "(bank)" "A591")
+			  "startmedmodule" ("StartMedModule" "MedModule#" "A902")
+			  "starttracker" ("StartTracker" "(TrackerModule#)" "9C02")
+			  "statement" ("Statement" "" "8008")
+			  "stencil" ("Stencil" "Stencil#,BitMap#" "BD01")
+			  "stopcycle" ("StopCycle" "" "CE0C")
+			  "stopmed" ("StopMed" "" "A904")
+			  "stopmodule" ("StopModule" "" "B004")
+			  "stoptracker" ("StopTracker" "" "9C03")
+			  "str$" ("Str$" "(Expression)" "DD83")
+			  "strtofls" ("StrToFls" "string$,destvar,maxlength[,fillchar]" "")
+			  "string$" ("String$" "(String$,Repeats)" "DC88")
+			  "stringgadget" ("StringGadget" "GadgetList#,X,Y,Flags,Id,Maxlen,Width" "C602")
+			  "stringsort" ("StringSort" "list,sizeof.type[,offset] - sort from start of list" "8681")
+			  "stringsortdir" ("StringSortDir" "direction" "8684")
+			  "stringsortitem" ("StringSortItem" "list,sizeof.type[,offset] - sort from current list item" "8683")
+			  "stringtext$" ("StringText$" "(GadgetList#,Id)" "C614")
+			  "striplead$" ("StripLead$" "(String$,Ascii)" "DC92")
+			  "striptrail$" ("StripTrail$" "(String$,Ascii)" "DC93")
+			  "subhit" ("SubHit" "" "C509")
+			  "subidcmp" ("SubIDCMP" "IDCMP_Flags" "C536")
+			  "subitem" ("SubItem" "MenuList#,Flags,Menu,Item,Subitem,Subitemtext$[,Shortcut$]" "C404")
+			  "subitemoff" ("SubItemOff" "X Offset,Y Offset" "C408")
+			  "swapbank" ("SwapBank" "(sourcebank,destbank)" "A5A1")
+			  "sysjsr" ("SysJsr" "" "80C2")
+			  "systemdate" ("SystemDate" "Returns system date as number of days since 1/1/1978" "A701")
+			  "tan" ("Tan" "(Float)" "E00D")
+			  "tapetrap" ("TapeTrap" "[Tape#]" "C20A")
+			  "taskname$" ("TaskName$" "task" "E104")
+			  "textgadget" ("TextGadget" "GadgetList#,X,Y,Flags,Id,Text$" "C601")
+			  "textrequest" ("TextRequest" "(Text,Title,Left Text[,[Middle Text,]Right Text])" "9A83")
+			  "texttimeout" ("TextTimeout" "Timeout Seconds" "9A87")
+			  "then" ("Then" "" "8021")
+			  "ticks" ("Ticks" ";'ticks' since last ResetTimer (1/50 secs. PAL, 1/60 NTSC)" "B384")
+			  "timer" ("Timer" "-- returns number of 50ths since machine startup" "A588")
+			  "to" ("To" "" "8018")
+			  "toggle" ("Toggle" "GadgetList#,Id [,On|Off]" "C60E")
+			  "togglebox" ("ToggleBox" "Box#" "BA9B")
+			  "tokejsr" ("TokeJsr" "" "8039")
+			  "trackervolume" ("TrackerVolume" "(Volume Range: 0-64)" "9C10")
+			  "translate$" ("Translate$" "returns phoneme translation of a string" "AC03")
+			  "true" ("True" "" "BC0E")
+			  "type" ("Type" "String$" "C20C")
+			  "ucase$" ("UCase$" "(String$)" "DC98")
+			  "used" ("USED" "" "80D1")
+			  "usepath" ("USEPATH" "" "80CA")
+			  "ustr$" ("UStr$" "(Expression)" "DD86")
+			  "unbuffer" ("UnBuffer" "Buffer#" "C903")
+			  "unleft$" ("UnLeft$" "(String$,Length)" "DC90")
+			  "unpackpbm" ("UnPackPBM" "sourceaddr,destaddr,length,destlength" "A488")
+			  "unqueue" ("UnQueue" "Queue#[,BitMap#]" "CA03")
+			  "unright$" ("UnRight$" "(String$,Length)" "DC91")
+			  "unsetenv" ("UnSetEnv" "[success=] UnSetEnv(Name$) ;Removes DOS environmental variable" "")
+			  "unsetlocal" ("UnSetLocal" "[success=] UnSetLocal(Name$) ;Removes DOS local variable" "")
+			  "unpackiff" ("UnpackIFF" "(sourceaddr,bitmap#[,numlines,xy_offset])" "A483")
+			  "unpackpcf" ("UnpackPCF" "" "")
+			  "until" ("Until" "" "80BC")
+			  "use" ("Use" "" "802C")
+			  "usecatalog" ("UseCatalog" "Catalogname" "A202")
+			  "usezonetable" ("UseZoneTable" "- select a zone table for use" "A00C")
+			  "used" ("Used" "" "80D1")
+			  "vpos" ("VPos" "" "BC0D")
+			  "vpropbody" ("VPropBody" "(GadgetList#,Id)" "C60A")
+			  "vproppot" ("VPropPot" "(GadgetList#,Id)" "C609")
+			  "vwait" ("VWait" "" "8037")
+			  "vwaitpos" ("VWaitPos" "RasterLine" "B383")
+			  "val" ("Val" "(String$)" "BC01")
+			  "viewport" ("ViewPort" "(Screen#)" "CF09")
+			  "voiceloc" ("VoiceLoc" "returns location of newvoice struct" "AC05")
+			  "volume" ("Volume" "Channelmask,Vol1[,Vol2...]" "BA05")
+			  "vpos" ("Vpos" "" "BC0D")
+			  "vwaitpos" ("VwaitPos" "RasterLine" "B383")
+			  "wbdepth" ("WBDepth" "" "E083")
+			  "wbextviewmode" ("WBExtViewMode" "" "E088")
+			  "wbheight" ("WBHeight" "" "E082")
+			  "wbstartup" ("WBStartup" "" "80C3")
+			  "wbviewmode" ("WBViewMode" "" "E084")
+			  "wbwidth" ("WBWidth" "" "E081")
+			  "wblit" ("WBlit" "Shape#,x,y" "C53E")
+			  "wbox" ("WBox" "X1,Y1,X2,Y2,Colour" "C50C")
+			  "wcircle" ("WCircle" "X,Y,Radius,Colour" "C50D")
+			  "wcls" ("WCls" "[Colour]" "C50F")
+			  "wcolour" ("WColour" "Foreground Colour[,Background Colour]" "C51C")
+			  "wcursx" ("WCursX" "" "C524")
+			  "wcursy" ("WCursY" "" "C525")
+			  "wellipse" ("WEllipse" "X,Y,X Radius,Y Radius,Colour" "C50E")
+			  "wjam" ("WJam" "Jammode" "C51D")
+			  "wleftoff" ("WLeftOff" "" "C531")
+			  "wline" ("WLine" "X1,Y1,X2,Y3[,Xn,Yn...],Colour" "C51E")
+			  "wlocate" ("WLocate" "Cursor x,Cursor y" "C510")
+			  "wmousex" ("WMouseX" "" "C51A")
+			  "wmousey" ("WMouseY" "" "C51B")
+			  "wmove" ("WMove" "X,Y" "C529")
+			  "wplot" ("WPlot" "X,Y,Colour" "C50B")
+			  "wpointer" ("WPointer" "Shape#" "C526")
+			  "wprintscroll" ("WPrintScroll" "" "C53D")
+			  "wscroll" ("WScroll" "X1,Y1,X2,Y2,Delta X,Delta Y" "C519")
+			  "wsize" ("WSize" "Width,Height" "C52A")
+			  "wtitle" ("WTitle" "windowtitle$,screentitle$" "C53B")
+			  "wtopoff" ("WTopOff" "" "C530")
+			  "wait" ("Wait" "" "E103")
+			  "waitblitter" ("WaitBlitter" "" "A59E")
+			  "waitcommodity" ("WaitCommodity" "" "AC84")
+			  "waitevent" ("WaitEvent" "" "C502")
+			  "waitfor" ("WaitFor" "(IDCMP Code)" "B592")
+			  "waittrackerevent" ("WaitTrackerEvent" "" "9C0A")
+			  "wbtoscreen" ("WbToScreen" "Screen#" "CF02")
+			  "weekday" ("WeekDay" ";returns day of week calculated in last call to date$" "A708")
+			  "wend" ("Wend" "" "80C1")
+			  "while" ("While" "" "800C")
+			  "window" ("Window" "Window#,X,Y,Width,Height,Flags,Title$,Dpen,Bpen[,GadgetList#[,BitMap#]]" "C501")
+			  "windowfont" ("WindowFont" "IntuiFont# [,SoftStyle]" "C50A")
+			  "windowheight" ("WindowHeight" "" "C52C")
+			  "windowinput" ("WindowInput" "Window#" "C511")
+			  "windowoutput" ("WindowOutput" "Window#" "C512")
+			  "windowtags" ("WindowTags" "Window#,Flags,Title$ [,&TagList] or [[,Tag,Data]...]" "C545")
+			  "windowwidth" ("WindowWidth" "" "C52B")
+			  "windowx" ("WindowX" "" "C520")
+			  "windowy" ("WindowY" "" "C521")
+			  "wline" ("Wline" "X1,Y1,X2,Y3[,Xn,Yn...],Colour" "C51E")
+			  "writeboot" ("WriteBoot" "unit#[,bootdata]" "AD88")
+			  "writechunky" ("WriteChunky" "Chunky#,rawfilename$" "A407")
+			  "writefile" ("WriteFile" "(File#,Filename$)" "BE12")
+			  "writemem" ("WriteMem" "File#,Address,Length" "BE13")
+			  "writesector" ("WriteSector" "unit#,sector#,buffer[,numsectors]" "AD86")
+			  "writeserial" ("WriteSerial" "unit#,byte" "AD02")
+			  "writeserialmem" ("WriteSerialMem" "unit#,Address,Length" "AD0C")
+			  "writeserialstring" ("WriteSerialString" "unit#,string[,Flags 1=DoIO 2=TrueString] " "AD03")
+			  "xbdecodesound" ("XBDecodeSound" "Sound#,MemoryLocation" "820B")
+			  "xbdiskbuffer" ("XBDiskBuffer" "Bufferlen" "8202")
+			  "xbdiskplay" ("XBDiskPlay" "Filename$,Channelmask[,Vol1[,Vol2...]]" "8201")
+			  "xbfilter" ("XBFilter" "On|Off" "8206")
+			  "xbinitsound" ("XBInitSound" "Sound#,Length[,Period[,Repeat]]" "8208")
+			  "xbloadsound" ("XBLoadSound" "Sound#,Filename$" "8203")
+			  "xbloopsound" ("XBLoopSound" "Sound#,Channelmask[,Vol1[,Vol2...]]" "8207")
+			  "xbpeeksound" ("XBPeekSound" "(Sound#,Offset)" "820A")
+			  "xbsetperiod" ("XBSetPeriod" "Sound#,Period" "820C")
+			  "xbsound" ("XBSound" "Sound#,Channelmask[,Vol1[,Vol2...]]" "8204")
+			  "xbsounddata" ("XBSoundData" "Sound#,Offset,Data" "8209")
+			  "xbvolume" ("XBVolume" "Channelmask,Vol1[,Vol2...]" "8205")
+			  "xflip" ("XFlip" "Shape#" "BB02")
+			  "xinclude" ("XINCLUDE" "" "8012")
+			  "xor" ("XOR" "(expression,expression) ;Returns Exclusive OR of two expressions" "B481")
+			  "xstatus" ("XStatus" "" "C20E")
+			  "xor" ("Xor" "(expression,expression) ;Returns Exclusive OR of two expressions" "B481")
+			  "yflip" ("YFlip" "Shape#" "BB03")
+			  "years" ("Years" ";returns year calculated in last call to date$" "A707")
+			  "zone" ("Zone" "(x,y)" "A003")
+			  "zoneinit" ("ZoneInit" "[zone_num#]|[#start_num,#end_num] - intialize zones" "A001")
+			  "zonemode" ("ZoneMode" "- returns -1 for 68020 mode or 0 for 68000 mode" "A00F")
+			  "zonetable" ("ZoneTable" "- returns address of the current zone table" "A005")
+			  "zonetablenumber" ("ZoneTableNumber" "- returns the number of the current zone table" "A00E")
+			  "zonetablesize" ("ZoneTableSize" "- returns size of the current zone table" "A00A")
+			  "zonetest" ("ZoneTest" "(start_num[,end_num],x,y)" "A004")
+			  "zoomx2" ("ZoomX2" "source#,dest#,sourceadd,destadd,width,height" "A107")
+			  "zoomx4" ("ZoomX4" "source#,dest#,sourceadd,destadd,width,height[,xy_select]" "A103")
+			  "zoomx8" ("ZoomX8" "source#,dest#,sourceadd,destadd,width,height" "A10A")
+			  "zoomxy" ("ZoomXY" "xzoom,yzoom,height" "A105")
+			  "cr_vbr" ("cr_vbr" "" "E086")
+			  "abcd" ("ABCD" "" "803C")
+			  "add" ("ADD" "" "803D")
+			  "adda" ("ADDA" "" "803F")
+			  "addi" ("ADDI" "" "803E")
+			  "addq" ("ADDQ" "" "8040")
+			  "addx" ("ADDX" "" "8041")
+			  "and" ("AND" "" "8042")
+			  "andi" ("ANDI" "" "8043")
+			  "asl" ("ASL" "" "8044")
+			  "asr" ("ASR" "" "8045")
+			  "bcc" ("BCC" "" "8046")
+			  "bcs" ("BCS" "" "8047")
+			  "beq" ("BEQ" "" "8048")
+			  "bge" ("BGE" "" "8049")
+			  "bgt" ("BGT" "" "804A")
+			  "bhi" ("BHI" "" "804B")
+			  "ble" ("BLE" "" "804C")
+			  "bls" ("BLS" "" "804D")
+			  "blt" ("BLT" "" "804E")
+			  "bmi" ("BMI" "" "804F")
+			  "bne" ("BNE" "" "8050")
+			  "bpl" ("BPL" "" "8051")
+			  "bvc" ("BVC" "" "8052")
+			  "bvs" ("BVS" "" "8053")
+			  "bra" ("BRA" "" "8058")
+			  "bsr" ("BSR" "" "8059")
+			  "bchg" ("BCHG" "" "8054")
+			  "bclr" ("BCLR" "" "8055")
+			  "bset" ("BSET" "" "8056")
+			  "btst" ("BTST" "" "8057")
+			  "chk" ("CHK" "" "805A")
+			  "clr" ("CLR" "" "805B")
+			  "cmp" ("CMP" "" "805C")
+			  "cmpa" ("CMPA" "" "805E")
+			  "cmpi" ("CMPI" "" "805D")
+			  "cmpm" ("CMPM" "" "805F")
+			  "dbcc" ("DBCC" "" "8060")
+			  "dbcs" ("DBCS" "" "8061")
+			  "dbeq" ("DBEQ" "" "8062")
+			  "dbf" ("DBF" "" "806E")
+			  "dbra" ("DBRA" "" "806F")
+			  "dbge" ("DBGE" "" "8063")
+			  "dbgt" ("DBGT" "" "8064")
+			  "dbhi" ("DBHI" "" "8065")
+			  "dble" ("DBLE" "" "8066")
+			  "dbls" ("DBLS" "" "8067")
+			  "dblt" ("DBLT" "" "8068")
+			  "dbmi" ("DBMI" "" "8069")
+			  "dbne" ("DBNE" "" "806A")
+			  "dbpl" ("DBPL" "" "806B")
+			  "dbt" ("DBT" "" "8070")
+			  "dbvc" ("DBVC" "" "806C")
+			  "dbvs" ("DBVS" "" "806D")
+			  "divs" ("DIVS" "" "8071")
+			  "divu" ("DIVU" "" "8072")
+			  "eor" ("EOR" "" "8073")
+			  "eori" ("EORI" "" "8074")
+			  "exg" ("EXG" "" "8075")
+			  "ext" ("EXT" "" "8076")
+			  "jmp" ("JMP" "" "8078")
+			  "jsr" ("JSR" "" "8079")
+			  "lea" ("LEA" "" "807A")
+			  "link" ("LINK" "" "807B")
+			  "lsl" ("LSL" "" "807C")
+			  "lsr" ("LSR" "" "807D")
+			  "move" ("MOVE" "" "807E")
+			  "movea" ("MOVEA" "" "8080")
+			  "movem" ("MOVEM" "" "8082")
+			  "movep" ("MOVEP" "" "")
+			  "moveq" ("MOVEQ" "" "8081")
+			  "muls" ("MULS" "" "8083")
+			  "mulu" ("MULU" "" "8084")
+			  "nbcd" ("NBCD" "" "8085")
+			  "neg" ("NEG" "" "8086")
+			  "negx" ("NEGX" "" "8087")
+			  "nop" ("NOP" "" "8088")
+			  "not" ("NOT" "" "8089")
+			  "or" ("OR" "" "808A")
+			  "ori" ("ORI" "" "808B")
+			  "pea" ("PEA" "" "808C")
+			  "reset" ("RESET" "" "808D")
+			  "rol" ("ROL" "" "808E")
+			  "ror" ("ROR" "" "808F")
+			  "roxl" ("ROXL" "" "8090")
+			  "roxr" ("ROXR" "" "8091")
+			  "rte" ("RTE" "" "8092")
+			  "rtr" ("RTR" "" "8093")
+			  "rts" ("RTS" "" "8094")
+			  "sbcd" ("SBCD" "" "8095")
+			  "scc" ("SCC" "" "8096")
+			  "scs" ("SCS" "" "8097")
+			  "seq" ("SEQ" "" "8098")
+			  "sf" ("SF" "" "80A5")
+			  "sge" ("SGE" "" "8099")
+			  "sgt" ("SGT" "" "809A")
+			  "shi" ("SHI" "" "809B")
+			  "sle" ("SLE" "" "809C")
+			  "sls" ("SLS" "" "809D")
+			  "slt" ("SLT" "" "809E")
+			  "smi" ("SMI" "" "809F")
+			  "sne" ("SNE" "" "80A0")
+			  "spl" ("SPL" "" "80A1")
+			  "st" ("ST" "" "80A4")
+			  "svc" ("SVC" "" "80A2")
+			  "svs" ("SVS" "" "80A3")
+			  "stop" ("STOP" "" "802D")
+			  "sub" ("SUB" "" "80A7")
+			  "suba" ("SUBA" "" "80A9")
+			  "subi" ("SUBI" "" "80A8")
+			  "subq" ("SUBQ" "" "80AA")
+			  "subx" ("SUBX" "" "80AB")
+			  "swap" ("SWAP" "" "80AC")
+			  "tas" ("TAS" "" "")
+			  "trap" ("TRAP" "" "80AE")
+			  "trapv" ("TRAPV" "" "80AF")
+			  "tst" ("TST" "" "80B0")
+			  "unlk" ("UNLK" "" "80B1")
+			  "agarexxhost_" ("AGARexxHost_" "(rmsg,result)" "")
+			  "abortio_" ("AbortIO_" "" "FEC6")
+			  "abortpkt_" ("AbortPkt_" "(port,pkt)" "FE26")
+			  "activatecxobj_" ("ActivateCxObj_" "(co,true)" "F803")
+			  "activategadget_" ("ActivateGadget_" "" "FFC9")
+			  "activatewindow_" ("ActivateWindow_" "" "FFC7")
+			  "addamigaguidehosta_" ("AddAmigaGuideHostA_" "" "FC10")
+			  "addanimob_" ("AddAnimOb_" "" "FF16")
+			  "addappicona_" ("AddAppIconA_" "" "EE03")
+			  "addappmenuitema_" ("AddAppMenuItemA_" "" "EE05")
+			  "addappwindowa_" ("AddAppWindowA_" "" "EE01")
+			  "addbob_" ("AddBob_" "(bob,rp)" "FF0C")
+			  "addbootnode_" ("AddBootNode_" "(bootPri,flags,deviceNode,configDev)" "F682")
+			  "addbuffers_" ("AddBuffers_" "(name,number)" "FE73")
+			  "addclass_" ("AddClass_" "" "FFEC")
+			  "addconfigdev_" ("AddConfigDev_" "" "F681")
+			  "adddtobject_" ("AddDTObject_" "(win,req,o,pos)" "F788")
+			  "adddevice_" ("AddDevice_" "" "FEBE")
+			  "adddosentry_" ("AddDosEntry_" "" "FE6A")
+			  "adddosnode_" ("AddDosNode_" "" "F695")
+			  "addfont_" ("AddFont_" "" "FF4C")
+			  "addfreelist_" ("AddFreeList_" "" "F582")
+			  "addglist_" ("AddGList_" "" "FFC5")
+			  "addgadget_" ("AddGadget_" "" "FF83")
+			  "addhead_" ("AddHead_" "(list,node)" "FE9E")
+			  "addievents_" ("AddIEvents_" "" "F819")
+			  "addintserver_" ("AddIntServer_" "(intNumber,interrupt)" "FE92")
+			  "addlibrary_" ("AddLibrary_" "" "FEB8")
+			  "addmemhandler_" ("AddMemHandler_" "" "FEF4")
+			  "addmemlist_" ("AddMemList_" "" "FEDA")
+			  "addnamedobject_" ("AddNamedObject_" "(namespace,object)" "EE9E")
+			  "addpart_" ("AddPart_" "" "FC8B")
+			  "addport_" ("AddPort_" "" "FEB1")
+			  "addresource_" ("AddResource_" "" "FEC7")
+			  "addsegment_" ("AddSegment_" "" "FE7A")
+			  "addsemaphore_" ("AddSemaphore_" "" "FED7")
+			  "addtail_" ("AddTail_" "(list,node)" "FE9F")
+			  "addtask_" ("AddTask_" "" "FEA5")
+			  "addvsprite_" ("AddVSprite_" "(vSprite,rp)" "FF0D")
+			  "alert_" ("Alert_" "" "FE88")
+			  "allocabs_" ("AllocAbs_" "(byteSize,location)" "FE98")
+			  "allocaslrequest_" ("AllocAslRequest_" "(reqType,tagList)" "FB84")
+			  "allocbitmap_" ("AllocBitMap_" "" "FD0E")
+			  "allocboardinfo_" ("AllocBoardInfo_" "" "")
+			  "allocboardmem_" ("AllocBoardMem_" "" "F683")
+			  "allocconfigdev_" ("AllocConfigDev_" "" "F684")
+			  "allocdbufinfo_" ("AllocDBufInfo_" "" "FD16")
+			  "allocdosobject_" ("AllocDosObject_" "(type,tags)" "FE20")
+			  "allocentry_" ("AllocEntry_" "" "FE9B")
+			  "allocexpansionmem_" ("AllocExpansionMem_" "(numSlots,slotAlign)" "F685")
+			  "allocfilerequest_" ("AllocFileRequest_" "" "FB81")
+			  "allociff_" ("AllocIFF_" "" "F501")
+			  "alloclocalitem_" ("AllocLocalItem_" "(type,id,ident,dataSize)" "F51A")
+			  "allocmem_" ("AllocMem_" "(byteSize,requirements)" "FE97")
+			  "allocmiscresource_" ("AllocMiscResource_" "(unitNum,name)" "F001")
+			  "allocnamedobjecta_" ("AllocNamedObjectA_" "(name,tags)" "EE9F")
+			  "allocpooled_" ("AllocPooled_" "(poolHeader,memSize)" "FEE9")
+			  "allocpotbits_" ("AllocPotBits_" "" "EF81")
+			  "allocraster_" ("AllocRaster_" "(width,height)" "FF4E")
+			  "allocremember_" ("AllocRemember_" "" "FFBE")
+			  "allocscreenbuffer_" ("AllocScreenBuffer_" "" "FFF2")
+			  "allocsignal_" ("AllocSignal_" "" "FEAD")
+			  "allocspritedataa_" ("AllocSpriteDataA_" "(bm,tags)" "FD1E")
+			  "alloctrap_" ("AllocTrap_" "" "FEAF")
+			  "allocunit_" ("AllocUnit_" "" "F701")
+			  "allocvec_" ("AllocVec_" "(byteSize,requirements)" "FEE5")
+			  "allocatetagitems_" ("AllocateTagItems_" "" "EE87")
+			  "allocate_" ("Allocate_" "(freeList,byteSize)" "FE95")
+			  "alohaworkbench_" ("AlohaWorkbench_" "" "FFBF")
+			  "amiga2date_" ("Amiga2Date_" "(seconds,result)" "EE8E")
+			  "amigaguidesignal_" ("AmigaGuideSignal_" "" "FC06")
+			  "andrectregion_" ("AndRectRegion_" "(region,rectangle)" "FF50")
+			  "andregionregion_" ("AndRegionRegion_" "(srcRegion,destRegion)" "FF64")
+			  "animate_" ("Animate_" "(anKey,rp)" "FF17")
+			  "applytagchanges_" ("ApplyTagChanges_" "(list,changeList)" "EE99")
+			  "areadraw_" ("AreaDraw_" "" "FF27")
+			  "areaellipse_" ("AreaEllipse_" "" "FF1B")
+			  "areaend_" ("AreaEnd_" "" "FF28")
+			  "areamove_" ("AreaMove_" "" "FF26")
+			  "askfont_" ("AskFont_" "(rp,textAttr)" "FF4B")
+			  "askkeymapdefault_" ("AskKeyMapDefault_" "" "F482")
+			  "asksoftstyle_" ("AskSoftStyle_" "" "FF0A")
+			  "aslrequest_" ("AslRequest_" "(requester,tagList)" "FB86")
+			  "assignadd_" ("AssignAdd_" "(name,lock)" "FE62")
+			  "assignlate_" ("AssignLate_" "(name,path)" "FE60")
+			  "assignlock_" ("AssignLock_" "(name,lock)" "FE5F")
+			  "assignpath_" ("AssignPath_" "(name,path)" "FE61")
+			  "attachcxobj_" ("AttachCxObj_" "(headObj,co)" "F80A")
+			  "attachpalextra_" ("AttachPalExtra_" "(cm,vp)" "FD03")
+			  "attemptlockdoslist_" ("AttemptLockDosList_" "" "FE68")
+			  "attemptlocklayerrom_" ("AttemptLockLayerRom_" "" "FF67")
+			  "attemptremnamedobject_" ("AttemptRemNamedObject_" "" "EEA0")
+			  "attemptsemaphoreshared_" ("AttemptSemaphoreShared_" "" "FEEB")
+			  "attemptsemaphore_" ("AttemptSemaphore_" "" "FED3")
+			  "autorequest_" ("AutoRequest_" "(window,body,posText,negText,pFlag,nFlag,width,height)" "FFB6")
+			  "availfonts_" ("AvailFonts_" "" "FD82")
+			  "availmem_" ("AvailMem_" "" "FE9A")
+			  "begincardaccess_" ("BeginCardAccess_" "" "F984")
+			  "beginrefresh_" ("BeginRefresh_" "" "FFB7")
+			  "beginupdate_" ("BeginUpdate_" "" "F409")
+			  "behindlayer_" ("BehindLayer_" "(dummy,layer)" "F405")
+			  "bestmodeida_" ("BestModeIDA_" "" "FD23")
+			  "bitmapscale_" ("BitMapScale_" "" "FF6B")
+			  "bltbitmaprastport_" ("BltBitMapRastPort_" "" "FF61")
+			  "bltbitmap_" ("BltBitMap_" "" "FF01")
+			  "bltclear_" ("BltClear_" "" "FF2E")
+			  "bltmaskbitmaprastport_" ("BltMaskBitMapRastPort_" "(srcBitMap,xSrc,ySrc,destRP,xDest,yDest,xSize,ySize,minterm,bltMask)" "FF66")
+			  "bltpattern_" ("BltPattern_" "" "FF30")
+			  "blttemplate_" ("BltTemplate_" "(source,xSrc,srcMod,destRP,xDest,yDest,xSize,ySize)" "FF02")
+			  "boardsprivate1_" ("BoardsPrivate1_" "" "")
+			  "buildeasyrequestargs_" ("BuildEasyRequestArgs_" "(window,easyStruct,idcmp,args)" "FFDE")
+			  "buildsysrequest_" ("BuildSysRequest_" "" "FFB8")
+			  "bumprevision_" ("BumpRevision_" "(newname,oldname)" "F588")
+			  "cbump_" ("CBump_" "" "FF39")
+			  "cmove_" ("CMove_" "" "FF3A")
+			  "cwait_" ("CWait_" "" "FF3B")
+			  "cachecleare_" ("CacheClearE_" "" "FEDE")
+			  "cacheclearu_" ("CacheClearU_" "" "FEDD")
+			  "cachecontrol_" ("CacheControl_" "(cacheBits,cacheMask)" "FEDF")
+			  "cachepostdma_" ("CachePostDMA_" "" "FEF3")
+			  "cachepredma_" ("CachePreDMA_" "" "FEF2")
+			  "calcivg_" ("CalcIVG_" "(v,vp)" "FD02")
+			  "callhookpkt_" ("CallHookPkt_" "" "EE8D")
+			  "cardaccessspeed_" ("CardAccessSpeed_" "(handle,nanoseconds)" "F989")
+			  "cardchangecount_" ("CardChangeCount_" "" "F990")
+			  "cardforcechange_" ("CardForceChange_" "" "F98F")
+			  "cardinterface_" ("CardInterface_" "" "F991")
+			  "cardmisccontrol_" ("CardMiscControl_" "(handle,control_bits)" "F988")
+			  "cardprogramvoltage_" ("CardProgramVoltage_" "(handle,voltage)" "F98A")
+			  "cardresetcard_" ("CardResetCard_" "" "F98B")
+			  "cardresetremove_" ("CardResetRemove_" "(handle,flag)" "F987")
+			  "cause_" ("Cause_" "" "FE94")
+			  "changeextspritea_" ("ChangeExtSpriteA_" "(vp,oldsprite,newsprite,tags)" "FD1F")
+			  "changemode_" ("ChangeMode_" "" "FE45")
+			  "changescreenbuffer_" ("ChangeScreenBuffer_" "(sc,sb)" "FFF4")
+			  "changesprite_" ("ChangeSprite_" "" "FF42")
+			  "changevpbitmap_" ("ChangeVPBitMap_" "" "FD12")
+			  "changewindowbox_" ("ChangeWindowBox_" "" "FFCD")
+			  "checkdate_" ("CheckDate_" "" "EE90")
+			  "checkio_" ("CheckIO_" "" "FEC4")
+			  "checksignal_" ("CheckSignal_" "" "FE7D")
+			  "childfree_" ("ChildFree_" "" "FEEE")
+			  "childorphan_" ("ChildOrphan_" "" "FEEF")
+			  "childstatus_" ("ChildStatus_" "" "FEF0")
+			  "childwait_" ("ChildWait_" "" "FEF1")
+			  "clearcxobjerror_" ("ClearCxObjError_" "" "F808")
+			  "cleardmrequest_" ("ClearDMRequest_" "" "FF84")
+			  "cleareol_" ("ClearEOL_" "" "FF03")
+			  "clearmenustrip_" ("ClearMenuStrip_" "" "FF85")
+			  "clearpointer_" ("ClearPointer_" "" "FF86")
+			  "clearrectregion_" ("ClearRectRegion_" "(region,rectangle)" "FF53")
+			  "clearregion_" ("ClearRegion_" "" "FF54")
+			  "clearrexxmsg_" ("ClearRexxMsg_" "(msgptr,count)" "EF06")
+			  "clearscreen_" ("ClearScreen_" "" "FF04")
+			  "cliinitnewcli_" ("CliInitNewcli_" "" "FC92")
+			  "cliinitrun_" ("CliInitRun_" "" "FC93")
+			  "cli_" ("Cli_" "" "FE4B")
+			  "clipblit_" ("ClipBlit_" "" "FF58")
+			  "clonetagitems_" ("CloneTagItems_" "" "EE88")
+			  "closeamigaguide_" ("CloseAmigaGuide_" "" "FC05")
+			  "closecatalog_" ("CloseCatalog_" "" "F381")
+			  "closeclipboard_" ("CloseClipboard_" "" "F525")
+			  "closedevice_" ("CloseDevice_" "" "FEC1")
+			  "closeengine_" ("CloseEngine_" "" "FA02")
+			  "closefont_" ("CloseFont_" "" "FF09")
+			  "closeiff_" ("CloseIFF_" "" "F504")
+			  "closelibrary_" ("CloseLibrary_" "" "FEBB")
+			  "closelocale_" ("CloseLocale_" "" "F382")
+			  "closemonitor_" ("CloseMonitor_" "" "FF72")
+			  "closescreen_" ("CloseScreen_" "" "FF87")
+			  "closewindow_" ("CloseWindow_" "" "FF88")
+			  "closeworkbench_" ("CloseWorkBench_" "" "FF89")
+			  "close_" ("Close_" "" "FE02")
+			  "coercemode_" ("CoerceMode_" "" "FD11")
+			  "coldreboot_" ("ColdReboot_" "" "FEEC")
+			  "collectionchunk_" ("CollectionChunk_" "" "F512")
+			  "collectionchunks_" ("CollectionChunks_" "" "F513")
+			  "comparedates_" ("CompareDates_" "(date1,date2)" "FE74")
+			  "configboard_" ("ConfigBoard_" "(board,configDev)" "F686")
+			  "configchain_" ("ConfigChain_" "" "F687")
+			  "convtolower_" ("ConvToLower_" "(locale,character)" "F383")
+			  "convtoupper_" ("ConvToUpper_" "(locale,character)" "F384")
+			  "converthsbtorgb_" ("ConvertHSBToRGB_" "" "ED81")
+			  "convertrgbtohsb_" ("ConvertRGBToHSB_" "" "ED82")
+			  "copymemquick_" ("CopyMemQuick_" "" "FEDC")
+			  "copymem_" ("CopyMem_" "" "FEDB")
+			  "copysbitmap_" ("CopySBitMap_" "" "FF47")
+			  "copytuple_" ("CopyTuple_" "(handle,buffer,tuplecode,size)" "F98C")
+			  "createargstring_" ("CreateArgstring_" "(string,length)" "EF01")
+			  "createbehindhooklayer_" ("CreateBehindHookLayer_" "" "F41C")
+			  "createbehindlayer_" ("CreateBehindLayer_" "(li,bm,x0,y0,x1,y1,flags,bm2)" "F403")
+			  "createcontext_" ("CreateContext_" "" "F60F")
+			  "createcxobj_" ("CreateCxObj_" "" "F801")
+			  "createdir_" ("CreateDir_" "" "FE10")
+			  "creategadgeta_" ("CreateGadgetA_" "(kind,gad,ng,taglist)" "F601")
+			  "createiorequest_" ("CreateIORequest_" "(port,size)" "FEE0")
+			  "createmenusa_" ("CreateMenusA_" "(newmenu,taglist)" "F604")
+			  "createmsgport_" ("CreateMsgPort_" "" "FEE2")
+			  "createnewproc_" ("CreateNewProc_" "" "FE4C")
+			  "createpool_" ("CreatePool_" "" "FEE7")
+			  "createproc_" ("CreateProc_" "(name,pri,segList,stackSize)" "FE13")
+			  "createrexxmsg_" ("CreateRexxMsg_" "" "EF04")
+			  "createupfronthooklayer_" ("CreateUpfrontHookLayer_" "" "F41B")
+			  "createupfrontlayer_" ("CreateUpfrontLayer_" "(li,bm,x0,y0,x1,y1,flags,bm2)" "F402")
+			  "currentchunk_" ("CurrentChunk_" "" "F518")
+			  "currentdir_" ("CurrentDir_" "" "FE11")
+			  "currenttime_" ("CurrentTime_" "(seconds,micros)" "FF8A")
+			  "cxbroker_" ("CxBroker_" "(nb,error)" "F802")
+			  "cxmsgdata_" ("CxMsgData_" "" "F813")
+			  "cxmsgid_" ("CxMsgID_" "" "F814")
+			  "cxmsgtype_" ("CxMsgType_" "" "F812")
+			  "cxobjerror_" ("CxObjError_" "" "F807")
+			  "cxobjtype_" ("CxObjType_" "" "F806")
+			  "date2amiga_" ("Date2Amiga_" "" "EE8F")
+			  "datestamp_" ("DateStamp_" "" "FE1A")
+			  "datetostr_" ("DateToStr_" "" "FE75")
+			  "deallocate_" ("Deallocate_" "" "FE96")
+			  "debug_" ("Debug_" "" "FE89")
+			  "delay_" ("Delay_" "" "FE1B")
+			  "deleteargstring_" ("DeleteArgstring_" "" "EF02")
+			  "deletecxobjall_" ("DeleteCxObjAll_" "" "F805")
+			  "deletecxobj_" ("DeleteCxObj_" "" "F804")
+			  "deletediskobject_" ("DeleteDiskObject_" "" "F58C")
+			  "deletefile_" ("DeleteFile_" "" "FE08")
+			  "deleteiorequest_" ("DeleteIORequest_" "" "FEE1")
+			  "deletelayer_" ("DeleteLayer_" "(dummy,layer)" "F40B")
+			  "deletemsgport_" ("DeleteMsgPort_" "" "FEE3")
+			  "deletepool_" ("DeletePool_" "" "FEE8")
+			  "deleterexxmsg_" ("DeleteRexxMsg_" "" "EF05")
+			  "deletevar_" ("DeleteVar_" "(name,flags)" "FC90")
+			  "deviceproc_" ("DeviceProc_" "" "FE17")
+			  "devicetuple_" ("DeviceTuple_" "(tuple_data,storage)" "F98D")
+			  "disable_" ("Disable_" "" "FE8A")
+			  "disownblitter_" ("DisownBlitter_" "" "FF49")
+			  "displayalert_" ("DisplayAlert_" "" "FF8B")
+			  "displaybeep_" ("DisplayBeep_" "" "FF8C")
+			  "disposecxmsg_" ("DisposeCxMsg_" "" "F817")
+			  "disposedtobject_" ("DisposeDTObject_" "" "F785")
+			  "disposefontcontents_" ("DisposeFontContents_" "" "FD84")
+			  "disposelayerinfo_" ("DisposeLayerInfo_" "" "F415")
+			  "disposeobject_" ("DisposeObject_" "" "FFE6")
+			  "disposeregion_" ("DisposeRegion_" "" "FF55")
+			  "divertcxmsg_" ("DivertCxMsg_" "" "F815")
+			  "doasynclayout_" ("DoAsyncLayout_" "(o,gpl)" "F78A")
+			  "docollision_" ("DoCollision_" "" "FF0E")
+			  "dodtmethoda_" ("DoDTMethodA_" "(o,win,req,msg)" "F78B")
+			  "dogadgetmethoda_" ("DoGadgetMethodA_" "(gad,win,req,message)" "FFF9")
+			  "dohookcliprects_" ("DoHookClipRects_" "" "F420")
+			  "doio_" ("DoIO_" "" "FEC2")
+			  "dopkt_" ("DoPkt_" "" "FE22")
+			  "doubleclick_" ("DoubleClick_" "(sSeconds,sMicros,cSeconds,cMicros)" "FF8D")
+			  "drawbevelboxa_" ("DrawBevelBoxA_" "(rport,left,top,width,height,taglist)" "F610")
+			  "drawborder_" ("DrawBorder_" "(rp,border,leftOffset,topOffset)" "FF8E")
+			  "drawellipse_" ("DrawEllipse_" "" "FF1A")
+			  "drawglist_" ("DrawGList_" "(rp,vp)" "FF0F")
+			  "drawimagestate_" ("DrawImageState_" "(rp,image,leftOffset,topOffset,state,drawInfo)" "FFE2")
+			  "drawimage_" ("DrawImage_" "(rp,image,leftOffset,topOffset)" "FF8F")
+			  "draw_" ("Draw_" "" "FF25")
+			  "duplockfromfh_" ("DupLockFromFH_" "" "FE38")
+			  "duplock_" ("DupLock_" "" "FE0C")
+			  "easyrequestargs_" ("EasyRequestArgs_" "(window,easyStruct,idcmpPtr,args)" "FFDD")
+			  "enable_" ("Enable_" "" "FE8B")
+			  "endcardaccess_" ("EndCardAccess_" "" "F985")
+			  "endnotify_" ("EndNotify_" "" "FC8D")
+			  "endrefresh_" ("EndRefresh_" "(window,complete)" "FFB9")
+			  "endrequest_" ("EndRequest_" "(requester,window)" "FF90")
+			  "endupdate_" ("EndUpdate_" "(layer,flag)" "F40A")
+			  "enqueuecxobj_" ("EnqueueCxObj_" "(headObj,co)" "F80B")
+			  "enqueue_" ("Enqueue_" "(list,node)" "FEA3")
+			  "entryhandler_" ("EntryHandler_" "(iff,type,id,position,handler,object)" "F50C")
+			  "eraseimage_" ("EraseImage_" "(rp,image,leftOffset,topOffset)" "FFE4")
+			  "eraserect_" ("EraseRect_" "" "FF7E")
+			  "errorreport_" ("ErrorReport_" "(code,type,arg1,device)" "FE4A")
+			  "exallend_" ("ExAllEnd_" "" "FC9A")
+			  "exall_" ("ExAll_" "" "FE42")
+			  "exnext_" ("ExNext_" "(lock,fileInfoBlock)" "FE0E")
+			  "examinefh_" ("ExamineFH_" "(fh,fib)" "FE3B")
+			  "examine_" ("Examine_" "(lock,fileInfoBlock)" "FE0D")
+			  "execute_" ("Execute_" "" "FE1F")
+			  "exithandler_" ("ExitHandler_" "(iff,type,id,position,handler,object)" "F50D")
+			  "exit_" ("Exit_" "" "FE14")
+			  "extendfont_" ("ExtendFont_" "(font,fontTags)" "FF7F")
+			  "fgetc_" ("FGetC_" "" "FE2D")
+			  "fgets_" ("FGets_" "" "FE32")
+			  "fputc_" ("FPutC_" "(fh,ch)" "FE2E")
+			  "fputs_" ("FPuts_" "(fh,str)" "FE33")
+			  "fread_" ("FRead_" "(fh,block,blocklen,number)" "FE30")
+			  "fwrite_" ("FWrite_" "(fh,block,blocklen,number)" "FE31")
+			  "fattenlayerinfo_" ("FattenLayerInfo_" "" "F416")
+			  "fault_" ("Fault_" "(code,header,buffer,len)" "FE48")
+			  "filepart_" ("FilePart_" "" "FC89")
+			  "fillrexxmsg_" ("FillRexxMsg_" "" "EF07")
+			  "filtertagchanges_" ("FilterTagChanges_" "" "EE85")
+			  "filtertagitems_" ("FilterTagItems_" "" "EE8C")
+			  "findarg_" ("FindArg_" "(keyword,template)" "FE7F")
+			  "findcliproc_" ("FindCliProc_" "" "FE54")
+			  "findcollection_" ("FindCollection_" "" "F516")
+			  "findcolor_" ("FindColor_" "" "FD1D")
+			  "findconfigdev_" ("FindConfigDev_" "" "F688")
+			  "finddisplayinfo_" ("FindDisplayInfo_" "" "FF73")
+			  "finddosentry_" ("FindDosEntry_" "" "FE6B")
+			  "findlocalitem_" ("FindLocalItem_" "(iff,type,id,ident)" "F51E")
+			  "findname_" ("FindName_" "(list,name)" "FEA4")
+			  "findnamedobject_" ("FindNamedObject_" "" "EEA1")
+			  "findport_" ("FindPort_" "" "FEB7")
+			  "findpropcontext_" ("FindPropContext_" "" "F517")
+			  "findprop_" ("FindProp_" "" "F515")
+			  "findresident_" ("FindResident_" "" "FE86")
+			  "findsegment_" ("FindSegment_" "" "FE7B")
+			  "findsemaphore_" ("FindSemaphore_" "" "FED6")
+			  "findtagitem_" ("FindTagItem_" "(tagVal,tagList)" "EE81")
+			  "findtask_" ("FindTask_" "" "FEA7")
+			  "findtooltype_" ("FindToolType_" "(toolTypeArray,typeName)" "F586")
+			  "findvar_" ("FindVar_" "(name,type)" "FC91")
+			  "flood_" ("Flood_" "(rp,mode,x,y)" "FF33")
+			  "flush_" ("Flush_" "" "FE36")
+			  "fontextent_" ("FontExtent_" "(font,fontExtent)" "FF76")
+			  "forbid_" ("Forbid_" "" "FE8C")
+			  "formatdate_" ("FormatDate_" "(locale,template,date,putCharFunc)" "F385")
+			  "formatstring_" ("FormatString_" "(locale,string,dataStream,putCharFunc)" "F386")
+			  "format_" ("Format_" "" "FE70")
+			  "freeargs_" ("FreeArgs_" "" "FC88")
+			  "freeaslrequest_" ("FreeAslRequest_" "" "FB85")
+			  "freebitmap_" ("FreeBitMap_" "" "FD0F")
+			  "freeboardinfo_" ("FreeBoardInfo_" "" "")
+			  "freeboardmem_" ("FreeBoardMem_" "(startSlot,slotSpec)" "F689")
+			  "freeclass_" ("FreeClass_" "" "FFF1")
+			  "freecolormap_" ("FreeColorMap_" "" "FF5C")
+			  "freeconfigdev_" ("FreeConfigDev_" "" "F68A")
+			  "freecoplist_" ("FreeCopList_" "" "FF57")
+			  "freecprlist_" ("FreeCprList_" "" "FF5A")
+			  "freedbufinfo_" ("FreeDBufInfo_" "" "FD17")
+			  "freedeviceproc_" ("FreeDeviceProc_" "" "FE65")
+			  "freediskobject_" ("FreeDiskObject_" "" "F585")
+			  "freedosentry_" ("FreeDosEntry_" "" "FE6E")
+			  "freedosobject_" ("FreeDosObject_" "(type,ptr)" "FE21")
+			  "freeentry_" ("FreeEntry_" "" "FE9C")
+			  "freeexpansionmem_" ("FreeExpansionMem_" "(startSlot,numSlots)" "F68B")
+			  "freefilerequest_" ("FreeFileRequest_" "" "FB82")
+			  "freefreelist_" ("FreeFreeList_" "" "F581")
+			  "freegbuffers_" ("FreeGBuffers_" "" "FF60")
+			  "freegadgets_" ("FreeGadgets_" "" "F602")
+			  "freeiff_" ("FreeIFF_" "" "F505")
+			  "freelocalitem_" ("FreeLocalItem_" "" "F51D")
+			  "freemem_" ("FreeMem_" "(memoryBlock,byteSize)" "FE99")
+			  "freemenus_" ("FreeMenus_" "" "F605")
+			  "freemiscresource_" ("FreeMiscResource_" "" "F002")
+			  "freenamedobject_" ("FreeNamedObject_" "" "EEA2")
+			  "freepooled_" ("FreePooled_" "" "FEEA")
+			  "freepotbits_" ("FreePotBits_" "" "EF82")
+			  "freeraster_" ("FreeRaster_" "" "FF4F")
+			  "freeremember_" ("FreeRemember_" "(rememberKey,reallyForget)" "FFC0")
+			  "freescreenbuffer_" ("FreeScreenBuffer_" "(sc,sb)" "FFF3")
+			  "freescreendrawinfo_" ("FreeScreenDrawInfo_" "(screen,drawInfo)" "FFEE")
+			  "freesignal_" ("FreeSignal_" "" "FEAE")
+			  "freespritedata_" ("FreeSpriteData_" "" "FD20")
+			  "freesprite_" ("FreeSprite_" "" "FF41")
+			  "freesysrequest_" ("FreeSysRequest_" "" "FFBA")
+			  "freetagitems_" ("FreeTagItems_" "" "EE89")
+			  "freetrap_" ("FreeTrap_" "" "FEB0")
+			  "freeunit_" ("FreeUnit_" "" "F702")
+			  "freevportcoplists_" ("FreeVPortCopLists_" "" "FF56")
+			  "freevec_" ("FreeVec_" "" "FEE6")
+			  "freevisualinfo_" ("FreeVisualInfo_" "" "F612")
+			  "gt_beginrefresh_" ("GT_BeginRefresh_" "" "F60B")
+			  "gt_endrefresh_" ("GT_EndRefresh_" "(win,complete)" "F60C")
+			  "gt_filterimsg_" ("GT_FilterIMsg_" "" "F60D")
+			  "gt_getgadgetattrsa_" ("GT_GetGadgetAttrsA_" "(gad,win,req,taglist)" "F613")
+			  "gt_getimsg_" ("GT_GetIMsg_" "" "F608")
+			  "gt_postfilterimsg_" ("GT_PostFilterIMsg_" "" "F60E")
+			  "gt_refreshwindow_" ("GT_RefreshWindow_" "(win,req)" "F60A")
+			  "gt_replyimsg_" ("GT_ReplyIMsg_" "" "F609")
+			  "gt_setgadgetattrsa_" ("GT_SetGadgetAttrsA_" "(gad,win,req,taglist)" "F603")
+			  "gadgetmouse_" ("GadgetMouse_" "" "FFDB")
+			  "getapen_" ("GetAPen_" "" "FD06")
+			  "getamigaguideattr_" ("GetAmigaGuideAttr_" "" "FC0D")
+			  "getamigaguidemsg_" ("GetAmigaGuideMsg_" "" "FC07")
+			  "getamigaguidestring_" ("GetAmigaGuideString_" "" "FC12")
+			  "getargstr_" ("GetArgStr_" "" "FE52")
+			  "getattr_" ("GetAttr_" "" "FFE8")
+			  "getbpen_" ("GetBPen_" "" "FD07")
+			  "getbitmapattr_" ("GetBitMapAttr_" "(bm,attrnum)" "FD15")
+			  "getboardname_" ("GetBoardName_" "" "")
+			  "getcc_" ("GetCC_" "" "FECB")
+			  "getcardmap_" ("GetCardMap_" "" "F983")
+			  "getcatalogstr_" ("GetCatalogStr_" "" "F387")
+			  "getcolormap_" ("GetColorMap_" "" "FF5B")
+			  "getconsoletask_" ("GetConsoleTask_" "" "FE4E")
+			  "getcurrentbinding_" ("GetCurrentBinding_" "(currentBinding,bindingSize)" "F693")
+			  "getcurrentdirname_" ("GetCurrentDirName_" "(buf,len)" "FE57")
+			  "getdtattrsa_" ("GetDTAttrsA_" "(o,attrs)" "F787")
+			  "getdtmethods_" ("GetDTMethods_" "" "F78D")
+			  "getdtstring_" ("GetDTString_" "" "F790")
+			  "getdttriggermethods_" ("GetDTTriggerMethods_" "" "F78E")
+			  "getdefdiskobject_" ("GetDefDiskObject_" "" "F589")
+			  "getdefprefs_" ("GetDefPrefs_" "(preferences,size)" "FF91")
+			  "getdefaultpubscreen_" ("GetDefaultPubScreen_" "" "FFDC")
+			  "getdeviceproc_" ("GetDeviceProc_" "(name,dp)" "FE64")
+			  "getdiskobjectnew_" ("GetDiskObjectNew_" "" "F58B")
+			  "getdiskobject_" ("GetDiskObject_" "" "F583")
+			  "getdisplayinfodata_" ("GetDisplayInfoData_" "" "FF75")
+			  "getdrmd_" ("GetDrMd_" "" "FD08")
+			  "getextspritea_" ("GetExtSpriteA_" "(ss,tags)" "FD10")
+			  "getfilesystask_" ("GetFileSysTask_" "" "FE50")
+			  "getgbuffers_" ("GetGBuffers_" "" "FF18")
+			  "geticon_" ("GetIcon_" "" "")
+			  "getlocalestr_" ("GetLocaleStr_" "(locale,stringNum)" "F388")
+			  "getmsg_" ("GetMsg_" "" "FEB4")
+			  "getoutlinepen_" ("GetOutlinePen_" "" "FD09")
+			  "getprefs_" ("GetPrefs_" "(preferences,size)" "FF92")
+			  "getprogramdir_" ("GetProgramDir_" "" "FE5D")
+			  "getprogramname_" ("GetProgramName_" "(buf,len)" "FE59")
+			  "getprompt_" ("GetPrompt_" "(buf,len)" "FE5B")
+			  "getrgb32_" ("GetRGB32_" "(cm,firstcolor,ncolors,table)" "FD0D")
+			  "getrgb4_" ("GetRGB4_" "(colorMap,entry)" "FF5D")
+			  "getrpattrsa_" ("GetRPAttrsA_" "(rp,tags)" "FD22")
+			  "getscreendata_" ("GetScreenData_" "(buffer,size,type,screen)" "FFC3")
+			  "getscreendrawinfo_" ("GetScreenDrawInfo_" "" "FFED")
+			  "getsprite_" ("GetSprite_" "(sprite,num)" "FF40")
+			  "gettagdata_" ("GetTagData_" "" "EE82")
+			  "getuniqueid_" ("GetUniqueID_" "" "EEA6")
+			  "getunitid_" ("GetUnitID_" "" "F705")
+			  "getunit_" ("GetUnit_" "" "F703")
+			  "getvpmodeid_" ("GetVPModeID_" "" "FF7B")
+			  "getvar_" ("GetVar_" "(name,buffer,size,flags)" "FC8F")
+			  "getvisualinfoa_" ("GetVisualInfoA_" "(screen,taglist)" "F611")
+			  "gfxassociate_" ("GfxAssociate_" "(associateNode,gfxNodePtr)" "FF6A")
+			  "gfxfree_" ("GfxFree_" "" "FF69")
+			  "gfxinternal1_" ("GfxInternal1_" "" "")
+			  "gfxinternal2_" ("GfxInternal2_" "" "")
+			  "gfxinternal3_" ("GfxInternal3_" "" "")
+			  "gfxlookup_" ("GfxLookUp_" "" "FF6F")
+			  "gfxnew_" ("GfxNew_" "" "FF68")
+			  "gfxspare1_" ("GfxSpare1_" "" "")
+			  "gfxspare2_" ("GfxSpare2_" "" "")
+			  "giveunit_" ("GiveUnit_" "" "F704")
+			  "goodid_" ("GoodID_" "" "F526")
+			  "goodtype_" ("GoodType_" "" "F527")
+			  "helpcontrol_" ("HelpControl_" "(win,flags)" "FFFC")
+			  "idtostr_" ("IDtoStr_" "(id,buf)" "F528")
+			  "ieeedpabs_" ("IEEEDPAbs_" "(parm)" "F285")
+			  "ieeedpacos_" ("IEEEDPAcos_" "(parm)" "F210")
+			  "ieeedpadd_" ("IEEEDPAdd_" "(leftParm,rightParm)" "F287")
+			  "ieeedpasin_" ("IEEEDPAsin_" "(parm)" "F20F")
+			  "ieeedpatan_" ("IEEEDPAtan_" "(parm)" "F201")
+			  "ieeedpceil_" ("IEEEDPCeil_" "(parm)" "F28C")
+			  "ieeedpcmp_" ("IEEEDPCmp_" "(leftParm,rightParm)" "F283")
+			  "ieeedpcos_" ("IEEEDPCos_" "(parm)" "F203")
+			  "ieeedpcosh_" ("IEEEDPCosh_" "(parm)" "F207")
+			  "ieeedpdiv_" ("IEEEDPDiv_" "(dividend,divisor)" "F28A")
+			  "ieeedpexp_" ("IEEEDPExp_" "(parm)" "F209")
+			  "ieeedpfieee_" ("IEEEDPFieee_" "" "F20E")
+			  "ieeedpfix_" ("IEEEDPFix_" "(parm)" "F281")
+			  "ieeedpfloor_" ("IEEEDPFloor_" "(parm)" "F28B")
+			  "ieeedpflt_" ("IEEEDPFlt_" "" "F282")
+			  "ieeedplog10_" ("IEEEDPLog10_" "(parm)" "F211")
+			  "ieeedplog_" ("IEEEDPLog_" "(parm)" "F20A")
+			  "ieeedpmul_" ("IEEEDPMul_" "(factor1,factor2)" "F289")
+			  "ieeedpneg_" ("IEEEDPNeg_" "(parm)" "F286")
+			  "ieeedppow_" ("IEEEDPPow_" "(exp,arg)" "F20B")
+			  "ieeedpsin_" ("IEEEDPSin_" "(parm)" "F202")
+			  "ieeedpsincos_" ("IEEEDPSincos_" "" "F205")
+			  "ieeedpsinh_" ("IEEEDPSinh_" "(parm)" "F206")
+			  "ieeedpsqrt_" ("IEEEDPSqrt_" "(parm)" "F20C")
+			  "ieeedpsub_" ("IEEEDPSub_" "(leftParm,rightParm)" "F288")
+			  "ieeedptan_" ("IEEEDPTan_" "(parm)" "F204")
+			  "ieeedptanh_" ("IEEEDPTanh_" "(parm)" "F208")
+			  "ieeedptieee_" ("IEEEDPTieee_" "(parm)" "F20D")
+			  "ieeedptst_" ("IEEEDPTst_" "(parm)" "F284")
+			  "ieeespabs_" ("IEEESPAbs_" "" "F185")
+			  "ieeespacos_" ("IEEESPAcos_" "" "F110")
+			  "ieeespadd_" ("IEEESPAdd_" "(leftParm,rightParm)" "F187")
+			  "ieeespasin_" ("IEEESPAsin_" "" "F10F")
+			  "ieeespatan_" ("IEEESPAtan_" "" "F101")
+			  "ieeespceil_" ("IEEESPCeil_" "" "F18C")
+			  "ieeespcmp_" ("IEEESPCmp_" "(leftParm,rightParm)" "F183")
+			  "ieeespcos_" ("IEEESPCos_" "" "F103")
+			  "ieeespcosh_" ("IEEESPCosh_" "" "F107")
+			  "ieeespdiv_" ("IEEESPDiv_" "(dividend,divisor)" "F18A")
+			  "ieeespexp_" ("IEEESPExp_" "" "F109")
+			  "ieeespfieee_" ("IEEESPFieee_" "" "F10E")
+			  "ieeespfix_" ("IEEESPFix_" "" "F181")
+			  "ieeespfloor_" ("IEEESPFloor_" "" "F18B")
+			  "ieeespflt_" ("IEEESPFlt_" "" "F182")
+			  "ieeesplog10_" ("IEEESPLog10_" "" "F111")
+			  "ieeesplog_" ("IEEESPLog_" "" "F10A")
+			  "ieeespmul_" ("IEEESPMul_" "(leftParm,rightParm)" "F189")
+			  "ieeespneg_" ("IEEESPNeg_" "" "F186")
+			  "ieeesppow_" ("IEEESPPow_" "(exp,arg)" "F10B")
+			  "ieeespsin_" ("IEEESPSin_" "" "F102")
+			  "ieeespsincos_" ("IEEESPSincos_" "(cosptr,parm)" "F105")
+			  "ieeespsinh_" ("IEEESPSinh_" "" "F106")
+			  "ieeespsqrt_" ("IEEESPSqrt_" "" "F10C")
+			  "ieeespsub_" ("IEEESPSub_" "(leftParm,rightParm)" "F188")
+			  "ieeesptan_" ("IEEESPTan_" "" "F104")
+			  "ieeesptanh_" ("IEEESPTanh_" "" "F108")
+			  "ieeesptieee_" ("IEEESPTieee_" "" "F10D")
+			  "ieeesptst_" ("IEEESPTst_" "" "F184")
+			  "ifamigaxip_" ("IfAmigaXIP_" "" "F98E")
+			  "info_" ("Info_" "(lock,parameterBlock)" "FE0F")
+			  "inhibit_" ("Inhibit_" "(name,onoff)" "FE72")
+			  "initarea_" ("InitArea_" "" "FF2B")
+			  "initbitmap_" ("InitBitMap_" "(bitMap,depth,width,height)" "FF3D")
+			  "initcode_" ("InitCode_" "(startClass,version)" "FE82")
+			  "initgmasks_" ("InitGMasks_" "" "FF19")
+			  "initgels_" ("InitGels_" "" "FF10")
+			  "initiff_" ("InitIFF_" "" "F521")
+			  "initiffasclip_" ("InitIFFasClip_" "" "F523")
+			  "initiffasdos_" ("InitIFFasDOS_" "" "F522")
+			  "initlayers_" ("InitLayers_" "" "F401")
+			  "initmasks_" ("InitMasks_" "" "FF11")
+			  "initrastport_" ("InitRastPort_" "" "FF1D")
+			  "initrequester_" ("InitRequester_" "" "FF93")
+			  "initresident_" ("InitResident_" "(resident,segList)" "FE87")
+			  "initsemaphore_" ("InitSemaphore_" "" "FED0")
+			  "initstruct_" ("InitStruct_" "" "FE83")
+			  "inittmpras_" ("InitTmpRas_" "" "FF4A")
+			  "initvport_" ("InitVPort_" "" "FF1E")
+			  "initview_" ("InitView_" "" "FF38")
+			  "input_" ("Input_" "" "FE05")
+			  "insertcxobj_" ("InsertCxObj_" "" "F80C")
+			  "insert_" ("Insert_" "" "FE9D")
+			  "installclipregion_" ("InstallClipRegion_" "(layer,region)" "F419")
+			  "installlayerhook_" ("InstallLayerHook_" "(layer,hook)" "F41D")
+			  "installlayerinfohook_" ("InstallLayerInfoHook_" "(li,hook)" "F41E")
+			  "internalloadseg_" ("InternalLoadSeg_" "(fh,table,funcarray,stack)" "FE77")
+			  "internalunloadseg_" ("InternalUnLoadSeg_" "(seglist,freefunc)" "FE78")
+			  "intuitextlength_" ("IntuiTextLength_" "" "FFB3")
+			  "intuition_" ("Intuition_" "" "FF82")
+			  "invertkeymap_" ("InvertKeyMap_" "" "F818")
+			  "ioerr_" ("IoErr_" "" "FE12")
+			  "isalnum_" ("IsAlNum_" "(locale,character)" "F389")
+			  "isalpha_" ("IsAlpha_" "(locale,character)" "F38A")
+			  "iscntrl_" ("IsCntrl_" "(locale,character)" "F38B")
+			  "isdigit_" ("IsDigit_" "(locale,character)" "F38C")
+			  "isfilesystem_" ("IsFileSystem_" "" "FE6F")
+			  "isgraph_" ("IsGraph_" "(locale,character)" "F38D")
+			  "isinteractive_" ("IsInteractive_" "" "FE1E")
+			  "islower_" ("IsLower_" "(locale,character)" "F38E")
+			  "isprint_" ("IsPrint_" "(locale,character)" "F38F")
+			  "ispunct_" ("IsPunct_" "(locale,character)" "F390")
+			  "isrexxmsg_" ("IsRexxMsg_" "" "EF08")
+			  "isspace_" ("IsSpace_" "(locale,character)" "F391")
+			  "isupper_" ("IsUpper_" "(locale,character)" "F392")
+			  "isxdigit_" ("IsXDigit_" "(locale,character)" "F393")
+			  "itemaddress_" ("ItemAddress_" "(menuStrip,menuNumber)" "FF94")
+			  "layoutmenuitemsa_" ("LayoutMenuItemsA_" "" "F606")
+			  "layoutmenusa_" ("LayoutMenusA_" "" "F607")
+			  "lendmenus_" ("LendMenus_" "(fromwindow,towindow)" "FFF8")
+			  "lengthargstring_" ("LengthArgstring_" "" "EF03")
+			  "loadrgb32_" ("LoadRGB32_" "(vp,table)" "FD0A")
+			  "loadrgb4_" ("LoadRGB4_" "" "FF1C")
+			  "loadseg_" ("LoadSeg_" "" "FE15")
+			  "loadview_" ("LoadView_" "" "FF21")
+			  "localitemdata_" ("LocalItemData_" "" "F51B")
+			  "lockamigaguidebase_" ("LockAmigaGuideBase_" "" "FC01")
+			  "lockdoslist_" ("LockDosList_" "" "FE66")
+			  "lockibase_" ("LockIBase_" "" "FFC1")
+			  "locklayerinfo_" ("LockLayerInfo_" "" "F410")
+			  "locklayerrom_" ("LockLayerRom_" "" "FF44")
+			  "locklayer_" ("LockLayer_" "(dummy,layer)" "F40C")
+			  "locklayers_" ("LockLayers_" "" "F40E")
+			  "lockpubscreenlist_" ("LockPubScreenList_" "" "FFD3")
+			  "lockpubscreen_" ("LockPubScreen_" "" "FFD1")
+			  "lockrecord_" ("LockRecord_" "" "FE27")
+			  "lockrecords_" ("LockRecords_" "(recArray,timeout)" "FE28")
+			  "lockrexxbase_" ("LockRexxBase_" "" "EF09")
+			  "lock_" ("Lock_" "(name,type)" "FE0A")
+			  "makeclass_" ("MakeClass_" "" "FFEB")
+			  "makedosentry_" ("MakeDosEntry_" "(name,type)" "FE6D")
+			  "makedosnode_" ("MakeDosNode_" "" "F694")
+			  "makefunctions_" ("MakeFunctions_" "" "FE85")
+			  "makelibrary_" ("MakeLibrary_" "" "FE84")
+			  "makelink_" ("MakeLink_" "" "FE44")
+			  "makescreen_" ("MakeScreen_" "" "FFBB")
+			  "makevport_" ("MakeVPort_" "(view,vp)" "FF20")
+			  "mapansi_" ("MapANSI_" "" "F484")
+			  "maprawkey_" ("MapRawKey_" "(event,buffer,length,keyMap)" "F483")
+			  "maptags_" ("MapTags_" "" "EE86")
+			  "matchend_" ("MatchEnd_" "" "FC85")
+			  "matchfirst_" ("MatchFirst_" "(pat,anchor)" "FC83")
+			  "matchix_" ("MatchIX_" "(event,ix)" "F81A")
+			  "matchnext_" ("MatchNext_" "" "FC84")
+			  "matchpatternnocase_" ("MatchPatternNoCase_" "(pat,str)" "FC98")
+			  "matchpattern_" ("MatchPattern_" "(pat,str)" "FC87")
+			  "matchtoolvalue_" ("MatchToolValue_" "(typeString,value)" "F587")
+			  "maxcli_" ("MaxCli_" "" "FE55")
+			  "modenotavailable_" ("ModeNotAvailable_" "" "FF7C")
+			  "modifyidcmp_" ("ModifyIDCMP_" "(window,flags)" "FF95")
+			  "modifyprop_" ("ModifyProp_" "(gadget,window,requester,flags,horizPot,vertPot,horizBody,vertBody)" "FF96")
+			  "movelayerinfrontof_" ("MoveLayerInFrontOf_" "(layer_to_move,other_layer)" "F418")
+			  "movelayer_" ("MoveLayer_" "(dummy,layer,dx,dy)" "F406")
+			  "movescreen_" ("MoveScreen_" "" "FF97")
+			  "movesizelayer_" ("MoveSizeLayer_" "" "F41A")
+			  "movesprite_" ("MoveSprite_" "(vp,sprite,x,y)" "FF43")
+			  "movewindowinfrontof_" ("MoveWindowInFrontOf_" "(window,behindWindow)" "FFCC")
+			  "movewindow_" ("MoveWindow_" "" "FF98")
+			  "move_" ("Move_" "" "FF24")
+			  "mrgcop_" ("MrgCop_" "" "FF1F")
+			  "namefromfh_" ("NameFromFH_" "" "FE3E")
+			  "namefromlock_" ("NameFromLock_" "" "FE3D")
+			  "namedobjectname_" ("NamedObjectName_" "" "EEA3")
+			  "newdtobjecta_" ("NewDTObjectA_" "(name,attrs)" "F784")
+			  "newfontcontents_" ("NewFontContents_" "(fontsLock,fontName)" "FD83")
+			  "newlayerinfo_" ("NewLayerInfo_" "" "F414")
+			  "newloadseg_" ("NewLoadSeg_" "(file,tags)" "FE79")
+			  "newmodifyprop_" ("NewModifyProp_" "" "FFCA")
+			  "newobjecta_" ("NewObjectA_" "" "FFE5")
+			  "newregion_" ("NewRegion_" "" "FF52")
+			  "newscaleddiskfont_" ("NewScaledDiskFont_" "(sourceFont,destTextAttr)" "FD85")
+			  "nextboardinfo_" ("NextBoardInfo_" "" "")
+			  "nextdisplayinfo_" ("NextDisplayInfo_" "" "FF74")
+			  "nextdosentry_" ("NextDosEntry_" "(dlist,flags)" "FE6C")
+			  "nextobject_" ("NextObject_" "" "FFEA")
+			  "nextpubscreen_" ("NextPubScreen_" "(screen,namebuf)" "FFD5")
+			  "nexttagitem_" ("NextTagItem_" "" "EE84")
+			  "obtainbattsemaphore_" ("ObtainBattSemaphore_" "" "FA81")
+			  "obtainbestpena_" ("ObtainBestPenA_" "" "FD04")
+			  "obtainconfigbinding_" ("ObtainConfigBinding_" "" "F690")
+			  "obtaindatatypea_" ("ObtainDataTypeA_" "" "F782")
+			  "obtaingirport_" ("ObtainGIRPort_" "" "FFD9")
+			  "obtaininfoa_" ("ObtainInfoA_" "(glyphEngine,tagList)" "FA04")
+			  "obtainpen_" ("ObtainPen_" "(cm,n,r,g,b,f)" "FD14")
+			  "obtainsemaphorelist_" ("ObtainSemaphoreList_" "" "FED4")
+			  "obtainsemaphoreshared_" ("ObtainSemaphoreShared_" "" "FEE4")
+			  "obtainsemaphore_" ("ObtainSemaphore_" "" "FED1")
+			  "offgadget_" ("OffGadget_" "" "FF99")
+			  "offmenu_" ("OffMenu_" "(window,menuNumber)" "FF9A")
+			  "oldopenlibrary_" ("OldOpenLibrary_" "" "FEBA")
+			  "ongadget_" ("OnGadget_" "" "FF9B")
+			  "onmenu_" ("OnMenu_" "(window,menuNumber)" "FF9C")
+			  "openamigaguidea_" ("OpenAmigaGuideA_" "(nag,*)" "FC03")
+			  "openamigaguideasynca_" ("OpenAmigaGuideAsyncA_" "(nag,attrs)" "FC04")
+			  "opencataloga_" ("OpenCatalogA_" "" "F394")
+			  "openclipboard_" ("OpenClipboard_" "" "F524")
+			  "opendevice_" ("OpenDevice_" "(devName,unit,ioRequest,flags)" "FEC0")
+			  "opendiskfont_" ("OpenDiskFont_" "" "FD81")
+			  "openengine_" ("OpenEngine_" "" "FA01")
+			  "openfont_" ("OpenFont_" "" "FF08")
+			  "openfromlock_" ("OpenFromLock_" "" "FE39")
+			  "openiff_" ("OpenIFF_" "(iff,rwMode)" "F502")
+			  "openintuition_" ("OpenIntuition_" "" "FF81")
+			  "openlibrary_" ("OpenLibrary_" "(libName,version)" "FECF")
+			  "openlocale_" ("OpenLocale_" "" "F395")
+			  "openmonitor_" ("OpenMonitor_" "(monitorName,displayID)" "FF71")
+			  "openresource_" ("OpenResource_" "" "FEC9")
+			  "openscreentaglist_" ("OpenScreenTagList_" "(newScreen,tagList)" "FFE1")
+			  "openscreen_" ("OpenScreen_" "" "FF9D")
+			  "openwindowtaglist_" ("OpenWindowTagList_" "(newWindow,tagList)" "FFE0")
+			  "openwindow_" ("OpenWindow_" "" "FF9E")
+			  "openworkbench_" ("OpenWorkBench_" "" "FF9F")
+			  "open_" ("Open_" "(name,accessMode)" "FE01")
+			  "orrectregion_" ("OrRectRegion_" "(region,rectangle)" "FF51")
+			  "orregionregion_" ("OrRegionRegion_" "(srcRegion,destRegion)" "FF62")
+			  "output_" ("Output_" "" "FE06")
+			  "ownblitter_" ("OwnBlitter_" "" "FF48")
+			  "owncard_" ("OwnCard_" "" "F981")
+			  "packbooltags_" ("PackBoolTags_" "" "EE83")
+			  "packstructuretags_" ("PackStructureTags_" "" "EE9C")
+			  "parentchunk_" ("ParentChunk_" "" "F519")
+			  "parentdir_" ("ParentDir_" "" "FE1D")
+			  "parentoffh_" ("ParentOfFH_" "" "FE3A")
+			  "parsedate_" ("ParseDate_" "(locale,date,template,getCharFunc)" "F396")
+			  "parseiff_" ("ParseIFF_" "(iff,control)" "F503")
+			  "parseix_" ("ParseIX_" "(description,ix)" "F811")
+			  "parsepatternnocase_" ("ParsePatternNoCase_" "" "FC97")
+			  "parsepattern_" ("ParsePattern_" "" "FC86")
+			  "pathpart_" ("PathPart_" "" "FC8A")
+			  "permit_" ("Permit_" "" "FE8D")
+			  "pointinimage_" ("PointInImage_" "(point,image)" "FFE3")
+			  "polydraw_" ("PolyDraw_" "" "FF34")
+			  "popchunk_" ("PopChunk_" "" "F50B")
+			  "printdtobjecta_" ("PrintDTObjectA_" "(o,w,r,msg)" "F78F")
+			  "printfault_" ("PrintFault_" "(code,header)" "FE49")
+			  "printitext_" ("PrintIText_" "(rp,iText,left,top)" "FFA0")
+			  "procure_" ("Procure_" "(sigSem,bidMsg)" "FECD")
+			  "propchunk_" ("PropChunk_" "" "F50E")
+			  "propchunks_" ("PropChunks_" "" "F50F")
+			  "pubscreenstatus_" ("PubScreenStatus_" "(screen,statusFlags)" "FFD8")
+			  "pushchunk_" ("PushChunk_" "(iff,type,id,size)" "F50A")
+			  "putdefdiskobject_" ("PutDefDiskObject_" "" "F58A")
+			  "putdiskobject_" ("PutDiskObject_" "(name,diskobj)" "F584")
+			  "puticon_" ("PutIcon_" "(name,icon)" "")
+			  "putmsg_" ("PutMsg_" "(port,message)" "FEB3")
+			  "putstr_" ("PutStr_" "" "FC95")
+			  "qbsblit_" ("QBSBlit_" "" "FF2D")
+			  "qblit_" ("QBlit_" "" "FF2A")
+			  "queryoverscan_" ("QueryOverscan_" "" "FFCB")
+			  "rldispatch_" ("RLDispatch_" "(rmsg,result)" "F781")
+			  "rawdofmt_" ("RawDoFmt_" "(formatString,dataStream,putChProc,putChData)" "FECA")
+			  "readargs_" ("ReadArgs_" "" "FE7E")
+			  "readbattclock_" ("ReadBattClock_" "" "FB02")
+			  "readbattmem_" ("ReadBattMem_" "" "FA83")
+			  "readcardstatus_" ("ReadCardStatus_" "" "F986")
+			  "readchunkbytes_" ("ReadChunkBytes_" "" "F506")
+			  "readchunkrecords_" ("ReadChunkRecords_" "(iff,buf,bytesPerRecord,numRecords)" "F508")
+			  "readexpansionbyte_" ("ReadExpansionByte_" "(board,offset)" "F68C")
+			  "readexpansionrom_" ("ReadExpansionRom_" "(board,configDev)" "F68D")
+			  "readitem_" ("ReadItem_" "" "FC81")
+			  "readlink_" ("ReadLink_" "" "FE43")
+			  "readpixelarray8_" ("ReadPixelArray8_" "" "FF79")
+			  "readpixelline8_" ("ReadPixelLine8_" "(rp,xstart,ystart,width,array,tempRP)" "FF77")
+			  "readpixel_" ("ReadPixel_" "" "FF31")
+			  "readunitid_" ("ReadUnitID_" "" "F706")
+			  "read_" ("Read_" "" "FE03")
+			  "rectfill_" ("RectFill_" "" "FF2F")
+			  "refreshdtobjecta_" ("RefreshDTObjectA_" "(o,win,req,attrs)" "F789")
+			  "refreshglist_" ("RefreshGList_" "(gadgets,window,requester,numGad)" "FFC4")
+			  "refreshgadgets_" ("RefreshGadgets_" "" "FFA1")
+			  "refreshtagitemclones_" ("RefreshTagItemClones_" "(clone,original)" "EE8A")
+			  "refreshwindowframe_" ("RefreshWindowFrame_" "" "FFC8")
+			  "relabel_" ("Relabel_" "(drive,newname)" "FE71")
+			  "releasebattsemaphore_" ("ReleaseBattSemaphore_" "" "FA82")
+			  "releasecard_" ("ReleaseCard_" "(handle,flags)" "F982")
+			  "releaseconfigbinding_" ("ReleaseConfigBinding_" "" "F691")
+			  "releasedatatype_" ("ReleaseDataType_" "" "F783")
+			  "releasegirport_" ("ReleaseGIRPort_" "" "FFDA")
+			  "releaseinfoa_" ("ReleaseInfoA_" "(glyphEngine,tagList)" "FA05")
+			  "releasenamedobject_" ("ReleaseNamedObject_" "" "EEA4")
+			  "releasepen_" ("ReleasePen_" "(cm,n)" "FD13")
+			  "releasesemaphorelist_" ("ReleaseSemaphoreList_" "" "FED5")
+			  "releasesemaphore_" ("ReleaseSemaphore_" "" "FED2")
+			  "remassignlist_" ("RemAssignList_" "(name,lock)" "FE63")
+			  "remconfigdev_" ("RemConfigDev_" "" "F68E")
+			  "remdevice_" ("RemDevice_" "" "FEBF")
+			  "remdosentry_" ("RemDosEntry_" "" "FE69")
+			  "remfont_" ("RemFont_" "" "FF4D")
+			  "remhead_" ("RemHead_" "" "FEA1")
+			  "remibob_" ("RemIBob_" "" "FF12")
+			  "remintserver_" ("RemIntServer_" "(intNumber,interrupt)" "FE93")
+			  "remlibrary_" ("RemLibrary_" "" "FEB9")
+			  "remmemhandler_" ("RemMemHandler_" "" "FEF5")
+			  "remnamedobject_" ("RemNamedObject_" "(object,message)" "EEA5")
+			  "remport_" ("RemPort_" "" "FEB2")
+			  "remresource_" ("RemResource_" "" "FEC8")
+			  "remsegment_" ("RemSegment_" "" "FE7C")
+			  "remsemaphore_" ("RemSemaphore_" "" "FED8")
+			  "remtail_" ("RemTail_" "" "FEA2")
+			  "remtask_" ("RemTask_" "" "FEA6")
+			  "remvsprite_" ("RemVSprite_" "" "FF13")
+			  "remakedisplay_" ("RemakeDisplay_" "" "FFBC")
+			  "removeamigaguidehosta_" ("RemoveAmigaGuideHostA_" "(hh,attrs)" "FC11")
+			  "removeappicon_" ("RemoveAppIcon_" "" "EE04")
+			  "removeappmenuitem_" ("RemoveAppMenuItem_" "" "EE06")
+			  "removeappwindow_" ("RemoveAppWindow_" "" "EE02")
+			  "removeclass_" ("RemoveClass_" "" "FFF0")
+			  "removecxobj_" ("RemoveCxObj_" "" "F80D")
+			  "removedtobject_" ("RemoveDTObject_" "(win,o)" "F78C")
+			  "removeglist_" ("RemoveGList_" "" "FFC6")
+			  "removegadget_" ("RemoveGadget_" "(window,gadget)" "FFA2")
+			  "remove_" ("Remove_" "" "FEA0")
+			  "rename_" ("Rename_" "(oldName,newName)" "FE09")
+			  "replyamigaguidemsg_" ("ReplyAmigaGuideMsg_" "" "FC08")
+			  "replymsg_" ("ReplyMsg_" "" "FEB5")
+			  "replypkt_" ("ReplyPkt_" "" "FE25")
+			  "reportmouse_" ("ReportMouse_" "(flag,window)" "FFA3")
+			  "requestfile_" ("RequestFile_" "" "FB83")
+			  "request_" ("Request_" "(requester,window)" "FFA4")
+			  "resetbattclock_" ("ResetBattClock_" "" "FB01")
+			  "resetmenustrip_" ("ResetMenuStrip_" "(window,menu)" "FFEF")
+			  "rethinkdisplay_" ("RethinkDisplay_" "" "FFBD")
+			  "routecxmsg_" ("RouteCxMsg_" "(cxm,co)" "F816")
+			  "runcommand_" ("RunCommand_" "(seg,stack,paramptr,paramlen)" "FE4D")
+			  "sdivmod32_" ("SDivMod32_" "(dividend,divisor)" "EE93")
+			  "smult32_" ("SMult32_" "(arg1,arg2)" "EE91")
+			  "smult64_" ("SMult64_" "(arg1,arg2)" "EE9A")
+			  "spabs_" ("SPAbs_" "" "F305")
+			  "spacos_" ("SPAcos_" "" "F090")
+			  "spadd_" ("SPAdd_" "(leftParm,rightParm)" "F307")
+			  "spasin_" ("SPAsin_" "" "F08F")
+			  "spatan_" ("SPAtan_" "" "F081")
+			  "spceil_" ("SPCeil_" "" "F30C")
+			  "spcmp_" ("SPCmp_" "(leftParm,rightParm)" "F303")
+			  "spcos_" ("SPCos_" "" "F083")
+			  "spcosh_" ("SPCosh_" "" "F087")
+			  "spdiv_" ("SPDiv_" "(leftParm,rightParm)" "F30A")
+			  "spexp_" ("SPExp_" "" "F089")
+			  "spfieee_" ("SPFieee_" "" "F08E")
+			  "spfix_" ("SPFix_" "" "F301")
+			  "spfloor_" ("SPFloor_" "" "F30B")
+			  "spflt_" ("SPFlt_" "" "F302")
+			  "splog10_" ("SPLog10_" "" "F091")
+			  "splog_" ("SPLog_" "" "F08A")
+			  "spmul_" ("SPMul_" "(leftParm,rightParm)" "F309")
+			  "spneg_" ("SPNeg_" "" "F306")
+			  "sppow_" ("SPPow_" "(power,arg)" "F08B")
+			  "spsin_" ("SPSin_" "" "F082")
+			  "spsincos_" ("SPSincos_" "(cosResult,parm)" "F085")
+			  "spsinh_" ("SPSinh_" "" "F086")
+			  "spsqrt_" ("SPSqrt_" "" "F08C")
+			  "spsub_" ("SPSub_" "(leftParm,rightParm)" "F308")
+			  "sptan_" ("SPTan_" "" "F084")
+			  "sptanh_" ("SPTanh_" "" "F088")
+			  "sptieee_" ("SPTieee_" "" "F08D")
+			  "sptst_" ("SPTst_" "" "F304")
+			  "samedevice_" ("SameDevice_" "(lock1,lock2)" "FC99")
+			  "samelock_" ("SameLock_" "(lock1,lock2)" "FE40")
+			  "scalerdiv_" ("ScalerDiv_" "" "FF6C")
+			  "screendepth_" ("ScreenDepth_" "" "FFF5")
+			  "screenposition_" ("ScreenPosition_" "(screen,flags,x1,y1,x2,y2)" "FFF6")
+			  "screentoback_" ("ScreenToBack_" "" "FFA5")
+			  "screentofront_" ("ScreenToFront_" "" "FFA6")
+			  "scrolllayer_" ("ScrollLayer_" "(dummy,layer,dx,dy)" "F408")
+			  "scrollrasterbf_" ("ScrollRasterBF_" "" "FD1C")
+			  "scrollraster_" ("ScrollRaster_" "" "FF3E")
+			  "scrollvport_" ("ScrollVPort_" "" "FF5E")
+			  "scrollwindowraster_" ("ScrollWindowRaster_" "" "FFF7")
+			  "seek_" ("Seek_" "" "FE07")
+			  "selectinput_" ("SelectInput_" "" "FE2B")
+			  "selectoutput_" ("SelectOutput_" "" "FE2C")
+			  "sendamigaguidecmda_" ("SendAmigaGuideCmdA_" "" "FC0B")
+			  "sendamigaguidecontexta_" ("SendAmigaGuideContextA_" "(cl,attrs)" "FC0A")
+			  "sendio_" ("SendIO_" "" "FEC3")
+			  "sendpkt_" ("SendPkt_" "" "FE23")
+			  "setabpendrmd_" ("SetABPenDrMd_" "(rp,apen,bpen,drawmode)" "FD0C")
+			  "setapen_" ("SetAPen_" "(rp,pen)" "FF35")
+			  "setamigaguideattrsa_" ("SetAmigaGuideAttrsA_" "(cl,attrs)" "FC0C")
+			  "setamigaguidecontexta_" ("SetAmigaGuideContextA_" "" "FC09")
+			  "setargstr_" ("SetArgStr_" "" "FE53")
+			  "setattrsa_" ("SetAttrsA_" "(object,tagList)" "FFE7")
+			  "setbpen_" ("SetBPen_" "(rp,pen)" "FF36")
+			  "setchiprev_" ("SetChipRev_" "" "FD0B")
+			  "setcollision_" ("SetCollision_" "" "FF14")
+			  "setcomment_" ("SetComment_" "(name,comment)" "FE18")
+			  "setconsoletask_" ("SetConsoleTask_" "" "FE4F")
+			  "setcurrentbinding_" ("SetCurrentBinding_" "(currentBinding,bindingSize)" "F692")
+			  "setcurrentdirname_" ("SetCurrentDirName_" "" "FE56")
+			  "setcxobjpri_" ("SetCxObjPri_" "(co,pri)" "F809")
+			  "setdmrequest_" ("SetDMRequest_" "(window,requester)" "FFA7")
+			  "setdtattrsa_" ("SetDTAttrsA_" "(o,win,req,attrs)" "F786")
+			  "setdefaultpubscreen_" ("SetDefaultPubScreen_" "" "FFD6")
+			  "setdrmd_" ("SetDrMd_" "(rp,drawMode)" "FF37")
+			  "setedithook_" ("SetEditHook_" "" "FFCE")
+			  "setexcept_" ("SetExcept_" "(newSignals,signalSet)" "FEAA")
+			  "setfiledate_" ("SetFileDate_" "(name,date)" "FE3C")
+			  "setfilesize_" ("SetFileSize_" "" "FE46")
+			  "setfilesystask_" ("SetFileSysTask_" "" "FE51")
+			  "setfilterix_" ("SetFilterIX_" "(filter,ix)" "F810")
+			  "setfilter_" ("SetFilter_" "(filter,text)" "F80F")
+			  "setfont_" ("SetFont_" "(rp,textFont)" "FF07")
+			  "setfunction_" ("SetFunction_" "" "FEBC")
+			  "setgadgetattrsa_" ("SetGadgetAttrsA_" "(gadget,window,requester,tagList)" "FFE9")
+			  "setinfoa_" ("SetInfoA_" "(glyphEngine,tagList)" "FA03")
+			  "setintvector_" ("SetIntVector_" "(intNumber,interrupt)" "FE91")
+			  "setioerr_" ("SetIoErr_" "" "FE47")
+			  "setkeymapdefault_" ("SetKeyMapDefault_" "" "F481")
+			  "setlocalitempurge_" ("SetLocalItemPurge_" "(localItem,purgeHook)" "F51C")
+			  "setmaxpen_" ("SetMaxPen_" "(rp,maxpen)" "FD1A")
+			  "setmenustrip_" ("SetMenuStrip_" "(window,menu)" "FFA8")
+			  "setmode_" ("SetMode_" "(fh,mode)" "FE41")
+			  "setmousequeue_" ("SetMouseQueue_" "(window,queueLength)" "FFCF")
+			  "setoutlinepen_" ("SetOutlinePen_" "(rp,pen)" "FD18")
+			  "setowner_" ("SetOwner_" "(name,owner_info)" "FC9B")
+			  "setpointer_" ("SetPointer_" "(window,pointer,height,width,xOffset,yOffset)" "FFA9")
+			  "setprefs_" ("SetPrefs_" "" "FFB2")
+			  "setprogramdir_" ("SetProgramDir_" "" "FE5C")
+			  "setprogramname_" ("SetProgramName_" "" "FE58")
+			  "setprompt_" ("SetPrompt_" "" "FE5A")
+			  "setprotection_" ("SetProtection_" "(name,protect)" "FE19")
+			  "setpubscreenmodes_" ("SetPubScreenModes_" "" "FFD7")
+			  "setrgb32cm_" ("SetRGB32CM_" "" "FD1B")
+			  "setrgb32_" ("SetRGB32_" "" "FD05")
+			  "setrgb4cm_" ("SetRGB4CM_" "" "FF65")
+			  "setrgb4_" ("SetRGB4_" "" "FF2C")
+			  "setrpattrsa_" ("SetRPAttrsA_" "(rp,tags)" "FD21")
+			  "setrast_" ("SetRast_" "(rp,pen)" "FF23")
+			  "setsr_" ("SetSR_" "(newSR,mask)" "FE8E")
+			  "setsignal_" ("SetSignal_" "(newSignals,signalSet)" "FEA9")
+			  "setsoftstyle_" ("SetSoftStyle_" "" "FF0B")
+			  "settaskpri_" ("SetTaskPri_" "(task,priority)" "FEA8")
+			  "settranslate_" ("SetTranslate_" "(translator,events)" "F80E")
+			  "setvbuf_" ("SetVBuf_" "(fh,buff,type,size)" "FE37")
+			  "setvar_" ("SetVar_" "(name,buffer,size,flags)" "FC8E")
+			  "setwindowpointera_" ("SetWindowPointerA_" "(win,taglist)" "FFFA")
+			  "setwindowtitles_" ("SetWindowTitles_" "" "FFAA")
+			  "setwritemask_" ("SetWriteMask_" "(rp,msk)" "FD19")
+			  "showtitle_" ("ShowTitle_" "(screen,showIt)" "FFAB")
+			  "signal_" ("Signal_" "(task,signalSet)" "FEAC")
+			  "sizelayer_" ("SizeLayer_" "(dummy,layer,dx,dy)" "F407")
+			  "sizewindow_" ("SizeWindow_" "" "FFAC")
+			  "sortglist_" ("SortGList_" "" "FF15")
+			  "sortlayercr_" ("SortLayerCR_" "" "F41F")
+			  "splitname_" ("SplitName_" "" "FE3F")
+			  "stackswap_" ("StackSwap_" "" "FEED")
+			  "startnotify_" ("StartNotify_" "" "FC8C")
+			  "stopchunk_" ("StopChunk_" "" "F510")
+			  "stopchunks_" ("StopChunks_" "" "F511")
+			  "stoponexit_" ("StopOnExit_" "" "F514")
+			  "storeitemincontext_" ("StoreItemInContext_" "" "F520")
+			  "storelocalitem_" ("StoreLocalItem_" "" "F51F")
+			  "strconvert_" ("StrConvert_" "" "F397")
+			  "strtodate_" ("StrToDate_" "" "FE76")
+			  "strtolong_" ("StrToLong_" "(string,value)" "FC82")
+			  "stricmp_" ("Stricmp_" "(string1,string2)" "EE95")
+			  "stripfont_" ("StripFont_" "" "FD01")
+			  "strncmp_" ("StrnCmp_" "" "F398")
+			  "strnicmp_" ("Strnicmp_" "" "EE96")
+			  "sumkickdata_" ("SumKickData_" "" "FED9")
+			  "sumlibrary_" ("SumLibrary_" "" "FEBD")
+			  "superstate_" ("SuperState_" "" "FE8F")
+			  "supervisor_" ("Supervisor_" "" "FE81")
+			  "swapbitsrastportcliprect_" ("SwapBitsRastPortClipRect_" "(rp,cr)" "F411")
+			  "syncsbitmap_" ("SyncSBitMap_" "" "FF46")
+			  "sysreqhandler_" ("SysReqHandler_" "" "FFDF")
+			  "systemtaglist_" ("SystemTagList_" "(command,tags)" "FE5E")
+			  "tedgetcurrentline_" ("TEDGetCurrentLine_" "()-90" "EC0B")
+			  "tedgetfilename_" ("TEDGetFilename_" "()-102" "EC0D")
+			  "tedgetfirstline_" ("TEDGetFirstLine_" "()-84" "EC0A")
+			  "tedgetjumptable_" ("TEDGetJumpTable_" "()-60" "EC06")
+			  "tedgetlabelcount_" ("TEDGetLabelCount_" "()-48" "EC04")
+			  "tedgetlabellist_" ("TEDGetLabelList_" "()-42" "EC03")
+			  "tedsetjumptable_" ("TEDSetJumpTable_" "()-54" "EC05")
+			  "taginarray_" ("TagInArray_" "(tagValue,tagArray)" "EE8B")
+			  "textextent_" ("TextExtent_" "(rp,string,count,textExtent)" "FF6D")
+			  "textfit_" ("TextFit_" "(rp,string,strLen,textExtent,constrainingExtent,strDirection,constrainingBitWidth,constrainingBitHeight)" "FF6E")
+			  "textlength_" ("TextLength_" "" "FF05")
+			  "text_" ("Text_" "" "FF06")
+			  "thinlayerinfo_" ("ThinLayerInfo_" "" "F417")
+			  "timeddisplayalert_" ("TimedDisplayAlert_" "(alertNumber,string,height,time)" "FFFB")
+			  "tolower_" ("ToLower_" "" "EE98")
+			  "toupper_" ("ToUpper_" "" "EE97")
+			  "typeofmem_" ("TypeOfMem_" "" "FECC")
+			  "ucopperlistinit_" ("UCopperListInit_" "(uCopList,n)" "FF5F")
+			  "udivmod32_" ("UDivMod32_" "(dividend,divisor)" "EE94")
+			  "umult32_" ("UMult32_" "(arg1,arg2)" "EE92")
+			  "umult64_" ("UMult64_" "(arg1,arg2)" "EE9B")
+			  "ungetc_" ("UnGetC_" "(fh,character)" "FE2F")
+			  "unloadseg_" ("UnLoadSeg_" "" "FE16")
+			  "unlockdoslist_" ("UnLockDosList_" "" "FE67")
+			  "unlockrecord_" ("UnLockRecord_" "" "FE29")
+			  "unlockrecords_" ("UnLockRecords_" "" "FE2A")
+			  "unlock_" ("UnLock_" "" "FE0B")
+			  "unlockamigaguidebase_" ("UnlockAmigaGuideBase_" "" "FC02")
+			  "unlockibase_" ("UnlockIBase_" "" "FFC2")
+			  "unlocklayerinfo_" ("UnlockLayerInfo_" "" "F413")
+			  "unlocklayerrom_" ("UnlockLayerRom_" "" "FF45")
+			  "unlocklayer_" ("UnlockLayer_" "" "F40D")
+			  "unlocklayers_" ("UnlockLayers_" "" "F40F")
+			  "unlockpubscreenlist_" ("UnlockPubScreenList_" "" "FFD4")
+			  "unlockpubscreen_" ("UnlockPubScreen_" "(name,screen)" "FFD2")
+			  "unlockrexxbase_" ("UnlockRexxBase_" "" "EF0A")
+			  "unpackstructuretags_" ("UnpackStructureTags_" "" "EE9D")
+			  "upfrontlayer_" ("UpfrontLayer_" "(dummy,layer)" "F404")
+			  "userstate_" ("UserState_" "" "FE90")
+			  "vbeampos_" ("VBeamPos_" "" "FF3C")
+			  "vfprintf_" ("VFPrintf_" "" "FE35")
+			  "vfwritef_" ("VFWritef_" "" "FE34")
+			  "vprintf_" ("VPrintf_" "(format,argarray)" "FC96")
+			  "vacate_" ("Vacate_" "(sigSem,bidMsg)" "FECE")
+			  "videocontrol_" ("VideoControl_" "(colorMap,tagarray)" "FF70")
+			  "viewaddress_" ("ViewAddress_" "" "FFAD")
+			  "viewportaddress_" ("ViewPortAddress_" "" "FFAE")
+			  "wbinfo_" ("WBInfo_" "" "EE07")
+			  "wbenchtoback_" ("WBenchToBack_" "" "FFB4")
+			  "wbenchtofront_" ("WBenchToFront_" "" "FFB5")
+			  "waitbovp_" ("WaitBOVP_" "" "FF3F")
+			  "waitblit_" ("WaitBlit_" "" "FF22")
+			  "waitforchar_" ("WaitForChar_" "(file,timeout)" "FE1C")
+			  "waitio_" ("WaitIO_" "" "FEC5")
+			  "waitpkt_" ("WaitPkt_" "" "FE24")
+			  "waitport_" ("WaitPort_" "" "FEB6")
+			  "waittof_" ("WaitTOF_" "" "FF29")
+			  "wait_" ("Wait_" "" "FEAB")
+			  "weightamatch_" ("WeighTAMatch_" "" "FF7D")
+			  "whichlayer_" ("WhichLayer_" "" "F412")
+			  "windowlimits_" ("WindowLimits_" "" "FFB1")
+			  "windowtoback_" ("WindowToBack_" "" "FFAF")
+			  "windowtofront_" ("WindowToFront_" "" "FFB0")
+			  "writebattclock_" ("WriteBattClock_" "" "FB03")
+			  "writebattmem_" ("WriteBattMem_" "" "FA84")
+			  "writechars_" ("WriteChars_" "(buf,buflen)" "FC94")
+			  "writechunkbytes_" ("WriteChunkBytes_" "" "F507")
+			  "writechunkrecords_" ("WriteChunkRecords_" "(iff,buf,bytesPerRecord,numRecords)" "F509")
+			  "writeexpansionbyte_" ("WriteExpansionByte_" "" "F68F")
+			  "writepixelarray8_" ("WritePixelArray8_" "" "FF7A")
+			  "writepixelline8_" ("WritePixelLine8_" "(rp,xstart,ystart,width,array,tempRP)" "FF78")
+			  "writepixel_" ("WritePixel_" "" "FF32")
+			  "writepotgo_" ("WritePotgo_" "(word,mask)" "EF83")
+			  "write_" ("Write_" "" "FE04")
+			  "xfa_allocframes_" ("XFA_AllocFrames_" "" "")
+			  "xfa_animframes_" ("XFA_AnimFrames_" "" "")
+			  "xfa_animmem_" ("XFA_AnimMem_" "" "")
+			  "xfa_cmapptr_" ("XFA_CMapPtr_" "" "")
+			  "xfa_changepackbitmap_" ("XFA_ChangePackBitMap_" "" "")
+			  "xfa_closepackstuff_" ("XFA_ClosePackStuff_" "" "")
+			  "xfa_closeplaystuff_" ("XFA_ClosePlayStuff_" "" "")
+			  "xfa_closeread_" ("XFA_CloseRead_" "" "")
+			  "xfa_freeanim_" ("XFA_FreeAnim_" "" "")
+			  "xfa_freeframe_" ("XFA_FreeFrame_" "" "")
+			  "xfa_freeframes_" ("XFA_FreeFrames_" "" "")
+			  "xfa_getpackmode_" ("XFA_GetPackMode_" "" "")
+			  "xfa_headptr_" ("XFA_HeadPtr_" "" "")
+			  "xfa_isskip_" ("XFA_IsSkip_" "" "")
+			  "xfa_liberr_" ("XFA_LibErr_" "" "")
+			  "xfa_loadanim_" ("XFA_LoadAnim_" "" "")
+			  "xfa_openpackstuff_" ("XFA_OpenPackStuff_" "" "")
+			  "xfa_openplaystuff_" ("XFA_OpenPlayStuff_" "" "")
+			  "xfa_openread_" ("XFA_OpenRead_" "" "")
+			  "xfa_packbitmap_" ("XFA_PackBitMap_" "" "")
+			  "xfa_packmem_l_" ("XFA_PackMem_L_" "" "")
+			  "xfa_packmem_w_" ("XFA_PackMem_W_" "" "")
+			  "xfa_play_" ("XFA_Play_" "" "")
+			  "xfa_posonframe_" ("XFA_PosOnFrame_" "" "")
+			  "xfa_putframe_" ("XFA_PutFrame_" "" "")
+			  "xfa_putseqframe_" ("XFA_PutSeqFrame_" "" "")
+			  "xfa_putskip_" ("XFA_PutSkip_" "" "")
+			  "xfa_readframe_" ("XFA_ReadFrame_" "" "")
+			  "xfa_saveanim_" ("XFA_SaveAnim_" "" "")
+			  "xfa_savescreen_" ("XFA_SaveScreen_" "" "")
+			  "xfa_setframesarray_" ("XFA_SetFramesArray_" "" "")
+			  "xfa_setpack_" ("XFA_SetPack_" "" "")
+			  "xfa_unpackbitmap_" ("XFA_UnPackBitMap_" "" "")
+			  "xfa_unpackbitmap_l_" ("XFA_UnPackBitMap_L_" "" "")
+			  "xfa_unpackbitmap_w_" ("XFA_UnPackBitMap_W_" "" "")
+			  "xfa_usecmap_" ("XFA_UseCMap_" "" "")
+			  "xfa_usehead_" ("XFA_UseHead_" "" "")
+			  "xprotocolhostmon_" ("XProtocolHostMon_" "(io,serbuff,actual,maxsize)" "")
+			  "xprotocolusermon_" ("XProtocolUserMon_" "(io,serbuff,actual,maxsize)" "")
+			  "xorrectregion_" ("XorRectRegion_" "(region,rectangle)" "FF59")
+			  "xorregionregion_" ("XorRegionRegion_" "(srcRegion,destRegion)" "FF63")
+			  "zipwindow_" ("ZipWindow_" "" "FFD0"))))
 
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
 (setq bb2-ted-indent-p t)
@@ -1859,8 +2445,17 @@
     (modify-syntax-entry ?\\ "." table)
     table))
 
+(defun bb2-get-bb-keywords-list ()
+  "Return a list of non-amigados keywords from the main table"
+  (let ((kw '()))
+    (maphash (lambda (k v)
+	       (if (not (string-suffix-p "_" k))
+		   (push (car v) kw)))
+	     bb2-keywords)
+    (nreverse kw))
+
 (defvar bb2-keywords-regexp nil "regular expression for bb2 keywords")
-(setq bb2-keywords-regexp (regexp-opt bb2-keywords 'words))
+(setq bb2-keywords-regexp (regexp-opt (bb2-get-bb-keywords-list) 'words))
 
 ;; constants- ie. #something_like_this
 (defvar bb2-const-regexp nil "regular expression for bb2 constants")
@@ -1886,9 +2481,9 @@
   (setq tab-width 2)
   (set (make-local-variable 'tab-stop-list) '(0 2 4 6))
   (setq standard-indent 2)  
-  ; replace indent-relative
+					; replace indent-relative
   (setq indent-line-function 'insert-tab)  
-  ; turn off electric-indent for this mode
+					; turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
 (defun keywordize-keyhook ()
@@ -1913,8 +2508,8 @@
   (and (< 0 (length (this-command-keys-vector)))
        (or (equal 13 last-command-event)
 	   (equal 10 last-command-event))))
-     ;	   (equal 'up last-command-event)
-   ;	   (equal 'down last-command-event))))
+					;	   (equal 'up last-command-event)
+					;	   (equal 'down last-command-event))))
 
 (defun bb2-user-is-typing-p ()
   (eq this-command #'self-insert-command))
