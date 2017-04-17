@@ -7,7 +7,7 @@
 
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
-      #s(hash-table data ("acos" ("ACos" "(Float)" "E002")
+      #s(hash-table test equal data ("acos" ("ACos" "(Float)" "E002")
 			  "addvalue" ("ADDValue" "(bitmap#,x,y)" "A10B")
 			  "agablue" ("AGABlue" "(Colour Register)" "CE12")
 			  "agafillpalette" ("AGAFillPalette" "palette#,r,g,b[,start_col,end_col] - fill palette with AGA r,g,b values" "A08A")
@@ -2445,17 +2445,22 @@
     (modify-syntax-entry ?\\ "." table)
     table))
 
-(defun bb2-get-bb-keywords-list ()
-  "Return a list of non-amigados keywords from the main table"
+; can probably get rid of the or-and-etc with a macro
+(defun bb2-get-keywords-list (keyword-type)
+  "Return a list of blitz or amigados keywords from the main table"
   (let ((kw '()))
-    (maphash (lambda (k v)
-	       (if (not (string-suffix-p "_" k))
-		   (push (car v) kw)))
-	     bb2-keywords)
-    (nreverse kw))
+    (maphash
+     (lambda (k v)
+       (if (or (and (eq keyword-type 'blitz)
+		    (not (string-suffix-p "_" k)))
+	       (and (eq keyword-type 'amiga)
+		    (string-suffix-p "_" k)))
+	   (push (car v) kw)))
+     bb2-keywords)
+    (nreverse kw)))
 
 (defvar bb2-keywords-regexp nil "regular expression for bb2 keywords")
-(setq bb2-keywords-regexp (regexp-opt (bb2-get-bb-keywords-list) 'words))
+(setq bb2-keywords-regexp (regexp-opt (bb2-get-keywords-list 'blitz) 'words))
 
 ;; constants- ie. #something_like_this
 (defvar bb2-const-regexp nil "regular expression for bb2 constants")
@@ -2466,7 +2471,7 @@
 (setq bb2-types-regexp "\\B\\$\\|\\(\\b\\|[[:blank:]]+\\)\\.[a-zA-Z_0-9]+")
 
 (defvar bb2-amigados-keywords-regexp nil "regular expression for AmigaDOS keywords")
-(setq bb2-amigados-keywords-regexp (regexp-opt bb2-amigados-keywords 'words))
+(setq bb2-amigados-keywords-regexp (regexp-opt (bb2-get-keywords-list 'amiga) 'words))
 
 (defvar bb2-highlights nil)
 (setq bb2-highlights
@@ -2481,9 +2486,9 @@
   (setq tab-width 2)
   (set (make-local-variable 'tab-stop-list) '(0 2 4 6))
   (setq standard-indent 2)  
-					; replace indent-relative
+  ; replace indent-relative
   (setq indent-line-function 'insert-tab)  
-					; turn off electric-indent for this mode
+  ;turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
 (defun keywordize-keyhook ()
@@ -2508,8 +2513,8 @@
   (and (< 0 (length (this-command-keys-vector)))
        (or (equal 13 last-command-event)
 	   (equal 10 last-command-event))))
-					;	   (equal 'up last-command-event)
-					;	   (equal 'down last-command-event))))
+     ;	   (equal 'up last-command-event)
+     ;	   (equal 'down last-command-event))))
 
 (defun bb2-user-is-typing-p ()
   (eq this-command #'self-insert-command))
@@ -2532,17 +2537,8 @@
       (insert found-keyword))))
 
 (defun bb2-find-keyword (symbol)
-  "Return the Blitz Keyword for a given symbol"
-  (let ((keyword-list (bb2-choose-keyword-list symbol)))
-    (cl-some (lambda (x)
-	       (if (string-match-p (concat "^" x "$") symbol) x))
-	     keyword-list)))
-
-(defun bb2-choose-keyword-list (symbol)
-  (if (and (char-or-string-p symbol)
-	   (string-suffix-p "_" symbol))
-      bb2-amigados-keywords
-    bb2-keywords))
+  "Return the blitz keyword for a given symbol"
+  (car (gethash symbol bb2-keywords)))
 
 (defun bb2-keywordize-region (start-pos end-pos)
   "Capitalize Blitz II keywords within a region"
@@ -2556,7 +2552,7 @@
   (let ((symbol (thing-at-point 'symbol)))
     (if (char-or-string-p symbol)
 	(setq symbol (downcase symbol)))
-    (gethash symbol bb2-eldoc-table)))
+    (cadr (gethash symbol bb2-keywords))))
 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
