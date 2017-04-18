@@ -2445,17 +2445,17 @@
     (modify-syntax-entry ?\\ "." table)
     table))
 
-; can probably get rid of the or-and-etc with a macro
 (defun bb2-get-keywords-list (keyword-type)
   "Return a list of blitz or amigados keywords from the main table"
   (let ((kw '()))
     (maphash
      (lambda (k v)
-       (if (or (and (eq keyword-type 'blitz)
-		    (not (string-suffix-p "_" k)))
-	       (and (eq keyword-type 'amiga)
-		    (string-suffix-p "_" k)))
-	   (push (car v) kw)))
+       (let ((is-amiga-keyword (string-suffix-p "_" k)))
+	 (if (or (and (eq keyword-type 'blitz)
+		      (not is-amiga-keyword))
+		 (and (eq keyword-type 'amiga)
+		      is-amiga-keyword))
+	     (push (car v) kw))))
      bb2-keywords)
     (nreverse kw)))
 
