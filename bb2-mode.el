@@ -3,8 +3,6 @@
 ;;; Richard Dare
 ;;; www.richardjdare.com
 
-(require 'cl-lib)
-
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
       #s(hash-table test equal data ("acos" ("ACos" "(Float)" "E002")
@@ -2450,11 +2448,11 @@
   (let ((kw '()))
     (maphash
      (lambda (k v)
-       (let ((is-amiga-keyword (string-suffix-p "_" k)))
+       (let ((amigados-keyword-p (string-suffix-p "_" k)))
 	 (if (or (and (eq keyword-type 'blitz)
-		      (not is-amiga-keyword))
+		      (not amigados-keyword-p))
 		 (and (eq keyword-type 'amiga)
-		      is-amiga-keyword))
+		      amigados-keyword-p))
 	     (push (car v) kw))))
      bb2-keywords)
     (nreverse kw)))
