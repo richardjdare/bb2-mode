@@ -2441,6 +2441,12 @@
     ;; \ is punctuation, not an escape character
     ;; but \\ is escape in AmiBlitz? how to do it?
     (modify-syntax-entry ?\\ "." table)
+    ;; operators are punctuation
+    (modify-syntax-entry ?\= "." table)
+    (modify-syntax-entry ?\+ "." table)
+    (modify-syntax-entry ?\- "." table)
+    (modify-syntax-entry ?\* "." table)
+    (modify-syntax-entry ?\/ "." table)
     table))
 
 (defun bb2-get-keywords-list (keyword-type)
