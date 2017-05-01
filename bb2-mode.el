@@ -2,7 +2,6 @@
 ;;; Emacs major mode for ascii Blitz Basic II source code
 ;;; Richard Dare
 ;;; www.richardjdare.com
-
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
       #s(hash-table test equal data ("acos" ("ACos" "(Float)" "E002")
@@ -841,7 +840,7 @@
 				     "par$" ("Par$" "parameter$=Par$(Paramter#)" "B502")
 				     "parpath$" ("ParPath$" "path$=ParPath$(Par#,#type)" "B504")
 				     "pathlock" ("PathLock" "" "B682")
-				     "pathpart$" ("PathPart$" "(FullPath$) ;"DH0:S/User-Startup" -> "DH0:S"" "B6A4")
+				     "pathpart$" ("PathPart$" "(FullPath$) ;\"DH0:S/User-Startup\" -> \"DH0:S\"" "B6A4")
 				     "pausemodule" ("PauseModule" "" "9C0D")
 				     "peek" ("Peek" "[.Type](Address)" "DA02")
 				     "peekmax$" ("PeekMax$" "(address,max_chars)" "988F")
@@ -2558,6 +2557,76 @@
 	(setq symbol (downcase symbol)))
     (cadr (gethash symbol bb2-keywords))))
 
+(defun bb2-make-token-table ()
+  "create a table of <token,keword> from our main table of data"
+  (let ((token-table (make-hash-table :test 'equal)))
+    (maphash (lambda (k v)
+	       (if (caddr v)
+		   (puthash (caddr v) (car v) token-table)))
+	     bb2-keywords)
+    token-table))
+
+(defun bb2-load-binary-file (filename)
+  "Load a binary file into a string of byte values."
+  (with-temp-buffer
+    (set-buffer-multibyte nil)
+    (setq buffer-file-coding-system 'binary)
+    (insert-file-contents-literally filename)
+    (buffer-substring-no-properties (point-min) (point-max))))
+
+(defun bb2-bytes-to-token (byte1 byte2)
+  "Convert 2 bytes from a binary file into a blitz token"
+  (upcase (format "%x" (logior (ash byte1 8) (logand byte2 255)))))
+
+(defun bb2-get-keyword-for-token (token token-table)
+  "Get the blitz 2 keyword for a given token, or ##[<token>] if not found"
+  (let ((found-token (gethash token token-table)))
+    (if found-token
+	found-token
+      (format "##[%s]" token))))
+      
+  (defun bb2-convert-tokens-to-str (bytes)
+    "Convert a string of byte values containing bb2 tokens into a text string."
+  (let ((token-table (bb2-make-token-table))
+	(outstr "")
+	(i 0))
+    (while (< i (- (length bytes) 1))
+      (let ((b1 (aref bytes i))
+	    (b2 (aref bytes (1+ i))))
+	
+	(cond
+	 ; its an ASCII file, bail out! Nasty but effective
+	 ((or (= b1 13) (= b1 10))
+	  (setq outstr "ASCII FILE")
+	  (setq i (length bytes)))
+	      
+	 ; newline character
+	 ((= b1 0)
+	  (setq outstr (concat outstr "\n"))
+	  (setq i (1+ i)))
+
+         ; tab
+	 ((and (= b1 32) (= b2 32))
+	  (setq outstr (concat outstr "\t"))
+	  (setq i (+ 2 i)))
+
+         ; plain text
+	 ((and (> b1 31) (< b1 127))
+	  (setq outstr (concat outstr (byte-to-string b1)))
+	  (setq i (1+ i)))
+	 
+	 ; number
+	 ((and (< b1 32) (> b1 0))
+	  (setq outstr (format "%s%d" outstr b1))
+	  (setq i (1+ i)))
+	 
+	 ;blitz token
+	 ((> b1 127)
+	  (setq outstr (concat outstr
+			       (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table)))
+	  (setq i (+ 2 i))))))
+    outstr))
+	 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
