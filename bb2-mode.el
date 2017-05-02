@@ -809,6 +809,7 @@
 				     "null" ("Null" "(String$) ;Returns address of null-termed string" #xB581)
 				     "numdays" ("NumDays" "date$ ;converts dd/mm/yyyy to days since 1/1/1978" #xA703)
 				     "numpars" ("NumPars" "pars.w=NumPars" #xB501)
+				     "off" ("Off" "" #x80C6)
 				     "on" ("On" "" #x80C5)
 				     "opencd" ("OpenCD" "[devicename,unit] - open a CD compatible device" #x8701)
 				     "openconsole" ("OpenConsole" "#Window,#Console" #xA182)
@@ -2560,7 +2561,7 @@
 
 (defun bb2-make-token-table ()
   "create a table of <token,keword> from our main table of data"
-  (let ((token-table (make-hash-table :test 'equal)))
+  (let ((token-table (make-hash-table)))
     (maphash (lambda (k v)
 	       (if (car (cddr v))
 		   (puthash (car (cddr v)) (car v) token-table)))
@@ -2593,8 +2594,7 @@
 	(i 0))
     (while (< i (- (length bytes) 1))
       (let ((b1 (aref bytes i))
-	    (b2 (aref bytes (1+ i))))
-	
+	    (b2 (aref bytes (1+ i))))	
 	(cond
 	 ; its an ASCII file, bail out! Nasty but effective
 	 ((or (= b1 13) (= b1 10))
@@ -2624,7 +2624,8 @@
 	; blitz token
 	 ((> b1 127)
 	  (setq outstr (concat outstr
-			       (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table)))
+			       (bb2-get-keyword-for-token
+				(bb2-bytes-to-token b1 b2) token-table)))
 	  (setq i (+ 2 i))))))
     outstr))
 
