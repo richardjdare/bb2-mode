@@ -2590,7 +2590,7 @@
 (defun bb2-convert-tokens-to-str (bytes)
   "Convert a string of byte values containing bb2 tokens into a text string."
   (let ((token-table (bb2-make-token-table))
-	(outstr "")
+	(outstr '())
 	(i 0))
     (while (< i (- (length bytes) 1))
       (let ((b1 (aref bytes i))
@@ -2598,36 +2598,34 @@
 	(cond
 	 ; its an ASCII file, bail out! Nasty but effective
 	 ((or (= b1 13) (= b1 10))
-	  (setq outstr "ASCII FILE")
+	  (push "ASCII FILE" outstr)
 	  (setq i (length bytes)))
 	 
 	 ;newline character
 	 ((= b1 0)
-	  (setq outstr (concat outstr "\n"))
+	  (push "\n" outstr)
 	  (setq i (1+ i)))
 
 	; tab
 	 ((and (= b1 32) (= b2 32))
-	  (setq outstr (concat outstr "\t"))
+	  (push "\t" outstr)
 	  (setq i (+ 2 i)))
 
 	; plain text
 	 ((and (> b1 31) (< b1 127))
-	  (setq outstr (concat outstr (byte-to-string b1)))
+	  (push (byte-to-string b1) outstr)
 	  (setq i (1+ i)))
 	 
 	; number
 	 ((and (< b1 32) (> b1 0))
-	  (setq outstr (format "%s%d" outstr b1))
+	  (push (format "%d" b1) outstr)
 	  (setq i (1+ i)))
 	 
 	; blitz token
 	 ((> b1 127)
-	  (setq outstr (concat outstr
-			       (bb2-get-keyword-for-token
-				(bb2-bytes-to-token b1 b2) token-table)))
+	  (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr)
 	  (setq i (+ 2 i))))))
-    outstr))
+    (mapconcat 'identity (nreverse outstr) "")))
 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
