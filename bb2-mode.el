@@ -2,6 +2,7 @@
 ;;; Emacs major mode for ascii Blitz Basic II source code
 ;;; Richard Dare
 ;;; www.richardjdare.com
+
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
       #s(hash-table test equal data ("acos" ("ACos" "(Float)" #xE002)
@@ -2451,7 +2452,7 @@
     table))
 
 (defun bb2-get-keywords-list (keyword-type)
-  "Return a list of blitz or amigados keywords from the main table"
+  "Return a list of Blitz or AmigaDOS keywords from the main table"
   (let ((kw '()))
     (maphash
      (lambda (k v)
@@ -2485,15 +2486,15 @@
 	(,bb2-const-regexp . font-lock-constant-face)
 	(,bb2-types-regexp . font-lock-type-face)))
 
-;; set bb2-mode to use simple 2 space indents like TED on Amiga
-(defun bb2-use-ted-indent () 
+(defun bb2-use-ted-indent ()
+  "Set bb2-mode to use simple 2 space indent like TED on Amiga"
   (setq indent-tabs-mode nil)
   (setq tab-width 2)
   (set (make-local-variable 'tab-stop-list) '(0 2 4 6))
   (setq standard-indent 2)  
-					; replace indent-relative
+  ; replace indent-relative
   (setq indent-line-function 'insert-tab)  
-					;turn off electric-indent for this mode
+  ;turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
 (defun keywordize-keyhook ()
@@ -2518,8 +2519,8 @@
   (and (< 0 (length (this-command-keys-vector)))
        (or (equal 13 last-command-event)
 	   (equal 10 last-command-event))))
-					;	   (equal 'up last-command-event)
-					;	   (equal 'down last-command-event))))
+      ;	   (equal 'up last-command-event)
+      ;	   (equal 'down last-command-event))))
 
 (defun bb2-user-is-typing-p ()
   (eq this-command #'self-insert-command))
@@ -2536,17 +2537,18 @@
 		      (bounds-of-thing-at-point 'symbol)))
 
 (defun bb2-process-symbol (symbol symbol-boundaries)
+  "Find the Blitz 2 keyword for a given symbol then replace the symbol with that keyword"
   (let ((found-keyword (bb2-find-keyword symbol)))
     (when found-keyword
       (delete-region (car symbol-boundaries) (cdr symbol-boundaries))
       (insert found-keyword))))
 
 (defun bb2-find-keyword (symbol)
-  "Return the blitz keyword for a given symbol"
+  "Return the Blitz 2 keyword for a given symbol"
   (car (gethash symbol bb2-keywords)))
 
 (defun bb2-keywordize-region (start-pos end-pos)
-  "Capitalize Blitz II keywords within a region"
+  "Capitalize Blitz 2 keywords within a region"
   (interactive "r")
   (save-excursion
     (goto-char start-pos)
@@ -2554,13 +2556,14 @@
       (bb2-keywordize-symbol 1))))
 
 (defun bb2-eldoc-function ()
+  "Retrieve the Blitz 2 help string for the keyword at the current point"
   (let ((symbol (thing-at-point 'symbol)))
     (if (char-or-string-p symbol)
 	(setq symbol (downcase symbol)))
     (cadr (gethash symbol bb2-keywords))))
 
 (defun bb2-make-token-table ()
-  "create a table of <token,keword> from our main table of data"
+  "Create a table of <token,keyword> from the main data table"
   (let ((token-table (make-hash-table)))
     (maphash (lambda (k v)
 	       (if (car (cddr v))
@@ -2569,7 +2572,7 @@
     token-table))
 
 (defun bb2-load-binary-file (filename)
-  "Load a binary file into a string of byte values."
+  "Load a binary file and return a string containing its byte values"
   (with-temp-buffer
     (set-buffer-multibyte nil)
     (setq buffer-file-coding-system 'binary)
