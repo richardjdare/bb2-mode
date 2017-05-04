@@ -2,6 +2,7 @@
 ;;; Emacs major mode for ascii Blitz Basic II source code
 ;;; Richard Dare
 ;;; www.richardjdare.com
+;; -*- lexical-binding: t -*-
 
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
@@ -2601,6 +2602,7 @@
 	(cond
 	 ; its an ASCII file, bail out! Nasty but effective
 	 ((or (= b1 13) (= b1 10))
+	  (setq outstr '())
 	  (push "ASCII FILE" outstr)
 	  (setq i (length bytes)))
 	 
@@ -2619,7 +2621,7 @@
 	  (push (byte-to-string b1) outstr)
 	  (setq i (1+ i)))
 	 
-	; number
+	; number?
 	 ((and (< b1 32) (> b1 0))
 	  (push (format "%d" b1) outstr)
 	  (setq i (1+ i)))
@@ -2629,6 +2631,30 @@
 	  (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr)
 	  (setq i (+ 2 i))))))
     (mapconcat 'identity (nreverse outstr) "")))
+
+(defun bb2-get-ascii-buffer-bytes (buffer)
+  "get a buffer of text and return it as a string of byte values"
+  (with-current-buffer buffer
+    (buffer-substring-no-properties (point-min) (point-max))))
+
+;; unfinished. need to split the token into 2 bytes
+(defun bb2-convert-ascii-to-tokenized (bytes)
+  "Take a string of bytes and tokenize them"
+  (let ((outstr '())
+	(word "")
+	(word-endings (mapcar 'string-to-char '(" " "(" "\n")))
+	(i 0))
+    (while (< i  (length bytes))
+      (let ((b (aref bytes i)))	
+	(if (not (member b word-endings))
+	    (setq word (concat word (char-to-string b)))
+	  (if (gethash (downcase word) bb2-keywords)
+	      (push (car (cddr (gethash (downcase word) bb2-keywords))) outstr)
+	    (map 'list (lambda (y) (push y outstr)) (vconcat word)))
+	  (setq word "")
+	  (push b outstr)))
+      (setq i (1+ i)))
+    (nreverse outstr)))
 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
