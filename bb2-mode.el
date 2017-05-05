@@ -2,7 +2,6 @@
 ;;; Emacs major mode for ascii Blitz Basic II source code
 ;;; Richard Dare
 ;;; www.richardjdare.com
-;; -*- lexical-binding: t -*-
 
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
@@ -2589,7 +2588,7 @@
   (let ((found-token (gethash token token-table)))
     (if found-token
 	found-token
-      (format "##[%s]" token))))
+      (format "##[$%x]" token))))
 
 (defun bb2-convert-tokens-to-str (bytes)
   "Convert a string of byte values containing bb2 tokens into a text string."
@@ -2645,6 +2644,7 @@
   "split a bb2 token value into 2 bytes"
   (list (logand (ash token -8) 255) (logand token 255)))
 
+;; this can probably be improved :)
 (defun bb2-convert-ascii-to-tokenized (chars)
   "Take a string of chars and tokenize them"
   (let ((outstr '())
@@ -2680,7 +2680,6 @@
   
   (add-hook 'post-command-hook 'keywordize-keyhook nil t)
   (eldoc-mode))
-
 
 ;; associate  bb2-mode to ascii files only at the moment
 (add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))	     
