@@ -2637,19 +2637,27 @@
   (with-current-buffer buffer
     (buffer-substring-no-properties (point-min) (point-max))))
 
-;; unfinished. need to split the token into 2 bytes
-(defun bb2-convert-ascii-to-tokenized (bytes)
-  "Take a string of bytes and tokenize them"
+(defun bb2-conv-special-char (b)
+  "Convert an ascii byte to a blitz special character if needed, or return it unchanged"
+  (if (= b 10) 0 b))
+
+(defun bb2-token-to-bytes (token)
+  "split a bb2 token value into 2 bytes"
+  (list (logand (ash token -8) 255) (logand token 255)))
+
+(defun bb2-convert-ascii-to-tokenized (chars)
+  "Take a string of chars and tokenize them"
   (let ((outstr '())
 	(word "")
-	(word-endings (mapcar 'string-to-char '(" " "(" "\n")))
+	(word-endings (mapcar 'string-to-char '(" " "(" "\ ")))
 	(i 0))
-    (while (< i  (length bytes))
-      (let ((b (aref bytes i)))	
+    (while (< i  (length chars))
+      (let ((b (bb2-conv-special-char (aref chars i))))
 	(if (not (member b word-endings))
 	    (setq word (concat word (char-to-string b)))
 	  (if (gethash (downcase word) bb2-keywords)
-	      (push (car (cddr (gethash (downcase word) bb2-keywords))) outstr)
+	      (map 'list (lambda (y) (push y outstr))
+		   (bb2-token-to-bytes (car (cddr (gethash (downcase word) bb2-keywords)))))
 	    (map 'list (lambda (y) (push y outstr)) (vconcat word)))
 	  (setq word "")
 	  (push b outstr)))
