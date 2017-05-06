@@ -2590,7 +2590,7 @@
 	found-token
       (format "##[$%x]" token))))
 
-(defun bb2-convert-tokens-to-str (bytes)
+(defun bb2-tokens-to-string (bytes)
   "Convert a string of byte values containing bb2 tokens into a text string."
   (let ((token-table (bb2-make-token-table))
 	(outstr '())
@@ -2645,8 +2645,8 @@
   (list (logand (ash token -8) 255) (logand token 255)))
 
 ;; this can probably be improved :)
-(defun bb2-convert-ascii-to-tokenized (chars)
-  "Take a string of chars and tokenize them"
+(defun bb2-string-to-tokens (chars)
+  "Convert a string of Blitz 2 source to its tokenized form"
   (let ((outstr '())
 	(word "")
 	(word-endings (mapcar 'string-to-char '(" " "(" "\ ")))
