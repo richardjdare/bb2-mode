@@ -2675,12 +2675,12 @@ Returns an empty string if we identify it as ascii src"
       (erase-buffer)
       (insert str))))
 
-(defun bb2-maybe-convert-current-buffer ()
-  "Check if the current buffer is a tokenized file and replace its contents with converted text"
+(defun bb2-maybe-convert-buffer (buffer)
+  "If the given buffer contains a tokenized file convert its contents to plain text"
   (if (> (buffer-size) 0)	
-      (let ((buffer-detokenized (bb2-tokens-to-string (bb2-get-buffer-contents (current-buffer)))))
+      (let ((buffer-detokenized (bb2-tokens-to-string (bb2-get-buffer-contents buffer))))
 	(if (> (length buffer-detokenized) 0)
-	    (bb2-replace-buffer-contents (current-buffer) buffer-detokenized)))))
+	    (bb2-replace-buffer-contents buffer buffer-detokenized)))))
 	
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
@@ -2699,7 +2699,7 @@ Returns an empty string if we identify it as ascii src"
   (add-hook 'post-command-hook 'keywordize-keyhook nil t)
   (eldoc-mode)
 
-  (bb2-maybe-convert-current-buffer))
+  (bb2-maybe-convert-buffer (current-buffer)))
 
 ;; associate  bb2-mode to ascii files only at the moment
 (add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))
