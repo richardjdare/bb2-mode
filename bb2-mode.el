@@ -2584,14 +2584,15 @@
   (logior (ash byte1 8) (logand byte2 255)))
 
 (defun bb2-get-keyword-for-token (token token-table)
-  "Get the blitz 2 keyword for a given token, or ##[<token>] if not found"
+  "Get the blitz 2 keyword for a given token, or ##[$<token>] if not found"
   (let ((found-token (gethash token token-table)))
     (if found-token
 	found-token
       (format "##[$%x]" token))))
 
 (defun bb2-tokens-to-string (bytes)
-  "Convert a string of byte values containing bb2 tokens into a text string."
+  "Convert a tokenized string of Blitz II src into a plain text string.
+Returns an empty string if we can't convert it"
   (let ((token-table (bb2-make-token-table))
 	(outstr '())
 	(i 0))
@@ -2602,7 +2603,6 @@
 	 ; its an ASCII file, bail out! Nasty but effective
 	 ((or (= b1 13) (= b1 10))
 	  (setq outstr '())
-	  (push "ASCII FILE" outstr)
 	  (setq i (length bytes)))
 	 
 	 ;newline character
@@ -2620,7 +2620,7 @@
 	  (push (byte-to-string b1) outstr)
 	  (setq i (1+ i)))
 	 
-	; number?
+	; not sure what these are in blitz
 	 ((and (< b1 32) (> b1 0))
 	  (push (format "%d" b1) outstr)
 	  (setq i (1+ i)))
@@ -2631,11 +2631,12 @@
 	  (setq i (+ 2 i))))))
     (mapconcat 'identity (nreverse outstr) "")))
 
-(defun bb2-get-ascii-buffer-bytes (buffer)
+(defun bb2-get-buffer-contents (buffer)
   "get a buffer of text and return it as a string of byte values"
   (with-current-buffer buffer
     (buffer-substring-no-properties (point-min) (point-max))))
 
+;; currently we only convert newlines to 0 - don't know of any other special chars
 (defun bb2-conv-special-char (b)
   "Convert an ascii byte to a blitz special character if needed, or return it unchanged"
   (if (= b 10) 0 b))
@@ -2664,10 +2665,28 @@
       (setq i (1+ i)))
     (nreverse outstr)))
 
+(defun bb2-replace-buffer-contents (buffer str)
+  "Replace the contents of a buffer with a string"
+  (save-excursion
+    (with-current-buffer buffer
+      (erase-buffer)
+      (insert str))))
+
+;; this reloads the tokenized file rather than converting the existing buffer contents.
+;; When using existing buffer contents, detokenization fails, probably for encoding reasons.fixme
+(defun bb2-maybe-convert-current-buffer ()
+  "Check if the current buffer is a tokenized file and replace its contents with converted text"
+  (if (> (buffer-size) 0)
+      (let ((buffer-detokenized (bb2-tokens-to-string (bb2-load-binary-file (buffer-file-name)))))
+	(if (> (length buffer-detokenized) 0)
+	    (bb2-replace-buffer-contents (current-buffer) buffer-detokenized)))))
+		 
+	
+	
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
-
+ 
   (if bb2-ted-indent-p
       (bb2-use-ted-indent))
   
@@ -2679,9 +2698,12 @@
        'bb2-eldoc-function)
   
   (add-hook 'post-command-hook 'keywordize-keyhook nil t)
-  (eldoc-mode))
+  (eldoc-mode)
+
+  (bb2-maybe-convert-current-buffer))
 
 ;; associate  bb2-mode to ascii files only at the moment
-(add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))	     
+(add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))
+(add-to-list 'auto-mode-alist '("\\.bb\\'" . bb2-mode))
 
 (provide 'bb2-mode)
