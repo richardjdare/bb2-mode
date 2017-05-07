@@ -2592,7 +2592,7 @@
 
 (defun bb2-tokens-to-string (bytes)
   "Convert a tokenized string of Blitz II src into a plain text string.
-Returns an empty string if we can't convert it"
+Returns an empty string if we identify it as ascii src"
   (let ((token-table (bb2-make-token-table))
 	(outstr '())
 	(i 0))
@@ -2600,7 +2600,7 @@ Returns an empty string if we can't convert it"
       (let ((b1 (aref bytes i))
 	    (b2 (aref bytes (1+ i))))	
 	(cond
-	 ; its an ASCII file, bail out! Nasty but effective
+	 ; its an ASCII file, bail out!
 	 ((or (= b1 13) (= b1 10))
 	  (setq outstr '())
 	  (setq i (length bytes)))
@@ -2631,10 +2631,13 @@ Returns an empty string if we can't convert it"
 	  (setq i (+ 2 i))))))
     (mapconcat 'identity (nreverse outstr) "")))
 
+;; we convert the text to latin-1 for detokenizing. latin-1 is the Amiga's default encoding
 (defun bb2-get-buffer-contents (buffer)
-  "get a buffer of text and return it as a string of byte values"
+  "get a buffer of blitz source and return it as a string of byte values"
   (with-current-buffer buffer
-    (buffer-substring-no-properties (point-min) (point-max))))
+    (encode-coding-string
+     (buffer-substring-no-properties (point-min) (point-max))
+     'latin-1)))
 
 ;; currently we only convert newlines to 0 - don't know of any other special chars
 (defun bb2-conv-special-char (b)
@@ -2672,16 +2675,12 @@ Returns an empty string if we can't convert it"
       (erase-buffer)
       (insert str))))
 
-;; this reloads the tokenized file rather than converting the existing buffer contents.
-;; When using existing buffer contents, detokenization fails, probably for encoding reasons.fixme
 (defun bb2-maybe-convert-current-buffer ()
   "Check if the current buffer is a tokenized file and replace its contents with converted text"
-  (if (> (buffer-size) 0)
-      (let ((buffer-detokenized (bb2-tokens-to-string (bb2-load-binary-file (buffer-file-name)))))
+  (if (> (buffer-size) 0)	
+      (let ((buffer-detokenized (bb2-tokens-to-string (bb2-get-buffer-contents (current-buffer)))))
 	(if (> (length buffer-detokenized) 0)
 	    (bb2-replace-buffer-contents (current-buffer) buffer-detokenized)))))
-		 
-	
 	
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
