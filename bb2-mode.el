@@ -360,7 +360,6 @@
 				     "diskused" ("DiskUsed" ";No. bytes used of last analyzed drive" #xB695)
 				     "diskfontbase" ("DiskfontBase" ";Returns DiskFont Library base" #xB589)
 				     "dispheight" ("DispHeight" "" #xBC0C)
-				     "display" ("Display" "" nil)
 				     "displayadjust" ("DisplayAdjust" "CopList#,fetchwid,ddfstrt,ddfstop,diwstrt,diwstop" #xC788)
 				     "displaybitmap" ("DisplayBitMap" "CopList#,bmap[,x,y] [,bmap[,x,y]]" #xC784)
 				     "displaycontrols" ("DisplayControls" "CopList#,BPLCON2,BPLCON3,BPLCON4" #xC787)
@@ -2596,39 +2595,44 @@ Returns an empty string if we identify it as ascii src"
   (let ((token-table (bb2-make-token-table))
 	(outstr '())
 	(i 0))
-    (while (< i (- (length bytes) 1))
-      (let ((b1 (aref bytes i))
-	    (b2 (aref bytes (1+ i))))	
-	(cond
-	 ; its an ASCII file, bail out!
-	 ((or (= b1 13) (= b1 10))
-	  (setq outstr '())
-	  (setq i (length bytes)))
-	 
+    (while
+	(progn
+	  (let ((b1 (aref bytes i))
+		(b2 (aref bytes (1+ i))))	
+	    (cond
+	     ; its an ASCII file, bail out!
+	     ((or (= b1 13) (= b1 10))
+	      (setq outstr '())
+	      (setq i (length bytes)))
+	     
 	 ;newline character
-	 ((= b1 0)
-	  (push "\n" outstr)
-	  (setq i (1+ i)))
+	     ((= b1 0)
+	      (push "\n" outstr)
+	      (setq i (1+ i)))
 
-	; tab
-	 ((and (= b1 32) (= b2 32))
-	  (push "\t" outstr)
-	  (setq i (+ 2 i)))
-
-	; plain text
-	 ((and (> b1 31) (< b1 127))
-	  (push (byte-to-string b1) outstr)
-	  (setq i (1+ i)))
+	; tab (rjd: using spaces for now)
+	;	 ((and (= b1 32) (= b2 32))
+	;	  (push "\t" outstr)
+	    ;	  (setq i (+ 2 i)))
 	 
-	; not sure what these are in blitz
-	 ((and (< b1 32) (> b1 0))
-	  (push (format "%d" b1) outstr)
-	  (setq i (1+ i)))
+	      ; plain text
+	     ((and (> b1 31) (< b1 127))
+	      (push (byte-to-string b1) outstr)
+	      (setq i (1+ i)))
 	 
-	; blitz token
-	 ((> b1 127)
-	  (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr)
-	  (setq i (+ 2 i))))))
+	     ; not sure what these are in blitz
+	     ((and (< b1 32) (> b1 0))
+	      (push (format "%d" b1) outstr)
+	      (setq i (1+ i)))
+	 
+	     ; blitz token
+	     ((> b1 127)
+	      (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr)
+	      (setq i (+ 2 i)))
+	 
+	     (t (setq i (1+ i))
+		(error "should not happen"))))
+	  (< i (- (length bytes) 1))))
     (mapconcat 'identity (nreverse outstr) "")))
 
 ;; we convert the text to latin-1 for detokenizing. latin-1 is the Amiga's default encoding
@@ -2648,6 +2652,13 @@ Returns an empty string if we identify it as ascii src"
   "split a bb2 token value into 2 bytes"
   (list (logand (ash token -8) 255) (logand token 255)))
 
+(defun bb2-token-for-keyword (keyword)
+  "Return a blitz 2 token for a given keyword. signals an error if no token"
+  (let ((found-token (car (cddr (gethash (downcase keyword) bb2-keywords)))))
+    (if found-token
+	found-token
+      (error "No token for keyword \"%s\"" keyword))))
+
 ;; this can probably be improved :)
 (defun bb2-string-to-tokens (chars)
   "Convert a string of Blitz 2 source to its tokenized form"
@@ -2660,9 +2671,9 @@ Returns an empty string if we identify it as ascii src"
 	(if (not (member b word-endings))
 	    (setq word (concat word (char-to-string b)))
 	  (if (gethash (downcase word) bb2-keywords)
-	      (mapc (lambda (y) (push y outstr))
-		   (bb2-token-to-bytes (car (cddr (gethash (downcase word) bb2-keywords)))))
-	    (mapc (lambda (y) (push y outstr)) (vconcat word)))
+	      (map 'list (lambda (y) (push y outstr))
+		   (bb2-token-to-bytes (bb2-token-for-keyword word)))
+	    (map 'list (lambda (y) (push y outstr)) (vconcat word)))
 	  (setq word "")
 	  (push b outstr)))
       (setq i (1+ i)))
@@ -2679,8 +2690,10 @@ Returns an empty string if we identify it as ascii src"
   "If the given buffer contains a tokenized file convert its contents to plain text"
   (if (> (buffer-size) 0)	
       (let ((buffer-detokenized (bb2-tokens-to-string (bb2-get-buffer-contents buffer))))
-	(if (> (length buffer-detokenized) 0)
-	    (bb2-replace-buffer-contents buffer buffer-detokenized)))))
+	(when (> (length buffer-detokenized) 0)
+	  (bb2-replace-buffer-contents buffer buffer-detokenized)
+	  (set-buffer-modified-p nil)))))
+	  
 	
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
@@ -2704,5 +2717,6 @@ Returns an empty string if we identify it as ascii src"
 ;; associate  bb2-mode to ascii files only at the moment
 (add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))
 (add-to-list 'auto-mode-alist '("\\.bb\\'" . bb2-mode))
+(add-to-list 'auto-mode-alist '("\\.bb2\\'" . bb2-mode))
 
 (provide 'bb2-mode)
