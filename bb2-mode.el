@@ -2451,7 +2451,7 @@
     table))
 
 (defun bb2-get-keywords-list (keyword-type)
-  "Return a list of Blitz or AmigaDOS keywords from the main table"
+  "Return a list of 'blitz or 'amiga keywords from the main table"
   (let ((kw '()))
     (maphash
      (lambda (k v)
@@ -2605,15 +2605,10 @@ Returns an empty string if we identify it as ascii src"
 	      (setq outstr '())
 	      (setq i (length bytes)))
 	     
-	 ;newline character
+	     ;newline character
 	     ((= b1 0)
 	      (push "\n" outstr)
 	      (setq i (1+ i)))
-
-	; tab (rjd: using spaces for now)
-	;	 ((and (= b1 32) (= b2 32))
-	;	  (push "\t" outstr)
-	    ;	  (setq i (+ 2 i)))
 	 
 	      ; plain text
 	     ((and (> b1 31) (< b1 127))
@@ -2628,32 +2623,29 @@ Returns an empty string if we identify it as ascii src"
 	     ; blitz token
 	     ((> b1 127)
 	      (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr)
-	      (setq i (+ 2 i)))
-	 
-	     (t (setq i (1+ i))
-		(error "should not happen"))))
+	      (setq i (+ 2 i)))))
 	  (< i (- (length bytes) 1))))
     (mapconcat 'identity (nreverse outstr) "")))
 
 ;; we convert the text to latin-1 for detokenizing. latin-1 is the Amiga's default encoding
 (defun bb2-get-buffer-contents (buffer)
-  "get a buffer of blitz source and return it as a string of byte values"
+  "Return the contents of a buffer as a latin-1 string"
   (with-current-buffer buffer
     (encode-coding-string
      (buffer-substring-no-properties (point-min) (point-max))
      'latin-1)))
 
 ;; currently we only convert newlines to 0 - don't know of any other special chars
-(defun bb2-conv-special-char (b)
-  "Convert an ascii byte to a blitz special character if needed, or return it unchanged"
+(defun bb2-translate-special-char (b)
+  "Return a Blitz 2 special character for a given ascii byte or return it unchanged"
   (if (= b 10) 0 b))
 
 (defun bb2-token-to-bytes (token)
-  "split a bb2 token value into 2 bytes"
+  "Split a Blitz 2 token value into 2 bytes and return them in a list"
   (list (logand (ash token -8) 255) (logand token 255)))
 
 (defun bb2-token-for-keyword (keyword)
-  "Return a blitz 2 token for a given keyword. signals an error if no token"
+  "Return a Blitz 2 token for a given keyword. Signal an error if no token"
   (let ((found-token (car (cddr (gethash (downcase keyword) bb2-keywords)))))
     (if found-token
 	found-token
@@ -2661,23 +2653,23 @@ Returns an empty string if we identify it as ascii src"
 
 ;; this can probably be improved :)
 (defun bb2-string-to-tokens (chars)
-  "Convert a string of Blitz 2 source to its tokenized form"
-  (let ((outstr '())
+  "Convert a string of Blitz 2 source into a list of tokenized chars."
+  (let ((tokenized '())
 	(word "")
 	(word-endings (mapcar 'string-to-char '(" " "(" "\ ")))
 	(i 0))
-    (while (< i  (length chars))
-      (let ((b (bb2-conv-special-char (aref chars i))))
+    (while (< i (length chars))
+      (let ((b (bb2-translate-special-char (aref chars i))))
 	(if (not (member b word-endings))
 	    (setq word (concat word (char-to-string b)))
 	  (if (gethash (downcase word) bb2-keywords)
-	      (map 'list (lambda (y) (push y outstr))
+	      (map 'list (lambda (y) (push y tokenized))
 		   (bb2-token-to-bytes (bb2-token-for-keyword word)))
-	    (map 'list (lambda (y) (push y outstr)) (vconcat word)))
+	    (map 'list (lambda (y) (push y tokenized)) (vconcat word)))
 	  (setq word "")
-	  (push b outstr)))
+	  (push b tokenized)))
       (setq i (1+ i)))
-    (nreverse outstr)))
+    (nreverse tokenized)))
 
 (defun bb2-replace-buffer-contents (buffer str)
   "Replace the contents of a buffer with a string"
@@ -2689,9 +2681,9 @@ Returns an empty string if we identify it as ascii src"
 (defun bb2-maybe-convert-buffer (buffer)
   "If the given buffer contains a tokenized file convert its contents to plain text"
   (if (> (buffer-size) 0)	
-      (let ((buffer-detokenized (bb2-tokens-to-string (bb2-get-buffer-contents buffer))))
-	(when (> (length buffer-detokenized) 0)
-	  (bb2-replace-buffer-contents buffer buffer-detokenized)
+      (let ((detokenized-text (bb2-tokens-to-string (bb2-get-buffer-contents buffer))))
+	(when (> (length detokenized-text) 0)
+	  (bb2-replace-buffer-contents buffer detokenized-text)
 	  (set-buffer-modified-p nil)))))
 	  
 	
@@ -2718,5 +2710,6 @@ Returns an empty string if we identify it as ascii src"
 (add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))
 (add-to-list 'auto-mode-alist '("\\.bb\\'" . bb2-mode))
 (add-to-list 'auto-mode-alist '("\\.bb2\\'" . bb2-mode))
+(add-to-list 'auto-mode-alist '("\\.bb2.ascii\\'" . bb2-mode))
 
 (provide 'bb2-mode)
