@@ -2417,7 +2417,6 @@
 				     "xorregionregion_" ("XorRegionRegion_" "(srcRegion,destRegion)" #xFF63)
 				     "zipwindow_" ("ZipWindow_" "" #xFFD0))))
 
-
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
 (setq bb2-ted-indent-p t)
 
@@ -2511,15 +2510,12 @@
   (not (eq this-command 'bb2-mode)))
 
 ;; The bb2 editor changed keywords on up or down.
-;; it doesnt play nice with the mechanism taken from sql-up.
-;; we need another way of doing things.
+;; this doesn't work with the mechanism taken from sql-up.
 (defun bb2-user-pressed-special-p ()
   "Did the user press enter?"  
   (and (< 0 (length (this-command-keys-vector)))
        (or (equal 13 last-command-event)
 	   (equal 10 last-command-event))))
-      ;	   (equal 'up last-command-event)
-      ;	   (equal 'down last-command-event))))
 
 (defun bb2-user-is-typing-p ()
   (eq this-command #'self-insert-command))
@@ -2595,36 +2591,36 @@ Returns an empty string if we identify it as ascii src"
   (let ((token-table (bb2-make-token-table))
 	(outstr '())
 	(i 0))
-    (while
-	(progn
-	  (let ((b1 (aref bytes i))
-		(b2 (aref bytes (1+ i))))	
-	    (cond
-	     ; its an ASCII file, bail out!
-	     ((or (= b1 13) (= b1 10))
-	      (setq outstr '())
-	      (setq i (length bytes)))
+    (while (< i (length bytes))
+      (let ((b1 (aref bytes i)))	
+	(cond
+	 ; its an ASCII file, bail out!
+	 ((or (= b1 13) (= b1 10))
+	  (setq outstr '())
+	  (setq i (length bytes)))
 	     
-	     ;newline character
-	     ((= b1 0)
-	      (push "\n" outstr)
-	      (setq i (1+ i)))
+	 ; newline character
+	 ((= b1 0)
+	  (push "\n" outstr)
+	  (setq i (1+ i)))
 	 
-	      ; plain text
-	     ((and (> b1 31) (< b1 127))
-	      (push (byte-to-string b1) outstr)
-	      (setq i (1+ i)))
+	  ; plain text
+	 ((and (> b1 31) (< b1 127))
+	  (push (byte-to-string b1) outstr)
+	  (setq i (1+ i)))
 	 
-	     ; not sure what these are in blitz
-	     ((and (< b1 32) (> b1 0))
-	      (push (format "%d" b1) outstr)
-	      (setq i (1+ i)))
+	 ; not sure what these are in blitz
+	 ((and (< b1 32) (> b1 0))
+	  (push (format "%d" b1) outstr)
+	  (setq i (1+ i)))
 	 
-	     ; blitz token
-	     ((> b1 127)
-	      (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr)
-	      (setq i (+ 2 i)))))
-	  (< i (- (length bytes) 1))))
+	 ; blitz token
+	 ((> b1 127)
+	  (let ((b2 (aref bytes (1+ i))))
+	    (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr))
+	  (setq i (+ 2 i)))
+	     
+	 (t (setq i (1+ i))))))
     (mapconcat 'identity (nreverse outstr) "")))
 
 ;; we convert the text to latin-1 for detokenizing. latin-1 is the Amiga's default encoding
@@ -2663,9 +2659,9 @@ Returns an empty string if we identify it as ascii src"
 	(if (not (member b word-endings))
 	    (setq word (concat word (char-to-string b)))
 	  (if (gethash (downcase word) bb2-keywords)
-	      (map 'list (lambda (y) (push y tokenized))
+	      (mapc (lambda (y) (push y tokenized))
 		   (bb2-token-to-bytes (bb2-token-for-keyword word)))
-	    (map 'list (lambda (y) (push y tokenized)) (vconcat word)))
+	    (mapc (lambda (y) (push y tokenized)) (vconcat word)))
 	  (setq word "")
 	  (push b tokenized)))
       (setq i (1+ i)))
@@ -2685,7 +2681,6 @@ Returns an empty string if we identify it as ascii src"
 	(when (> (length detokenized-text) 0)
 	  (bb2-replace-buffer-contents buffer detokenized-text)
 	  (set-buffer-modified-p nil)))))
-	  
 	
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
