@@ -2647,6 +2647,14 @@ Returns an empty string if we identify it as ascii src"
 	found-token
       (error "No token for keyword \"%s\"" keyword))))
 
+(defun bb2-token-list-for-keyword (keyword)
+  "Return a Blitz 2 token for a given keyword as a list of bytes.
+If there is no token, return the keyword as a list of bytes"
+  (let ((found-token (car (cddr (gethash (downcase keyword) bb2-keywords)))))
+    (if found-token
+	(bb2-token-to-bytes found-token)
+      (string-to-list keyword))))
+			     
 ;; this can probably be improved :)
 (defun bb2-string-to-tokens (chars)
   "Convert a string of Blitz 2 source into a list of tokenized chars."
@@ -2660,7 +2668,7 @@ Returns an empty string if we identify it as ascii src"
 	    (setq word (concat word (char-to-string b)))
 	  (if (gethash (downcase word) bb2-keywords)
 	      (mapc (lambda (y) (push y tokenized))
-		   (bb2-token-to-bytes (bb2-token-for-keyword word)))
+		   (bb2-token-list-for-keyword word))
 	    (mapc (lambda (y) (push y tokenized)) (vconcat word)))
 	  (setq word "")
 	  (push b tokenized)))
