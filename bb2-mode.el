@@ -2700,7 +2700,7 @@ If there is no token, return the keyword as a list of bytes"
   (when bb2-is-current-file-tokenized
     (let ((tokenized-text (bb2-string-to-tokens (bb2-get-buffer-contents (current-buffer)))))    
       (when (> (length tokenized-text) 0)
-	(bb2-replace-buffer-contents (current-buffer) (mapconcat 'char-to-string tokenized-text ""))
+	(bb2-replace-buffer-contents (current-buffer) (mapconcat 'unibyte-string tokenized-text ""))
 	(set-buffer-modified-p nil)))))
 
   (defun bb2-after-save ()
