@@ -2417,6 +2417,9 @@
 				     "xorregionregion_" ("XorRegionRegion_" "(srcRegion,destRegion)" #xFF63)
 				     "zipwindow_" ("ZipWindow_" "" #xFFD0))))
 
+(defvar bb2-is-current-file-tokenized nil "Is the current file tokenized?")
+
+
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
 (setq bb2-ted-indent-p t)
 
@@ -2688,6 +2691,8 @@ If there is no token, return the keyword as a list of bytes"
       (let ((detokenized-text (bb2-tokens-to-string (bb2-get-buffer-contents buffer))))
 	(when (> (length detokenized-text) 0)
 	  (bb2-replace-buffer-contents buffer detokenized-text)
+	  (set (make-local-variable 'bb2-is-current-file-tokenized) t)
+	  (setq mode-name "bb2 tokenized")
 	  (set-buffer-modified-p nil)))))
 	
 (define-derived-mode bb2-mode prog-mode "bb2"
