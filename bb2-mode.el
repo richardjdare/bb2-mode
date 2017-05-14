@@ -2694,7 +2694,19 @@ If there is no token, return the keyword as a list of bytes"
 	  (set (make-local-variable 'bb2-is-current-file-tokenized) t)
 	  (setq mode-name "bb2 tokenized")
 	  (set-buffer-modified-p nil)))))
-	
+
+(defun bb2-on-save ()
+  "before-save-hook function. If the buffer is tokenized replace its contents with tokens before saving"
+  (when bb2-is-current-file-tokenized
+    (let ((tokenized-text (bb2-string-to-tokens (bb2-get-buffer-contents (current-buffer)))))    
+      (when (> (length tokenized-text) 0)
+	(bb2-replace-buffer-contents (current-buffer) (mapconcat 'char-to-string tokenized-text ""))
+	(set-buffer-modified-p nil)))))
+
+  (defun bb2-after-save ()
+    "post-save-hook function. If the buffer is tokenized, convert it back to text after saving"
+    (bb2-maybe-convert-buffer (current-buffer)))
+
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
@@ -2708,7 +2720,9 @@ If there is no token, return the keyword as a list of bytes"
   
   (set (make-local-variable 'eldoc-documentation-function)
        'bb2-eldoc-function)
-  
+
+  (add-hook 'before-save-hook 'bb2-on-save nil t)
+  (add-hook 'after-save-hook 'bb2-after-save nil t)
   (add-hook 'post-command-hook 'keywordize-keyhook nil t)
   (eldoc-mode)
 
