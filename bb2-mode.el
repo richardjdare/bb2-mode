@@ -2419,7 +2419,6 @@
 
 (defvar bb2-is-current-file-tokenized nil "Is the current file tokenized?")
 
-
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
 (setq bb2-ted-indent-p t)
 
@@ -2657,24 +2656,36 @@ If there is no token, return the keyword as a list of bytes"
     (if found-token
 	(bb2-token-to-bytes found-token)
       (string-to-list keyword))))
-			     
+
 ;; this can probably be improved :)
 (defun bb2-string-to-tokens (chars)
   "Convert a string of Blitz 2 source into a list of tokenized chars."
   (let ((tokenized '())
 	(word "")
-	(word-endings (mapcar 'string-to-char '(" " "(" "\ ")))
+	(word-endings (mapcar 'string-to-char '(" " "(" "\ " "." ":" ";")))
+	(comment-char (string-to-char ";"))
+	(comment-p nil)
 	(i 0))
     (while (< i (length chars))
       (let ((b (bb2-translate-special-char (aref chars i))))
+	
+	(if (= b comment-char)
+	    (setq comment-p t))
+		    
 	(if (not (member b word-endings))
 	    (setq word (concat word (char-to-string b)))
-	  (if (gethash (downcase word) bb2-keywords)
+	  (if (and (not comment-p)
+		   (gethash (downcase word) bb2-keywords))
 	      (mapc (lambda (y) (push y tokenized))
-		   (bb2-token-list-for-keyword word))
+		    (bb2-token-list-for-keyword word))
 	    (mapc (lambda (y) (push y tokenized)) (vconcat word)))
 	  (setq word "")
-	  (push b tokenized)))
+	  (push b tokenized))
+
+	(if (and (= b 0)
+		 comment-p)
+	    (setq comment-p nil)))
+	
       (setq i (1+ i)))
     (nreverse tokenized)))
 
@@ -2695,7 +2706,7 @@ If there is no token, return the keyword as a list of bytes"
 	  (setq mode-name "bb2 tokenized")
 	  (set-buffer-modified-p nil)))))
 
-(defun bb2-on-save ()
+(defun bb2-before-save ()
   "before-save-hook function. If the buffer is tokenized replace its contents with tokens before saving"
   (when bb2-is-current-file-tokenized
     (let ((tokenized-text (bb2-string-to-tokens (bb2-get-buffer-contents (current-buffer)))))    
@@ -2703,9 +2714,20 @@ If there is no token, return the keyword as a list of bytes"
 	(bb2-replace-buffer-contents (current-buffer) (mapconcat 'unibyte-string tokenized-text ""))
 	(set-buffer-modified-p nil)))))
 
-  (defun bb2-after-save ()
-    "post-save-hook function. If the buffer is tokenized, convert it back to text after saving"
-    (bb2-maybe-convert-buffer (current-buffer)))
+(defun bb2-after-save ()
+  "post-save-hook function. If the buffer is tokenized, convert it back to text after saving"
+  (bb2-maybe-convert-buffer (current-buffer)))
+
+(defun bb2-update-modeline ()
+  (if bb2-is-current-file-tokenized
+      (setq mode-name "bb2 tokenized")
+    (setq mode-name "bb2")))
+
+(defun bb2-toggle-tokenized ()
+  "Toggle a Blitz 2 buffer between ascii and tokenized"
+  (interactive)
+  (setq bb2-is-current-file-tokenized (not bb2-is-current-file-tokenized))
+  (bb2-update-modeline))
 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
@@ -2721,7 +2743,7 @@ If there is no token, return the keyword as a list of bytes"
   (set (make-local-variable 'eldoc-documentation-function)
        'bb2-eldoc-function)
 
-  (add-hook 'before-save-hook 'bb2-on-save nil t)
+  (add-hook 'before-save-hook 'bb2-before-save nil t)
   (add-hook 'after-save-hook 'bb2-after-save nil t)
   (add-hook 'post-command-hook 'keywordize-keyhook nil t)
   (eldoc-mode)
