@@ -1124,6 +1124,7 @@
 				     "starttracker" ("StartTracker" "(TrackerModule#)" #x9C02)
 				     "statement" ("Statement" "" #x8008)
 				     "stencil" ("Stencil" "Stencil#,BitMap#" #xBD01)
+				     "step" ("Step" "" #x8019)
 				     "stopcycle" ("StopCycle" "" #xCE0C)
 				     "stopmed" ("StopMed" "" #xA904)
 				     "stopmodule" ("StopModule" "" #xB004)
@@ -2426,6 +2427,14 @@
   (mapcar 'string-to-char '(";" " " "(" "," "'" "{" "}"))
   "When the user types one of these characters, we trigger the keyword replacement logic.")
 
+(defconst bb2-word-endings
+  (mapcar 'string-to-char '(" " "(" ")" "\ " "." ":" ";"))
+  "These characters signify a word ending during tokenization.")
+
+(defconst bb2-comment-char
+  (string-to-char ";")
+  "This character is used to signify a comment during tokenization.")
+
 (defconst bb2-mode-syntax-table
   (let ((table (make-syntax-table)))
     ;; ' is a string delimiter
@@ -2657,36 +2666,42 @@ If there is no token, return the keyword as a list of bytes"
 	(bb2-token-to-bytes found-token)
       (string-to-list keyword))))
 
+; I shouldnt code when Ive been up for 21 hrs
+(defun bb2-start-comment (byte comment-status)
+  "Return a comment-status of true if the given byte is the start of a comment
+otherwise return the given comment-status unchanged"
+  (if (= byte bb2-comment-char)
+      t
+    comment-status))
+
+(defun bb2-end-comment (byte comment-status)
+  "Return a comment-status of nil if the given byte is the end of a commented line
+otherwise return the given comment-status unchanged"
+  (if (and (= byte 0) comment-status)
+      nil
+    comment-status))
+
 ;; this can probably be improved :)
 (defun bb2-string-to-tokens (chars)
   "Convert a string of Blitz 2 source into a list of tokenized chars."
   (let ((tokenized '())
-	(word "")
-	(word-endings (mapcar 'string-to-char '(" " "(" "\ " "." ":" ";")))
-	(comment-char (string-to-char ";"))
 	(comment-p nil)
+	(word "")
 	(i 0))
     (while (< i (length chars))
-      (let ((b (bb2-translate-special-char (aref chars i))))
-	
-	(if (= b comment-char)
-	    (setq comment-p t))
-		    
-	(if (not (member b word-endings))
+      (let ((b (bb2-translate-special-char (aref chars i))))	
+	(setq comment-p (bb2-start-comment b comment-p))
+	(if (not (member b bb2-word-endings))
 	    (setq word (concat word (char-to-string b)))
 	  (if (and (not comment-p)
 		   (gethash (downcase word) bb2-keywords))
-	      (mapc (lambda (y) (push y tokenized))
+	      (mapc (lambda (e) (push e tokenized))
 		    (bb2-token-list-for-keyword word))
-	    (mapc (lambda (y) (push y tokenized)) (vconcat word)))
+	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
 	  (setq word "")
 	  (push b tokenized))
-
-	(if (and (= b 0)
-		 comment-p)
-	    (setq comment-p nil)))
-	
-      (setq i (1+ i)))
+	(setq comment-p (bb2-end-comment b comment-p))
+      (setq i (1+ i))))
     (nreverse tokenized)))
 
 (defun bb2-replace-buffer-contents (buffer str)
@@ -2703,7 +2718,7 @@ If there is no token, return the keyword as a list of bytes"
 	(when (> (length detokenized-text) 0)
 	  (bb2-replace-buffer-contents buffer detokenized-text)
 	  (set (make-local-variable 'bb2-is-current-file-tokenized) t)
-	  (setq mode-name "bb2 tokenized")
+	  (bb2-update-modeline)
 	  (set-buffer-modified-p nil)))))
 
 (defun bb2-before-save ()
@@ -2720,7 +2735,7 @@ If there is no token, return the keyword as a list of bytes"
 
 (defun bb2-update-modeline ()
   (if bb2-is-current-file-tokenized
-      (setq mode-name "bb2 tokenized")
+      (setq mode-name "bb2 Tokenized")
     (setq mode-name "bb2")))
 
 (defun bb2-toggle-tokenized ()
@@ -2738,7 +2753,7 @@ If there is no token, return the keyword as a list of bytes"
   
   ;; font-lock-defaults last param sets case-insensitivity
   (setq font-lock-defaults '((bb2-highlights) nil t))
-  (font-lock-fontify-buffer)
+ ; (font-lock-fontify-buffer)
   
   (set (make-local-variable 'eldoc-documentation-function)
        'bb2-eldoc-function)
