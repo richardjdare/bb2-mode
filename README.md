@@ -5,8 +5,8 @@ An Emacs major mode for Blitz Basic II (a basic compiler for the Amiga)
 
 *bb2-mode showing CaffeineFree.bb by Ben Campbell and JS Hong (1993) with the zerodark Emacs theme.*
 
-bb2-mode provides syntax highlighting and eldoc-based online help for both ascii and tokenized Blitz Basic II source code. It should recognise all keywords from Blitz Basic 2.1.
-It will also correctly capitalize keywords as you type them like in the original Blitz II editor.
+bb2-mode provides syntax highlighting and eldoc-based online help for ascii and tokenized Blitz Basic II source code. It should recognise all keywords from Blitz Basic 2.1.
+It will also capitalize keywords as you type them like in the original Blitz II editor.
 
 Keywords were extracted from Blitz using Stripper (1997) by D!ck/Carnage (from http://www.blitz-2000.co.uk/)
 
@@ -29,6 +29,8 @@ To convert a tokenized file to ascii, or vice-versa:
 ```
 m-x bb2-toggle-tokenized
 ```
+Or use the keyboard shortcut `C-c C-t`
+
 When saving, tokenized files will be saved as tokenized. Ascii files will be saved as ascii. In the future, explicit "save tokenized" and "save ascii" commands will be added.
 
 ## Todo

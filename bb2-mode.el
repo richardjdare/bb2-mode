@@ -2418,6 +2418,10 @@
 				     "xorregionregion_" ("XorRegionRegion_" "(srcRegion,destRegion)" #xFF63)
 				     "zipwindow_" ("ZipWindow_" "" #xFFD0))))
 
+(defvar bb2-mode-map nil "Keymap for bb2-mode")
+(setq bb2-mode-map (make-sparse-keymap))
+(define-key bb2-mode-map (kbd "C-c C-t") 'bb2-toggle-tokenized)
+
 (defvar bb2-is-current-file-tokenized nil "Is the current file tokenized?")
 
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
@@ -2459,7 +2463,7 @@
     (modify-syntax-entry ?\* "." table)
     (modify-syntax-entry ?\/ "." table)
     table))
-
+	
 (defun bb2-get-keywords-list (keyword-type)
   "Return a list of 'blitz or 'amiga keywords from the main table"
   (let ((kw '()))
@@ -2742,7 +2746,9 @@ otherwise return the given comment-status unchanged"
   "Toggle a Blitz 2 buffer between ascii and tokenized"
   (interactive)
   (setq bb2-is-current-file-tokenized (not bb2-is-current-file-tokenized))
-  (bb2-update-modeline))
+  (bb2-update-modeline)
+  (force-mode-line-update)
+  (message "bb2-toggle-tokenized"))
 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
