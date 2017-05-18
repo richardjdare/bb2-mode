@@ -29,7 +29,7 @@ To convert a tokenized file to ascii, or vice-versa:
 ```
 m-x bb2-toggle-tokenized
 ```
-when saving, Tokenized files will be saved as tokenized. Ascii files will be saved as ascii. In the future, explicit "save tokenized" and "save ascii" commands will be added.
+When saving, tokenized files will be saved as tokenized. Ascii files will be saved as ascii. In the future, explicit "save tokenized" and "save ascii" commands will be added.
 
 ## Todo
 * Add more 3rd party commands/commands from Amiblitz 2
