@@ -26,9 +26,9 @@ Blitz II saves source code in a custom format to save floppy disk space. These f
 If bb2-mode is displaying a tokenized file, it will say `bb2 Tokenized` in the mode line (like in the screenshot above). Ascii files will just say `bb2`.
 
 To convert a tokenized file to ascii, or vice-versa:
-
-`m-x bb2-toggle-tokenized`
-
+```
+m-x bb2-toggle-tokenized
+```
 when saving, Tokenized files will be saved as tokenized. Ascii files will be saved as ascii. In the future, explicit "save tokenized" and "save ascii" commands will be added.
 
 ## Todo
