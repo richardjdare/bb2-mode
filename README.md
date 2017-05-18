@@ -21,7 +21,7 @@ Add the following to your .emacs file:
 ```
 
 ## Tokenized files
-Blitz II saves source code in a custom format to save floppy disk space. These files are known as *tokenized files* since they use 2-byte tokens to represent the Blitz language keywords. Although Blitz II can also load and save ascii, a great deal of Blitz source is tokenized. bb2-mode can load and save these files.
+Blitz II saves source code in a custom file format in order to save floppy disk space. These files are known as *tokenized files* since they use 2-byte tokens to represent Blitz keywords. bb2-mode can load and save these files. Blitz II also exported ascii source code, but most historical Blitz source is tokenized.
 
 If bb2-mode is displaying a tokenized file, it will say `bb2 Tokenized` in the mode line (like in the screenshot above). Ascii files will just say `bb2`.
 
