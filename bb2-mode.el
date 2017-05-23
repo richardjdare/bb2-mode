@@ -1,5 +1,5 @@
 ;;; bb2-mode.el
-;;; Emacs major mode for ascii Blitz Basic II source code
+;;; Emacs major mode for Blitz Basic II source code
 ;;; Richard Dare
 ;;; www.richardjdare.com
 
