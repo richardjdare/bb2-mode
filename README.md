@@ -14,14 +14,14 @@ keyword transformation code based on [sql-up-mode](https://github.com/Trevoke/sq
 
 My first ever Emacs Lisp code, so bear with me.
 ## Installation
-Add the following to your .emacs file:
+Download the project somewhere, then add the following to your .emacs file:
 ```
-(add-to-list 'load-path "~/path/to/bb2-mode/")
+(add-to-list 'load-path "/path/to/bb2-mode/")
 (require 'bb2-mode)
 ```
 
 ## Tokenized files
-Blitz II saves source code in a custom file format in order to save floppy disk space. These files are known as *tokenized files* since they use 2-byte tokens to represent Blitz keywords. bb2-mode can load and save these files. Blitz II also exported ascii source code, but most historical Blitz source is tokenized.
+Blitz II saves source code in a custom file format in order to save floppy disk space. These files are known as *tokenized files* since they use 2-byte tokens to represent Blitz keywords. bb2-mode can load and save these files. Blitz II also exports ascii source code, but most historical Blitz source is tokenized.
 
 If bb2-mode is displaying a tokenized file, it will say `bb2 Tokenized` in the mode line (like in the screenshot above). Ascii files will just say `bb2`.
 
@@ -35,8 +35,9 @@ When saving, tokenized files will be saved as tokenized. Ascii files will be sav
 
 ## Todo
 * Add more 3rd party commands/commands from Amiblitz 2
-* separate keywords and functions? (unlike bb2 editor)
-* nicer/smarter indenting (current settings are more or less like bb2 editor)
-* find out if we can communicate from Emacs -> WinUAE -> ARexx -> Blitz for various things
-* Completion
+* Separate keywords and functions? (unlike bb2 editor)
+* Nicer/smarter indenting (current settings are more or less like bb2 editor)
+* Find out if we can communicate from Emacs -> WinUAE -> ARexx -> Blitz for various things
+* Completion with Company mode or similar.
 * Add a menu with "save tokenized " and "save ascii" options
+* Report if any missing/unknown tokens. Better error handling all round
