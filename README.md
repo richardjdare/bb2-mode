@@ -41,3 +41,4 @@ When saving, tokenized files will be saved as tokenized. Ascii files will be sav
 * Completion with Company mode or similar.
 * Add a menu with "save tokenized " and "save ascii" options
 * Report if any missing/unknown tokens. Better error handling all round
+* Find out if we can scan Blitz directly for commands and tokens for people with custom blitzlibs setups.
