@@ -2427,6 +2427,9 @@
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
 (setq bb2-ted-indent-p t)
 
+(defvar bb2-completion-list nil "list of keywords for completion")
+(setq bb2-completion-list (append (bb2-get-keywords-list 'blitz) (bb2-get-keywords-list 'amiga)))
+
 (defconst bb2-trigger-characters
   (mapcar 'string-to-char '(";" " " "(" "," "'" "{" "}"))
   "When the user types one of these characters, we trigger the keyword replacement logic.")
@@ -2750,6 +2753,14 @@ otherwise return the given comment-status unchanged"
   (force-mode-line-update)
   (message "bb2-toggle-tokenized"))
 
+(defun bb2-completion-at-point ()
+  "Provide 'completion-at-point' for bb2-mode"
+  (interactive)
+  (let* ((bds (bounds-of-thing-at-point 'symbol))
+         (start (car bds))
+         (end (cdr bds)))
+    (list start end bb2-completion-list . nil )))
+			 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
@@ -2767,6 +2778,8 @@ otherwise return the given comment-status unchanged"
   (add-hook 'before-save-hook 'bb2-before-save nil t)
   (add-hook 'after-save-hook 'bb2-after-save nil t)
   (add-hook 'post-command-hook 'keywordize-keyhook nil t)
+  (add-hook 'completion-at-point-functions 'bb2-completion-at-point nil 'local)
+  (setf completion-ignore-case t)
   (eldoc-mode)
 
   (bb2-maybe-convert-buffer (current-buffer)))
