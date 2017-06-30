@@ -2427,9 +2427,6 @@
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
 (setq bb2-ted-indent-p t)
 
-(defvar bb2-completion-list nil "list of keywords for completion")
-(setq bb2-completion-list (append (bb2-get-keywords-list 'blitz) (bb2-get-keywords-list 'amiga)))
-
 (defconst bb2-trigger-characters
   (mapcar 'string-to-char '(";" " " "(" "," "'" "{" "}"))
   "When the user types one of these characters, we trigger the keyword replacement logic.")
@@ -2480,6 +2477,9 @@
 	     (push (car v) kw))))
      bb2-keywords)
     (nreverse kw)))
+
+(defvar bb2-completion-list nil "list of keywords for completion")
+(setq bb2-completion-list (append (bb2-get-keywords-list 'blitz) (bb2-get-keywords-list 'amiga)))
 
 (defvar bb2-keywords-regexp nil "regular expression for bb2 keywords")
 (setq bb2-keywords-regexp (regexp-opt (bb2-get-keywords-list 'blitz) 'words))
