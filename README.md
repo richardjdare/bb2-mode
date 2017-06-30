@@ -33,12 +33,14 @@ Or use the keyboard shortcut `C-c C-t`
 
 When saving, tokenized files will be saved as tokenized. Ascii files will be saved as ascii. In the future, explicit "save tokenized" and "save ascii" commands will be added.
 
+## Completion
+bb2-mode uses Emacs's standard `completion-at-point` system to provide keyword completion. Use `C-M-i` to perform completion. company-mode will also work with bb2-mode.
+
 ## Todo
 * Add more 3rd party commands/commands from Amiblitz 2
 * Separate keywords and functions? (unlike bb2 editor)
 * Nicer/smarter indenting (current settings are more or less like bb2 editor)
 * Find out if we can communicate from Emacs -> WinUAE -> ARexx -> Blitz for various things
-* Completion with Company mode or similar.
 * Add a menu with "save tokenized " and "save ascii" options
 * Report if any missing/unknown tokens. Better error handling all round
 * Find out if we can scan Blitz directly for commands and tokens for people with custom blitzlibs setups.
