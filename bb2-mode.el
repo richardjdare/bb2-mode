@@ -2513,7 +2513,7 @@
   ;turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
-(defun keywordize-keyhook ()
+(defun bb2-keywordize-keyhook ()
   (if (bb2-should-replace-keyword-p)
       (save-excursion (bb2-keywordize-symbol -1))))
 
@@ -2756,10 +2756,8 @@ otherwise return the given comment-status unchanged"
 (defun bb2-completion-at-point ()
   "Provide 'completion-at-point' for bb2-mode"
   (interactive)
-  (let* ((bds (bounds-of-thing-at-point 'symbol))
-         (start (car bds))
-         (end (cdr bds)))
-    (list start end bb2-completion-list . nil )))
+  (let ((bounds (bounds-of-thing-at-point 'symbol)))
+    (list (car bounds) (cdr bounds) bb2-completion-list . nil )))
 			 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
@@ -2777,7 +2775,7 @@ otherwise return the given comment-status unchanged"
 
   (add-hook 'before-save-hook 'bb2-before-save nil t)
   (add-hook 'after-save-hook 'bb2-after-save nil t)
-  (add-hook 'post-command-hook 'keywordize-keyhook nil t)
+  (add-hook 'post-command-hook 'bb2-keywordize-keyhook nil t)
   (add-hook 'completion-at-point-functions 'bb2-completion-at-point nil 'local)
   (set (make-local-variable 'completion-ignore-case) t)
   (eldoc-mode)
