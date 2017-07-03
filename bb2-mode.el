@@ -2778,6 +2778,7 @@ otherwise return the given comment-status unchanged"
   (add-hook 'post-command-hook 'bb2-keywordize-keyhook nil t)
   (add-hook 'completion-at-point-functions 'bb2-completion-at-point nil 'local)
   (set (make-local-variable 'completion-ignore-case) t)
+  (set-buffer-file-coding-system 'iso-latin-1-unix t)
   (eldoc-mode)
 
   (bb2-maybe-convert-buffer (current-buffer)))
