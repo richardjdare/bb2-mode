@@ -2995,6 +2995,15 @@
 	(,bb2-const-regexp . font-lock-constant-face)
 	(,bb2-types-regexp . font-lock-type-face)))
 
+(defvar bb2-telnet-port 1234
+  "telnet port of Amiga emulator")
+
+(defvar bb2-telnet-host "127.0.0.1"
+  "telnet host address")
+
+(defvar bb2-tcp-process nil
+  "Emacs TCP network process used to talk to amiga emulator")
+
 (defun bb2-use-ted-indent ()
   "Set bb2-mode to use simple 2 space indent like TED on Amiga"
   (setq indent-tabs-mode nil)
@@ -3251,6 +3260,31 @@ otherwise return the given comment-status unchanged"
   (interactive)
   (let ((bounds (bounds-of-thing-at-point 'symbol)))
     (list (car bounds) (cdr bounds) bb2-completion-list . nil )))
+
+(defun bb2-tcp-start ()
+  "Start bb2-mode's tcp connection"
+  (interactive)
+  (setq bb2-tcp-process
+	(make-network-process
+	 :name "bb2-listen"
+	 :buffer "*bb2-listen*"
+	 :family 'ipv4
+	 :host bb2-telnet-host
+	 :service bb2-telnet-port
+	 :sentinel 'bb2-listen-sentinel
+	 :filter 'bb2-listen-filter)))
+
+(defun bb2-tcp-stop ()
+  "Stop bb2-mode's tcp connection"
+  (interactive)
+  (delete-process "bb2-listen"))
+	      
+(defun bb2-listen-filter (proc string)   
+  (message string))
+
+(defun bb2-listen-sentinel (proc msg)
+  (when (string= msg "connection broken by remote peer\n")
+    (message (format "client %s has quit" proc))))
 
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
