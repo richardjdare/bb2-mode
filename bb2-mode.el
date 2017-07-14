@@ -3001,9 +3001,9 @@
   (setq tab-width 2)
   (set (make-local-variable 'tab-stop-list) '(0 2 4 6))
   (setq standard-indent 2)  
-					; replace indent-relative
+  ;; replace indent-relative
   (setq indent-line-function 'insert-tab)  
-					;turn off electric-indent for this mode
+  ;;turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
 (defun bb2-keywordize-keyhook ()
@@ -3105,27 +3105,27 @@ Returns an empty string if we identify it as ascii src"
     (while (< i (length bytes))
       (let ((b1 (aref bytes i)))	
 	(cond
-	 ; its an ASCII file, bail out!
+	 ;; its an ASCII file, bail out!
 	 ((or (= b1 13) (= b1 10))
 	  (setq outstr '())
 	  (setq i (length bytes)))
 	 
-	 ; newline character
+	 ;; newline character
 	 ((= b1 0)
 	  (push "\n" outstr)
 	  (setq i (1+ i)))
 	 
-	 ; plain text
+	 ;; plain text
 	 ((and (> b1 31) (< b1 127))
 	  (push (byte-to-string b1) outstr)
 	  (setq i (1+ i)))
 	 
-	 ; not sure what these are in blitz
+	 ;; not sure what these are in blitz
 	 ((and (< b1 32) (> b1 0))
 	  (push (format "%d" b1) outstr)
 	  (setq i (1+ i)))
 	 
-	 ; blitz token
+	 ;; blitz token
 	 ((> b1 127)
 	  (let ((b2 (aref bytes (1+ i))))
 	    (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr))
@@ -3166,7 +3166,7 @@ If there is no token, return the keyword as a list of bytes"
 	(bb2-token-to-bytes found-token)
       (string-to-list keyword))))
 
-; I shouldnt code when Ive been up for 21 hrs
+;; I shouldnt code when Ive been up for 21 hrs
 (defun bb2-start-comment (byte comment-status)
   "Return a comment-status of true if the given byte is the start of a comment
 otherwise return the given comment-status unchanged"
