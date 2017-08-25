@@ -3264,10 +3264,12 @@ otherwise return the given comment-status unchanged"
 
 (defvar bb2-amiga-file-mappings (make-hash-table :test 'equal))
 
+(defvar bb2-amiga-file-location "ram:")
+
+(defvar bb2-arexx-script "echo \"address TED_REXX1*NSHOWSCREEN*NWINDOWTOFRONT*NACTIVATE*NLOADNEW 'test.bb'*NCOMPILE*N\" > ram:bb2mode.rx")
+
 (defun bb2-add-amiga-file-mapping (host-path amiga-path)
   (puthash host-path amiga-path bb2-amiga-file-mappings))
-
-(defvar bb2-amiga-file-location "ram:")
 
 ;; given  "c:/programs/myfolder/" and "c:/programs/myfolder/myproject/foo.bb" return "myproject/foo.bb"
 (defun bb2-path-diff (path1 path2)
