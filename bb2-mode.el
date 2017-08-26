@@ -3228,11 +3228,13 @@ otherwise return the given comment-status unchanged"
     (let ((tokenized-text (bb2-string-to-tokens (bb2-get-buffer-contents (current-buffer)))))    
       (when (> (length tokenized-text) 0)
 	(bb2-replace-buffer-contents (current-buffer) (mapconcat 'unibyte-string tokenized-text ""))
+	(set-buffer-file-coding-system 'binary)
 	(set-buffer-modified-p nil)))))
 
 (defun bb2-after-save ()
   "post-save-hook function. If the buffer is tokenized, convert it back to text after saving"
-  (bb2-maybe-convert-buffer (current-buffer)))
+  (bb2-maybe-convert-buffer (current-buffer))
+  (set-buffer-file-coding-system  'iso-latin-1-unix t))
 
 (defun bb2-update-modeline ()
   (if bb2-is-current-file-tokenized
@@ -3253,20 +3255,14 @@ otherwise return the given comment-status unchanged"
   (let ((bounds (bounds-of-thing-at-point 'symbol)))
     (list (car bounds) (cdr bounds) bb2-completion-list . nil )))
 
-(defun bb2-last-index-of (regex str &optional ignore-case)
-  (let ((start 0)
-        (case-fold-search ignore-case)
-        idx)
-    (while (string-match regex str start)
-      (setq idx (match-beginning 0))
-      (setq start (match-end 0)))
-    idx))
+(defvar bb2-amiga-file-mappings nil "table mapping host filenames to Amigados filenames")
+(setq bb2-amiga-file-mappings (make-hash-table :test 'equal))
 
-(defvar bb2-amiga-file-mappings (make-hash-table :test 'equal))
+(defvar bb2-amiga-file-location nil "Default location of files uploaded to Amiga")
+(setq bb2-amiga-file-location "ram:")
 
-(defvar bb2-amiga-file-location "ram:")
-
-(defvar bb2-arexx-script "echo \"address TED_REXX1*NSHOWSCREEN*NWINDOWTOFRONT*NACTIVATE*NLOADNEW 'test.bb'*NCOMPILE*N\" > ram:bb2mode.rx")
+(defvar bb2-arexx-script nil "ARexx script to load, compile and run bb2 files in Blitz on the Amiga")
+(setq bb2-arexx-script  "echo \"/**bb2mode.rexx**/*Naddress TED_REXX1*NSHOWSCREEN*NWINDOWTOFRONT*NACTIVATE*NLOADNEW '%s'*NCOMPILE*N\" > ram:bb2mode.rexx")
 
 (defun bb2-add-amiga-file-mapping (host-path amiga-path)
   (puthash host-path amiga-path bb2-amiga-file-mappings))
@@ -3301,7 +3297,6 @@ otherwise return the given comment-status unchanged"
 
 (defun bb2-tcp-start ()
   "Start bb2-mode's tcp connection"
- ; (interactive)
   (setq bb2-tcp-process
 	(make-network-process
 	 :name "bb2-listen"
@@ -3314,27 +3309,18 @@ otherwise return the given comment-status unchanged"
 
 (defun bb2-tcp-stop ()
   "Stop bb2-mode's tcp connection"
-;  (interactive)
   (delete-process "bb2-listen"))
 
 (defun bb2-compile-and-run ()
+  "Connect to an amiga emulator running Blitz and compile and run the current buffer"
   (interactive)
   (message "bb2-compile-and-run")
-  "Connect to an amiga emulator running Blitz and compile and run the current buffer"
-;  (bb2-tcp-start)
-  ;;lets try and send a tokenized file to the amiga
-  ;(process-send-string bb2-tcp-process (concat "ram:" (byte-to-string 13)))
-		       
-  (process-send-string bb2-tcp-process
-;		       (concat "echo \"" teststr "\" > ram:test.txt" (byte-to-string 13))))
-		       (concat "ppmore" (byte-to-string 13))))
-
-  
-		;;	(format "echo %s > test.bb"
-		;;		(bb2-string-to-tokens (bb2-get-buffer-contents (current-buffer))))
-  ;;	(byte-to-string 13)))
-;  (wait
-;  (bb2-tcp-stop))
+  (unless bb2-tcp-process
+    (bb2-tcp-start))
+  (let* ((file-location (bb2-get-amiga-filepath (buffer-file-name (current-buffer))))
+	 (script (format bb2-arexx-script file-location)))
+    (process-send-string bb2-tcp-process (concat script (byte-to-string 13)))
+    (process-send-string bb2-tcp-process (concat "rx ram:bb2mode.rexx" (byte-to-string 13)))))
   
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
