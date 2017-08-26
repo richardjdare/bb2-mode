@@ -36,11 +36,29 @@ When saving, tokenized files will be saved as tokenized. Ascii files will be sav
 ## Completion
 bb2-mode uses Emacs's standard `completion-at-point` system to provide keyword completion. Use `C-M-i` to perform completion. company-mode will also work with bb2-mode.
 
+## Compile and run in WinUAE
+If you are editing a file that is inside a directory being used as a WinUAE hard disk, bb2-mode can connect to a running instance of WinUAE and tell Blitz Basic to compile and run that file.
+
+```
+m-x bb2-compile-and-run
+```
+Or use the keyboard shortcut `C-c C-e`
+
+If the buffer is unsaved, you will be prompted to save it before the operation begins. Blitz II must be running in WinUAE when you call `bb2-compile-and-run`.
+
+### Setting up WinUAE and your emulated Amiga
+
+### Setting up bb2-mode
+Before using `bb2-compile-and-run`, you must give bb2-mode the location of the directories being used as WinUAE hard disks. These are used to convert the source code filenames into Amigados filenames when we load them into Blitz. You can do this by calling `bb2-add-amiga-file-mapping` in your .emacs file. For example:
+```
+(bb2-add-amiga-file-mapping "d:emulation/amiga/harddrive/" "programs:")
+```
+This tells bb2-mode that the Windows directory, `"d:/emulation/amiga/harddrive/"` is being used as the `"programs:"` drive on the Amiga. This means that a blitz source file at `"d:/emulation/amiga/harddrive/blitzcode/mycode.bb"` will be mapped to `"programs:blitzcode/mycode.bb"` inside WinUAE
+
 ## Todo
 * Add more 3rd party commands/commands from Amiblitz 2
 * Separate keywords and functions? (unlike bb2 editor)
 * Nicer/smarter indenting (current settings are more or less like bb2 editor)
-* Find out if we can communicate from Emacs -> WinUAE -> ARexx -> Blitz for various things
 * Add a menu with "save tokenized " and "save ascii" options
 * Report if any missing/unknown tokens. Better error handling all round
 * Find out if we can scan Blitz directly for commands and tokens for people with custom blitzlibs setups.
