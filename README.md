@@ -47,6 +47,26 @@ Or use the keyboard shortcut `C-c C-e`
 If the buffer is unsaved, you will be prompted to save it before the operation begins. Blitz II must be running in WinUAE when you call `bb2-compile-and-run`.
 
 ### Setting up WinUAE and your emulated Amiga
+To use `bb2-compile-and-run` your emulated Amiga must be running ARexx. To run ARexx automatically when Workbench starts, add the following line to your startup-sequence (or S:user-startup)
+```
+sys:system/rexxmast
+```
+#### Setting up a telnet port in WinUAE
+`bb2-compile-and-run` communicates with WinUAE using its built-in telnet port. In the WinUAE settings, go to Host->IO ports. Then set the serial port dropdown to `TCP://0.0.0.0:1234` and tick the `direct` checkbox.
+
+On your Amiga, create a file `DEVS:MountList` with the following content:
+```
+AUX:
+Handler = L:Aux-Handler
+Stacksize = 1000
+Priority = 5
+```
+Add the following commands to the end of S:user-startup:
+```
+mount aux:
+newshell aux:
+```
+Restart your Amiga. You should now be able to telnet to your Amiga at localhost:1234
 
 ### Setting up bb2-mode
 Before using `bb2-compile-and-run`, you must give bb2-mode the location of the directories being used as WinUAE hard disks. These are used to convert the source code filenames into Amigados filenames when we load them into Blitz. You can do this by calling `bb2-add-amiga-file-mapping` in your .emacs file. For example:
