@@ -3219,8 +3219,7 @@ otherwise return the given comment-status unchanged"
 	(when (> (length detokenized-text) 0)
 	  (bb2-replace-buffer-contents buffer detokenized-text)
 	  (set (make-local-variable 'bb2-is-current-file-tokenized) t)
-	  (bb2-update-modeline)
-	  (set-buffer-modified-p nil)))))
+	  (bb2-update-modeline)))))
 
 (defun bb2-before-save ()
   "before-save-hook function. If the buffer is tokenized replace its contents with tokens before saving"
@@ -3234,7 +3233,8 @@ otherwise return the given comment-status unchanged"
 (defun bb2-after-save ()
   "post-save-hook function. If the buffer is tokenized, convert it back to text after saving"
   (bb2-maybe-convert-buffer (current-buffer))
-  (set-buffer-file-coding-system  'iso-latin-1-unix t))
+  (set-buffer-file-coding-system  'iso-latin-1-unix t)
+  (set-buffer-modified-p nil))
 
 (defun bb2-update-modeline ()
   (if bb2-is-current-file-tokenized
@@ -3265,14 +3265,14 @@ otherwise return the given comment-status unchanged"
 (setq bb2-arexx-script  "echo \"/**bb2mode.rexx**/*Naddress TED_REXX1*NSHOWSCREEN*NWINDOWTOFRONT*NACTIVATE*NLOADNEW '%s'*NCOMPILE*N\" > ram:bb2mode.rexx")
 
 (defun bb2-add-amiga-file-mapping (host-path amiga-path)
-  (puthash host-path amiga-path bb2-amiga-file-mappings))
+  (puthash (file-name-as-directory host-path) amiga-path bb2-amiga-file-mappings))
 
 ;; given  "c:/programs/myfolder/" and "c:/programs/myfolder/myproject/foo.bb" return "myproject/foo.bb"
 (defun bb2-path-diff (path1 path2)
   (substring path1 (1- (compare-strings path1 0 (length path1) path2 0 (length path2)))))
 	  
 (defun bb2-get-amiga-filepath (path)
-  (let ((result (concat bb2-amiga-file-location (file-name-nondirectory path))))
+  (let ((result nil))
     (maphash (lambda (k v)
 	       (if (string-prefix-p k path)
 		   (setf result (concat v (bb2-path-diff path k)))))
@@ -3311,16 +3311,22 @@ otherwise return the given comment-status unchanged"
   "Stop bb2-mode's tcp connection"
   (delete-process "bb2-listen"))
 
-(defun bb2-compile-and-run ()
-  "Connect to an amiga emulator running Blitz and compile and run the current buffer"
-  (interactive)
-  (message "bb2-compile-and-run")
-  (unless bb2-tcp-process
-    (bb2-tcp-start))
-  (let* ((file-location (bb2-get-amiga-filepath (buffer-file-name (current-buffer))))
-	 (script (format bb2-arexx-script file-location)))
+(defun bb2-send-script (filepath)
+  (let ((script (format bb2-arexx-script filepath)))
     (process-send-string bb2-tcp-process (concat script (byte-to-string 13)))
     (process-send-string bb2-tcp-process (concat "rx ram:bb2mode.rexx" (byte-to-string 13)))))
+  
+(defun bb2-compile-and-run ()
+  "Connect to an Amiga emulator running Blitz II and compile and run the current buffer"
+  (interactive)
+  (message "bb2-compile-and-run")
+  (save-buffer)
+  (if (eq (process-status bb2-tcp-process) 'closed)
+      (bb2-tcp-start))
+  (let ((file-location (bb2-get-amiga-filepath (buffer-file-name (current-buffer)))))
+    (if file-location
+	(bb2-send-script file-location)
+      (error "File is not in an Amiga directory"))))
   
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
@@ -3331,7 +3337,6 @@ otherwise return the given comment-status unchanged"
   
   ;; font-lock-defaults last param sets case-insensitivity
   (setq font-lock-defaults '((bb2-highlights) nil t))
-					; (font-lock-fontify-buffer)
   
   (set (make-local-variable 'eldoc-documentation-function)
        'bb2-eldoc-function)
