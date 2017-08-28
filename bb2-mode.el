@@ -3007,13 +3007,31 @@
   ;;turn off electric-indent for this mode
   (electric-indent-local-mode -1))
 
+(defun bb2-point-in-comment-p ()
+  "Return true if the current point is in a comment"
+    (and (nth 4 (syntax-ppss)) t))
+
+(defun bb2-point-in-quotes-p ()
+  "return true if the current point is between quotes"
+    (and (nth 3 (syntax-ppss)) t))
+
 (defun bb2-keywordize-keyhook ()
   (if (bb2-should-replace-keyword-p)
       (save-excursion (bb2-keywordize-symbol -1))))
 
+;; this is a bit kludgey - improvements welcome
+(defun bb2-ignore-keyword-p ()
+  "We ignore keywords inside strings and comments"
+  (or
+   (bb2-point-in-comment-p)
+   (bb2-point-in-quotes-p)
+   (looking-back "\"\\|\"\\(\s+\\|\n+\\)")
+   (looking-back  ";\.+\\(\s+\\|\n+\\)")))
+  
 (defun bb2-should-replace-keyword-p ()
   "check if user pressed a key that triggers keyword replacement"
   (and (bb2-not-just-initialized-p)
+       (not (bb2-ignore-keyword-p))
        (or (bb2-user-pressed-special-p)
 	   (and (bb2-user-is-typing-p)
 		(bb2-user-pressed-trigger-key-p)))))
