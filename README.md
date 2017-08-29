@@ -71,9 +71,9 @@ Restart your Amiga. You should now be able to telnet to your Amiga at localhost:
 ### Setting up bb2-mode
 Before using `bb2-compile-and-run`, you must give bb2-mode the location of the directories being used as WinUAE hard disks. These are used to convert the source code filenames into Amigados filenames when we load them into Blitz. You can do this by calling `bb2-add-amiga-file-mapping` in your .emacs file. For example:
 ```
-(bb2-add-amiga-file-mapping "d:emulation/amiga/harddrive/" "programs:")
+(bb2-add-amiga-file-mapping "d:emulation/amiga/harddrive/" "work:")
 ```
-This tells bb2-mode that the Windows directory, `"d:/emulation/amiga/harddrive/"` is being used as the `"programs:"` drive on the Amiga. This means that a blitz source file at `"d:/emulation/amiga/harddrive/blitzcode/mycode.bb"` will be mapped to `"programs:blitzcode/mycode.bb"` inside WinUAE
+This tells bb2-mode that the Windows directory, `"d:/emulation/amiga/harddrive/"` is being used as the `"work:"` drive on the Amiga. This means that a blitz source file at `"d:/emulation/amiga/harddrive/blitzcode/mycode.bb"` will be mapped to `"work:blitzcode/mycode.bb"` inside WinUAE
 
 ## Todo
 * Separate keywords and functions? (unlike bb2 editor)
