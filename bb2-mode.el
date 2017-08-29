@@ -2956,6 +2956,8 @@
     (modify-syntax-entry ?\- "." table)
     (modify-syntax-entry ?\* "." table)
     (modify-syntax-entry ?\/ "." table)
+    ;; # is a symbol constituent ?
+    (modify-syntax-entry ?\# "_" table)
     table))
 
 (defun bb2-get-keywords-list (keyword-type)
