@@ -3125,39 +3125,39 @@
   "Convert a tokenized string of Blitz II src into a plain text string.
 Returns an empty string if we identify it as ascii src"
   (let ((token-table (bb2-make-token-table))
-	(outstr '())
+	(char-list '())
 	(i 0))
     (while (< i (length bytes))
       (let ((b1 (aref bytes i)))	
 	(cond
 	 ;; its an ASCII file, bail out!
 	 ((or (= b1 13) (= b1 10))
-	  (setq outstr '())
+	  (setq char-list '())
 	  (setq i (length bytes)))
 	 
 	 ;; newline character
 	 ((= b1 0)
-	  (push "\n" outstr)
+	  (push "\n" char-list)
 	  (setq i (1+ i)))
 	 
 	 ;; plain text
 	 ((and (> b1 31) (< b1 127))
-	  (push (byte-to-string b1) outstr)
+	  (push (byte-to-string b1) char-list)
 	  (setq i (1+ i)))
 	 
 	 ;; not sure what these are in blitz
 	 ((and (< b1 32) (> b1 0))
-	  (push (format "%d" b1) outstr)
+	  (push (format "%d" b1) char-list)
 	  (setq i (1+ i)))
 	 
 	 ;; blitz token
 	 ((> b1 127)
 	  (let ((b2 (aref bytes (1+ i))))
-	    (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) outstr))
+	    (push (bb2-get-keyword-for-token (bb2-bytes-to-token b1 b2) token-table) char-list))
 	  (setq i (+ 2 i)))
 	 
 	 (t (setq i (1+ i))))))
-    (mapconcat 'identity (nreverse outstr) "")))
+    (mapconcat 'identity (nreverse char-list) "")))
 
 ;; we convert the text to latin-1 for detokenizing. latin-1 is the Amiga's default encoding
 (defun bb2-get-buffer-contents (buffer)
@@ -3292,10 +3292,12 @@ otherwise return the given comment-status unchanged"
   (puthash (file-name-as-directory host-path) amiga-path bb2-amiga-file-mappings))
 
 ;; given  "c:/programs/myfolder/" and "c:/programs/myfolder/myproject/foo.bb" return "myproject/foo.bb"
-(defun bb2-path-diff (path1 path2)
-  (substring path1 (1- (compare-strings path1 0 (length path1) path2 0 (length path2)))))
+(defun bb2-path-diff (long-path short-path)
+  "given 'c:/programs/myfolder/foo.bb' and 'c:/programs/' return 'myfolder/foo.bb'"
+  (substring long-path (1- (compare-strings long-path 0 (length long-path) short-path 0 (length short-path)))))
 
 (defun bb2-get-amiga-filepath (path)
+  "convert a host file path into an Amigados path if possible, or return nil"
   (let ((result nil))
     (maphash (lambda (k v)
 	       (if (string-prefix-p k path)
@@ -3336,6 +3338,7 @@ otherwise return the given comment-status unchanged"
   (delete-process "bb2-listen"))
 
 (defun bb2-send-script (filepath)
+  "Send Arexx script to the Amiga using telnet"
   (let ((script (format bb2-arexx-script filepath)))
     (process-send-string bb2-tcp-process (concat script (byte-to-string 13)))
     (process-send-string bb2-tcp-process (concat "rx ram:bb2mode.rexx" (byte-to-string 13)))))
