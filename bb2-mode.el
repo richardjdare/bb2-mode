@@ -2937,6 +2937,10 @@
   (string-to-char ";")
   "This character is used to signify a comment during tokenization.")
 
+(defconst bb2-dot-char
+  (string-to-char ".")
+  "This character signifies a dot during tokenization")
+
 (defconst bb2-mode-syntax-table
   (let ((table (make-syntax-table)))
     ;; ' is a string delimiter
@@ -3212,18 +3216,21 @@ otherwise return the given comment-status unchanged"
   (let ((tokenized '())
 	(comment-p nil)
 	(word "")
+	(skip-next nil)
 	(i 0))
     (while (< i (length chars))
       (let ((b (bb2-translate-special-char (aref chars i))))	
 	(setq comment-p (bb2-start-comment b comment-p))
 	(if (not (member b bb2-word-endings))
-	    (setq word (concat word (char-to-string b)))
+	    (setq word (concat word (char-to-string b)))	  
 	  (if (and (not comment-p)
+		   (not skip-next)
 		   (gethash (downcase word) bb2-keywords))
 	      (mapc (lambda (e) (push e tokenized))
 		    (bb2-token-list-for-keyword word))
 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
 	  (setq word "")
+	  (setq skip-next (eq b bb2-dot-char))
 	  (push b tokenized))
 	(setq comment-p (bb2-end-comment b comment-p))
 	(setq i (1+ i))))
