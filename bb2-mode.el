@@ -2930,7 +2930,7 @@
   "When the user types one of these characters, we trigger the keyword replacement logic.")
 
 (defconst bb2-word-endings
-  (mapcar 'string-to-char '(" " "(" ")" "\ " "." ":" ";" "+" "-" "*" "/" "="))
+  (mapcar 'string-to-char '(" " "(" ")" "\ " "." ":" ";" "+" "-" "*" "/" "=" "[" "]" "{" "}" "\\"))
   "These characters signify a word ending during tokenization.")
 
 (defconst bb2-comment-char
