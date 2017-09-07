@@ -3286,17 +3286,11 @@ otherwise return the given comment-status unchanged"
   (let ((bounds (bounds-of-thing-at-point 'symbol)))
     (list (car bounds) (cdr bounds) bb2-completion-list . nil )))
 
-(defvar bb2-amiga-file-mappings nil "table mapping host filenames to Amigados filenames")
-(setq bb2-amiga-file-mappings (make-hash-table :test 'equal))
-
-(defvar bb2-amiga-file-location nil "Default location of files uploaded to Amiga")
-(setq bb2-amiga-file-location "ram:")
+(defvar bb2-default-amiga-file-location nil "Default location of files uploaded to Amiga")
+(setq bb2-default-amiga-file-location "ram:")
 
 (defvar bb2-arexx-script nil "ARexx script to load, compile and run bb2 files in Blitz on the Amiga")
 (setq bb2-arexx-script  "echo \"/**bb2mode.rexx**/*Naddress TED_REXX1*NSHOWSCREEN*NWINDOWTOFRONT*NACTIVATE*NLOADNEW '%s'*NCOMPILE*N\" > ram:bb2mode.rexx")
-
-(defun bb2-add-amiga-file-mapping (host-path amiga-path)
-  (puthash (file-name-as-directory host-path) amiga-path bb2-amiga-file-mappings))
 
 ;; given  "c:/programs/myfolder/" and "c:/programs/myfolder/myproject/foo.bb" return "myproject/foo.bb"
 (defun bb2-path-diff (long-path short-path)
@@ -3306,10 +3300,10 @@ otherwise return the given comment-status unchanged"
 (defun bb2-get-amiga-filepath (path)
   "convert a host file path into an Amigados path if possible, or return nil"
   (let ((result nil))
-    (maphash (lambda (k v)
-	       (if (string-prefix-p k path)
-		   (setf result (concat v (bb2-path-diff path k)))))
-	     bb2-amiga-file-mappings)
+    (if (boundp 'bb2-amiga-file-locations)
+	(dolist (i amiga-file-locations)
+	  (if (string-prefix-p (car i) path)
+	      (setf result (concat (cdr i) (bb2-path-diff path (car i)))))))
     result))
 
 (defvar bb2-telnet-port 1234
