@@ -3301,7 +3301,7 @@ otherwise return the given comment-status unchanged"
   "convert a host file path into an Amigados path if possible, or return nil"
   (let ((result nil))
     (if (boundp 'bb2-amiga-file-locations)
-	(dolist (i amiga-file-locations)
+	(dolist (i bb2-amiga-file-locations)
 	  (if (string-prefix-p (car i) path)
 	      (setf result (concat (cdr i) (bb2-path-diff path (car i)))))))
     result))
@@ -3349,7 +3349,8 @@ otherwise return the given comment-status unchanged"
   (interactive)
   (message "bb2-compile-and-run")
   (save-buffer)
-  (if (eq (process-status bb2-tcp-process) 'closed)
+  (if (or (eq bb2-tcp-process nil)
+	  (eq (process-status bb2-tcp-process) 'closed))
       (bb2-tcp-start))
   (let ((file-location (bb2-get-amiga-filepath (buffer-file-name (current-buffer)))))
     (if file-location
