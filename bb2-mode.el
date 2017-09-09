@@ -2926,7 +2926,7 @@
 (setq bb2-ted-indent-p t)
 
 (defconst bb2-word-endings
-  (mapcar 'string-to-char '(" " "(" ")" "\ " "." ":" ";" "+" "-" "*" "/" "=" "[" "]" "{" "}" "\\"))
+  (mapcar 'string-to-char '(" " "(" ")" "\ " "." "," ":" ";" "+" "-" "*" "/" "=" "[" "]" "{" "}" "\\"))
   "These characters signify a word ending during tokenization and are used to trigger keyword replacement")
 
 (defconst bb2-comment-char
