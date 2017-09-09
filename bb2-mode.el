@@ -2925,13 +2925,9 @@
 (defvar bb2-ted-indent-p nil "Use TED style simple 2 space indenting")
 (setq bb2-ted-indent-p t)
 
-(defconst bb2-trigger-characters
-  (mapcar 'string-to-char '(";" " " "(" "," "'" "{" "}"))
-  "When the user types one of these characters, we trigger the keyword replacement logic.")
-
 (defconst bb2-word-endings
   (mapcar 'string-to-char '(" " "(" ")" "\ " "." ":" ";" "+" "-" "*" "/" "=" "[" "]" "{" "}" "\\"))
-  "These characters signify a word ending during tokenization.")
+  "These characters signify a word ending during tokenization and are used to trigger keyword replacement")
 
 (defconst bb2-comment-char
   (string-to-char ";")
@@ -3063,7 +3059,7 @@
 (defun bb2-user-pressed-trigger-key-p ()
   "Did the user enter a character from our list?"
   (let ((bb2-current-char last-command-event))
-    (member bb2-current-char bb2-trigger-characters)))
+    (member bb2-current-char bb2-word-endings)))
 
 (defun bb2-keywordize-symbol (direction)
   "direction is 1 for forward or -1 for backward"
