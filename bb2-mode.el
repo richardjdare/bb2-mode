@@ -3368,14 +3368,15 @@ otherwise return the given comment-status unchanged"
   (set (make-local-variable 'eldoc-documentation-function)
        'bb2-eldoc-function)
 
+  (add-hook 'before-save-hook 'bb2-before-save nil t)
+  (add-hook 'after-save-hook 'bb2-after-save nil t)
+  (add-hook 'post-command-hook 'bb2-keywordize-keyhook nil t)
+  (add-hook 'completion-at-point-functions 'bb2-completion-at-point nil 'local)
+  (set (make-local-variable 'completion-ignore-case) t)
+  (eldoc-mode)
+
   (let ((buffer-modified (buffer-modified-p)))
-    (add-hook 'before-save-hook 'bb2-before-save nil t)
-    (add-hook 'after-save-hook 'bb2-after-save nil t)
-    (add-hook 'post-command-hook 'bb2-keywordize-keyhook nil t)
-    (add-hook 'completion-at-point-functions 'bb2-completion-at-point nil 'local)
-    (set (make-local-variable 'completion-ignore-case) t)
     (set-buffer-file-coding-system 'iso-latin-1-unix t)
-    (eldoc-mode)
 
     (if (and (bb2-maybe-convert-buffer (current-buffer))
 	     (not buffer-modified))
