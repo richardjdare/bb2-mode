@@ -3240,13 +3240,15 @@ otherwise return the given comment-status unchanged"
       (insert str))))
 
 (defun bb2-maybe-convert-buffer (buffer)
-  "If the given buffer contains a tokenized file convert its contents to plain text"
+  "If the given buffer contains a tokenized file convert its contents to plain text.
+  Returns true if the buffer was converted"
   (if (> (buffer-size) 0)	
       (let ((detokenized-text (bb2-tokens-to-string (bb2-get-buffer-contents buffer))))
 	(when (> (length detokenized-text) 0)
 	  (bb2-replace-buffer-contents buffer detokenized-text)
 	  (set (make-local-variable 'bb2-is-current-file-tokenized) t)
-	  (bb2-update-modeline)))))
+	  (bb2-update-modeline)
+	  t))))
 
 (defun bb2-before-save ()
   "before-save-hook function. If the buffer is tokenized replace its contents with tokens before saving"
@@ -3366,15 +3368,18 @@ otherwise return the given comment-status unchanged"
   (set (make-local-variable 'eldoc-documentation-function)
        'bb2-eldoc-function)
 
-  (add-hook 'before-save-hook 'bb2-before-save nil t)
-  (add-hook 'after-save-hook 'bb2-after-save nil t)
-  (add-hook 'post-command-hook 'bb2-keywordize-keyhook nil t)
-  (add-hook 'completion-at-point-functions 'bb2-completion-at-point nil 'local)
-  (set (make-local-variable 'completion-ignore-case) t)
-  (set-buffer-file-coding-system 'iso-latin-1-unix t)
-  (eldoc-mode)
+  (let ((buffer-modified (buffer-modified-p)))
+    (add-hook 'before-save-hook 'bb2-before-save nil t)
+    (add-hook 'after-save-hook 'bb2-after-save nil t)
+    (add-hook 'post-command-hook 'bb2-keywordize-keyhook nil t)
+    (add-hook 'completion-at-point-functions 'bb2-completion-at-point nil 'local)
+    (set (make-local-variable 'completion-ignore-case) t)
+    (set-buffer-file-coding-system 'iso-latin-1-unix t)
+    (eldoc-mode)
 
-  (bb2-maybe-convert-buffer (current-buffer)))
+    (if (and (bb2-maybe-convert-buffer (current-buffer))
+	     (not buffer-modified))
+	(set-buffer-modified-p nil))))
 
 ;; associate  bb2-mode to ascii files only at the moment
 (add-to-list 'auto-mode-alist '("\\.bb.ascii\\'" . bb2-mode))
