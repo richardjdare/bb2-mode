@@ -54,6 +54,8 @@ sys:system/rexxmast
 #### Setting up a telnet port in WinUAE
 `bb2-compile-and-run` communicates with WinUAE using its built-in telnet port. In the WinUAE settings, go to Host->IO ports. Then set the serial port dropdown to `TCP://0.0.0.0:1234` and tick the `direct` checkbox.
 
+![WinUAE serial port settings](https://github.com/richardjdare/bb2-mode/blob/master/media/winuae-serial-settings.jpg "WinUAE serial port settings")
+
 On your Amiga, create a file `DEVS:MountList` with the following content:
 ```
 AUX:
