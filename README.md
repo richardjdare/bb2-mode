@@ -71,7 +71,7 @@ newshell aux:
 Restart your Amiga. You should now be able to telnet to your Amiga at localhost:1234
 
 ### Setting up bb2-mode
-Before using `bb2-compile-and-run`, you must give bb2-mode the location of the directories being used as WinUAE hard disks. These are used to convert the source code filenames into Amigados filenames when we load them into Blitz. You can do this by setting a variable, `bb2-amiga-file-locations` in your .emacs file. This variable is a list of dotted pairs each containing the path of an Amiga drive on the host system and its corresponding name in Amigados. For example:
+Before using `bb2-compile-and-run`, you must give bb2-mode the locations of the directories being used as WinUAE hard disks. These are used to convert the source code filenames into Amigados filenames when we load them into Blitz. You can do this by setting a variable, `bb2-amiga-file-locations` in your .emacs file. This variable is a list of dotted pairs each containing the path of an Amiga drive on the host system and its corresponding name in Amigados. For example:
 
 ```
 (setq bb2-amiga-file-locations '(("d:/emulation/amiga/harddrive/" . "work:")))
