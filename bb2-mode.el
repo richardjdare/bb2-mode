@@ -2937,6 +2937,12 @@
   (string-to-char ".")
   "This character signifies a dot during tokenization")
 
+(defconst bb2-single-quote
+  (string-to-char "'"))
+
+(defconst bb2-double-quote
+  (string-to-char "\""))
+  		  
 (defconst bb2-mode-syntax-table
   (let ((table (make-syntax-table)))
     ;; ' is a string delimiter
@@ -3244,7 +3250,7 @@ otherwise return the given ignore-status unchanged"
     (while (< i (length chars))
       (let ((b (bb2-translate-special-char (aref chars i)))
 	    (will-add-char t))
-	(setq ignore-p (bb2-start-ignore b ignore-p))
+	(setq ignore-p (bb2-start-comment b ignore-p))
 	;; add char to current word
 	(when (not (member b bb2-word-endings))
 	  (setq word (concat word (char-to-string b)))
@@ -3261,7 +3267,7 @@ otherwise return the given ignore-status unchanged"
 	  (if will-add-char (push b tokenized))
 	  (setq word "")
 	  (setq skip-next-word (eq b bb2-dot-char)))
-	(setq ignore-p (bb2-end-ignore b ignore-p))
+	(setq ignore-p (bb2-end-comment b ignore-p))
 	(setq i (1+ i))))
     (nreverse tokenized)))
 
