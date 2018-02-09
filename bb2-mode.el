@@ -3217,9 +3217,7 @@ otherwise return the given comment-status unchanged"
     (while (< i (length chars))
       (let ((b (bb2-translate-special-char (aref chars i))))	
 	(setq comment-p (bb2-start-comment b comment-p))
-	(if (and
-	     (not (member b bb2-word-endings))
-	     (eq i (- (length chars) 2)))
+	(if (not (member b bb2-word-endings))
 	    (setq word (concat word (char-to-string b)))	  
 	  (if (and (not comment-p)
 		   (not skip-next-word)
