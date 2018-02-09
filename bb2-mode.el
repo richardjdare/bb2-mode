@@ -3234,36 +3234,36 @@ otherwise return the given ignore-status unchanged"
     nil)
    (t ignore-status)))
 
-
 (defun bb2-string-to-tokens (chars)
+    "Convert a string of Blitz 2 source into a list of tokenized chars."
   (let ((tokenized '())
 	(word "")
-	(comment-p nil)
+	(ignore-p nil)
 	(skip-next-word nil)
 	(i 0))
     (while (< i (length chars))
-      (let ((b (bb2-translate-special-char (aref chars i))))
-	(setq comment-p (bb2-start-comment b comment-p))
+      (let ((b (bb2-translate-special-char (aref chars i)))
+	    (will-add-char t))
+	(setq ignore-p (bb2-start-ignore b ignore-p))
 	;; add char to current word
 	(when (not (member b bb2-word-endings))
 	  (setq word (concat word (char-to-string b)))
-	  (setq b nil))
+	  (setq will-add-char nil))
 	;; finished a word or hit end of document? add word/char to tokenized list,
 	;; if we are not in a comment or other special sequence
 	(when (or (member b bb2-word-endings) (= i (- (length chars) 1)))
 	  (if (and (gethash (downcase word) bb2-keywords)
-		   (not comment-p)
+		   (not ignore-p)
 		   (not skip-next-word))
 	      (mapc (lambda (e) (push e tokenized))
 		    (bb2-token-list-for-keyword word))
 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
-	  (if b (push b tokenized))
+	  (if will-add-char (push b tokenized))
 	  (setq word "")
-	  (setq skip-next-word (eq (aref chars i) bb2-dot-char)))
-	(setq comment-p (bb2-end-comment (aref chars i) comment-p))
+	  (setq skip-next-word (eq b bb2-dot-char)))
+	(setq ignore-p (bb2-end-ignore b ignore-p))
 	(setq i (1+ i))))
     (nreverse tokenized)))
-		      
 
 (defun bb2-replace-buffer-contents (buffer str)
   "Replace the contents of a buffer with a string"
