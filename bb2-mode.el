@@ -3206,31 +3206,64 @@ otherwise return the given comment-status unchanged"
       nil
     comment-status))
 
-;; this can probably be improved :)
+(defun bb2-start-ignore (byte ignore-status)
+  "Check if the current byte is the start of an ignored sequence, ie. a comment or string.
+If the byte begins a comment return :comment, a string then return either :string-single-quote
+ or :string-double-quote. Otherwise return the current ignore status"
+  (cond
+   ((char-equal byte bb2-single-quote)
+    :string-single-quote)
+   ((char-equal byte bb2-double-quote)
+    :string-double-quote)
+   ((char-equal byte bb2-comment-char)
+    :comment)
+   (t ignore-status)))
+   
+(defun bb2-end-ignore (byte ignore-status)
+  "If the given byte is the end of an ongoing ignored sequence such as a comment or string, return nil
+otherwise return the given ignore-status unchanged"
+  (cond
+   ((and (= byte 0)
+	 (eq ignore-status :comment))
+    nil)
+   ((and (char-equal byte bb2-single-quote)
+	 (eq ignore-status :string-single-quote))
+    nil)
+   ((and (char-equal byte bb2-double-quote)
+	 (eq ignore-status :string-double-quote))
+    nil)
+   (t ignore-status)))
+
+
 (defun bb2-string-to-tokens (chars)
-  "Convert a string of Blitz 2 source into a list of tokenized chars."
   (let ((tokenized '())
-	(comment-p nil)
 	(word "")
+	(comment-p nil)
 	(skip-next-word nil)
 	(i 0))
     (while (< i (length chars))
-      (let ((b (bb2-translate-special-char (aref chars i))))	
+      (let ((b (bb2-translate-special-char (aref chars i))))
 	(setq comment-p (bb2-start-comment b comment-p))
-	(if (not (member b bb2-word-endings))
-	    (setq word (concat word (char-to-string b)))	  
-	  (if (and (not comment-p)
-		   (not skip-next-word)
-		   (gethash (downcase word) bb2-keywords))
+	;; add char to current word
+	(when (not (member b bb2-word-endings))
+	  (setq word (concat word (char-to-string b)))
+	  (setq b nil))
+	;; finished a word or hit end of document? add word/char to tokenized list,
+	;; if we are not in a comment or other special sequence
+	(when (or (member b bb2-word-endings) (= i (- (length chars) 1)))
+	  (if (and (gethash (downcase word) bb2-keywords)
+		   (not comment-p)
+		   (not skip-next-word))
 	      (mapc (lambda (e) (push e tokenized))
 		    (bb2-token-list-for-keyword word))
 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
+	  (if b (push b tokenized))
 	  (setq word "")
-	  (setq skip-next-word (eq b bb2-dot-char))
-	  (push b tokenized))
-	(setq comment-p (bb2-end-comment b comment-p))
+	  (setq skip-next-word (eq (aref chars i) bb2-dot-char)))
+	(setq comment-p (bb2-end-comment (aref chars i) comment-p))
 	(setq i (1+ i))))
     (nreverse tokenized)))
+		      
 
 (defun bb2-replace-buffer-contents (buffer str)
   "Replace the contents of a buffer with a string"
