@@ -2,7 +2,7 @@
 ;;; Emacs major mode for Blitz Basic II source code
 ;;; Richard Dare
 ;;; www.richardjdare.com
-
+;;; -*- lexical-binding: t; -*-
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
       #s(hash-table test equal data
@@ -3240,6 +3240,10 @@ otherwise return the given ignore-status unchanged"
     nil)
    (t ignore-status)))
 
+(defun bb2-test-detokenize (tokens)
+  "Helper function used to test tokenization in repl"
+  (bb2-tokens-to-string (mapconcat 'unibyte-string tokens "")))
+
 (defun bb2-string-to-tokens (chars)
     "Convert a string of Blitz 2 source into a list of tokenized chars."
   (let ((tokenized '())
@@ -3255,6 +3259,7 @@ otherwise return the given ignore-status unchanged"
 	(when (not (member b bb2-word-endings))
 	  (setq word (concat word (char-to-string b)))
 	  (setq will-add-char nil))
+	
 	;; finished a word or hit end of document? add word/char to tokenized list,
 	;; if we are not in a comment or other special sequence
 	(when (or (member b bb2-word-endings) (= i (- (length chars) 1)))
@@ -3264,9 +3269,11 @@ otherwise return the given ignore-status unchanged"
 	      (mapc (lambda (e) (push e tokenized))
 		    (bb2-token-list-for-keyword word))
 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
+	  
 	  (if will-add-char (push b tokenized))
 	  (setq word "")
 	  (setq skip-next-word (eq b bb2-dot-char)))
+	
 	(setq ignore-p (bb2-end-comment b ignore-p))
 	(setq i (1+ i))))
     (nreverse tokenized)))
