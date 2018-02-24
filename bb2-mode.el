@@ -3,6 +3,9 @@
 ;;; Richard Dare
 ;;; www.richardjdare.com
 ;;; -*- lexical-binding: t; -*-
+
+(require 'cl-lib)
+
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
       #s(hash-table test equal data
@@ -2942,7 +2945,13 @@
 
 (defconst bb2-double-quote
   (string-to-char "\""))
-  		  
+
+(defvar bb2-open-delimiter-list nil "These characters are the delimiters beginning a block/string etc.")
+(setf open-delimiter-list `(,bb2-comment-char))
+
+(defvar bb2-close-delimiter-list nil "These characters are the delimiters ending a block/string etc.")
+(setf close-delimiter-list `(, bb2-double-quote #x0))
+
 (defconst bb2-mode-syntax-table
   (let ((table (make-syntax-table)))
     ;; ' is a string delimiter
@@ -3197,52 +3206,17 @@ If there is no token, return the keyword as a list of bytes"
 	(bb2-token-to-bytes found-token)
       (string-to-list keyword))))
 
-;; I shouldnt code when Ive been up for 21 hrs
-(defun bb2-start-comment (byte comment-status)
-  "Return a comment-status of true if the given byte is the start of a comment
-otherwise return the given comment-status unchanged"
-  (if (= byte bb2-comment-char)
-      t
-    comment-status))
-
-(defun bb2-end-comment (byte comment-status)
-  "Return a comment-status of nil if the given byte is the end of a commented line
-otherwise return the given comment-status unchanged"
-  (if (and (= byte 0) comment-status)
-      nil
-    comment-status))
-
-(defun bb2-start-ignore (byte ignore-status)
-  "Check if the current byte is the start of an ignored sequence, ie. a comment or string.
-If the byte begins a comment return :comment, a string then return either :string-single-quote
- or :string-double-quote. Otherwise return the current ignore status"
-  (cond
-   ((char-equal byte bb2-single-quote)
-    :string-single-quote)
-   ((char-equal byte bb2-double-quote)
-    :string-double-quote)
-   ((char-equal byte bb2-comment-char)
-    :comment)
-   (t ignore-status)))
-   
-(defun bb2-end-ignore (byte ignore-status)
-  "If the given byte is the end of an ongoing ignored sequence such as a comment or string, return nil
-otherwise return the given ignore-status unchanged"
-  (cond
-   ((and (= byte 0)
-	 (eq ignore-status :comment))
-    nil)
-   ((and (char-equal byte bb2-single-quote)
-	 (eq ignore-status :string-single-quote))
-    nil)
-   ((and (char-equal byte bb2-double-quote)
-	 (eq ignore-status :string-double-quote))
-    nil)
-   (t ignore-status)))
-
 (defun bb2-test-detokenize (tokens)
   "Helper function used to test tokenization in repl"
   (bb2-tokens-to-string (mapconcat 'unibyte-string tokens "")))
+
+(defun bb2-start-string-p (char delimiter-stack)
+  "is char the first double quote in a string with reference to a stack of delimiters?"
+  (and (equal char bb2-double-quote)
+       (evenp (length (remove-if-not
+		       (lambda (x)
+			 (equal x bb2-double-quote))
+		       delimiter-stack)))))
 
 (defun bb2-string-to-tokens (chars)
     "Convert a string of Blitz 2 source into a list of tokenized chars."
@@ -3250,11 +3224,22 @@ otherwise return the given ignore-status unchanged"
 	(word "")
 	(ignore-p nil)
 	(skip-next-word nil)
+	(delimiter-stack '())
 	(i 0))
+    
     (while (< i (length chars))
       (let ((b (bb2-translate-special-char (aref chars i)))
 	    (will-add-char t))
-	(setq ignore-p (bb2-start-comment b ignore-p))
+	
+	;; check for delimiters, strings etc. we don't tokenize contents of strings,comments
+	(if (or (member b bb2-open-delimiter-list)
+		(bb2-start-string-p b delimiter-stack))
+	    (push b delimiter-stack)
+	  (if (member b bb2-close-delimiter-list)
+	      (pop delimiter-stack)))
+	
+	(setq ignore-p (consp delimiter-stack))
+	       
 	;; add char to current word
 	(when (not (member b bb2-word-endings))
 	  (setq word (concat word (char-to-string b)))
@@ -3269,14 +3254,47 @@ otherwise return the given ignore-status unchanged"
 	      (mapc (lambda (e) (push e tokenized))
 		    (bb2-token-list-for-keyword word))
 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
-	  
 	  (if will-add-char (push b tokenized))
 	  (setq word "")
 	  (setq skip-next-word (eq b bb2-dot-char)))
 	
-	(setq ignore-p (bb2-end-comment b ignore-p))
+	;;(setq ignore-p (bb2-end-comment b ignore-p))
 	(setq i (1+ i))))
     (nreverse tokenized)))
+
+;; (defun bb2-string-to-tokens (chars)
+;;     "Convert a string of Blitz 2 source into a list of tokenized chars."
+;;   (let ((tokenized '())
+;; 	(word "")
+;; 	(ignore-p nil)
+;; 	(skip-next-word nil)
+;; 	(i 0))
+;;     (while (< i (length chars))
+;;       (let ((b (bb2-translate-special-char (aref chars i)))
+;; 	    (will-add-char t))
+;; 	(setq ignore-p (bb2-start-comment b ignore-p))
+;; 	;; add char to current word
+;; 	(when (not (member b bb2-word-endings))
+;; 	  (setq word (concat word (char-to-string b)))
+;; 	  (setq will-add-char nil))
+	
+;; 	;; finished a word or hit end of document? add word/char to tokenized list,
+;; 	;; if we are not in a comment or other special sequence
+;; 	(when (or (member b bb2-word-endings) (= i (- (length chars) 1)))
+;; 	  (if (and (gethash (downcase word) bb2-keywords)
+;; 		   (not ignore-p)
+;; 		   (not skip-next-word))
+;; 	      (mapc (lambda (e) (push e tokenized))
+;; 		    (bb2-token-list-for-keyword word))
+;; 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
+	  
+;; 	  (if will-add-char (push b tokenized))
+;; 	  (setq word "")
+;; 	  (setq skip-next-word (eq b bb2-dot-char)))
+	
+;; 	(setq ignore-p (bb2-end-comment b ignore-p))
+;; 	(setq i (1+ i))))
+;;     (nreverse tokenized)))
 
 (defun bb2-replace-buffer-contents (buffer str)
   "Replace the contents of a buffer with a string"
