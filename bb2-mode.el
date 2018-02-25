@@ -3235,7 +3235,8 @@ If there is no token, return the keyword as a list of bytes"
 	(if (or (member b bb2-open-delimiter-list)
 		(bb2-start-string-p b delimiter-stack))
 	    (push b delimiter-stack)
-	  (if (member b bb2-close-delimiter-list)
+	  (if (and (member b bb2-close-delimiter-list)
+		   (= (length word) 0))
 	      (pop delimiter-stack)))
 	
 	(setq ignore-p (consp delimiter-stack))
