@@ -3253,10 +3253,10 @@ If there is no token, return the keyword as a list of bytes"
 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
 	  (if will-add-char (push b tokenized))
 	  (setq word "")
-	  (setq skip-next-word (eq b bb2-dot-char))
+	  (setq skip-next-word (eq b bb2-dot-char)))
 	
-	  (if (member b bb2-close-delimiter-list)
-	      (pop delimiter-stack)))
+	(if (member b bb2-close-delimiter-list)
+	    (pop delimiter-stack))
 
 	(setq i (1+ i))))
     (nreverse tokenized)))
