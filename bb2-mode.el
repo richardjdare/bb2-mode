@@ -2947,10 +2947,10 @@
   (string-to-char "\""))
 
 (defvar bb2-open-delimiter-list nil "These characters are the delimiters beginning a block/string etc.")
-(setf open-delimiter-list `(,bb2-comment-char))
+(setf bb2-open-delimiter-list `(,bb2-comment-char))
 
 (defvar bb2-close-delimiter-list nil "These characters are the delimiters ending a block/string etc.")
-(setf close-delimiter-list `(, bb2-double-quote #x0))
+(setf bb2-close-delimiter-list `(, bb2-double-quote #x0))
 
 (defconst bb2-mode-syntax-table
   (let ((table (make-syntax-table)))
