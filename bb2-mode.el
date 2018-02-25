@@ -3210,7 +3210,7 @@ If there is no token, return the keyword as a list of bytes"
   "Helper function used to test tokenization in repl"
   (bb2-tokens-to-string (mapconcat 'unibyte-string tokens "")))
 
-(defun bb2-start-string-p (char delimiter-stack)
+(defun bb2-start-of-string-p (char delimiter-stack)
   "is char the first double quote in a string with reference to a stack of delimiters?"
   (and (equal char bb2-double-quote)
        (evenp (length (remove-if-not
@@ -3233,12 +3233,8 @@ If there is no token, return the keyword as a list of bytes"
 	
 	;; check for delimiters, strings etc. we don't tokenize contents of strings,comments
 	(if (or (member b bb2-open-delimiter-list)
-		(bb2-start-string-p b delimiter-stack))
-	    (push b delimiter-stack)
-	  (if (and (member b bb2-close-delimiter-list)
-		   (= (length word) 0))
-	      (pop delimiter-stack)))
-	
+		(bb2-start-of-string-p b delimiter-stack))
+	    (push b delimiter-stack))
 	(setq ignore-p (consp delimiter-stack))
 	       
 	;; add char to current word
@@ -3257,45 +3253,13 @@ If there is no token, return the keyword as a list of bytes"
 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
 	  (if will-add-char (push b tokenized))
 	  (setq word "")
-	  (setq skip-next-word (eq b bb2-dot-char)))
+	  (setq skip-next-word (eq b bb2-dot-char))
 	
-	;;(setq ignore-p (bb2-end-comment b ignore-p))
+	  (if (member b bb2-close-delimiter-list)
+	      (pop delimiter-stack)))
+
 	(setq i (1+ i))))
     (nreverse tokenized)))
-
-;; (defun bb2-string-to-tokens (chars)
-;;     "Convert a string of Blitz 2 source into a list of tokenized chars."
-;;   (let ((tokenized '())
-;; 	(word "")
-;; 	(ignore-p nil)
-;; 	(skip-next-word nil)
-;; 	(i 0))
-;;     (while (< i (length chars))
-;;       (let ((b (bb2-translate-special-char (aref chars i)))
-;; 	    (will-add-char t))
-;; 	(setq ignore-p (bb2-start-comment b ignore-p))
-;; 	;; add char to current word
-;; 	(when (not (member b bb2-word-endings))
-;; 	  (setq word (concat word (char-to-string b)))
-;; 	  (setq will-add-char nil))
-	
-;; 	;; finished a word or hit end of document? add word/char to tokenized list,
-;; 	;; if we are not in a comment or other special sequence
-;; 	(when (or (member b bb2-word-endings) (= i (- (length chars) 1)))
-;; 	  (if (and (gethash (downcase word) bb2-keywords)
-;; 		   (not ignore-p)
-;; 		   (not skip-next-word))
-;; 	      (mapc (lambda (e) (push e tokenized))
-;; 		    (bb2-token-list-for-keyword word))
-;; 	    (mapc (lambda (e) (push e tokenized)) (vconcat word)))
-	  
-;; 	  (if will-add-char (push b tokenized))
-;; 	  (setq word "")
-;; 	  (setq skip-next-word (eq b bb2-dot-char)))
-	
-;; 	(setq ignore-p (bb2-end-comment b ignore-p))
-;; 	(setq i (1+ i))))
-;;     (nreverse tokenized)))
 
 (defun bb2-replace-buffer-contents (buffer str)
   "Replace the contents of a buffer with a string"
