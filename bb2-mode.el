@@ -3218,6 +3218,7 @@ If there is no token, return the keyword as a list of bytes"
 			 (equal x bb2-double-quote))
 		       delimiter-stack)))))
 
+;; this could do with some work i think.
 (defun bb2-string-to-tokens (chars)
     "Convert a string of Blitz 2 source into a list of tokenized chars."
   (let ((tokenized '())
@@ -3229,14 +3230,17 @@ If there is no token, return the keyword as a list of bytes"
     
     (while (< i (length chars))
       (let ((b (bb2-translate-special-char (aref chars i)))
-	    (will-add-char t))
+	    (will-add-char t)
+	    (found-delimiter nil))
 	
 	;; check for delimiters, strings etc. we don't tokenize contents of strings,comments
-	(if (or (member b bb2-open-delimiter-list)
-		(bb2-start-of-string-p b delimiter-stack))
-	    (push b delimiter-stack))
+	(when (or (member b bb2-open-delimiter-list)
+		  (bb2-start-of-string-p b delimiter-stack))
+	  (push b delimiter-stack)
+	  (setq found-delimiter t))
+	  
 	(setq ignore-p (consp delimiter-stack))
-	       
+	
 	;; add char to current word
 	(when (not (member b bb2-word-endings))
 	  (setq word (concat word (char-to-string b)))
@@ -3255,9 +3259,11 @@ If there is no token, return the keyword as a list of bytes"
 	  (setq word "")
 	  (setq skip-next-word (eq b bb2-dot-char)))
 	
-	(if (member b bb2-close-delimiter-list)
+	(if (and (member b bb2-close-delimiter-list)
+		 (not found-delimiter))
 	    (pop delimiter-stack))
-
+	
+	(setf found-delimiter nil)
 	(setq i (1+ i))))
     (nreverse tokenized)))
 
