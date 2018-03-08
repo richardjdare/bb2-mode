@@ -3213,7 +3213,7 @@ If there is no token, return the keyword as a list of bytes"
 (defun bb2-start-of-string-p (char delimiter-stack)
   "is char the first double quote in a string with reference to a stack of delimiters?"
   (and (equal char bb2-double-quote)
-       (evenp (length (remove-if-not
+       (cl-evenp (length (cl-remove-if-not
 		       (lambda (x)
 			 (equal x bb2-double-quote))
 		       delimiter-stack)))))
