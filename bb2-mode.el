@@ -353,7 +353,7 @@
 		     "d_getsr" ("D_GetSR" "buffer,SR" #x9882)
 		     "d_hexword" ("D_HexWord" "source,address,num" #x9883)
 		     "data" ("Data" "[.Type] Item[,Item...]" #x801A)
-		     "data$" ("Data$" "" nil)
+	;	     "data$" ("Data$" "" nil)
 		     "date$" ("Date$" "days.l ;converts days since 1/1/1978 to date string" #xA702)
 		     "dateformat" ("DateFormat" "0=dd/mm/yyyy 1=mm/dd/yyyy" #xA704)
 		     "days" ("Days" ";returns day calculated in last call to date$" #xA705)
@@ -2932,6 +2932,9 @@
   (mapcar 'string-to-char '(" " "(" ")" "\ " "." "," ":" ";" "+" "-" "*" "/" "=" "[" "]" "{" "}" "\\"))
   "These characters signify a word ending during tokenization and are used to trigger keyword replacement")
 
+(defvar bb2-$-keywords nil "These keywords have a type parameter requiring that '$' be a word ending during tokenization")
+(setq bb2-$-keywords '("data" "function" "peek" "poke"))
+
 (defconst bb2-comment-char
   (string-to-char ";")
   "This character is used to signify a comment during tokenization.")
@@ -3218,6 +3221,13 @@ If there is no token, return the keyword as a list of bytes"
 			 (equal x bb2-double-quote))
 		       delimiter-stack)))))
 
+(defun bb2-word-ending-p (char word)
+  "does char mark the end of word? - This function handles a 
+special case where $ is a possible word ending (for example,
+Data$ or function$) but is a part of a token (for example Inkey$) at other times."
+  (or (and (eq char ?$) (member (downcase word) bb2-$-keywords))
+      (member char bb2-word-endings)))
+
 ;; this could do with some work i think.
 (defun bb2-string-to-tokens (chars)
     "Convert a string of Blitz 2 source into a list of tokenized chars."
@@ -3242,13 +3252,13 @@ If there is no token, return the keyword as a list of bytes"
 	(setq ignore-p (consp delimiter-stack))
 	
 	;; add char to current word
-	(when (not (member b bb2-word-endings))
+	(when (not (bb2-word-ending-p b word))
 	  (setq word (concat word (char-to-string b)))
 	  (setq will-add-char nil))
 	
 	;; finished a word or hit end of document? add word/char to tokenized list,
 	;; if we are not in a comment or other special sequence
-	(when (or (member b bb2-word-endings) (= i (- (length chars) 1)))
+	(when (or (bb2-word-ending-p b word) (= i (- (length chars) 1)))
 	  (if (and (gethash (downcase word) bb2-keywords)
 		   (not ignore-p)
 		   (not skip-next-word))
