@@ -5,6 +5,13 @@ An Emacs major mode for Blitz Basic II (a basic compiler for the Amiga)
 
 *bb2-mode showing CaffeineFree.bb by Ben Campbell and JS Hong (1993) with the zerodark Emacs theme.*
 
+## Features
+* Syntax highlighting
+* Automatic keyword capitalization (like the original Blitz II Editor)
+* Eldoc-based online help for command parameters (similar to original editor)
+* Load and save tokenized files
+* Compile and run in WinUAE over telnet
+
 bb2-mode provides syntax highlighting and eldoc-based online help for ascii and tokenized Blitz Basic II source code. It should recognise all keywords from Blitz Basic 2.1.
 It will also capitalize keywords as you type them like in the original Blitz II editor.
 
