@@ -10,14 +10,14 @@ An Emacs major mode for Blitz Basic 2 (a basic compiler for the Amiga)
 * Automatic keyword capitalization (like the original Blitz II Editor)
 * Eldoc-based online help for command parameters (similar to original editor)
 * Load and save tokenized files
-* Compile and run in WinUAE over telnet
+* Compile and run your code in the WinUAE Amiga Emulator
 
 bb2-mode provides syntax highlighting and eldoc-based online help for ascii and tokenized Blitz Basic 2 source code. It should recognise all keywords from Blitz Basic 2.1.
 It will also capitalize keywords as you type them like in the original Blitz 2 editor.
 
 Keywords were extracted from Blitz using Stripper (1997) by D!ck/Carnage (from http://www.blitz-2000.co.uk/)
 
-keyword transformation code based on [sql-up-mode](https://github.com/Trevoke/sqlup-mode.el) by Aldric Giacomoni.
+Keyword transformation code based on [sql-up-mode](https://github.com/Trevoke/sqlup-mode.el) by Aldric Giacomoni.
 
 My first ever Emacs Lisp code, so bear with me.
 ## Installation
@@ -28,7 +28,7 @@ Download the project somewhere, then add the following to your .emacs file:
 ```
 
 ## Tokenized files
-Blitz 2 saves source code in a custom file format in order to save floppy disk space. These files are known as *tokenized files* since they use 2-byte tokens to represent Blitz keywords. bb2-mode can load and save these files. Blitz 2 also exports ascii source code, but most historical Blitz source is tokenized.
+Blitz 2 saves source code files in a custom format in order to save floppy disk space. These files are known as *tokenized files* since they use 2-byte tokens to represent Blitz keywords. bb2-mode can load and save these files. Blitz 2 also exports ascii source code, but most historical Blitz source is tokenized.
 
 If bb2-mode is displaying a tokenized file, it will say `bb2 Tokenized` in the mode line (like in the screenshot above). Ascii files will just say `bb2`.
 
@@ -38,13 +38,13 @@ m-x bb2-toggle-tokenized
 ```
 Or use the keyboard shortcut `C-c C-t`
 
-When saving, tokenized files will be saved as tokenized. Ascii files will be saved as ascii. In the future, explicit "save tokenized" and "save ascii" commands will be added.
+When saving, tokenized files will be saved as tokenized. Ascii files will be saved as ascii.
 
 ## Completion
-bb2-mode uses Emacs's standard `completion-at-point` system to provide keyword completion. Use `C-M-i` to perform completion. company-mode will also work with bb2-mode.
+bb2-mode uses Emacs' standard `completion-at-point` system to provide keyword completion. Use `C-M-i` to perform completion. company-mode will also work with bb2-mode.
 
 ## Compile and run in WinUAE
-bb2-mode can connect to the WinUAE Amiga emulator and compile and run the source code you are editing. The file must be saved in a directory that is being used as a WinUAE virtual hard disk, and Blitz 2 must be running in the emulator.
+bb2-mode can connect to the WinUAE Amiga emulator using telnet and compile and run the source code you are editing. The file must be saved in a directory that is being used as a WinUAE virtual hard disk, and Blitz 2 must be running in the emulator.
 
 ```
 m-x bb2-compile-and-run
