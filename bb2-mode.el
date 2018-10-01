@@ -6,6 +6,8 @@
 
 (require 'cl-lib)
 
+(defconst bb2-home-dir (file-name-directory load-file-name) "bb2-mode home directory")
+
 (defvar bb2-keywords nil "Blitz Basic II language keywords")
 (setq bb2-keywords
       #s(hash-table test equal data
