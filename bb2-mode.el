@@ -3104,12 +3104,18 @@
     (while (< (point) end-pos)
       (bb2-keywordize-symbol 1))))
 
+(defun bb2-make-help-str (keyword)
+  "Create a Blitz 2 help string for the given keyword"
+  (let ((keyword-data (gethash keyword bb2-keywords)))
+    (if keyword-data
+	(format "%s %s" (car keyword-data) (cadr keyword-data)))))
+
 (defun bb2-eldoc-function ()
   "Retrieve the Blitz 2 help string for the keyword at the current point"
   (let ((symbol (thing-at-point 'symbol)))
     (if (char-or-string-p symbol)
 	(setq symbol (downcase symbol)))
-    (cadr (gethash symbol bb2-keywords))))
+    (bb2-make-help-str symbol)))
 
 (defun bb2-make-token-table ()
   "Create a table of <token,keyword> from the main data table"
