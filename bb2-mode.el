@@ -3426,6 +3426,9 @@ Data$ or function$) but is a part of a token (for example Inkey$) at other times
   (set (make-local-variable 'completion-ignore-case) t)
   (eldoc-mode)
 
+  (setq-local comment-start "; ")
+  (setq-local comment-end "")
+
   (let ((buffer-modified (buffer-modified-p)))
     (set-buffer-file-coding-system 'iso-latin-1-unix t)
 
