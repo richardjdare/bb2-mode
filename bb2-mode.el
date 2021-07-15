@@ -2965,10 +2965,12 @@
     (modify-syntax-entry ?\; "<" table)
     ;; /n is a comment end
     (modify-syntax-entry ?\n ">" table)
-    ;;underscore is part of a word
-    (modify-syntax-entry ?_ "w" table)
-    ;; $ is part of a word
-    (modify-syntax-entry ?\$ "w" table)
+    ;;underscore is a symbol constituent
+    (modify-syntax-entry ?_ "_" table)
+    ;; $ is a symbol constituent
+    (modify-syntax-entry ?\$ "_" table)
+    ;; # is a prefix character?
+    (modify-syntax-entry ?\# "'" table)
     ;; \ is punctuation, not an escape character
     ;; but \\ is escape in AmiBlitz? how to do it?
     (modify-syntax-entry ?\\ "." table)
@@ -2978,8 +2980,15 @@
     (modify-syntax-entry ?\- "." table)
     (modify-syntax-entry ?\* "." table)
     (modify-syntax-entry ?\/ "." table)
-    ;; # is a symbol constituent ?
-    (modify-syntax-entry ?\# "_" table)
+    ;; is . punctuation?
+    (modify-syntax-entry ?\. "." table)
+    ;; open/close paren characters
+    (modify-syntax-entry ?\( "(" table)
+    (modify-syntax-entry ?\) ")" table)
+    (modify-syntax-entry ?\[ "(" table)
+    (modify-syntax-entry ?\] ")" table)
+    (modify-syntax-entry ?\{ "(" table)
+    (modify-syntax-entry ?\} ")" table)
     table))
 
 (defun bb2-get-keywords-list (keyword-type)
