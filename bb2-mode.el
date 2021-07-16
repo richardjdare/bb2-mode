@@ -2966,7 +2966,7 @@
     ;; /n is a comment end
     (modify-syntax-entry ?\n ">" table)
     ;;underscore is a symbol constituent
-    (modify-syntax-entry ?_ "_" table)
+    (modify-syntax-entry ?_ "w" table)
     ;; $ is a symbol constituent?
     (modify-syntax-entry ?\$ "w" table)
     ;; # is a word constituent?
