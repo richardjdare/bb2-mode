@@ -2967,10 +2967,10 @@
     (modify-syntax-entry ?\n ">" table)
     ;;underscore is a symbol constituent
     (modify-syntax-entry ?_ "_" table)
-    ;; $ is a symbol constituent
-    (modify-syntax-entry ?\$ "_" table)
-    ;; # is a prefix character?
-    (modify-syntax-entry ?\# "'" table)
+    ;; $ is a symbol constituent?
+    (modify-syntax-entry ?\$ "w" table)
+    ;; # is a word constituent?
+    (modify-syntax-entry ?\# "w" table)
     ;; \ is punctuation, not an escape character
     ;; but \\ is escape in AmiBlitz? how to do it?
     (modify-syntax-entry ?\\ "." table)
@@ -2990,6 +2990,12 @@
     (modify-syntax-entry ?\{ "(" table)
     (modify-syntax-entry ?\} ")" table)
     table))
+
+(defconst bb2-syntax-propertize
+  (syntax-propertize-rules
+   ;; we want '.' chars to be considered part of the word when they are used as labels
+   ;; at all other times, they are punctuation
+   ("^\\.\\w+" (0 "w"))))
 
 (defun bb2-get-keywords-list (keyword-type)
   "Return a list of 'blitz or 'amiga keywords from the main table"
@@ -3019,6 +3025,9 @@
 (defvar bb2-types-regexp nil "regular expression for bb2 types")
 (setq bb2-types-regexp "\\B\\$\\|\\(\\b\\|[[:blank:]]+\\)\\.[a-zA-Z_0-9]+")
 
+(defvar bb2-labels-regexp nil "regular expression for bb2 labels")
+(setq bb2-labels-regexp "^\\.[a-zA-Z_0-9]+")
+
 (defvar bb2-amigados-keywords-regexp nil "regular expression for AmigaDOS keywords")
 (setq bb2-amigados-keywords-regexp (regexp-opt (bb2-get-keywords-list 'amiga) 'words))
 
@@ -3027,6 +3036,7 @@
       `((,bb2-keywords-regexp . font-lock-keyword-face)
 	(,bb2-amigados-keywords-regexp . font-lock-builtin-face)
 	(,bb2-const-regexp . font-lock-constant-face)
+	(,bb2-labels-regexp . font-lock-preprocessor-face)
 	(,bb2-types-regexp . font-lock-type-face)))
 
 (defun bb2-use-ted-indent ()
@@ -3437,7 +3447,8 @@ Data$ or function$) but is a part of a token (for example Inkey$) at other times
 
   (setq-local comment-start "; ")
   (setq-local comment-end "")
-
+  (setq-local syntax-propertize-function bb2-syntax-propertize)
+  
   (let ((buffer-modified (buffer-modified-p)))
     (set-buffer-file-coding-system 'iso-latin-1-unix t)
 
