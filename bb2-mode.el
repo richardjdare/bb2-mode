@@ -2965,9 +2965,9 @@
     (modify-syntax-entry ?\; "<" table)
     ;; /n is a comment end
     (modify-syntax-entry ?\n ">" table)
-    ;;underscore is a symbol constituent
+    ;;underscore is a word constituent
     (modify-syntax-entry ?_ "w" table)
-    ;; $ is a symbol constituent?
+    ;; $ is a word constituent?
     (modify-syntax-entry ?\$ "w" table)
     ;; # is a word constituent?
     (modify-syntax-entry ?\# "w" table)
@@ -2995,7 +2995,17 @@
   (syntax-propertize-rules
    ;; we want '.' chars to be considered part of the word when they are used as labels
    ;; at all other times, they are punctuation
-   ("^\\.\\w+" (0 "w"))))
+   ("^\\.\\w+" (0 "w"))
+   ;; $ is a word constituent unless it is at the end of commands in bb2-$-keywords
+   ;; where it signifies a type
+   ("\\(\\w+\\)\\(\\$\\)"
+    (1 "w")
+    (2 (string-to-syntax (bb2-$-check (match-string 1)))))))
+
+(defun bb2-$-check (str)
+  (if (member (downcase str) bb2-$-keywords)
+      "."
+    "w"))
 
 (defun bb2-get-keywords-list (keyword-type)
   "Return a list of 'blitz or 'amiga keywords from the main table"
@@ -3033,11 +3043,13 @@
 
 (defvar bb2-highlights nil)
 (setq bb2-highlights
-      `((,bb2-keywords-regexp . font-lock-keyword-face)
+      `(
+	(,bb2-keywords-regexp . font-lock-keyword-face)
 	(,bb2-amigados-keywords-regexp . font-lock-builtin-face)
+	(,bb2-types-regexp . font-lock-type-face)
 	(,bb2-const-regexp . font-lock-constant-face)
 	(,bb2-labels-regexp . font-lock-preprocessor-face)
-	(,bb2-types-regexp . font-lock-type-face)))
+	))
 
 (defun bb2-use-ted-indent ()
   "Set bb2-mode to use simple 2 space indent like TED on Amiga"
