@@ -3437,6 +3437,12 @@ Data$ or function$) but is a part of a token (for example Inkey$) at other times
 	(bb2-send-script file-location)
       (error "File is not in an Amiga directory"))))
 
+(defvar bb2-imenu-generic-expression
+  '((nil "^\\.\\(\\w+\\b\\)" 1)
+    ("*Functions*" "Function\\(\\..+ \\| \\)\\(\\w+\\b\\)" 2)
+    ("*Statements*" "Statement \\(\\w+\\b\\){" 1))
+  "imenu generic expressions for blitz labels, functions and statements")
+
 (define-derived-mode bb2-mode prog-mode "bb2"
   "Major mode for Blitz Basic II code"
   :syntax-table bb2-mode-syntax-table
@@ -3460,7 +3466,7 @@ Data$ or function$) but is a part of a token (for example Inkey$) at other times
   (setq-local comment-start "; ")
   (setq-local comment-end "")
   (setq-local syntax-propertize-function bb2-syntax-propertize)
-  
+  (setq imenu-generic-expression bb2-imenu-generic-expression)
   (let ((buffer-modified (buffer-modified-p)))
     (set-buffer-file-coding-system 'iso-latin-1-unix t)
 
