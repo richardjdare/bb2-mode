@@ -10,6 +10,7 @@ An Emacs major mode for Blitz Basic 2 (a basic compiler for the Amiga)
 * Automatic keyword capitalization (like the original Blitz II Editor)
 * Eldoc-based online help for command parameters (similar to original editor)
 * Load and save tokenized files
+* Navigate Blitz labels, functions and statements with imenu
 * Compile and run your code in the WinUAE Amiga Emulator
 
 bb2-mode provides syntax highlighting and eldoc-based online help for ascii and tokenized Blitz Basic 2 source code. It should recognise all keywords from Blitz Basic 2.1.
@@ -42,6 +43,9 @@ When saving, tokenized files will be saved as tokenized. Ascii files will be sav
 
 ## Completion
 bb2-mode uses Emacs' standard `completion-at-point` system to provide keyword completion. Use `C-M-i` to perform completion. company-mode will also work with bb2-mode.
+
+## Quickly navigate your code with imenu
+bb2-mode provides imenu integration for Blitz labels, functions and statements. Load some Blitz source code, hit `m-x imenu` and then hit tab. You will be presented with a list of all the labels in the source file. Select one to navigate to its position in the source code. Functions and Statements are accessed as sub-lists under `*Functions*` and `*Statements*` in the main list.
 
 ## Compile and run in WinUAE
 bb2-mode can connect to the WinUAE Amiga emulator using telnet and compile and run the source code you are editing. The file must be saved in a directory that is being used as a WinUAE virtual hard disk, and Blitz 2 must be running in the emulator.
