@@ -2930,9 +2930,11 @@
 
 (defconst bb2-word-endings
   (mapcar 'string-to-char '(" " "(" ")" "\ " "." "," ":" ";" "+" "-" "*" "/" "=" "[" "]" "{" "}" "\\"))
-  "These characters signify a word ending during tokenization and are used to trigger keyword replacement")
+  "These characters signify a word ending during tokenization
+and are used to trigger keyword replacement")
 
-(defvar bb2-$-keywords nil "These keywords have a type parameter requiring that '$' be a word ending during tokenization")
+(defvar bb2-$-keywords nil "These keywords have a type parameter requiring
+that '$' be a word ending during tokenization")
 (setq bb2-$-keywords '("data" "function" "peek" "poke"))
 
 (defconst bb2-comment-char
@@ -3117,7 +3119,7 @@
 		      (bounds-of-thing-at-point 'symbol)))
 
 (defun bb2-process-symbol (symbol symbol-boundaries)
-  "Find the Blitz 2 keyword for a given symbol then replace the symbol with that keyword"
+  "Replace SYMBOL with its capitalized blitz 2 keyword."
   (let ((found-keyword (bb2-find-keyword symbol)))
     (when found-keyword
       (delete-region (car symbol-boundaries) (cdr symbol-boundaries))
@@ -3233,7 +3235,7 @@ Returns an empty string if we identify it as ascii src"
 
 (defun bb2-token-for-keyword (keyword)
   "Return a Blitz 2 token for a given keyword. Signal an error if no token"
-  (let ((found-token (car (cddr (gethash (downcase keyword) bb2-keywords)))))
+  (let ((found-token (caddr (gethash (downcase keyword) bb2-keywords))))
     (if found-token
 	found-token
       (error "No token for keyword \"%s\"" keyword))))
@@ -3241,7 +3243,7 @@ Returns an empty string if we identify it as ascii src"
 (defun bb2-token-list-for-keyword (keyword)
   "Return a Blitz 2 token for a given keyword as a list of bytes.
 If there is no token, return the keyword as a list of bytes"
-  (let ((found-token (car (cddr (gethash (downcase keyword) bb2-keywords)))))
+  (let ((found-token (caddr (gethash (downcase keyword) bb2-keywords))))
     (if found-token
 	(bb2-token-to-bytes found-token)
       (string-to-list keyword))))
@@ -3251,7 +3253,7 @@ If there is no token, return the keyword as a list of bytes"
   (bb2-tokens-to-string (mapconcat 'unibyte-string tokens "")))
 
 (defun bb2-start-of-string-p (char delimiter-stack)
-  "is char the first double quote in a string with reference to a stack of delimiters?"
+  "is char the first \" in a string with respect to a stack of delimiters?"
   (and (equal char bb2-double-quote)
        (cl-evenp (length (cl-remove-if-not
 		       (lambda (x)
@@ -3259,9 +3261,10 @@ If there is no token, return the keyword as a list of bytes"
 		       delimiter-stack)))))
 
 (defun bb2-word-ending-p (char word)
-  "does char mark the end of word? - This function handles a 
-special case where $ is a possible word ending (for example,
-Data$ or function$) but is a part of a token (for example Inkey$) at other times."
+  "does char mark the end of word?This function handles a 
+  special case where $ is a possible word ending (for example,
+  Data$ or function$) but is a part of a token
+  (for example Inkey$) at other times."
   (or (and (eq char ?$) (member (downcase word) bb2-$-keywords))
       (member char bb2-word-endings)))
 
@@ -3322,8 +3325,8 @@ Data$ or function$) but is a part of a token (for example Inkey$) at other times
       (insert str))))
 
 (defun bb2-maybe-convert-buffer (buffer)
-  "If the given buffer contains a tokenized file convert its contents to plain text.
-  Returns true if the buffer was converted"
+  "If the given buffer contains a tokenized file convert its contents
+to plain text. Returns true if the buffer was converted"
   (if (> (buffer-size) 0)	
       (let ((detokenized-text (bb2-tokens-to-string (bb2-get-buffer-contents buffer))))
 	(when (> (length detokenized-text) 0)
@@ -3333,7 +3336,8 @@ Data$ or function$) but is a part of a token (for example Inkey$) at other times
 	  t))))
 
 (defun bb2-before-save ()
-  "before-save-hook function. If the buffer is tokenized replace its contents with tokens before saving"
+  "before-save-hook function. If the buffer is tokenized replace
+its contents with tokens before saving"
   (when bb2-is-current-file-tokenized
     (let ((tokenized-text (bb2-string-to-tokens (bb2-get-buffer-contents (current-buffer)))))    
       (when (> (length tokenized-text) 0)
@@ -3342,7 +3346,8 @@ Data$ or function$) but is a part of a token (for example Inkey$) at other times
 	(set-buffer-modified-p nil)))))
 
 (defun bb2-after-save ()
-  "post-save-hook function. If the buffer is tokenized, convert it back to text after saving"
+  "post-save-hook function. If the buffer is tokenized,
+ convert it back to text after saving"
   (bb2-maybe-convert-buffer (current-buffer))
   (set-buffer-file-coding-system  'iso-latin-1-unix t)
   (set-buffer-modified-p nil))
@@ -3425,7 +3430,8 @@ Data$ or function$) but is a part of a token (for example Inkey$) at other times
     (process-send-string bb2-tcp-process (concat "rx ram:bb2mode.rexx" (byte-to-string 13)))))
 
 (defun bb2-compile-and-run ()
-  "Connect to an Amiga emulator running Blitz II and compile and run the current buffer"
+  "Connect to an Amiga emulator running Blitz II
+and compile and run the current buffer"
   (interactive)
   (message "bb2-compile-and-run")
   (save-buffer)
