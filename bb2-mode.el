@@ -3137,11 +3137,17 @@ that '$' be a word ending during tokenization")
     (while (< (point) end-pos)
       (bb2-keywordize-symbol 1))))
 
+(defun bb2-get-keyword-face (keyword)
+  (if (string-suffix-p "_" keyword)
+      font-lock-builtin-face
+    font-lock-keyword-face))
+
 (defun bb2-make-help-str (keyword)
   "Create a Blitz 2 help string for the given keyword"
   (let ((keyword-data (gethash keyword bb2-keywords)))
     (if keyword-data
-	(format "%s %s" (car keyword-data) (cadr keyword-data)))))
+	(concat (propertize (car keyword-data) 'face (bb2-get-keyword-face keyword))
+		" " (cadr keyword-data)))))
 
 (defun bb2-eldoc-function ()
   "Retrieve the Blitz 2 help string for the keyword at the current point"
