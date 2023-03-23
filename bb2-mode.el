@@ -3381,7 +3381,7 @@ its contents with tokens before saving"
 (setq bb2-default-amiga-file-location "ram:")
 
 (defvar bb2-arexx-script nil "ARexx script to load, compile and run bb2 files in Blitz on the Amiga")
-(setq bb2-arexx-script  "echo \"/**bb2mode.rexx**/*Naddress TED_REXX1*NSHOWSCREEN*NWINDOWTOFRONT*NACTIVATE*NLOADNEW '%s'*NCOMPILE*N\" > ram:bb2mode.rexx")
+(setq bb2-arexx-script  "%secho \"/**bb2mode.rexx**/*Naddress TED_REXX1*NSHOWSCREEN*NWINDOWTOFRONT*NACTIVATE*NLOADNEW '%s'*NCOMPILE*N\" > ram:bb2mode.rexx")
 
 ;; given  "c:/programs/myfolder/" and "c:/programs/myfolder/myproject/foo.bb" return "myproject/foo.bb"
 (defun bb2-path-diff (long-path short-path)
@@ -3396,6 +3396,9 @@ its contents with tokens before saving"
 	  (if (string-prefix-p (car i) path)
 	      (setf result (concat (cdr i) (bb2-path-diff path (car i)))))))
     result))
+
+(defvar bb2-telnet-user ""
+  "Communicate with the Amiga using a custom Telnet user. Not required for WinUAE")
 
 (defvar bb2-telnet-port 1234
   "telnet port of Amiga emulator")
@@ -3431,7 +3434,7 @@ its contents with tokens before saving"
 
 (defun bb2-send-script (filepath)
   "Send Arexx script to the Amiga using telnet"
-  (let ((script (format bb2-arexx-script filepath)))
+  (let ((script (format bb2-arexx-script bb2-telnet-user filepath)))
     (process-send-string bb2-tcp-process (concat script (byte-to-string 13)))
     (process-send-string bb2-tcp-process (concat "rx ram:bb2mode.rexx" (byte-to-string 13)))))
 
